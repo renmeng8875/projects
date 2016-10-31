@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>错误处理</title>
+<script type="text/javascript">
+function $(id) {
+	return document.getElementById(id);
+}
+window.onerror=function () {
+	alert('Error!!!');
+	return true;
+};
+//var err = new Error("An Error!!!");
+//abc;
+//alert("错误信息是："+e.message+"\n"+"错误代码是："+e.number);
+//alert("正常执行到了!");
+//Firebug Lite
+alert(window.console);
+try {
+	var err = new Error("An Error!!!");
+	
+	
+	//在IE中，会在错误窗口中显示“未指明的错误”，而FF中则是空字符串
+	//抛出错误后，脚本便会停止往下执行
+	//var message = "我抛出的错误！";//错误描述
+	//err = new Error(message);
+	//throw err;
+} catch(e) {
+	//alert("错误信息是："+e.message+"\n"+"错误代码是："+e.number);
+	
+} finally {
+	//不管有没有错误发生，都始终执行
+	
+}
+//alert(abc.attr);
+var address="http://www.pl4cj.org",
+		name="PL4CJ";
+
+//window.external.addFavorite(address,name);
+//window.sidebar.addPanel(name,address,"");
+
+//addFavorite(address,name);
+//alert("addFavorite" in window.external);
+
+function addFavorite(address,name) {
+	if (window.external && window.external.addFavorite) {//IE
+		window.external.addFavorite(address,name);
+	} else if (window.sidebar && window.sidebar.addPanel) {//FireFox
+		window.sidebar.addPanel(name,address,"");
+	}
+}
+
+
+function addFav(address,name) {
+	try {
+		window.sidebar.addPanel(name,address,"");//FF方法
+		//在try语句中，如果脚本出错，会自动跳转到catch语句执行
+	} catch(e) {//这里的e是必须的，是语法的一部分，它表示一个错误对象
+		try {
+			window.external.addFavorite(address,name);//IE
+		} catch(e) {}
+		//如果在这里还出现错误，浏览器就会将这个错误抛出
+	}
+}
+
+</script>
+<style type="text/css">
+#oDiv {
+width:200px;
+height:200px;
+border:3px ridge aqua;
+background:blue;
+position:absolute;
+left:150px;
+top:150px;
+}
+</style>
+</head>
+<body class="redStyle">
+	<h1>错误处理</h1>
+
+	<div id="oDiv">
+
+	</div>
+</body>
+</html>

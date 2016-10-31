@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.函数式与面向对象</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>函数式与面向对象</h1>
+	<h2>函数</h2>
+	<p>函数是一组可以随时随地运行的语句。</p>
+	<p>函数是 ECMAScript 的核心。</p>
+	<p>创建函数</p>
+	<pre>
+	function fnOne() {//具有名称的函数,函数名必须符合变量名命名规范
+		//可以没有符何语句
+	}
+	var fnTwo = function () {//匿名函数
+	};
+	function () {//创建匿名函数而不立即创建其引用，那么之后就没办法调用此函数
+	}
+	(function fnThree() {
+	})();//创建函数并立即执行一次
+	(function () {})();//创建匿名函数并立即执行一次</pre>
+	<p>匿名函数与命名函数的区别</p>
+	<pre>
+	fnOne();//不会出错，使用function创建的具有名称的函数在任何与之相同作用域的地方都能调用
+	fnTwo();//出错
+	var fnTwo =function () {};//因为只有执行了这个赋值语句后，fnTwo才会被创建
+	function fnOne() {}</pre>
+	<p>函数返回值</p>
+	<pre>
+	function fnTest() {
+		return "value";//使用return来返回值
+		alert("Hello!!!");//执行了return之后，函数就会退出 
+	}</pre>
+	<p>函数参数</p>
+	<pre>
+	function fnTest(arg1,arg2,arg3) {
+		alert(arg1+"\n"+arg2+"\n"+arg3);
+	}
+	fnTest(1,2,3);
+	fnTest(1,2);//没有传值过去时，就会是undefined</pre>
+	<p>arguments对象:在函数执行时函数内部就会有arguments对象，它包含了所有的参数，arguments的length属性报告了传入参数个数</p>
+	<pre>
+	function fnTest() {
+		for (var i=0;i< arguments.length;i++) {
+			alert(arguments[i]);
+		}
+	}
+	fnTest(1,2,3);
+	fnTest(45);</pre>
+	<p>使用arguments对象模拟函数重载</p>
+	<pre>
+	function fnTest() {
+		var args = arguments;
+		switch (arguments.length) {
+			case 0 :
+				return "没有输入！！！";
+			case 1 :
+				return "一个参数："+args[0];
+			case 2 :
+				return "二个参数："+args[0]+" 和 "+ args[1];
+		}
+	}
+	alert(fnTest());
+	alert(fnTest(1));
+	alert(fnTest(2));</pre>
+	<p>arguments对象补充:arguments对象的callee属性指向它所在的函数</p>
+	<pre>
+	function fnTest() {alert(arguments.callee);}</pre>
+	<h2>闭包</h2>
+	<p>闭包，指的是词法表示包括不被计算的变量的函数，也就是说，函数可以使用函数之外定义的变量。</p>
+	<p>在 ECMAScript 中使用全局变量是一个简单的闭包实例。请思考下面这段代码：</p>
+	<pre>
+	var msg = "我是全局变量!!!";
+	function say() {
+	  alert(msg);
+	}
+	say();</pre>
+	<p>在ECMAScript中，在函数声明处向函数外部看到的声明的所有变量，在函数内部都能访问到它们的最终值！</p>
+	<pre>
+	var g = "全局变量！！！";
+	function fnA() {
+		var a="A";
+		function fnB() {
+			var b="B";
+			alert(a);//可以访问到a
+			alert(c);//但不以访问c
+			function fnC() {
+				var c = "C";
+				alert(a+"\n"+b);//只要遵循从里向外看的原则，看到的变量都可以访问到
+			}
+		}
+	}
+	//更复杂的闭包
+	function fnTest(num1,num2) {
+		var num3 = num1+num2;
+		return function () {
+			alert("num1+num2结果为"+num3);
+		};
+	}
+	var result = fnTest(23,56);
+	result();</pre>
+	<p>闭包函数只能访问变量的最终值!!!</p>
+	<pre>
+	function fnTest(arr) {
+		for (var i=0;i < arr.length;i++) {
+			arr[i]=function () {
+				alert(i+" | "+arr[i]);
+			};
+		}
+	}
+	var arr = [0,1,2,3,4,5];
+	fnTest(arr);
+	for (var i=0;i < arr.length;i++) {
+		arr[i]();//始终输出6还有一个undefined
+		//因为函数退出后，i值为6,所以访问到的值只有6
+	}</pre>
+	<p>不但在闭包中可以访问闭包外的变量值，而且还可以设置它的值</p>
+	<pre>
+	function fnTest() {
+		var a=123;
+		return {
+			set:function (param) {a = param},
+			get:function () {return a}
+		};
+	}
+	var obj = fnTest();
+	alert(obj.get());//123
+	obj.set(4);
+	alert(obj.get());//4</pre>
+	<h2>对象,构造函数</h2>
+	<p>创建一个对象</p>
+	<pre>
+	var obj = new Object();
+	alert(obj);
+	alert(Object);//一个函数
+	Object();//可以直接执行
+	//构造函数也是一个普通的函数
+	function Demo() {
+	}
+	var d = new Demo();//不会出错，使用new运算符来创建对象实例
+	alert(d);//object</pre>
+	<p>this关键字的用法</p>
+	<pre>
+	function Demo() {
+		this.property = "属性！！！";
+	}
+	d = new Demo();
+	alert(d.property);//属性！！！</pre>
+	<p>不使用new而直接执行构造函数时，this指向window</p>
+	<pre>
+	function Demo() {
+		this.property = "属性！！！";
+	}
+	var d = Demo();
+	alert(d.property);//undefined
+	alert(window.property);//属性！！！</pre>
+	<p>可以给构造函数传递参数,然后可以将参数赋值给对象的属性</p>
+	<pre>
+	function Person(name,age) {
+		this.name = name;
+		this.age = age;
+	}
+	var p1 = new Person("CJ",18);</pre>
+	<p>instanceof 运算符，用来判断对象是否是某个类（虽然ECMAScript中并不存在类，但我们在这里依然使用这一术语）的实例</p>
+	<pre>
+	var str = new String("string");
+	alert(str instanceof String);//true
+	var arr = new Array();
+	alert(arr instanceof Array);//true
+	function Demo() {}
+	var d = new Demo();
+	alert(d instanceof Demo);//true</pre>
+	<h2>面向对象术语</h2>
+	<p>一种面向对象语言需要向开发者提供四种基本能力：</p>
+	<ul>
+		<li>封装——把相关的信息（无论数据或方法）存储在对象中的能力。</li>
+		<li>聚集——把一个对象存储在另一个对象内的能力。</li>
+		<li>继承——由另一个类（或多个类）得来类的属性和方法的能力。</li>
+		<li>多态——编写能以多种方法运行的函数或方法的能力。</li>
+	</ul>
+	<p>ECMAScript支持这些要求，因此可被看作面向对象的。</p>
+	<h3>封装与私有属性:封装并不要求私有！</h3>
+	<pre>
+	function Person(name,age) {
+		this.name = name;//将值存储为对象的属性即是封装
+		this.age = age;
+	}
+	var p1 = new Person("CJ",18);</pre>
+	<p>ECMAScript目前版本并不支持私有属性，但可以通过闭包来模拟</p>
+	<pre>
+	function Person(name,age) {
+		this.getName = function () {return name};
+		this.setName = function (param) {name=param};
+		this.getAge = function () {return age};
+		this.setAge = function (param) {age=param};
+	}
+	var p1 = new Person("CJ",18);
+	alert(p1.name);//undefined
+	alert(p1.getName());//CJ
+	p1.setName("XXX");
+	alert(p1.getName());//XXX</pre>
+	<h3>继承：prototype属性</h3>
+	<p>ECMAScript中，继承是通过构造函数的prototype属性实现的</p>
+	<pre>
+	function Person(name,age) {
+		this.name=name;
+		this.age = name;
+	}
+	alert(Person.prototype);//object
+	Person.prototype.sort = "人";
+	var p1 = new Person("CJ",18);
+	alert(p1.sort);//所有的Person对象的实例继承了sort这个属性</pre>
+	<p>所有对象都有一个方法isPrototypeOf(),用来判断它是不是另一个对象的原型</p>
+	<pre>
+	function Person() {}
+	var p1 = new Person();
+	alert(Person.prototype.isPrototypeOf(p1));//true</pre>
+	<p>在ECMAScript中让一个类继承另一个类的方式比较特殊</p>
+	<pre>
+	function ClassA() {
+		this.a = "A";
+	}
+	function ClassB() {
+		this.b = "B";
+	}
+	ClassB.prototype = new ClassA(); //让ClassB继承ClassA
+	var b = new ClassB();
+	alert(b.a);//"A",继承了属性a
+	alert(b instanceof ClassB);//true
+	alert(b instanceof ClassA);//true,因为继承，b也是ClassA的后代
+	alert(ClassB.prototype.isPrototypeOf(b));//true
+	alert(ClassA.prototype.isPrototypeOf(b));//true,ClassA.prototype也是b的原型</pre>
+	<p>然而这样的继承有个注意点——</p>
+	<pre>
+	function ClassA() {
+		this.a = "A";
+	}
+	function ClassB() {
+		this.b = "B";
+	}
+	var b = new ClassB();//先实例化ClassB
+	ClassB.prototype = new ClassA();//再去继承ClassA,将prototype重置为另一个对象
+	alert(b instanceof ClassB);//false
+	alert(b instanceof ClassA);//false
+	alert(ClassB.prototype.isPrototypeOf(b));//false
+	alert(ClassA.prototype.isprototypeOf(b));//false</pre>
+	<p>当构造函数需要参数时</p>
+	<pre>
+	function Person(name,age) {
+		this.name = name;
+		this.age = age;
+	}
+	function Teacher(name,age,lesson) {
+		this.tempMethod = Person;//对象冒充
+		this.tempMethod(name,age);
+		//当执行Person时,由于是在Teacher某个实例上调用的,所以在Person函数中的this指向了Teacher的实例
+		delete this.tempMethod;//删除临时方法
+		this.lesson = lesson;
+	}
+	ClassB.prototype =new ClassA();//始终不应在继承时放参数
+	var t1 = new Teacher("HUXP",18,"C#");
+	alert(t1.name+" | "+ this.age+ " | "+this.lesson);</pre>
+	<p>事实上，对于对象冒充，ECMAScript提供了更简洁的内置方法call,在每个函数上调用，第一个参数即为要冒充的对象，剩下的是函数需要的其它参数</p>
+	<pre>
+	function Demo(arg) {
+		this.name = arg;
+	}
+	var obj = new Object();
+	Demo.call(obj,"name");
+	alert(obj.name);//"name"
+	//使用call重写上面继承的例子
+	function Person(name,age) {
+		this.name = name;
+		this.age = age;
+	}
+	function Teacher(name,age,lesson) {
+		Person.call(this,name,age);//对象冒充
+		this.lesson = lesson;
+	}</pre>
+	<h3>静态属性与Function类</h3>
+	<p>在ECMAScript里有个有趣的地方是，函数本身也是对象（和数组也一样），也可使用new来创建.Function构造函数至少要传两个字符串参数，可以是空字符串。除了最后一个字符串会被当做函数体语句去执行，其它参数都会作为函数参数变量名!</p>
+	<pre>
+	var fn = new Function();//一个空函数
+	//创建有内容的函数
+	fn = new Function("arg1","alert(arg1)");//最后一个参数为执行语句的字符串，前面参数全是函数要用到的参数
+	//上面的代码等效于
+	fn = function (arg1) {alert(arg1)};//同样，由于都是赋值语句，所以要注意出现次序
+	fn.property ="既然是对象，那么就要以添加属性"</pre>
+	<p>事实上，在构造函数上添加的属性就被称之为静态属性，它不会被实例所继承</p>
+	<pre>
+	function ClassDemo() {
+	}
+	ClassDemo.property = new Array();
+	var d =new ClassDemo();
+	alert(d.property);//undefined
+	alert(ClassDemo.property);//object</pre>
+	<p>Function类的实例还有其它一些方法和属性（当然，使用function关键字声明的函数也是一样的）</p>
+	<pre>
+	function outer() {
+		inner();
+		function inner() {
+			alert(inner.caller);
+			//函数的caller属性指向调用自身的上下文函数，这里指向outer
+		}
+	}
+	function applyTest() {
+		var args = arguments;
+		this.name = args[0];
+		this.age=args[1];
+	}
+	var obj = new Object();
+	applyTest.apply(obj,["name",18]);
+	alert(obj.name);
+	alert(obj.age);
+	//apply方法与call方法类似，也用于对象冒充，只是apply方法只有两个参数
+	//第一个是要冒充的对象，第二个是所有参数组成的数组</pre>
+
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+</body>
+</html>

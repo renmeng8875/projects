@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery基础</title>
+<script type="text/javascript">
+var oldMap={};
+for (var i in window) {
+	oldMap[i]=1;
+}
+</script>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+/*for (var i in window) {
+	if (i in oldMap) continue;
+	alert(i+":"+window[i]);
+}*/
+//jQuery $
+//alert(window.jQuery===window.$);
+//$ 选择DOM元素
+/*
+window.onload=function () {
+	var list=$("#newsList li.highlight");
+	
+};
+//jQuery.fn.init
+function $(selector, context) {
+    return new (jQuery.fn.init)(selector, context);
+}*/
+
+//Google CDN
+/*
+google.load("jquery","1.4.2");
+google.setOnLoadCallback(function () {
+	alert(jQuery);
+});*/
+//jQuery,$
+//var o=jQuery("#newsList li.highlight");
+/*
+jQuery.fn.init(jQuery元素) 其实例定义了多少方法
+jQuery这个函数上有多少静态方法
+*/
+/*
+var o=jQuery();
+o.method();
+
+jQuery.method();*/
+
+/*
+window.onload=function () {
+	var o=jQuery("#newsList li.highlight");
+	alert(o);
+};*/
+
+//DOMContentLoaded
+
+
+jQuery(function ($) {
+	var list=$("li.highlight em a",$("#newsList"));
+	//get 方法返回的是DOM元素（DOM元素数组）
+	/*list.each(function (i,v) {//遍历方法
+		alert(this+":"+i+(v===this));
+		return false;
+	});*/
+	/*
+	var div=$("<div>Div</div>");
+	//div.appendTo(document.body);
+	var eles=document.getElementsByTagName("*");
+	$(eles).each(function () {
+		alert(this.tagName);
+	});*/
+	//alert(jQuery.support.opacity);
+	var o={name:"CJ"};
+	var obj={age:18};
+	jQuery.extend(obj,o);
+	alert(obj.age);
+	
+});
+
+
+
+/*
+
+function jQuery(a) {
+	if (a instanceof Function) {
+		addEvent(window,"load",function () {
+			a(jQuery);
+		});
+	} else if (typeof a=="string") {//CSS选择器
+		return new jQueryElement(a);
+		
+	}
+}
+
+function jQueryElement(cssSelector) {
+	var nodes=querySelector(cssSelector);
+	this.nodes=nodes;
+}
+jQueryElement.prototype= {
+	each:function (callback) {
+		for (var i=0;i<this.nodes.length;i++) {
+			callback.call(this.nodes[i]);
+		}
+	},
+	get:function ()  {
+		return this.nodes;
+	}
+};
+*/
+</script>
+<style type="text/css">
+	/*#newsList li.highlight {
+	background:blue;
+	}*/
+</style>
+</head>
+<body>
+<h1 id="header">jQuery基础</h1>
+<ul id="newsList">
+	<li class="highlight">List 1</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li class="highlight">List 4</li>
+</ul>
+<ul>
+	<li class="highlight">List 1</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li class="highlight">List 4</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bjsxt.hibernate.Classes" table="T_Classes">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="classesNo"/>
+		<set name="students">
+			<key column="classesid"/>
+			<one-to-many class="com.bjsxt.hibernate.Student"/>
+		</set>
+	</class>
+	<class name="com.bjsxt.hibernate.Student" table="T_Student">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<property name="studentNo"/>
+		<many-to-one name="classes" column="classesid" />
+	</class>
+	<class name="com.bjsxt.hibernate.Course" table="T_Course">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+	</class>
+	<class name="com.bjsxt.hibernate.Grade" table="T_Grade">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="grade"/>
+		<many-to-one name="course"/>
+		<many-to-one name="student"/>
+	</class>
+</hibernate-mapping>

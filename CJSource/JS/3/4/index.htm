@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>表单</title>
+<script type="text/javascript">
+if (false) {
+window.onload=function () {
+	var fm,t;
+	//fm=document.fm;
+	//alert(fm[0].tagName);
+	fm=document.getElementById("fm1");
+	//alert(fm);
+//	t=fm.textInput;
+	//alert(t.value);
+	//t.value="ABC";
+	//要访问一个表单中的所有表单控件
+	//fm.getElementsByTagName('input');
+	var eles=fm.elements;
+	fm.gender[0].checked=true;
+	//fm.gender[0].setAttribute("checked","checked");
+	
+	fm.onsubmit=function () {
+		//alert(this.city.value);
+		
+		var select=this.city;
+		//alert(select.selectedIndex);//被选中option对象的下标
+		/*var options=select.getElementsByTagName("option");
+		alert(options[select.selectedIndex].innerHTML);*/
+		alert("城市ID:"+select.value
+		+"城市名称:"+select.options[select.selectedIndex].text);
+		//select.value
+		
+		
+		return false;
+		/*if (/\s/.test(this.searchInput.value)) {
+			alert("不能包含空格");
+			this.searchInput.select();
+		}
+		
+		return false;*/
+		//alert(this);//form对象
+		var gender;
+		/*if (fm.gender[0].checked) {
+			gender=fm.gender[0].value;
+		} else {
+			gender=fm.gender[1].value;
+		}
+		
+		
+		gender=fm.gender[0].checked?
+						fm.gender[0].value:
+						fm.gender[1].value;
+		//alert(gender);
+		//alert(fm.gender[0].defaultChecked);
+		
+		for (var i=0;i<this.elements.length;i++) {
+			if (!this.elements[i].value) {
+				//alert("请填写完整");
+				//return false;
+			}
+		}
+		return false;*/
+	};
+	fm.onreset=function () {
+		alert("Reset!!!");
+		return false;
+	};
+	
+	/*
+	var searchInput=document.getElementById("searchInput");
+	searchInput.onclick=function () {
+		//alert(this.defaultValue);
+		if (this.defaultValue==this.value) {
+			this.value="";
+		}
+	};*/
+};
+}//comment
+window.onload=function () {
+	var fm=document.fm1;
+	var sel=fm.city;
+	var sinput=fm.searchInput;
+	var txt=document.getElementById("txt");
+	txt.onchange=function () {
+		alert(this.value);
+	};
+	sinput.onselect=function () {
+		//alert("Selected!!!");
+		return false;
+	};
+	/*sinput.onfocus=function () {
+		alert("Focus!!!");
+	};*/
+	/*sinput.onfocus=sinput.onclick=function () {
+		if (this.value==this.defaultValue) {
+			this.value="";
+		}
+	};
+	sinput.onblur=function () {
+		if (/\s/.test(this.value)) {
+			//this.select();
+			//alert(this.value);
+			this.focus();//将表单控件设置焦点
+			
+		}
+	};*/
+	
+	sel.onchange=function () {
+		alert(this.value);
+	};
+	
+	
+	
+	
+	
+	
+	//sel.value;//
+	//sel.selectedIndex;//被选中option的下标
+	//sel.options.length=2;
+	//var opts=sel.options;
+	//opts[0]=new Option("Text","Value");
+	//opts[10]=new Option("ABC",123);//自动添加一个元素
+	//向select末尾添加option元素
+	//sel.options[sel.options.length]=new Option("向select末尾添加元素","向select末尾添加元素");
+	
+	//var opt=sel.options[sel.selectedIndex];
+	//opt.text;
+	//alert(opt.value);
+	/*var opt=document.createElement("option");
+	opt.appendChild(document.createTextNode("上海"));
+	opt.setAttribute("value","B3");
+	sel.appendChild(opt);*/
+	/*var opt = new Option("新增选项文本","选项值");//document.createElement("option");
+	addOpt(sel,opt,2);
+	sel.remove(3);*/
+	//var nodes=document.getElementsByTagName("*");
+	//alert(nodes.length=1);
+	
+	//sel.add(opt,null);
+	//sel.add(opt,sel.options[sel.options.length-1]);
+	//sel.add(opt,1);
+	/*
+	FireFox:
+					select.add(新加入的option,null);
+					select.add(新加入的option,要放到哪个option之前-Option对象);
+	IE:select.add(新加入的option)//option添加到最后面
+		 select.add(新加入的option,下标)//将option插入到某个下标之前
+	*/
+	//add(opt,null) //FireFox
+};
+
+
+function addOpt(sel,opt,index) {
+	//addOpt(Select对象,新加入的opt,插入的下标)
+	var IE=navigator.userAgent.indexOf("MSIE")>-1;
+	if (IE) {
+		sel.add(opt,index);
+	} else {
+		sel.add(opt,index===undefined?null:sel.options[index]);
+	}
+	return sel;
+}
+</script>
+</head>
+<body>
+	<h1>表单</h1>
+	<form name="fm1" id="fm1" action="http://www.g.cn">
+		<input name="searchInput" type="text" id="searchInput" value="请输入搜索内容" />
+		<input name="textInput1" type="text" value="文本框" />
+		<input name="textInput2" type="reset" value="重置" />
+		<input type="radio" name="gender" value="Man" />
+		<input type="radio" name="gender" value="Woman" />
+		<input type="submit" value="提交" />
+		<select name="city">
+			<option value="A1">盐城</option>
+			<option value="B1" selected="selected">南京</option>
+			<option value="C1">北京</option>
+		</select>
+		<label>Label</label>
+		<textarea id="txt"></textarea>
+	</form>
+</body>
+</html>

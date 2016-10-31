@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function set(){
+	var input = document.querySelector("#input");
+	var value = input.value;
+	
+	sessionStorage.setItem("name2",value);
+}
+function get(){
+	var value = sessionStorage.getItem("name2");
+	var input = document.querySelector("#input");
+	
+	input.value = value;
+}
+</script>
+</head>
+<body>
+	name:<input type="text" id="input" /><br />
+	<button onclick="set()">保存</button>&nbsp;
+	<button onclick="get()">获取</button>
+</body>
+</html>

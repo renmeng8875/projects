@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>函数式与面向对象</title>
+<script type="text/javascript">
+	
+	
+/*
+function fn1() {
+	alert('fn1');
+}*/
+
+//lambda 函数表达式
+ //不具名函数,一个表达式
+
+//var a;
+
+
+//(function () {alert('fn2')})();
+
+
+// () 括号的作用，将括号中的表达式求值返回给上下文 
+//alert(a=function () {alert('fn2')});
+
+/*var l= (a="abc").length;
+alert(l);*/
+/*
+var c= (a=Math).sqrt(2);
+alert(c);
+alert(a);*/
+
+//fn1();
+
+/*
+(function (p,p2) {
+		alert(p);
+})(123,333);
+*/
+
+/*
+var fn2=function () {
+	alert('fn2');
+};
+fn2();*/
+/*
+(function abc() {})();
+alert(abc);*/
+
+
+//表达式，与 语句
+/*
+function arg(a,b,c) {
+	//在函数执行时有个arguments对象,保存所有的参数
+	//arguments对象，类似数组,可以用下标访问，并且有length属性
+	//alert(arguments.length);
+	for (var i=0;i<arguments.length;i++) {
+		alert(arguments[i]);
+	}
+	//alert(a+"\n"+b+"\n"+c);
+}
+
+function msg() {//将所有的传进来的值都作为字符串用换行符分隔输出
+	var s='';
+	for (var i=0;i<arguments.length;i++) {
+		s+=arguments[i]+"\n";
+	}
+	alert(s+"-");
+	
+}
+
+
+function msg() {
+	for (var i=0,a=[];i<arguments.length;i++) {
+		a.push(arguments[i]);
+	}
+	alert(a.join('\n'));
+}
+*/
+ 
+//msg("adf","adfsad",3,4,6,7,8);
+
+/*
+function fnTest() {
+	var args = arguments;
+	switch (args.length) {
+		case 0 :
+			return "没有输入！！！";
+		case 1 :
+			return "一个参数："+args[0];
+		case 2 :
+			return "二个参数："+args[0]+" 和 "+ args[1];
+	}
+}
+alert(fnTest());
+alert(fnTest(1));
+alert(fnTest(1,2));
+
+function fn () {
+	var args=arguments;
+	alert(args.callee);
+}
+
+function add(n) {
+	for (var i=ret=1;i<=n;i++) {
+		ret=ret*i;
+	}
+	return ret;
+}
+
+function fnAdd(n,b,c) {
+	//alert(arguments.callee.caller);
+	return n?n*arguments.callee(n-1):1;
+}
+
+/*function fn1() {fn1();}
+//fn1();*/
+/*var n=fnAdd(5);
+alert(n);*/
+/*
+var c=fnAdd;
+fnAdd=null;
+alert(c(5));
+alert(fnAdd());*/
+
+//alert(fnAdd.length);
+//alert(fnAdd.caller);
+
+/*
+function callOther() {
+	fnAdd(5);
+}
+callOther();*/
+/*
+var msg = "我是全局变量!!!";
+function say() {
+  alert(msg);
+}
+say();*/
+
+/*
+var g = "全局变量！！！";
+function fnA() {
+	var a="A";
+	//alert(g);
+	fnB();
+	function fnB() {
+		var b="B";
+		//alert(g);//全局变量 在任何函数的任何位置都可以访问
+		//alert(a);//可以访问到a
+		//alert(c);//但不以访问c
+		function fnC() {
+			var c = "C";
+			alert(a+"\n"+b);//只要遵循从里向外看的原则，看到的变量都可以访问到
+		}
+	}
+	//fnC();//Wrong!!
+}
+*/
+//fnA();
+//alert(a);//Wrong
+	
+
+//更复杂的闭包
+/*
+function fnTest(num1,num2) {
+	//var num3 = num1+num2;
+	return function () {//一个闭包
+		alert("num1+num2结果为"+(num1+num2));
+	};
+}
+var result = fnTest(23,56);
+result();
+
+
+function each() {
+	var i=0,inner,a=[];
+	for (;i<10;i++) {
+		
+		cache(i);
+			
+	}
+	
+	function cache(abc) {//cache函数执行了10次
+		//var i;
+		//这里的i是cache函数的局部变量 
+		a.push(function () {
+				alert(abc);
+		});
+	}
+	
+	return a;
+}
+/*
+var fn=each();
+fn();
+var a=each();
+for (var i in a) {
+	a[i]();
+}
+
+*/
+/*
+
+function outer() {
+	var a=123,b=1234;
+	function inner() {return a;}
+	inner.function_closure={a:123,b:1234}
+	return inner;
+}
+
+var inner=outer();
+outer();
+outer();
+inner();
+
+
+function fnTest() {
+	var i=0,a=[];
+	for(;i<10;i++) {
+		a.push(function () {alert(i);});
+	}
+	return a;
+}
+fnTest();
+
+function fn1() {
+	var i=123;
+}
+fn1();
+fn1();
+fn1();*/
+
+/*
+function fnTest() {
+	var a=123;
+	return {
+		set:function (param) {a = param},
+		get:function () {return a}
+	};
+}
+var obj = fnTest();
+alert(obj.get());//123
+obj.set(4);
+alert(obj.get());//4
+
+
+var obj=new Object();//Object是构造函数
+//alert(Object);
+function Demo(name,age) {
+	this.name=name;
+	this.age=age;
+
+	
+	//return {};
+	//return [123,456];//在构造函数中如果返回一个对象(不是基本类型)，就会覆盖new出来的新对象
+	
+}
+//var s=String(123);
+//var d=Demo("CJ",18);//new了一个新对象
+
+//alert(typeof window);
+//所有全局变量都是window对象的属性
+
+//window.alert("全局函数Alert");
+/*
+var obj={};
+//obj.name="CJ";
+obj.method=Demo;
+//Demo=null;
+var c={abc:obj.method};
+c.abc("CJ",18);
+
+
+alert(c.name+"|"+c.age);*/
+
+//执行一个全局函数，函数内部的this指向window
+//d.name="CJ";
+/*alert(d.name);
+alert(d.age);*/
+//alert(d);
+function Demo(name,age) {
+	this.name=name;
+	this.age=age;
+}
+var d=new Demo("CJ",18);
+//alert(d.name+"\n"+d.age);
+
+// 实例
+//d 是Demo类的实例
+// 实例 instanceof 类/构造函数
+//alert(d instanceof Demo);
+
+var str = new String("string");
+//alert(str instanceof String);//true
+var arr = new Array();
+//alert(arr instanceof Array);//true
+var a=[];
+//alert(typeof a);//object
+//alert(a instanceof Array);
+//alert(typeof('')=='string');
+//alert(new String() instanceof String);
+//alert(0 instanceof Number);
+//alert(/a/ instanceof RegExp);
+//alert({} instanceof Object);
+/*
+var a,b,c;
+//alert(a);
+var o={};
+o.a=123;
+o.b=456;
+//alert(Math.sqrt());
+o.a={};
+o.a.b={};
+*/
+/*
+function Demo(name,age) {
+	//this.name=name;
+	//this.age=age;
+	
+	this.getName=function () {
+		return name;
+	};
+	this.getAge=function () {
+		return age;
+	};
+	this.setName=function (n) {
+		name=n;
+	};
+	this.setAge=function (a) {
+		age=a;
+	};
+}
+
+var d=new Demo('CJ',25);
+alert(d.getName());
+d.setName("XXX");
+alert(d.getName());*/
+
+String,Array,Object,Number;
+var o=new Object;
+//alert(o.toString);
+var a=new Array;
+//alert(a.toString);
+
+//Demo类借用了Object的toString和valueOf方法
+/*function Demo() {}
+var d=new Demo;*/
+
+//alert(d.valueOf===o.valueOf);
+//ECMAScript:所有类都从Object类继承
+//Demo 继承了Object
+
+//alert();
+/*
+function DemoA() {
+	this.name="CJ";
+}
+function DemoB() {//要让DemoB继承DemoA，就是要从DemoA上借用一些属性和方法
+}
+DemoB.prototype=new DemoA;//让DemoB继承DemoA
+//DemoA是DemoB的父类
+//子类.prototype=new 父类;//不能传参数
+
+
+var b=new DemoB();
+alert(b instanceof DemoA);
+*/
+/*
+function ClassA() {
+	this.a = "A";
+}
+function ClassB() {
+	this.b = "B";
+}
+ClassB.prototype = new ClassA(); //让ClassB继承ClassA
+var b = new ClassB();
+alert(b.a);//"A",继承了属性a
+alert(b instanceof ClassB);//true
+alert(b instanceof ClassA);//true,因为继承，b也是ClassA的后代
+alert(ClassB.prototype.isPrototypeOf(b));//true
+alert(ClassA.prototype.isPrototypeOf(b));//true,ClassA.prototype也是b的原型*/
+
+function Demo() {
+	//this.ver=1;//ver属性是固定的
+	this.toString=123;
+}
+/*
+Demo.prototype.ver=1;
+Demo.prototype.toString=function () {
+	return "Demo";
+};
+*/
+//构造函数A的prototype属性是一个对象
+//这个对象具有的所有属性，A的实例也具有
+//Demo.prototype.name="CJ";
+
+function DemoA(name,age) {
+	this.name=name;
+	this.age=age;
+	
+}
+function DemoB(name,age) {//要让DemoB继承DemoA，就是要从DemoA上借用一些属性和方法
+	/*this.DemoA=DemoA;
+	this.DemoA(name,age);*/
+	DemoA.call(this,name,age);
+	
+}
+
+//DemoB.prototype=new DemoA();//只能执行一次
+
+
+
+//var d=new DemoB("CJ",18);
+
+//alert(d.name);
+
+/*
+function fn(a,b) {
+	this.ver=123;
+	alert(a+"|"+b);
+}
+var o={};
+//fn.call(o,12,"b");
+fn.apply(o,[12,"b"]);
+//call(this指向的对象,....函数的参数)
+//apply(this,[参数数组])
+alert(o.ver);
+*/
+/*
+
+
+Demo.prototype.name=123;
+/*
+Demo.prototype={
+	getName:function () {
+		return this.name;
+	}
+};
+Demo.prototype.getName=123454;
+
+Demo.prototype.name
+
+
+var o={};
+o={name:"CJ"};
+o.name=123;*/
+
+//所有类的根
+//alert(/a/ instanceof Object);
+
+//Object.prototype.name="CJ";
+/*
+Object.prototype.dir=function () {
+	var a=[];
+	for (var i in this) {
+		a.push(i+":"+this[i]);
+	}
+	return "{"+a.join("\n")+"}";
+};
+//alert(/a/.name);
+o={
+	name:"CJ",
+	age:19
+	};
+alert(o.dir());*/
+
+/*
+String.prototype.trim=function () {
+	return this.replace(/^\s+/,'').replace(/\s+$/,'');
+};
+var s="  fadsfads  ";
+alert("|"+s.trim()+"|");
+*/
+
+function msg() {
+	alert([].join.call(arguments,'\n'));
+}
+//msg("adf",1233,4325,345);
+
+var fn=new Function('a,b','alert(a+b)');
+//fn(123,456);
+
+Function.prototype.toString=function () {
+	return 'Function';
+};
+
+Function.prototype.valueOf=function () {
+	return 'Function';
+	
+};
+/*var s=""+fn;
+alert(s);*/
+//将其它类型转换成字符串，就是去调用它的toString方法
+//valueOf
+//alert(fn);
+//alert(fn);
+</script>
+
+</head>
+<body>
+<h1>函数式与面向对象 </h1>
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>引用类型</title>
+<script type="text/javascript">
+var obj=new Object();
+//Object 就是一个"类"
+// new 类名()   //创建一个对象
+/*
+var a=new Array;
+
+var d= +new Date;//创建一个Date对象，然后将其转换成数字类型
+alert(d);*/
+/*
+obj.name="CJ";
+//alert(obj.constructor);
+alert(obj.toString());
+alert(obj.valueOf());*/
+var bool=true;
+/*bool=new Boolean();//创建一个布尔对象
+alert(!!bool);*/
+/*alert(bool);*/
+
+//alert(!!bool);
+
+//var s='adsf';
+/*
+var obj=new Object;
+var s=new String;
+var b=new Boolean;
+
+
+alert(s.length);//s是一个对象，它有一个属性名为length
+*/
+/*
+var n=68;
+alert(n.toFixed(2));*/
+/*
+var n=68.14;
+alert(n.toPrecision(3));*/
+/*
+var oStringObject = "yellow";
+alert(oStringObject.localeCompare("brick"));		//输出 "1"
+alert(oStringObject.localeCompare("yellow"));		//输出 "0"
+alert(oStringObject.localeCompare("zoo"));		//输出 "-1"*/
+
+var oStringObject = new String("hello world");
+//alert(oStringObject.slice(3));		//输出 "lo world"
+//alert(oStringObject.slice(3, -4));		//输出 "lo w"
+
+String,Boolean,Object,Array,Number,RegExp;
+//所有的全局函数都是Global对象的方法
+
+/*isNaN();
+alert(Global);*/
+
+/*
+var url = "http://www.g.cn/trend page";
+alert(encodeURI(url));//该方法会将一些不能用在URI中的字符进行编码
+//上面的空格将会被替换成%20,与之对应的decodeURI则是用来解码的
+alert(decodeURI(encodeURI(url)));//原样输出
+*/
+var url = "http://www.g.cn";
+	alert(encodeURIComponent(url));
+
+
+
+</script>
+
+</head>
+<body>
+<h1>引用类型 </h1>
+</body>
+</html>

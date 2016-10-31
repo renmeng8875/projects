@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery Ajax菜单</title>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+	$("#mottoList li a").click(function (evt) {
+		evt.preventDefault();
+		var a=$(this),div=a.data("content");
+		if (div) {
+			div.slideToggle("slow");
+		} else  {
+			div=$("<div />");
+			a.data("content",div);
+			div.html("Loading.............");
+			a.after(div);		
+			var oh=div.height();
+			div.hide();
+			div.show("slow");
+			
+			div.load(a.attr("href"),function () {
+				var nh=div.height();
+				div.height(oh);
+				/*div.hide();
+				div.slideDown("slow");*/
+				div.animate({height:nh},"slow");
+			});
+		}
+	});
+});
+</script>
+<style type="text/css">
+#mottoList {
+list-style-type:none;
+}
+#mottoList li {
+	line-height:20px;
+	border-bottom:1px dashed #999;
+}
+#mottoList li a {
+color:#333;
+text-decoration:none;
+font-size:12px;
+}
+#mottoList li a:hover {
+text-decoration:underline;
+color:#F30;
+}
+#mottoList li div {
+background:#EEE;
+color:blue;
+line-height:120%;
+margin:4px 0;
+}
+</style>
+</head>
+<body>
+<h1 id="header">jQuery Ajax菜单</h1>
+<ul id="mottoList">
+	<li><a href="action.php?man=柏格森" target="_blank">柏格森</a></li>
+	<li><a href="action.php?man=王尔德" target="_blank">王尔德</a></li>
+	<li><a href="action.php?man=斯宾诺莎" target="_blank">斯宾诺莎</a></li>
+	<li><a href="action.php?man=罗素" target="_blank">罗素</a></li>
+	<li><a href="action.php?man=爱因斯坦" target="_blank">爱因斯坦</a></li>
+</ul>
+
+</body>
+</html>

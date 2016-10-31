@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>浏览器中的XPath</title>
+<script type="text/javascript" src="../../lib/base.js"></script>
+</head>
+<body>
+	<h1>浏览器中的XPath</h1>
+
+<script type="text/javascript">
+
+var xmlDom=Base.getXMLDOM();
+Base.loadXMLFile(xmlDom,"test.xml",function () {
+	//var node=xmlDom.documentElement.firstChild.selectSingleNode("name");
+	//var nodes=xmlDom.selectNodes("/root/book");
+	//alert(Base.getXML(node));
+	
+	
+	/*var eva = new XPathEvaluator();
+	var result=eva.evaluate("/root/book[2]",xmlDom,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE,null);
+	
+	if (result) {//XPath执行失败会返回null
+		var node;
+		while (node=result.iterateNext()) {
+			alert(Base.getXML(node));
+		}
+	}*/
+
+	/*var node=selectSingleNode(xmlDom,"//book[@*=4]");
+	alert(Base.getXML(node));*/
+	var nodes=selectNodes(xmlDom,"//date");
+	alert(Base.getXML(nodes[0]));
+});
+
+
+function selectSingleNode(node,xpath) {
+	if ("selectSingleNode" in node) {
+		return node.selectSingleNode(xpath);
+	} else {
+		var eva = new XPathEvaluator();
+		var result=eva.evaluate(xpath,xmlDom,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE,null);
+		if (result) {//XPath执行失败会返回null
+			var node;
+			while (node=result.iterateNext()) {
+				return node;
+			}
+		}
+	}
+	
+}
+
+
+function selectNodes(node,xpath) {
+	if ("selectNodes" in node) {
+		return node.selectNodes(xpath);
+	} else {
+		var eva = new XPathEvaluator();
+		var result=eva.evaluate(xpath,xmlDom,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE,null);
+		if (result) {//XPath执行失败会返回null
+			var node,nodes=[];
+			while (node=result.iterateNext()) {
+				nodes.push(node);
+			}
+			return nodes;
+		}
+	}
+}
+
+</script>
+</body>
+</html>

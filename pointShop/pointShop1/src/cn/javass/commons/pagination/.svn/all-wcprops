@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination
+END
+INavigationProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/INavigationProvider.java
+END
+IPageContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/IPageContext.java
+END
+PageUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/PageUtil.java
+END
+NavigationTag.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/NavigationTag.java
+END
+Page.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/Page.java
+END
+AbstractNavigationProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/AbstractNavigationProvider.java
+END
+QuickPageContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/repo/!svn/ver/5043/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop1/src/cn/javass/commons/pagination/QuickPageContext.java
+END

@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.数组与对象</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>数组与对象</h1>
+	<h2>数组</h2>
+	<p>数组,实际上就是将一大堆相似的数据有秩序的放在格子箱中,十分像药房里的那些柜子.</p>
+	<table>
+		<tr><td>数据1</td><td>数据2</td><td>数据3</td><td>数据4</td><td>数据5</td><td>数据6</td></tr>
+	</table>
+	<p>用代码创建数组</p>
+	<pre>
+	var arr = new Array();//Array和Date一样,也是一个内置对象,需要使用new运算符创建
+	arr[0]="数据1";//向数组中添加一个元素,数组中的元素是有编号的,并且要注意的是,编号从0开始
+	//上面一行代码就向数组中的第一个箱添加了一个元素
+	arr[1]="数据2";//方括号用以指定下标1
+	arr[2]="数据3";
+	arr[3]="数据4";
+	arr[5]="数据6";
+	arr[4]="数据5";
+	alert(arr);//将会输出"数据1,数据2,数据3,数据4,数据5,数据6"   是以逗号分隔的字符串
+	//并且这些字符串的连接是按(下标)顺序的
+	alert(arr[0]);//当然,我们也可以直接访问其中第一个元素
+	alert(arr[1]);//第二个
+	alert(arr.length);//遇到的第一个数组对象的属性,length属性用以表示数组中元素的个数,输出6</pre>
+	<p>遍历数组 for 循环</p>
+	<pre>
+	for (var i=0;i< arr.length;i++) {
+		arr[i]+="  ---changed";//将数组中每个元素(字符串)后面连上一个"  ---changed"
+	}
+	alert(arr);//变了
+	</pre>
+	<p>创建数组的其它方式</p>
+	<pre>
+	var arr;
+	arr = new Array();//这样创建了一个空数组
+	alert(arr);//输出为空,因为没有元素
+	arr = new Array(3);//在申明时只放一个正整数表示数组的长度
+	alert(arr.length);//输出3
+	alert(arr);//输出两个逗号,它里面放了3个空元素
+	//申明时指定了数组的长度,然后修改指定位置的值
+	arr[2]="end";//将最后一位修改为"end"
+	alert(arr);
+	//并不是在数组申明时指定了长度就不能更改,更改长度很简单
+	arr[8]="super";//数组长度将自动增长到8
+	//记住,JavaScript中数组长度会自动增长,并且length属性会自动更新
+	alert(arr.length);//输出9,JavaScript中数组下标是从0开始的
+	alert(arr[8]);
+	//也可以在创建数组时就指定值
+	arr = new Array(1,2,3,4,5,6,7,8);
+	alert(arr);
+	//如果在创建数组时只指定一个值,并且是正整数
+	arr = new Array(6);//将得不到预期效果,因为这是在声明一个长度为6的空数组
+	//需要这样
+	arr = new Array();
+	arr[0]=6;
+	//还可以使用数组字面量的方式
+	arr = [];//是的,一个空中括号
+	//与下面一句几乎是等价的
+	arr = new Array();
+	//但更灵活和简便
+	arr =[3];//将创建一个长度为1,第一个元素为3的数组
+	arr = [2,3,4,6];//多个元素以逗号分隔
+	alert(arr[0]);//输出2,下标的顺序与在中括号中出现的顺序相关
+	//数组中可以混合存放字符串,数值,布尔值...,几乎所以类型的值,包括数组
+	arr = new Array(1,0,true,"some string",new Array("a",3));//第五个元素放的是一个数组
+	alert(arr[4]);//输出"a",3
+	alert(arr[4][0]);//输出"a"
+	</pre>
+	<p>数组的按引用传值的特性</p>
+	<pre>
+	var arr = [2,3,4]	;
+	var arr2 =arr;//这相当于给arr取了个别名
+	arr2[0]=234;
+	alert(arr[0]);//输出234,因为arr与arr2是同一个对象</pre>
+	<p>向数组中添加,删除元素(push,delete)</p>
+	<pre>
+	var arr = [2,4];
+	arr.push(6);//push方法将元素添加到数组未尾
+	alert(arr.length);//输出3
+	arr.push("a","b");//可以一次添加多个元素
+	alert(arr.length);//输出5
+	alert(arr[5]);//输出"b"
+	alert(arr.push(123));//push方法执行后会返回数组的新长度值,输出6
+	//事实上将元素添加到数组未尾的最简单的方法是
+	arr = [4,5];
+	arr[arr.length]="new element";//利用数组长度自动增长的特性
+	alert(arr.length);//输出3
+	//为了更明了的明白push的工作原理,我们可以使用一个简单的自定义函数来完成这项工作
+	function array_push(element,arr) {//第一个参数为要添加的元素,第二个参数为该数组
+		arr[arr.length]=element;
+		return arr.length;
+	}
+	arr = [1,2,3];
+	array_push(345,arr);
+	alert(arr.length);//输出4
+	alert(array_push("some string",arr));//输出5
+	alert(arr);
+	//删除一个元素
+	arr = ["#","$","%"];
+	alert(arr);
+	delete arr[2];
+	alert(arr);
+	alert(arr.length);//元素被删除了,但数组长度并没有变化,因为这样能使我们使用相同的下标访问以前的元素
+	//使用delete与下面的语句效果一样
+	arr = ["#","$","%"];
+	alert(arr);
+	arr[2]=undefined;//undefined是一个值
+	alert(arr);
+	</pre>
+	<p>join方法,返回数组中的所有元素以指的分隔符间隔的字符串</p>
+	<pre>
+	var arr = [2,3,4];
+	alert(arr.join("#"));
+	//事实上当我们直接输出数组时,系统会自动调用这样的方法
+	alert(arr);
+	alert(arr.join(","));//两句的输出效果是一样的</pre>
+	<h2>对象</h2>
+	<p>对象是一堆属性的集合,其实它和数组是相通的</p>
+	<pre>
+	var obj = new Object();//创建一个对象
+	obj.property = "value";//使用点语法给对象添加属性
+	alert(obj);//只会输出含糊的[object Object]
+	alert(obj.property);//真正的数据全存储在它的属性上面</pre>
+	<p>对象吗?就当和现实中的对象一样:一个"人"对象</p>
+	<pre>
+	var person = new Object();
+	person.age = 18;
+	person.weight = "123kg";
+	person.height = "170cm";
+	person.arm = 2;//两个臂膀
+	person.leg = 2;</pre>
+	<p>上面创建的对象,描述了现实中的人的一些特性:年龄 18;重量 123kg;身高 170cm;不是残疾(这个是我推断的);  其实数组也能完成这样的工作</p>
+	<pre>
+	var person = new Array();
+	person[0] = 18;
+	person[1] = "123kg";
+	person[2] = "170cm";
+	person[3] = 2;
+	person[4] = 2;</pre>
+	<p>但是这样的表达方式,没人能看出这是一个"人"对象,使用数字下标没有对象的属性明了,代码难于理解. 其实数组可以使用字符串下标的</p>
+	<pre>
+	var person = new Array();
+	person["age"] = 18;//注意,中括号里的下标是一个字符串,所以需要使用引号
+	person["weight"] = "123kg";
+	person["height"] = "170cm";
+	person["arm"] = 2;
+	person["leg"] = 2;</pre>
+	<p>我说过了,数组和对象是相通的</p>
+	<pre>
+	var arr = new Array();
+	var obj = new Object();
+	alert(typeof arr);//object
+	alert(typeof obj);//object</pre>
+	<p>所以,数组用字符串下标,事实上也是在给其添加属性</p>
+	<pre>
+	var arr =[1,2,3];
+	arr["property"]="some data";
+	alert(arr.property);//"some data"
+	//但注意的是,数组的length属性只能报告具有数字下标的元素的个数
+	alert(arr.length);//3</pre>
+	<p>而对象也可以使用类似语法访问它的属性</p>
+	<pre>
+	var obj = new Object();
+	obj.property = "some data";
+	alert(obj["property"]);//"some data"
+	//当然也可以使用数字下标
+	obj[1]=123;
+	alert(obj[1]);//123
+	alert(obj.property);//"some data"
+	alert(obj.length);//但与数组不同的是,它没有length属性</pre>
+	<p>与数组字面量相对应的,也有对象字面量的声明方式</p>
+	<pre>
+	var obj = {
+		a:123,//这里的a,b等同样是对象的属性名
+		b:456 //注意,最后没有逗号
+	};
+	alert(obj.a);
+	alert(obj.b);
+	//还可以这样写
+	obj = {
+		"a":345,  //虽然如果用引号引起来就可以使用空格等不符合变量命名规范的字符,但强烈不推荐
+		"b":333  
+	};
+	alert(obj.a);//345</pre>
+	<p>对于数组,我们可以使用for对其进行遍历,但for循环只能遍历具有数字下标的元素</p>
+	<pre>
+	var arr =[1,2,3,4];
+	arr["stringIndex"]="some data";//这个不会被遍历到
+	alert(arr.length);//arr.length属性也不报告包含此元素
+	for (var i=0;i&lt; arr.length;i++) {
+		alert(arr[i]);//i只会是数字,所以不能遍历字符串下标的元素
+	}</pre>
+	<p>我们之前看到,对数组使用字符串下标实际上是给这个数组对象添加属性,这个时候我们会发现,对象的属性还没有什么好的方法列举出来,for.. in...循环出现了 (对于研究对象,for in循环太有用了)</p>
+	<pre>
+	var obj={
+		age:12,
+		height:170
+	};
+	for (var i in obj) {//i将会被列举为键名,就是所说的字符串的下标
+		alert(i+"\n"+obj[i]);/*将会以类似
+			age
+			12
+		这样的格式分别输出它的键名键值对
+		*/
+	}</pre>
+	<p>for in 循环不但是用来遍历对象属性,它也可以遍历出数组的具有数字下标的元素</p>
+	<pre>
+	var arr = [1,2,3,4,5,6];
+	arr["property"]=78;//会被遍历到,因为它是属性
+	for (var i in arr) {
+		alert(i+" : "+arr[i]);
+	}</pre>
+	<p>了解这些之后,我们可以使用它们来存储一些数据:一个班的学生的成绩(该用数组还是对象呢?这确实是一个问题)</p>
+	<pre>
+	//该是对象就是对象,该是数组就是数组
+	var myClass=[];//创建一个数组,放置每个学生的信息,以学生的学号作为数组下标
+	myClass[1]={
+		"name":"HUXP",
+		"Chinese":60,
+		"English":70,
+		"Math":80,
+		"Grade":"C"
+	};
+	myClass[2]={
+		"name":"发哥",
+		"Chinese":80,
+		"English":80,
+		"Math":80,
+		"Grade":"B"
+	};
+	myClass[3]={
+		"name":"Per",
+		"Chinese":66,
+		"English":77,
+		"Math":88,
+		"Grade":"B"
+	};
+	myClass[4]={
+		"name":"小虎子",
+		"Chinese":60,
+		"English":60,
+		"Math":770,
+		"Grade":"C"
+	};
+	myClass[5]={
+		"name":"DBD",
+		"Chinese":70,
+		"English":70,
+		"Math":70,
+		"Grade":"B"
+	};
+	myClass[6]={
+		"name":"○",
+		"Chinese":77,
+		"English":77,
+		"Math":80,
+		"Grade":"B"
+	};
+	myClass[7]={
+		"name":"Me",
+		"Chinese":100,
+		"English":100,
+		"Math":100,
+		"Grade":"A",
+		"Saying":"哇哈哈!"
+	};
+	//当然,做了这些还没什么意义
+	alert(myClass[5].Chinese)//如果有学号,输出对应学号的学生的语文成绩太简单了
+	//更复杂的,搜索学生姓名,返回他的所有信息,是使用函数的时候了
+	function searchByName(name) {
+		for (var i=1;i&lt; myClass.length;i++) {
+			if (myClass[i].name == name) {
+				return myClass[i];
+			}
+		}
+	}
+	alert(searchByName("○").Math);</pre>
+	<h2>String对象以及一些用于字符串的方法和属性</h2>
+	<p>创建String对象</p>
+	<pre>
+	var str = new String();
+	alert(str);//输出空字符串
+	str = new String("some string here");
+	alert(str);//输出字符串"some string here"
+	//表面上看,这和直接创建的字符串是一样的效果
+	str = "some string here";
+	alert(str);</pre>
+	<p>但由于使用new String();所以创建出来的是对象</p>
+	<pre>
+	var str = new String();
+	alert(typeof str);//object
+	//因为是对象,所以自然有很多属性和方法
+	//但字符串本身也存这样的方法</pre>
+	<p>有很多用于处理字符串的方法以及一些属性</p>
+	<ul>
+		<li>length 属性,返回字符串的长度</li>
+		<li>indexOf 方法,返回字符串内第一次出现子字符串的字符位置</li>
+		<li>lastIndexOf 方法,返回字符串中子字符串最后出现的位置</li>
+		<li>charCodeAt 方法,返回一个整数，代表指定位置上字符的 Unicode 编码</li>
+		<li>fromCharCode 方法,从一些 Unicode 字符值中返回一个字符串</li>
+		<li>replace 方法,进行文字替换,返回替换后的字符串的复制</li>
+		<li>substr 方法,返回一个从指定位置开始的指定长度的子字符串</li>
+		<li>substring 方法,返回位于 String 对象中指定位置的子字符串</li>
+		<li>toLowerCase 方法,返回一个字符串，该字符串中的字母被转换为小写字母</li>
+		<li>toUpperCase 方法,返回一个字符串，该字符串中的所有字母都被转化为大写字母</li>
+		<li>split 方法,把字符串分割为字符串数组。</li>
+	</ul>
+	<pre>
+	var str ="some string here";
+	alert(str.length);//16
+	alert(str.indexOf("s"));//0,字符串的位置从0开始计数
+	alert(str.indexOf("o"));//1
+	alert(str.indexOf("k"));//没有找到时返回-1
+	alert(str.lastIndexOf("e"));//15,从后往前查找
+	alert(str.charCodeAt(0));//115,小写s的Unicode编码
+	alert(String.fromCharCode(65,66,67,68));//返回ABCD,注意fromCharCode是String对象的静态方法
+	alert(str.replace("some","much"));//"much string here"
+	alert(str.substr(1,2));//uc,从下标1开始向后截取2个字符
+	alert(str.substring(1,2));//c,从下标1开始截取到下标2,不包括结束位置的字符
+	alert(str.toLowerCase());
+	alert(str.toUpperCase());
+	alert(str.split(" "));//some,string,here</pre>
+</body>
+</html>

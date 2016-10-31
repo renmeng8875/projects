@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>7.事件(上)</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>事件(上)</h1>
+	<table>
+	  <tbody>
+	    <tr>
+	      <td height="40" colspan="3">JavaScript事件列表</td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">事件</td>
+	      <td>解说</td>
+	    </tr>
+	    <tr>
+	      <td rowspan="10">一般事件</td>
+	      <td>onclick</td>
+	      <td>鼠标点击时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>ondblclick</td>
+	      <td>鼠标双击时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onmousedown</td>
+	      <td>按下鼠标时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onmouseup</td>
+	      <td>鼠标按下后松开鼠标时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onmouseover</td>
+	      <td>当鼠标移动到某对象范围的上方时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onmousemove</td>
+	      <td>鼠标移动时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onmouseout</td>
+	      <td>当鼠标离开某对象范围时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onkeypress</td>
+	      <td>当键盘上的某个键被按下并且释放时触发此事件.</td>
+	    </tr>
+	    <tr>
+	      <td>onkeydown</td>
+	      <td>当键盘上某个按键被按下时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onkeyup</td>
+	      <td>当键盘上某个按键被按放开时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td rowspan="10">页面相关事件</td>
+	      <td>onabort</td>
+	      <td>图片在下载时被用户中断</td>
+	    </tr>
+	    <tr>
+	      <td>onbeforeunload</td>
+	      <td>当前页面的内容将要被改变时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onerror</td>
+	      <td>出现错误时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onload</td>
+	      <td>页面内容完成时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onmove</td>
+	      <td>浏览器的窗口被移动时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onresize</td>
+	      <td>当浏览器的窗口大小被改变时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onscroll</td>
+	      <td>浏览器的滚动条位置发生变化时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onstop</td>
+	      <td>浏览器的停止按钮被按下时触发此事件或者正在下载的文件被中断</td>
+	    </tr>
+	    <tr>
+	      <td>oncontextmenu</td>
+	      <td>当弹出右键上下文菜单时发生</td>
+	    </tr>
+	    <tr>
+	      <td>onunload</td>
+	      <td>当前页面将被改变时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td rowspan="5">表单相关事件</td>
+	      <td>onblur</td>
+	      <td>当前元素失去焦点时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onchange</td>
+	      <td>当前元素失去焦点并且元素的内容发生改变而触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onfocus</td>
+	      <td>当某个元素获得焦点时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onreset</td>
+	      <td>当表单中RESET的属性被激发时触发此事件</td>
+	    </tr>
+	    <tr>
+	      <td>onsubmit</td>
+	      <td>一个表单被递交时触发此事件</td>
+	    </tr>
+	  </tbody>
+	</table>
+	<p>了解上面的事件如此简单，那么事件还有什么可讲的呢？</p>
+	<p>问题一：每个事件只能注册一个函数</p>
+	<pre>
+	var oDiv = document.getElementById("oDiv");
+	oDiv.onclick = fn1;
+	oDiv.onclick =fn2;
+	function fn1() {alert("我被覆盖了！")}
+	function fn2() {alert("只有我被执行到！")}</pre>
+	<p>解决方案一：</p>
+	<pre>
+	obj.onclick = function () {
+		fn1();
+		fn2();
+		fn3();
+	};</pre>
+	<p>缺陷一：需要将所有函数一次添加进去，不能在运行时添加</p>
+	<p>缺陷二：在事件处理函数中this将指向window,而不是obj</p>
+	<p>解决方案二：</p>
+	<pre>
+	function addEvent(fn,evtype,obj) {
+		//obj是要添加事件的HTML元素对象
+		//evtype是事件名字，不包含on前缀，因为每个都有on，所以写个on是多余的
+		//fn是事件处理函数
+		var oldFn;
+		if (obj["on"+evtype] instanceof Function) {
+			oldFn = obj["on"+evtype];//当添加函数时，如果已注册过了，则将其保存起来
+		}
+		obj["on"+evtype]=function () {
+				if (oldFn) {
+					oldFn.call(this);
+				}
+				fn.call(this);//使用call方法，使事件处理函数中的this仍指向obj
+		};
+	}</pre>
+	<p>这样已经解决了问题，但如何删除事件呢？如果直接将对象的onevtype这类的属性赋值为null将会删除所有的事件处理函数！</p>
+	<p>解决方案二的修改版：先将事件存储起来，存储在对象的__EventHandles属性里面</p>
+	<pre>
+	eventHandlesCounter=1;//计数器，将统计所有添加进去的函数的个数,0位预留作其它用
+	function addEvent(fn,evtype,obj) {
+		if (!fn.__EventID) {//__EventID是给函数加的一个标识，见下面给函数添加标识的部分
+			fn.__EventID=eventHandlesCounter++;
+			//使用一个自动增长的计数器作为函数的标识以保证不会重复
+		}
+		if (!obj.__EventHandles) {
+			obj.__EventHandles=[];//当不存在，也就是第一次执行时，创建一个，并且是数组
+		}
+		if (!obj.__EventHandles[evtype]) {//将所有事件处理函数按事件类型分类存放
+			obj.__EventHandles[evtype]=[];//当不存在时也创建一个数组
+			if (obj["on"+evtype] instanceof Function) {
+				//查看是否已经注册过其它函数
+				//如果已经注册过，则将以前的事件处理函数添加到数组下标为0的预留的位置
+				obj.__EventHandles[evtype][0]=obj["on"+evtype];
+				obj["on"+evtype]=handleEvents;//使用handleEvents集中处理所有的函数
+			}
+		}
+		obj.__EventHandles[evtype][fn.__EventID]=fn;
+		//如果函数是第一次注册为事件处理函数，那么它将被添加到数组中，函数的标识作为下标
+		//如果函数已经注册过相同对象的相同事件了，那么将覆盖原来的而不会被添加两次
+		function handleEvents() {
+			var fns = obj.__EventHandles[evtype];
+			for (var i=0;i< fns.length;i++) {
+				fns[i].call(this);
+			}
+		}
+	}</pre>
+	<p>使用上面的函数已经可以在一个对象添加多个事件处理函数，在函数内部this关键字也指向了相应的对象，并且这些函数都被作了标识，那么移除某个事件处理函数就是轻而易举的了！</p>
+	<pre>
+	//使用传统方法：obj.onevtype = null;但这样会移除所有的事件处理函数
+	function delEvent(fn,evtype,obj) {
+		if (!obj.__EventHandles || !obj.__EventHandles[evtype] || !fn.__EventID) {
+			return false;
+		}
+		if (obj.__EventHandles[evtype][fn.__EventID] == fn) {
+			delete obj.__EventHandles[evtype][fn.__EventID];
+		}
+	}</pre>
+	
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

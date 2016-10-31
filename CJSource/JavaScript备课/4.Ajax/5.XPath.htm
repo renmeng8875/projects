@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.XPath</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>XPath</h1>
+	<h2>XPath 简介</h2>
+	<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 可用来在 XML 文档中对元素和属性进行遍历。XPath 是 W3C XSLT 标准的主要元素，并且 XQuery 和 XPointer 同时被构建于 XPath 表达之上。因此，对 XPath 的理解是很多高级 XML 应用的基础。
+	其实对些我们并不陌生,最与XPath相似的便是CSS的选择器.在CSS中使用CSS选择符选择元素来应用样式,而在XSLT中则使用XPath,XPath与CSS选择器相比如强大的许多!下面是CSS选择符与XPath选择符一些对照:</p>
+	<pre>
+	//CSS选择符
+	body p  //选择所有body下面的p元素
+	body>p //选择body的子元素p
+	* //选择所有的元素
+	//与之对应的XPath选择符
+	body//p
+	body/p
+	*</pre>
+	<p>虽然现在还不能了解这些XPath表达的含意,但可以发现,它和CSS选择符十分相像!但XPath有更强大的地方,比如它可以定位到body元素下具体位置上的p或可以选择前N个p:</p>
+	<pre>
+	body/p[position()=4]  //这个XPath表达式将选取body子元素中第4个p元素,注意这里从1开始计数
+	body/p[position()<3]  //将选取body子元素中前两个p元素</pre>
+	<p>XPath 使用路径表达式来选取 XML 文档中的节点或者节点集。这些路径表达式和我们在常规的电脑文件系统中看到的表达式非常相似。另外,XPath 含有超过 100 个内建的函数。这些函数用于字符串值、数值，日期和时间比较、节点和 QName 处理、序列处理、逻辑值等等。</p>
+	<h2>书写XPath</h2>
+	<p>XPath使用路径表达式在 XML 文档中选取节点。节点是通过沿着路径(path)或者 步(step) 来选取的。如"/"表示文档节点,"."表示当前节点,而".."则表示当前节点的父节点.示例:</p>
+	<pre>
+	{因为XPath表示达式中有斜杠,所以暂时用这个表示注释!
+	/ {选取文档节点,nodeType为9
+	/root {选取文档根元素,类似于文件系统的路径(Unix),以/开头的路径都是绝对路径
+	/root/child/.. {选取根节点root的子节点child的父节点(就是root)</pre>
+	<p>下面是一些常用路径表达式</p>
+	<ul>
+		<li>nodeName	选取名称为nodeName的节点</li>
+		<li>/	从根节点选取</li>
+		<li>//	选择元素后代元素,必须在后面跟上nodeName</li>
+		<li>.	选取当前节点</li>
+		<li>..	选取当前节点的父节点</li>
+		<li>@	选取属性节点(@是attribute的缩写)</li>
+	</ul>
+	<pre>
+	&lt;?xml version="1.0"?&gt;
+	&lt;root&gt;
+		&lt;child attr="attr" /&gt;
+		&lt;child&gt;
+			&lt;a&gt;&lt;desc /&gt;&lt;/a&gt;
+		&lt;/child&gt;
+	&lt;/root&gt;
+	{针对上面的XML文档的XPath结果,当前节点为document
+	/root  {选取root
+	root {选取root
+	child {空,因为child不是document的子元素
+	//child {选取两个child元素,//表示后代
+	//@attr {选取attr属性节点
+	/root/child//desc {返回child的后代元素desc</pre>
+	<h3>谓语（Predicates）</h3>
+	<p>谓语用于在查找节点时提供更详尽的信息,谓语被嵌在方括号中。下面是一些带有谓语的XPath表达式:</p>
+	<pre>
+	/root/child[3] {选取root元素的第三个child子元素,注意,这和数组下标不一样,从1开始计数
+	//child[@attr] {选取所有具有属性attr的child元素
+	//child[@attr="val"]/desc {选取所有属性attr的值为val的child元素的子元素desc
+	//child[desc] {选取所有的有desc子元素的child
+	//child[position()>3]  {position()是XPath中的一个函数,表示节点的位置
+	//child[@attr>12] {XPath表达式还可以进行数值比较,该表达式将选取attr属性值大于12的child元素
+	//child[last()] {last()函数返回节点列表最后的位置,该表达式将选取最后一个child元素</pre>
+	<h3> 通配符</h3>
+	<p>XPath 通配符可用来选取未知的 XML 元素。</p>
+	<ul>
+		<li>*	,和CSS中的选择符一样,这将匹配任何元素节点</li>
+		<li>@*	,匹配任何属性节点</li>
+		<li>node()	,匹配任何类型的节点</li>
+	</ul>
+	<pre>
+	/root/* {选取根元素下面的所有子元素
+	/root/node() {选取根元素下面的所有节点,包括文本节点
+	//* {选取文档中所有元素
+	//child[@*] {选取所有具有属性的child元素
+	//@*  {选取所有的属性节点</pre>
+	<h3>组合路径</h3>
+	<p>与CSS中使用逗号组合使用多个选择符一样,XPath支持一种使用"|"来组合多个路径的语法!</p>
+	<pre>
+	/root | /root/child {选取根元素root与它下面的子元素child
+	//child | //desc {选取所有的child元素与desc元素</pre>
+	<h3>XPath 运算符</h3>
+	<p>下面列出了可用在 XPath 表达式中的运算符：</p>
+	<ul>
+		<li>|	,计算两个节点集</li>
+		<li>+	,加法</li>
+		<li>-	,减法</li>
+		<li>*	,乘法</li>
+		<li>div	,除法,因为/已经被作为路径符了,所以不能用来作为除法标识</li>
+		<li>mod	,取余</li>
+		<li>=	,等于</li>
+		<li>!=	,不等于</li>
+		<li>&lt;	,小于</li>
+		<li>&lt;=	,小于或等于</li>
+		<li>&gt;	,大于</li>
+		<li>&gt;=	,大于或等于</li>
+		<li>or	,或</li>
+		<li>and	,与</li>
+	</ul>
+	<h3>XPath 轴</h3>
+	<p>轴可定义某个相对于当前节点的节点集。下面一可用的轴名称与对应的结果:</p>
+	<ul>
+		<li>ancestor	选取当前节点的所有先辈（父、祖父等）</li>
+		<li>ancestor-or-self	选取当前节点的所有先辈（父、祖父等）以及当前节点本身</li>
+		<li>attribute	选取当前节点的所有属性</li>
+		<li>child	选取当前节点的所有子元素。</li>
+		<li>descendant	选取当前节点的所有后代元素（子、孙等）。</li>
+		<li>descendant-or-self	选取当前节点的所有后代元素（子、孙等）以及当前节点本身。</li>
+		<li>following	选取文档中当前节点的结束标签之后的所有节点。</li>
+		<li>namespace	选取当前节点的所有命名空间节点</li>
+		<li>parent	选取当前节点的父节点。</li>
+		<li>preceding	选取文档中当前节点的开始标签之前的所有节点。</li>
+		<li>preceding-sibling	选取当前节点之前的所有同级节点。</li>
+		<li>self	选取当前节点。</li>
+	</ul>
+	<p>事实上,一个完整的XPath表达式由"/"与"步"构成的,而步又是由 "轴" 、 "节点测试"和"谓语"构成的.如下:</p>
+	<pre>
+	step/step/.....  {一个XPath表达式
+	{step的构成
+	轴名称::节点测试[谓语]</pre>
+	<p>在一般的XPath表达式中,没有谓语即表达没有其它条件限制,而没有轴名称,则默认使用child.如"abc"与"child::abc"是等效的, 下面是一些与使用轴名称等效的简单XPath表达式:</p>
+	<ul>
+		<li>child::abc --------------------- abc(子元素abc)</li>
+		<li>root/attribute::id ------------ root/@id(root的属性id)</li>
+		<li>selft::node() ------------------ .(自身)</li>
+		<li>parent::node() --------------- ..(父节点)</li>
+		<li>child::* ------------------------ *(子元素)</li>
+		<li>child::text() ------------------ text()(子文本节点)</li>
+		<li>descendant::tag ------------ .//tag (后代tag元素)</li>
+		<li></li>
+	</ul>
+	<p>XPath还包含一套函数库,如position与last就是函数,一般的函数被用在谓语中,而在XSLT及XQuery中它们则得到了更广泛的使用.</p>
+	<h2>浏览器中的XPath</h2>
+	<p>IE浏览器对XPath的实现比较简单.一个XML DOM对象(及每个节点)都有selectSingleNode与selectNodes方法,传入XPath表达式,selectNodes返回匹配的节点列表,而selectSingleNode则只返回列表中第一个项目!</p>
+	<pre>
+	var xmlDom = getXMLDOM();//我们之前写的跨浏览器的XML DOM加载函数
+	loadXMLFile(xmlDom,"text.xml");
+	var root = xmlDom.selectSingleNode("/*");//返回文档根元素
+	root = xmlDom.selectNodes("/*")[0];//同上
+	var lastChild = xmlDom.selectSingleNode("/*/*[last()]");</pre>
+	<p>Mozilla是根据DOM标准来实现对XPath的支持的。DOM Level 3附加标准DOM Level 3 XPath定义了用于在DOM中计算XPath表达式的接口。遗憾的是，这个标准要比微软直观的方式复杂得多。</p>
+	<p>虽然有好多与XPath相关的对象，最重要的两个是：XPathEvaluator和XPathResult。XPathEvaluator利用方法evaluate()计算XPath表达式。</p>
+	<p>evaluate()方法有五个参数：XPath表达式、上下文节点、命名空间解释程序和返回的结果的类型，同时，在XPathResult中存放结果（通常为null）。</p>
+	<p>命名空间解释程序，只有在XML代码用到了XML命名空间时才是必要的，所以通常留空，置为null。返回结果的类型，可以是以下十个常量值之一：</p>
+	<p></p>
+	<ul>
+		<li>XPathResult.ANY_TYPE——返回符合XPath表达式类型的数据</li>
+		<li>XPathResult.ANY_UNORDERED_NODE_TYPE——返回匹配节点的节点集合，但顺序可能与文档中的节点的顺序不匹配</li>
+		<li>XPathResult.BOOLEAN_TYPE——返回布尔值</li>
+		<li>XPathResult.FIRST_ORDERED_NODE_TYPE——返回只包含一个节点的节点集合，且这个节点是在文档中第一个匹配的节点</li>
+		<li>XPathResult.NUMBER_TYPE——返回数字值</li>
+		<li>XPathResult.ORDERED_NODE_ITERATOR_TYPE——返回匹配节点的节点集合，顺序为节点在文档中出现的顺序。这是最常用到的结果类型</li>
+		<li>XPathResult.ORDERED_NODE_SNAPSHOT_TYPE——返回节点集合快照，在文档外捕获节点，这样将来对文档的任何修改都不会影响这个节点列表。节点集合中的节点与它们出现在文档中的顺序一样</li>
+		<li>XPathResult.STRING_TYPE——返回字符串值</li>
+		<li>XPathResult.UNORDERED_NODE_ITERATOR_TYPE——返回匹配节点的节点集合，不过顺序可能不会按照节点在文档中出现的顺序排列</li>
+		<li>XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE——返回节点集合快照，在文档外捕获节点，这样将来对文档的任何修改都不会影响这个节点列表。节点集合中的节点和文档中原来的顺序不一定一样。</li>
+	</ul>
+	<p>下面是使用ORDERED_NODE_ITERATOR_TYPE的例子:</p>
+	<pre>
+	var xmlDom = getXMLDOM();//我们之前写的跨浏览器的XML DOM加载函数
+	loadXMLFile(xmlDom,"text.xml");
+	var evaluator = new XPathEvaluator();
+	var result =evaluator.evaluate("/root",xmlDom,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE,null);
+	var node;
+	if (result) {//执行失败会返回null
+		while(node=result.iterateNext()) {//这个列表必须使用iterateNext方法遍历
+			alert(node.tagName);
+		}
+	}</pre>
+	
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	进度：<span id="out"></span><br />
+	<button onclick="down()">开始加载</button>
+	<script type="text/javascript">
+		function down(){
+			var out = document.querySelector("#out");
+			
+			var xh = new XMLHttpRequest();
+			xh.open("GET","data/down.jsp",true);
+			xh.onprogress = function(evt){
+	
+				if(evt.lengthComputable){
+					
+					var pencent = parseInt((evt.loaded / evt.total) * 100);
+					out.innerHTML = pencent + "%";
+				}
+			}
+			xh.onreadystatechange = function(){
+				if(xh.readyState == 4){
+					out.innerHTML = "已下载完成";
+				}
+			}
+			xh.send();
+		}
+	</script>
+</body>
+</html>

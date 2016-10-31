@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>简单歌曲播放器</title>
+</head>
+<body>
+	<h3>播放：海阔天空(信乐团)</h3>
+	
+	<audio id="audio" src="1.mp3" ontimeupdate="updateTime()" oncanplay="canpaly()"></audio><br />
+	<div>
+		播放进度：<progress id="progress" value="0" max="100"></progress>
+		<span id="time"></span><br />
+		
+		调整进度：<input type="range" id="seek" min="0" max="100" value="0" onchange="onseek()" />
+		<br />
+	</div>
+	
+	<button id="btn_play" onclick="play()">播放</button>
+	&nbsp;&nbsp;
+	音量：(小<input id="volume" type="range" onchange="changeVolume()" min="0" max="100" />大)
+	<script type="text/javascript">
+		var audio = document.querySelector("#audio");
+		var btnPlay = document.querySelector("#btn_play");
+		var volume = document.querySelector("#volume");
+		var progress = document.querySelector("#progress");
+		var time = document.querySelector("#time");
+		var seek = document.querySelector("#seek");
+		var second;	//总时间
+		
+		
+		function onseek(){
+			audio.currentTime = seek.value;
+		}
+		
+		function canpaly(){
+			second = parseInt(audio.seekable.end(0));
+			// c 
+			progress.max = second;
+			seek.max = second;
+			// 设置时间
+			var m = parseInt(second/60),
+				s = second - m*60;
+			time.innerHTML = m + ":" + s;
+		}
+		function updateTime(){
+			// 获取已播放时间
+			var ct = parseInt(audio.currentTime);
+			// 剩余时间
+			var restS = second - ct;
+			
+			progress.value = ct;
+			seek.value = ct;
+			// 设置时间
+			var m = parseInt(restS/60),
+				s = restS - m*60;
+			time.innerHTML = m + ":" + s;
+		}
+		
+		function play(){
+			if(audio.paused){
+				audio.play();
+				btnPlay.innerHTML = "暂停";
+			}else{
+				audio.pause();
+				btnPlay.innerHTML = "播放";
+			}
+		}
+		
+		function changeVolume(){
+			audio.volume = (volume.value / 100);
+		}
+	</script>
+</body>
+</html>

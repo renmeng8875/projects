@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>2.值,类型与类型转换</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>值,类型与类型转换</h1>
+	<h2>原始值和引用值</h2>
+	<p>在ECMAScript中，变量可以存放两种类型的值，即原始值和引用值。</p>
+	<ul>
+		<li>原始值（primitive value）是存储在栈（stack）中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。</li>
+		<li>引用值（reference value）是存储在堆（heap）中的对象，也就是说，存储在变量处的值是一个指针（point），指向存储对象的内存处。</li>
+	</ul>
+	<p>为变量赋值时，ECMAScript的解释程序必须判断该值是原始类型的，还是引用类型的。要实现这一点，解释程序则需尝试判断该值是否为ECMAScript的原始类型之一，即Undefined、Null、Boolean和String型。由于这些原始类型占据的空间是固定的，所以可将它们存储在较小的内存区域——栈中。这样存储便于迅速查寻变量的值。</p>
+	<strong>在许多语言中，字符串都被看作引用类型，而非原始类型，因为字符串的长度是可变的。ECMAScript打破了这一传统。</strong>
+	<p>如果一个值是引用类型的，那么它的存储空间将从堆中分配。由于引用值的大小会改变，所以不能把它放在栈中，否则会降低变量查寻的速度。相反，放在变量的栈空间中的值是该对象存储在堆中的地址。地址的大小是固定的，所以把它存储在栈中对变量性能无任何负面影响,如图:</p>
+	<img src="../images/stack_heap.jpg" alt="内存堆栈" />
+	<p>堆栈就像我们的书一样,堆对应着书的正文内容,而栈对应的是书的目录,章节标题是简短的,所以在目录里面可以放,而文章的内容则不能放在目录里,我们只需要在目录放一个对应文章的标题和页码.这样,即可以在一本书中放大量的内容,又因为存在目录,可以快速查找内容!</p>
+	<h2>原始类型</h2>
+	<p>如前所述，ECMAScript有5种原始类型（primitive type），即Undefined、Null、Boolean、Number和String。ECMA-262把术语类型（type）定义为值的一个集合，每种原始类型定义了它包含的值的范围及其字面量表示形式。ECMAScript提供了typeof运算符来判断一个值是否在某种类型的范围内。可以用这种运算符判断一个值是否表示一种原始类型；如果它是原始类型，还可以判断它表示哪种原始类型。</p>
+	<p>typeof运算符有一个参数，即要检查的变量或值。例如：</p>
+	<pre>
+	var str = "some thing";
+	alert(typeof str);//输出string
+	var num =123;
+	alert(typeof(num));//输出number,typeof运算符可以像函数一样使用
+	//这主要运用于一些复杂的表达的以解决优先级问题
+	alert(typeof num*3);//输出NaN,因为typeof优先于*
+	alert(typeof(num*3));//输出number</pre>
+	<p>对变量或值调用typeof运算符将返回下列值之一：</p>
+	<ul>
+		<li>"undefined"，如果变量是Undefined型的</li>
+		<li>"boolean"，如果变量是Boolean型的</li>
+		<li>"number"，如果变量是Number型的</li>
+		<li>"string"，如果变量是String型的</li>
+		<li>"object"，如果变量是一种引用类型或Null类型的</li>
+	</ul>
+	<strong>
+		你也许会问，为什么typeof运算符对于null值会返回"object"。这实际上是JavaScript最初实现中的一个错误，然后被ECMAScript沿用了。现在，null被认为是对象的占位符，从而解释了这一矛盾，但从技术上来说，它仍然是原始值。
+	</strong>
+	<p>如前所述，Undefined类型只有一个值，即undefined。当声明的变量未初始化时，该变量的默认值是undefined</p>
+	<pre>
+	var a;
+	alert(a);//输出undefined
+	alert(typeof a);//输出undefined
+	alert(a==undefined);//true</pre>
+	<p>注意，值undefined并不同于未定义的值。但是，typeof运算符并不真正区分这两种值。考虑下面的代码：</p>
+	<pre>
+	var tmp;
+	alert(tmp);//undefined
+	alert(typeof tmp);//undefined
+	alert(typeof tmp2);//undefined</pre>
+	<p>前面的代码对两个变量输出的都是"undefined"，即使只有变量tmp2是未定义的。如果不用typeof运算符，就对tmp2使用其他运算符，这将引起错误，因为那些运算符只能用于已定义的变量。例如，下面的代码将引发错误：</p>
+	<pre>
+	alert(tmp3==undefined);//出错,因为变量tmp3未声明</pre>
+	<p>当函数无明确返回值时，返回的也是值undefined，如下所示：</p>
+	<pre>
+	function tmp() {}//空函数,没有返回值
+	alert(tmp());//undefined</pre>
+	<p>另一种只有一个值的类型是Null，它只有一个专用值null，即它的字面量。值undefined实际上是从值null派生来的，因此ECMAScript把它们定义为相等的。但它们并不是严格相等的,因为它们是不同类型!</p>
+	<pre>
+	alert(null==undefined);//输出true</pre>
+	<p>尽管这两个值相等，但它们的含义不同。undefined是声明了变量但未对其初始化时赋予该变量的值，null则用于表示尚未存在的对象。如果函数或方法要返回的是对象，那么找不到该对象时，返回的通常是null。</p>
+	<pre>
+	var obj = document.getElementById("tmp");//页面上没有ID为tmp的元素
+	alert(obj);//null</pre>
+	<p>Boolean类型是ECMAScript中最常用的类型之一。它有两个值true和false（即两个Boolean字面量）。即使false不等于0，0也可以在必要时被转换成false，这样在Boolean语句中使用两者都是安全的。</p>
+	<pre>
+	var bool=true;
+	bool=false;</pre>
+	<p>ECMA-262中定义的最特殊的类型是Number型。这种类型既可以表示32位的整数，还可以表示64位的浮点数。直接输入的（而不是从另一个变量访问的）任何数字都被看作Number型的字面量。例如，下面的代码声明了存放整数值的变量，它的值由字面量55定义：</p>
+	<pre>
+	var num =55;</pre>
+	<p>整数也可以被表示为八进制（以8为底）或十六进制（以16为底）的字面量。八进制字面量的首数字必须是0，其后的数字可以是任何八进制数字（0到7），如下面代码所示：</p>
+	<pre>
+	var num=020;//八进制10为十进制的16
+	alert(num);//虽然我们用八进制方法表示一个数,但输出时,系统会自动输出它的十进制表现形式</pre>
+	<p>要创建十六进制的字面量，首位数字必须为0，其后接字母x，然后是任意的十六进制数字（0到9和A到F）。这些字母可以是大写的，也可以是小写的。例如：</p>
+	<pre>
+	var num=0x12;//十进制18
+	num=0xab;//171
+	alert(num);//输出的仍是十进制的171</pre>
+	<strong>注意!尽管所有整数都可表示为八进制或十六进制的字面量，但所有数学运算返回的都是十进制结果!</strong>
+	<p>要定义浮点值，必须包括小数点和小数点后的一位数字（例如，用1.0而不是1）。这被看作浮点数字面量。例如：</p>
+	<pre>
+	var num = 1;//整数
+	var num2=1.0;//浮点数</pre>
+	<p>对于非常大或非常小的数，可以用科学记数法表示浮点值。采用科学记数法，可以把一个数表示为数字（包括十进制数字）加e（或E），后面加乘以10的倍数。不明白？下面是一个示例：</p>
+	<pre>
+	var num = 3E10;
+	alert(num);//30000000000
+	num=3.45E2;
+	alert(num);//345</pre>
+	<p>也可用科学记数法表示非常小的数，例如0.00000000000000003可以表示为3-e17（这里，10被升到-17次幂，意味着需要被10除17次）。ECMAScript默认把具有6个或6个以上前导0的浮点数转换成科学记数法。</p>
+	<p>几个特殊值也被定义为Number类型的。前两个是Number.MAX_VALUE和Number.MIN_ VALUE，它们定义了Number值集合的外边界。所有ECMAScript数都必须在这两个值之间。不过计算生成的数值结果可以不落在这两个数之间。当计算生成的数大于Number.MAX_VALUE时，它将被赋予值Number.POSITIVE_INFINITY，意味着不再有数字值。同样，生成的数值小于Number.MIN_VALUE的计算也会被赋予值Number.NEGATIVE_INFINITY，也意味着不再有数字值。如果计算返回的是无穷大值，那么生成的结果不能再用于其他计算。</p>
+	<p>事实上，有专门的值表示无穷大，即Infinity。Number.POSITIVE_INFINITY的值为Infinity，Number.NEGATIVE_INFINITY的值为-Infinity。</p>
+	<pre>
+	alert(Number.MAX_VALUE*2 == Infinity);//true
+	alert(Number.NEGATIVE_INFINITY == -Infinity);//true</pre>
+	<p>由于无穷大数可以是正数也可以是负数，所以可用一个方法判断一个数是否是有穷的（而不是单独测试每个无穷数）。可以对任何数调用isFinit()方法，以确保该数不是无穷大。例如：</p>
+	<pre>
+	var a = 9E9999999999999999999999999999999999;//已经超过范围了
+	if (isFinite(a)) {
+		alert("一个有穷数!");
+	} else {
+		alert("一个无穷数!");
+	}</pre>
+	<p>最后一个特殊值是NaN，表示非数（Not a Number）。NaN是个奇怪的特殊值。一般说来，这种情况发生在类型（String、Boolean等）转换失败时。例如，要把单词blue转换成数值就会失败，因为没有与之等价的数值。与无穷大值一样，NaN也不能用于算术计算。NaN的另一个奇特之处在于，它与自身不相等，这意味着下面的代码将返回false：</p>
+	<pre>
+		alert(NaN);
+		alert(!!NaN);
+		alert(NaN == NaN);</pre>
+	<p>出于这种原因，不推荐使用NaN值本身。函数isNaN()会做得相当好：</p>
+	<pre>
+	alert(isNaN(NaN));//true
+	alert(isNaN(123));//false</pre>
+	<p>String类型的独特之处在于，它是唯一没有固定大小的原始类型。可以用字符串存储0或更多的Unicode字符，由16位整数表示（Unicode是一种国际字符集，本书后面将讨论它）。字符串中每个字符都有特定的位置，首字符从位置0开始，第二个字符在位置1，依此类推。这意味着字符串中的最后一个字符的位置一定是字符串的长度减1</p>
+	<p>字符串字面量是由双引号（"）或单引号（'）声明的。与Java不同的是，双引号用于声明字符串，单引号用于声明字符。但是，由于ECMAScript没有字符类型，所以可使用这两种表示法中的任何一种。</p>
+	<p>String类型还包括几种字符字面量，Java、C和Perl的开发者应该对此非常熟悉。下表列出了ECMAScript的字符字面量：</p>
+	<table>
+		<tr><th>字  面  量</th><th>含    义</th></tr>
+		<tr><td>\n</td><td>换行</td></tr>
+		<tr><td>\t</td><td>制表符</td></tr>
+		<tr><td>\b</td><td>空格</td></tr>
+		<tr><td>\r</td><td>回车</td></tr>
+		<tr><td>\f</td><td>换页符</td></tr>
+		<tr><td>\\</td><td>反斜杠</td></tr>
+		<tr><td>\'</td><td>单引号</td></tr>
+		<tr><td>\"</td><td>双引号</td></tr>
+		<tr><td>\0nnn</td><td>八进制代码nnn（n是0到7中的一个八进制数字）表示的字符</td></tr>
+		<tr><td>\xnn</td><td>十六进制代码nn（n是0到F中的一个十六进制数字）表示的字符</td></tr>
+		<tr><td>\unnnn</td><td>十六进制代码nnnn（n是0到F中的一个十六进制数字）表示的Unicode字符</td></tr>
+	</table>
+	<h2>类型转换</h2>
+	<p>所有程序设计语言最重要的特征之一是具有进行类型转换的能力，ECMAScript给开发者提供了大量简单的转换方法。大多数类型具有进行简单转换的方法，还有几个全局方法可以用于更复杂的转换。无论哪种情况，在ECMAScript中，类型转换都是简短的一步操作。</p>
+	<p>ECMAScript的Boolean值、数字和字符串的原始值的有趣之处在于它们是伪对象，这意味着它们实际上具有属性和方法。例如，要获得字符串的长度，可以采用下面的代码：</p>
+	<pre>
+	var str ="some";
+	alert(str.length);</pre>
+	<p>尽管"blue"是原始类型的字符串，它仍然具有属性length，用于存放该字符串的大小。总而言之，3种主要的原始值Boolean值、数字和字符串都有toString()方法，可以把它们的值转换成字符串。</p>
+	<strong>也许你会问，“字符串还有toString()方法，这不是多余的吗？”是的，的确如此，不过ECMAScript定义所有对象都有toString()方法，无论它是伪对象，还是真的对象。因为String类型属于伪对象，所以它一定有toString()方法。</strong>
+	<p>Boolean型的toString()方法只是输出"true"或"false"，结果由变量的值决定：</p>
+	<pre>
+	var bool=true;
+	alert(bool.toString());</pre>
+	<p>Number类型的toString()方法比较特殊，它有两种模式，即默认模式和基模式。采用默认模式，toString()方法只是用相应的字符串输出数字值（无论是整数、浮点数还是科学记数法），如下所示：</p>
+	<pre>
+	var num=10;
+	alert(num.toString());
+	num=10.0;
+	alert(num.toString());//仍然是10</pre>
+	<strong>在默认模式中，无论最初采用什么表示法声明数字，Number类型的toString()方法返回的都是数字的十进制表示。因此，以八进制或十六进制字面量形式声明的数字输出时都是十进制形式的。</strong>
+	<p>采用Number类型的toString()方法的基模式，可以用不同的基输出数字，例如二进制的基是2，八进制的基是8，十六进制的基是16。基只是要转换成的基数的另一种叫法而已，它是toString()方法的参数：</p>
+	<pre>
+	var num=10;
+	alert(num.toString());//10
+	alert(num.toString(2));//1010
+	alert(num.toString(8));//12
+	alert(num.toString(16));//A
+	//对数字调用toString(10)与调用toString()相同，它们返回的都是该数字的十进制形式。
+	alert(num.toString(10));</pre>
+	<p>ECMAScript提供了两种把非数字的原始值转换成数字的方法，即parseInt()和parseFloat()。正如你可能想到的，前者把值转换成整数，后者把值转换成浮点数。只有对String类型调用这些方法，它们才能正确运行；对其他类型返回的都是NaN。</p>
+	<pre>
+	alert(parseInt("12.23"));//12
+	alert(parseFloat("12.45"));//12.45
+	alert(parseFloat("12.23.34"));//12.23
+	alert(parseFloat("abc"));//NaN
+	alert(parseInt(true));//NaN</pre>
+	<p>在判断字符串是否是数字值前，parseInt()和parseFloat()都会仔细分析该字符串。parseInt()方法首先查看位置0处的字符，判断它是否是个有效数字；如果不是，该方法将返回NaN，不再继续执行其他操作。但如果该字符是有效数字，该方法将查看位置1处的字符，进行同样的测试。这一过程将持续到发现非有效数字的字符为止，此时parseInt()将把该字符之前的字符串转换成数字。例如，如果要把字符串"1234blue"转换成整数，那么parseInt()将返回1234，因为当它检测到字符b时，就会停止检测过程。字符串中包含的数字字面量会被正确转换为数字，因此字符串"0xA"会被正确转换为数字10。不过，字符串"22.5"将被转换成22，因为对于整数来说，小数点是无效字符。</p>
+	<p>parseInt()方法还有基模式，可以把二进制、八进制、十六进制或其他任何进制的字符串转换成整数。基是由parseInt()方法的第二个参数指定的，所以要解析十六进制的值，需如下调用parseInt()方法：</p>
+	<pre>
+	alert(parseInt("AB",16));//171
+	alert(parseInt("10",2));//2
+	alert(parseInt("10",8));//8</pre>
+	<p>如果十进制数包含前导0，那么最好采用基数10，这样才不会意外地得到八进制的值。例如：</p>
+	<pre>
+	var str ="010";
+	alert(parseInt(str));//8
+	alert(parseInt(str,10));//10</pre>
+	<strong>parseFloat()没有基模式</strong>
+	<h2>强制类型转换</h2>
+	<p>还可使用强制类型转换（type casting）处理转换值的类型。使用强制类型转换可以访问特定的值，即使它是另一种类型的。ECMAScript中可用的3种强制类型转换如下：</p>
+	<ul>
+		<li>Boolean(value)——把给定的值转换成Boolean型</li>
+		<li>Number(value)——把给定的值转换成数字（可以是整数或浮点数）</li>
+		<li>String(value)——把给定的值转换成字符串</li>
+	</ul>
+	<p>用这三个函数之一转换值，将创建一个新值，存放由原始值直接转换成的值。这会造成意想不到的后果。</p>
+	<p>当要转换的值是至少有一个字符的字符串、非0数字或对象时，Boolean()函数将返回true。如果该值是空字符串、数字0、undefined或null，它将返回false。可以用下面的代码段测试Boolean型的强制类型转换。</p>
+	<pre>
+	var b1 = Boolean("");		//false - 空字符串
+	var b2 = Boolean("hello");		//true - 非空字符串
+	var b1 = Boolean(50);		//true - 非零数字
+	var b1 = Boolean(null);		//false - null
+	var b1 = Boolean(0);		//false - 零
+	var b1 = Boolean(new object());	//true - 对象</pre>
+	<p>Number() 函数的强制类型转换与 parseInt() 和 parseFloat() 方法的处理方式相似，只是它转换的是整个值，而不是部分值。</p>
+	<p>parseInt() 和 parseFloat() 方法只转换第一个无效字符之前的字符串，因此 "1.2.3" 将分别被转换为 "1" 和 "1.2"。用 Number() 进行强制类型转换，"1.2.3" 将返回 NaN，因为整个字符串值不能转换成数字。如果字符串值能被完整地转换，Number() 将判断是调用 parseInt() 方法还是 parseFloat() 方法。</p>
+	<p>下表说明了对不同的值调用 Number() 方法会发生的情况：</p>
+	<table>
+		<tr><th>用法</th><th>结果</th></tr>
+		<tr><td>Number(false)</td><td>0</td></tr>
+		<tr><td>Number(true)</td><td>1</td></tr>
+		<tr><td>Number(undefined)</td><td>NaN</td></tr>
+		<tr><td>Number(null)</td><td>0</td></tr>
+		<tr><td>Number("1.2")</td><td>1.2</td></tr>
+		<tr><td>Number("12")</td><td>12</td></tr>
+		<tr><td>Number("1.2.3")</td><td>NaN</td></tr>
+		<tr><td>Number(new Object())</td><td>NaN</td></tr>
+		<tr><td>Number(50)</td><td>50</td></tr>
+	</table>
+	<p>最后一种强制类型转换方法 String() 是最简单的，因为它可把任何值转换成字符串。要执行这种强制类型转换，只需要调用作为参数传递进来的值的 toString() 方法，即把 12 转换成 "12"，把 true 转换成 "true"，把 false 转换成 "false"，以此类推。强制转换成字符串和调用 toString() 方法的唯一不同之处在于，对 null 和 undefined 值强制类型转换可以生成字符串而不引发错误：</p>
+	<pre>
+	var s1 = String(null);	//"null"
+	var oNull = null;
+	var s2 = oNull.toString();	//会引发错误</pre>
+	<p>在处理 ECMAScript 这样的弱类型语言时，强制类型转换非常有用，不过应该确保使用值的正确。</p>
+</body>
+</html>

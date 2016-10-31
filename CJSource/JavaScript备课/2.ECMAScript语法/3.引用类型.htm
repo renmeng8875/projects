@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>3.引用类型</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>引用类型</h1>
+	<p>引用类型通常叫做类（class），也就是说，遇到引用值，所处理的就是对象。</p>
+	<strong>注意：从传统意义上来说，ECMAScript 并不真正具有类。事实上，除了说明不存在类，在 ECMA-262 中根本没有出现“类”这个词。ECMAScript 定义了“对象定义”，逻辑上等价于其他程序设计语言中的类</strong>
+	<h2>Object</h2>
+	<p>对象是由 new 运算符加上要实例化的对象的名字创建的。例如，下面的代码创建 Object 对象的实例：</p>
+	<pre>
+	var obj = new Object();</pre>
+	<p>这种语法与 Java 语言的相似，不过当有不止一个参数时，ECMAScript 要求使用括号。如果没有参数，如以下代码所示，括号可以省略：</p>
+	<pre>
+	var o = new Object;</pre>
+	<strong>注意：尽管括号不是必需的，但是为了避免混乱，最好使用括号。</strong>
+	<p>Object 对象自身用处不大，不过在了解其他类之前，还是应该了解它。因为 ECMAScript 中的 Object 对象与 Java 中的 java.lang.object 相似，ECMAScript 中的所有对象都由这个对象继承而来，Object 对象中的所有属性和方法都会出现在其他对象中，所以理解了 Object 对象，就可以更好地理解其他对象。</p>
+	<p>Object 对象具有下列属性：</p>
+	<dl>
+		<dt>constructor</dt>
+		<dd>对创建对象的函数的引用（指针）。对于 Object 对象，该指针指向原始的 Object() 函数。</dd>
+	</dl>
+	<dl>
+		<dt>prototype</dt>
+		<dd>对该对象的对象原型的引用。对于所有的对象，它默认返回 Object 对象的一个实例。</dd>
+	</dl>
+	<p>Object 对象还具有几个方法：</p>
+	<dl>
+		<dt>hasOwnProperty(property)</dt>
+		<dd>判断对象是否有某个特定的属性。必须用字符串指定该属性。（例如，o.hasOwnProperty("name")）</dd>
+	</dl>
+	<dl>
+		<dt>isPrototypeOf(object)</dt>
+		<dd>判断该对象是否为另一个对象的原型。</dd>
+	</dl>
+	<dl>
+		<dt>propertyIsEnumerable(property)</dt>
+		<dd>判断给定的属性是否可以用 for...in 语句进行枚举。</dd>
+	</dl>
+	<dl>
+		<dt>toString()</dt>
+		<dd>返回对象的原始字符串表示。对于 Object 对象，ECMA-262 没有定义这个值，所以不同的 ECMAScript 实现具有不同的值。</dd>
+	</dl>
+	<dl>
+		<dt>valueOf()</dt>
+		<dd>返回最适合该对象的原始值。对于许多对象，该方法返回的值都与 ToString() 的返回值相同。</dd>
+	</dl>
+	<strong>注意：上面列出的每种属性和方法都会被其他对象覆盖。</strong>
+	<h2>Boolean</h2>
+	<p>Boolean 对象是 Boolean 原始类型的引用类型。要创建 Boolean 对象，只需要传递 Boolean 值作为参数：</p>
+	<pre>
+	var oBooleanObject = new Boolean(true);</pre>
+	<p>Boolean 对象将覆盖 Object 对象的 ValueOf() 方法，返回原始值，即 true 和 false。ToString() 方法也会被覆盖，返回字符串 "true" 或 "false"。遗憾的是，在 ECMAScript 中很少使用 Boolean 对象，即使使用，也不易理解。问题通常出现在 Boolean 表达式中使用 Boolean 对象时。例如：</p>
+	<pre>
+	var oFalseObject = new Boolean(false);
+	var bResult = oFalseObject && true;	//输出 true</pre>
+	<p>在这段代码中，用 false 值创建 Boolean 对象。然后用这个值与原始值 true 进行 AND 操作。在 Boolean 运算中，false 和 true 进行 AND 操作的结果是 false。不过，在这行代码中，计算的是 oFalseObject，而不是它的值 false。正如前面讨论过的，在 Boolean 表达式中，所有对象都会被自动转换为 true，所以 oFalseObject 的值是 true。然后 true 再与 true 进行 AND 操作，结果为 true。</p>
+	<strong>注意：虽然你应该了解 Boolean 对象的可用性，不过最好还是使用 Boolean 原始值，避免发生这一节提到的问题。</strong>
+	<h2>Number</h2>
+	<p>Number 对象是 Number 原始类型的引用类型。要创建 Number 对象，采用下列代码：</p>
+	<pre>
+	var oNumberObject = new Number(68);</pre>
+	<strong>Number.MAX_VALUE,Number.MIN_VALUE等特殊值都是 Number 对象的静态属性。</strong>
+	<p>要得到数字对象的 Number 原始值，只需要使用 valueOf() 方法：</p>
+	<pre>
+	var iNumber = oNumberObject.valueOf();</pre>
+	<p>当然，Number 类也有 toString() 方法.除了从 Object 对象继承的标准方法外，Number 对象还有几个处理数值的专用方法:</p>
+	<p>toFixed() 方法返回的是具有指定位数小数的数字的字符串表示。例如：</p>
+	<pre>
+	var oNumberObject = new Number(68);
+	alert(oNumberObject.toFixed(2));  //输出 "68.00"</pre>
+	<p>在这里，toFixed() 方法的参数是 2，说明应该显示两位小数。该方法返回 "68.00"，空的字符串位由 0 来补充。对于处理货币的应用程序，该方法非常有用。toFixed() 方法能表示具有 0 到 20 位小数的数字，超过这个范围的值会引发错误。</p>
+	<p>与格式化数字相关的另一个方法是 toExponential()，它返回的是用科学计数法表示的数字的字符串形式。与 toFixed() 方法相似，toExponential() 方法也有一个参数，指定要输出的小数的位数。例如：</p>
+	<pre>
+	var oNumberObject = new Number(68);
+	alert(oNumberObject.toExponential(1));  //输出 "6.8e+1"</pre>
+	<p>这段代码的结果是 "6.8e+1"，前面解释过，它表示 6.8x101。问题是，如果不知道要用哪种形式（预定形式或指数形式）表示数字怎么办？可以用 toPrecision() 方法。</p>
+	<p>toPrecision() 方法根据最有意义的形式来返回数字的预定形式或指数形式。它有一个参数，即用于表示数的数字总数（不包括指数）。例如:</p>
+	<pre>
+	var oNumberObject = new Number(68);
+	alert(oNumberObject.toPrecision(2));  //输出 "68"</pre>
+	<p>当然，输出的是 "68"，因为这正是该数的准确表示。不过，如果指定的位数多于需要的位数又如何呢？</p>
+	<pre>
+	var oNumberObject = new Number(68);
+	alert(oNumberObject.toPrecision(3));  //输出 "68.0"</pre>
+	<p>在这种情况下，toPrecision(3) 等价于 toFixed(1)，输出的是 "68.0"。toFixed()、toExponential() 和 toPrecision() 方法都会进行舍入操作，以便用正确的小数位数正确地表示一个数。</p>
+	<h2>String</h2>
+	<p>String 对象是 String 原始类型的对象表示法，它是以下方式创建的：</p>
+	<pre>
+	var oStringObject = new String("hello world");</pre>
+	<p>String 对象的 valueOf() 方法和 toString() 方法都会返回 String 类型的原始值：</p>
+	<pre>
+	alert(oStringObject.valueOf() == oStringObject.toString());	//输出 "true"</pre>
+	<p>String 对象具有属性 length，它是字符串中的字符个数：</p>
+	<pre>
+	var oStringObject = new String("hello world");
+	alert(oStringObject.length);	//输出 "11"</pre>
+	<strong>注意，即使字符串包含双字节的字符（与 ASCII 字符相对，ASCII 字符只占用一个字节），每个字符也只算一个字符。</strong>
+	<p>String 对象还拥有大量的方法。</p>
+	<p>localeCompare() 方法,对字符串进行排序。该方法有一个参数 - 要进行比较的字符串，返回的是下列三个值之一：</p>
+	<ul>
+		<li>如果 String 对象按照字母顺序排在参数中的字符串之前，返回负数。</li>
+		<li>如果 String 对象等于参数中的字符串，返回 0</li>
+		<li>如果 String 对象按照字母顺序排在参数中的字符串之后，返回正数。</li>
+	</ul>
+	<strong>如果返回负数，那么最常见的是 -1，不过真正返回的是由实现决定的。如果返回正数，那么同样的，最常见的是 1，不过真正返回的是由实现决定的。而且对于中文字符,虽然表面上看是按拼音排序的,但并不一定!事实上,它们按Unicode编码排序,小的排在前面,大的排在后面</strong>
+	<p>示例如下：</p>
+	<pre>
+	var oStringObject = new String("yellow");
+	alert(oStringObject.localeCompare("brick"));		//输出 "1"
+	alert(oStringObject.localeCompare("yellow"));		//输出 "0"
+	alert(oStringObject.localeCompare("zoo"));		//输出 "-1"</pre>
+	<p>再强调一次，由于返回的值是由实现决定的，所以最好以下面的方式调用 localeCompare() 方法：</p>
+	<pre>
+	var oStringObject1 = new String("yellow");
+	var oStringObject2 = new String("brick");
+	var iResult = oStringObject1.localeCompare(oStringObject2);
+	if(iResult < 0) {
+	  alert(oStringObject2 + " 排在字符串 " + oStringObject1 +"后面");
+	} else if (iResult > 0) {
+	  alert(oStringObject2 + " 排在字符串 " + oStringObject1+"前面");
+	} else {
+	  alert("两个字符串排序是一样的!");
+	}</pre>
+	<p>localeCompare() 方法的独特之处在于，实现所处的区域（locale，兼指国家/地区和语言）确切说明了这种方法运行的方式。在美国，英语是 ECMAScript 实现的标准语言，localeCompare() 是区分大小写的，大写字母在字母顺序上排在小写字母之后。不过，在其他区域，情况可能并非如此。</p>
+	<p>ECMAScript 提供了两种方法从子串创建字符串值，即 slice() 和 substring()。这两种方法返回的都是要处理的字符串的子串，都接受一个或两个参数。第一个参数是要获取的子串的起始位置，第二个参数（如果使用的话）是要获取子串终止前的位置（也就是说，获取终止位置处的字符不包括在返回的值内）。如果省略第二个参数，终止位就默认为字符串的长度。slice() 和 substring() 方法都不改变 String 对象自身的值。它们只返回原始的 String 值，保持 String 对象不变。</p>
+	<pre>
+	var oStringObject = new String("hello world");
+	alert(oStringObject.slice(3));		//输出 "lo world"
+	alert(oStringObject.substring(3));		//输出 "lo world"
+	alert(oStringObject.slice(3, 7));		//输出 "lo w"
+	alert(oStringObject.substring(3, 7));	//输出 "lo w"</pre>
+	<p>为什么有两个功能完全相同的方法呢？事实上，这两个方法并不完全相同，不过只在参数为负数时，它们处理参数的方式才稍有不同。对于负数参数，slice() 方法会用字符串的长度加上参数，substring() 方法则将其作为 0 处理（也就是说将忽略它）。例如：</p>
+	<pre>
+	var oStringObject = new String("hello world");
+	alert(oStringObject.slice(-3));		//输出 "rld"
+	alert(oStringObject.substring(-3));	//输出 "hello world"
+	alert(oStringObject.slice(3, -4));		//输出 "lo w"
+	alert(oStringObject.substring(3, -4));	//输出 "hel"</pre>
+	<p>最后一套要讨论的方法涉及大小写转换。有 4 种方法用于执行大小写转换，即</p>
+	<ul>
+		<li>toLowerCase()</li>
+		<li>toLocaleLowerCase()</li>
+		<li>toUpperCase()</li>
+		<li>toLocaleUpperCase()</li>
+	</ul>
+	<p>从名字上可以看出它们的用途，前两种方法用于把字符串转换成全小写的，后两种方法用于把字符串转换成全大写的。toLowerCase() 和 toUpperCase() 方法是原始的，是以 java.lang.String 中相同方法为原型实现的。toLocaleLowerCase() 和 toLocaleUpperCase() 方法是基于特定的区域实现的（与 localeCompare() 方法相同）。在许多区域中，区域特定的方法都与通用的方法完全相同。不过，有几种语言对 Unicode 大小写转换应用了特定的规则（例如土耳其语），因此必须使用区域特定的方法才能进行正确的转换。</p>
+	<strong>String 对象的所有属性和方法都可应用于 String 原始值上，因为它们是伪对象。</strong>
+	<p>String对象方法参考</p>
+	<table>
+	  <tbody>
+	    <tr>
+	      <th>方法</th>
+	      <th>描述</th>
+	    </tr>
+	    <tr>
+	      <td>charAt()</td>
+	      <td>返回在指定位置的字符。</td>
+	    </tr>
+	    <tr>
+	      <td>charCodeAt()</td>
+	      <td>返回在指定的位置的字符的 Unicode 编码。</td>
+	    </tr>
+	    <tr>
+	      <td>concat()</td>
+	      <td>连接字符串。</td>
+	    </tr>
+	    <tr>
+	      <td>fromCharCode()</td>
+	      <td>从字符编码创建一个字符串。</td>
+	    </tr>
+	    <tr>
+	      <td>indexOf()</td>
+	      <td>检索字符串。</td>
+	    </tr>
+	    <tr>
+	      <td>lastIndexOf()</td>
+	      <td>从后向前搜索字符串。</td>
+	    </tr>
+	    <tr>
+	      <td>localeCompare()</td>
+	      <td>用本地特定的顺序来比较两个字符串。</td>
+	    </tr>
+	    <tr>
+	      <td>match()</td>
+	      <td>找到一个或多个正则表达式的匹配。</td>
+	    </tr>
+	    <tr>
+	      <td>replace()</td>
+	      <td>替换与正则表达式匹配的子串。</td>
+	    </tr>
+	    <tr>
+	      <td>search()</td>
+	      <td>检索与正则表达式相匹配的值。</td>
+	    </tr>
+	    <tr>
+	      <td>slice()</td>
+	      <td>提取字符串的片断，并在新的字符串中返回被提取的部分。</td>
+	    </tr>
+	    <tr>
+	      <td>split()</td>
+	      <td>把字符串分割为字符串数组。</td>
+	    </tr>
+	    <tr>
+	      <td>substr()</td>
+	      <td>从起始索引号提取字符串中指定数目的字符。</td>
+	    </tr>
+	    <tr>
+	      <td>substring()</td>
+	      <td>提取字符串中两个指定的索引号之间的字符。</td>
+	    </tr>
+	    <tr>
+	      <td>toLocaleLowerCase()</td>
+	      <td>把字符串转换为小写。</td>
+	    </tr>
+	    <tr>
+	      <td>toLocaleUpperCase()</td>
+	      <td>把字符串转换为大写。</td>
+	    </tr>
+	    <tr>
+	      <td>toLowerCase()</td>
+	      <td>把字符串转换为小写。</td>
+	    </tr>
+	    <tr>
+	      <td>toUpperCase()</td>
+	      <td>把字符串转换为大写。</td>
+	    </tr>
+	    <tr>
+	      <td>toString()</td>
+	      <td>返回字符串。</td>
+	    </tr>
+	    <tr>
+	      <td>valueOf()</td>
+	      <td>返回某个字符串对象的原始值。</td>
+	    </tr>
+	  </tbody>
+	</table>
+	<h2>Global</h2>
+	<p>Global是一个最为特殊的对象,因为它实际上根本不存在!如果尝试输出Global对象将出错:</p>
+	<pre>
+	alert(Global);</pre>
+	<p>但Global确实是一个对象,要理解这一点要先理解ECMAScript中一个概念,即在ECMAScript中不存在独立的函数,所有的函数必须是某个对象的方法.
+		像之前所使用的isNaN(),parseInt()看上去像独立的函数,其实它们都是Global对象的方法,Global对象的方法还不止这些,如用于编解码URI的函数:encodeURI与decodeURI方法
+	</p>
+	<pre>
+	var url = "http://www.g.cn/trend page";
+	alert(encodeURI(url));//该方法会将一些不能用在URI中的字符进行编码
+	//上面的空格将会被替换成%20,与之对应的decodeURI则是用来解码的
+	alert(decodeURI(encodeURI(url)));//原样输出</pre>
+	<p>与encodeURI和decodeURI相似的encodeURIComponent和decodeURIComponent . 
+		这两个方法不但对空格之类的字符进行编码,还对"/"和":"这些URL中的特殊字符进行编码
+	</p>
+	<pre>
+	var url = "http://www.g.cn";
+	alert(encodeURIComponent(url));
+	//输出http://%3A%2F%2Fwww.g.cn</pre>
+	<p>一般情况下要把一些字符串作为QueryString值添加到URL后面时,使用encodeURIComponent更安全些.
+		encodeURI之类的方法代替了以前BOM提供的escape与unescape之类的方法,URI方法更可取,因为escape方法只能对ASCII字符进行编码,而URI方法则可以对所有的Unicode字符进行编码.
+		应该总是使用URI方法,避免使用escape方法!
+	</p>
+	<p>Global对象不但有方法,还有一些属性:如undefined,NaN,Infinity这些特殊值都是Global对象的属性,还有所有的内置引用类型的构造函数(Array,Date等)都是的,只是不能通过Global.Array这样方法输出来,它们都被映射到了window对象上了.</p>
+		
+	
+</body>
+</html>

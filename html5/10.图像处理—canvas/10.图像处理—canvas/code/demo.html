@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>canvas demo</title>
+</head>
+<body>
+	
+	<canvas id="canvas" width="202px" height="102px" style="border:1px solid red;">
+		
+	</canvas>
+	
+	<script>
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		
+		var img = new Image();
+		img.onload = function(){ 
+			// 画图drawImage(img,0,0,0,0, 0,0,0,0)
+			ctx.drawImage(img,101,0,101,101,0,0,202,102);
+			// 写文字
+			ctx.fillStyle    = "#00f";
+			ctx.font         = "20px arial";
+			ctx.fillText("hello canvas",10,20);	
+		}
+		img.src="images/demo.png";
+	</script>
+</body>
+</html>

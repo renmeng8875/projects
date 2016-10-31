@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Drag</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript" src="../js/mytools.js"></script>
+<script type="text/javascript">
+	function getRealStyle(obj,cssProperty) {
+		if (window.getComputedStyle) {
+			return window.getComputedStyle(obj,null)[cssProperty];
+		} else if (obj.currentStyle) {
+			return obj.currentStyle[cssProperty];
+		}
+	}
+	/*window.onload = function () {
+		var oDiv = document.getElementById("oDiv");
+		var a = document.getElementsByTagName("a")[0];
+		addEvent(oDiv,"click",function (evt) {
+			alert(evt.layerX);
+		});
+		//alert(getRealStyle(oDiv,"width"));
+		//alert(document.documentElement.clientWidth);
+		//alert(oDiv.offsetLeft);
+	};*/
+	function Drag(obj) {
+		obj.onmousedown = Drag.drag;
+	}
+	Drag.drag =  function (evt) {
+		evt = evt || window.event;
+		if (document.selection && document.selection.empty) document.selection.empty();  //IE
+		else if (window.getSelection) window.getSelection().removeAllRanges(); //火狐
+		document.onmouseup = Drag.drop;
+		var __self = this;
+		document.onmousemove = function (evt) {	Drag.moveDiv.call(__self,evt);};
+		this.offset = {
+			x:evt.offsetX || evt.layerX,
+			y:evt.offsetY || evt.layerY
+		};
+		return false;
+	};
+	Drag.drop = function drop(evt) {
+		document.onmouseup = null;
+		document.onmousemove = null;
+	};
+	Drag.moveDiv = function (evt) {
+		evt = evt || window.event;
+		this.style.left = evt.clientX-this.offset.x+"px";
+		this.style.top = evt.clientY-this.offset.y+"px";
+		return false;
+	};
+	
+	
+	
+	
+	window.onload = function () {
+		var oDiv = document.getElementById("oDiv");//oDiv必须使用CSS定位
+		var div2 = document.getElementById("div2");
+		Drag(div2);
+	};
+	
+</script>
+<style type="text/css">
+* {
+	font-size:12px;
+	margin:0;
+	padding:0;
+}
+html {
+}
+body {
+	background:white;
+}
+div {
+	width:100px;
+	height:100px;
+	background:blue;
+	color:red;
+	position:absolute;
+	left:100px;
+	top:100px;
+}
+#div2 {
+background:yellow;
+}
+a {
+display:block;
+width:200px;
+height:20px;
+background:pink;
+}
+a:hover {
+background:red;
+}
+</style>
+</head>
+<body>
+	<div id="oDiv">A</div>
+	<div id="div2">B</div>
+	<a href="###">AAA</a>
+</body>
+</html>

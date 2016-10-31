@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bjsxt.hibernate">
+	<class name="User3" table="t_user3">
+		<id name="id" column="user_id" length="32">
+			<generator class="assigned"/>
+		</id>
+		<property name="name"/>
+		<property name="password"/>
+		<property name="createTime" column="create_time"/>
+		<property name="expireTime" column="expire_time"/>
+	</class>
+</hibernate-mapping>

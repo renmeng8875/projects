@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/resources/chapter9
+END
+applicationContext-jta-derby.xml
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/resources/chapter9/applicationContext-jta-derby.xml
+END
+applicationContext-jdbc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/resources/chapter9/applicationContext-jdbc.xml
+END
+applicationContext-jdbc2.xml
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/resources/chapter9/applicationContext-jdbc2.xml
+END
+applicationContext-jta-hsqldb.xml
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/resources/chapter9/applicationContext-jta-hsqldb.xml
+END

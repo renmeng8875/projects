@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7
+END
+UserModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/UserModel.java
+END
+UserModelMappingSqlQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/UserModelMappingSqlQuery.java
+END
+UserModelGenericSqlQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/UserModelGenericSqlQuery.java
+END
+InsertUserModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/InsertUserModel.java
+END
+HsqldbLengthFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/HsqldbLengthFunction.java
+END
+UserModelSqlQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/UserModelSqlQuery.java
+END
+HsqldbTestProcedure.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/HsqldbTestProcedure.java
+END
+UserRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/UserRowMapper.java
+END
+MysqlLengthFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/MysqlLengthFunction.java
+END
+TraditionalJdbcTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/TraditionalJdbcTest.java
+END
+JdbcTemplateTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter7/JdbcTemplateTest.java
+END

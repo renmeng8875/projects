@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/datePicker.css" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.date.js"></script>
+	<script type="text/javascript" src="js/jquery.datePicker.js"></script>
+	<script type="text/javascript" src="js/21-2.js"></script>
+</head>
+<body>
+	<div id="container">
+		<p class="headline">您当前的位置：求职管理中心 &#62; 基本个人资料</p>
+		<!-- left start -->
+		<div class="left">
+			<span class="blank"> </span>
+			<dl class="menu">
+				<dt><span>│</span>我的简历</dt>
+				<dd><a href="###">基本资料</a></dd>
+				<dd class="menu_click"><a href="###">工作经验</a></dd>
+				<dd><a href="###">教育经历</a></dd>
+				<dd><a href="###">求职意向</a></dd>
+				<dd><a href="###">专业技能</a></dd>
+			</dl>
+			<h3 class="important">温馨提示：</h3>
+			<p class="matter">为了更好的让招聘单位了解您，请您务必详细填写你的各个选项，每个选项都是让使用单位更加清晰的了解您的综合能力，谢谢合作！</p>
+		</div>
+		<!-- left end -->
+		
+		
+		<div class="right">
+			<p class="look_box">
+				<strong>温馨提示：</strong>
+				<span>经调查，一般公司招聘人才时最重视工作经验，因此详细填写你的工作经验，可以让招聘企业更加了解您，并且更容易取得面试机会</span>
+			</p>
+			<h3>工作经验</h3>
+			<p class="see_box"><span>*</span>为必填项</p>
+			<fieldset>
+				<form method="post" action="" id="form21-2">
+					<dl>
+						<dt><span>*</span>任职期间：</dt>
+						<dd>
+							<input type="text" name="rYear" id="rYearFrom" readonly="readonly" class="length85px required" />
+							<img src="images/date_ico.gif" id="rYearFromButton" /><em>至</em>
+							<input type="text" name="rMonth"  id="rYearTo"  readonly="readonly"   class="length85px required" />
+							<img src="images/date_ico.gif" id="rYearToButton"/>
+							<input type="checkbox" class="check_css" name="all" id="rToday" /><em>至今</em>
+						</dd>
+						<dt><span>*</span>公司名称：</dt>
+						<dd>
+							<input type="text" id="companyName" class="required" name="company" />
+						</dd>
+						<dt><span>*</span>民族：</dt>
+						<dd>
+							<select name="ethnic">
+								<option value="汉族">汉族</option>
+								<option value="其他">其他</option>
+							</select>
+						</dd>
+						<dt><span>*</span>职位名称：</dt>
+						<dd class="length145px">
+							<input type="text" id="officeName" class="length85px required" name="workName" />
+						</dd>
+						<dt><span>*</span>公司规模：</dt>
+						<dd class="length145px">
+							<select name="model">
+								<option value="50人以下">50人以下</option>
+								<option value="其他">50-100人</option>
+								<option value="其他">100-200人</option>
+								<option value="其他">200-300人</option>
+								<option value="其他">300人以上</option>
+							</select>
+						</dd>
+						<dt><span>*</span>证明人：</dt>
+						<dd class="length145px">
+							<input type="text" id="certifyName" class="length85px required" name="person" />
+						</dd>
+						<dt><span>*</span>证明人联系方式：</dt>
+						<dd class="length145px">
+							<input type="text" name="personTel" id="certifyTel" class="required" />
+						</dd>
+						<dt><span>*</span>工作描述：</dt>
+						<dd class="height150px">
+							<textarea></textarea>
+							<input type="submit" class="orange_button required" name="cSave" value="保存" /> <input type="button" class="blue_button" name="cBack" value="返回" />
+						</dd>
+					</dl>
+					<div class="ff_bug"> </div>
+					<div class="all_button"><input type="submit" class="save_show" value="继续添加" name="send" /> <input type="button" class="save_show" value="进入下一步" name="sendShow" /> </div>
+				</form>
+			</fieldset>
+		</div>
+		<!-- right end -->
+	</div>
+</body>
+</html>

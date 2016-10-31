@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Style</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<!--link rel="styleSheet" type="text/css" href="test.css" />
+<link rel="alternate styleSheet" type="text/css" title="Style1" href="test.css" />
+<link rel="alternate styleSheet" type="text/css" title="Style2" href="test.css" /-->
+<!--script type="text/javascript" src="../js/jquery-1.3.2.js"></script-->
+<script type="text/javascript" src="../js/tools.js"></script>
+<script type="text/javascript">
+	window.onload = function () {
+		var sheet = document.styleSheets[0];
+		sheet.removeRule(0);//IE方法,第一个参数为CSS选择符,第二个为CSS内容,第三个为位置
+	};
+	function getStyle(sheet,selector) {
+		var declaration;
+		if (sheet.cssRules) {//W3C
+			declaration =  sheet.cssRules;
+		} else if (sheet.rules) {//IE
+			declaration = sheet.rules;
+		}
+		for (var i=0;i< declaration.length;i++) {
+			if (declaration[i].selectorText == selector) {
+				return declaration[i];
+			}
+		}
+	}
+	function getRealStyle(obj,cssProperty) {
+		if (window.getComputedStyle) {
+			return window.getComputedStyle(obj,null)[cssProperty];
+		} else if (obj.currentStyle) {
+			return obj.currentStyle[cssProperty];
+		}
+	}
+	//Cross-Browser 总结函数
+	function addCSS(sheet,selectorText,declarations,index) {
+		if (sheet.insertRule) {
+			sheet.insertRule(selectorText+" {"+declarations+"}",index);
+		} else if (sheet.addRule) {
+			sheet.addRule(selectorText,declarations,index);
+		}
+	}
+	function delCSS(sheet,index) {
+		if (sheet.deleteRule) {
+			sheet.deleteRule(index);
+		} else {
+			sheet.removeRule(index);
+		}
+	}
+</script>
+<style type="text/css">
+	 * {
+	 padding:0;
+	 }
+	#oDiv {
+	width:10em;
+	height:10em;
+	background:blue;
+	}
+	
+</style>
+</head>
+<body>
+<div id="oDiv">Div</div>
+<div id="div2">Div222</div>
+	<script type="text/javascript">
+		//for (var i in Node) {
+		//	document.write(i+" | "+Node[i]+"<br />");
+		//}
+	</script>
+	
+</body>
+</html>

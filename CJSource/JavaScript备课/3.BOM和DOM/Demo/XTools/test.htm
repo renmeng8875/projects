@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" /> 
+<title>XTools</title>
+<script type="text/javascript" src="XTools.js"></script>
+<script type="text/javascript">
+	
+</script>
+<style type="text/css">
+* {
+	padding:0;
+	margin:0;
+}
+html {
+	background:navy;
+	height:100%;
+}
+body {
+	width:800px;
+	height:100%;
+	background:white;
+	margin:0 auto;
+	padding:10px;
+}
+h1 {
+	background:#06f;
+	color:white;
+	line-height:200%;
+	text-align:center;
+	width:200px;
+	height:200px;
+	border:10px solid lime;
+	position:fixed;
+	left:50%;
+	top:50%;
+	margin-top:-100px;
+	margin-left:-100px;
+	
+}
+</style>
+</head>
+<body>
+	<h1 id="abc">XTools JavaScript库</h1>
+	<script type="text/javascript">
+		//XT.clearSpaceNode.call(XT("abc"));
+		alert(XT("abc").before(document.createTextNode("#sdafasf##")));
+	</script>
+</body>
+</html>

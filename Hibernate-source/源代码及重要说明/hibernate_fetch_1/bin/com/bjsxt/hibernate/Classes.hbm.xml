@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bjsxt.hibernate">
+	<class name="Classes" table="t_classes">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<set name="students" inverse="true" cascade="all">
+			<key column="classesid"/>
+			<one-to-many class="Student"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+* {
+	margin:0;
+	padding:0;
+}
+h1 {
+text-align:center;
+}
+ul {
+list-style:none;
+padding:10px;
+}
+#dragOrderH {
+margin:10px;
+height:40px;
+
+}
+ li {
+width:195px;
+height:30px;
+line-height:30px;
+text-indent:20px;
+background:url("images/item_bg.gif") no-repeat center;
+margin:4px;
+cursor:move;
+
+
+}
+#dragOrderH li {
+float:left;
+}
+#dragOrderV {
+width:210px;
+margin:100px auto;
+}
+ li a {
+color:white;
+font-weight:bold;
+text-decoration:none;
+font-family:Arial;
+}
+ li a:hover {
+color:lime;
+}
+
+.moving {
+opacity:0.6;
+filter:alpha(opacity=60);
+}

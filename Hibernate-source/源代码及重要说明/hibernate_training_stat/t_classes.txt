@@ -1,0 +1,10 @@
+mysql> select * from t_classes;
++----+-----------+
+| id | classesNo |
++----+-----------+
+|  1 | SXT0      |
+|  2 | SXT1      |
+|  3 | SXT2      |
+|  4 | SXT3      |
+|  5 | SXT4      |
++----+-----------+

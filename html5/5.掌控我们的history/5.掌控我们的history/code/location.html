@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>location</title>
+</head>
+<body>
+	params:<span id="params"></span><br />
+	url:<input type="text" id="url"/>&nbsp;&nbsp;
+	<br /><br />
+	
+	<button onclick="gotoUrl()">location.href</button>&nbsp;&nbsp;
+	<button onclick="replace()">replace</button>&nbsp;&nbsp;
+	
+	<script>
+		var url = document.getElementById("url");
+	
+		function gotoUrl(){
+			location.href=url.value;
+		}
+		
+		function replace(){
+			location.replace(url.value);
+		}
+		
+		document.getElementById("params").innerHTML = location.search;
+	</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>OpacityTrans</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript">
+	/*setTimeout(function () {
+		var oDiv = document.getElementById("oDiv");
+		var curWidth = parseInt(getRealStyle(oDiv,"width"));
+		var curHeight = parseInt(getRealStyle(oDiv,"height"));
+		oDiv.style.width = curWidth+1+"px";
+		oDiv.style.height = curHeight+1+"px";
+		oDiv.style.marginLeft = "-"+(parseInt((curWidth+1)/2)+20)+"px";
+		oDiv.style.marginTop = "-"+(parseInt((curHeight+1)/2)+20)+"px";
+		if (true) {
+			setTimeout(arguments.callee,50);
+		}
+	},50);*/
+	window.onload = function () {
+		var oDiv = document.getElementById("oDiv");
+		opacityTrans(oDiv,0,100,1);
+	};
+	function getRealStyle(obj,cssProperty) {
+		if (window.getComputedStyle) {
+			return window.getComputedStyle(obj,null)[cssProperty];
+		} else if (obj.currentStyle) {
+			return obj.currentStyle[cssProperty];
+		}
+	}
+			/*{
+			width:"100px",
+			height:"100px",
+			fontSize:"12px"
+			}*/
+	function trans(obj,start,finish,add) {
+		var from,to,unit;
+		for (var i in start) {
+			if (!finish[i]) {continue;}
+			from = parseInt(start[i]);
+			to = parseInt(finish[i]);
+			unit = getUnit(finish[i]);
+			addProp(from,to,i,unit);
+		}
+		function addProp(from,to,param,unit) {
+			var times = Math.ceil(Math.abs((to-from)/add));
+			for (var i=0;i<times;i++) {delay(i,from,param,unit);}
+			setTimeout(function () {obj.style[param]=to+unit;},i*50);
+		}
+		function delay(i,from,param,unit) {
+			var val = i*add+from;
+			setTimeout(function () {obj.style[param]= val+unit;},i*50);
+		}
+		function getUnit(val) {
+			var re = /[^0-9]+/;
+			var arr = re.exec(val);
+			return arr?arr[0]:"";
+		}
+	}
+	function opacityTrans(obj,start,finish,add) {
+		var times = Math.abs((finish-start)/add);
+		for (var i=0;i<=times;i++) {
+			(function () {
+				var val = i*add+start;
+				setTimeout(function () {
+					setOpacity(obj,val);
+				},i*50);
+			})();
+		}
+	}
+	var setOpacity = (document.documentElement.filters)?function (obj,val) {
+		obj.style.filter = "alpha(opacity="+val+")";
+	}:function (obj,val) {
+		obj.style.opacity = val/100+"";
+	};
+</script>
+<style type="text/css">
+* {
+	margin:0;
+	padding:0;
+	font-size:12px;
+	
+}
+html {
+	width:100%;
+	height:100%;
+}
+body {
+	background:white;
+	width:100%;
+	height:100%;
+}
+#oDiv {
+	width:200px;
+	height:200px;
+	background:blue;
+	margin:0 auto;
+	position:fixed;
+	left:50%;
+	top:50%;
+	margin-top:-120px;
+	margin-left:-120px;
+	color:white;
+	padding:20px;
+}
+</style>
+</head>
+<body>
+	<div id="oDiv">OpacityTrans</div>
+</body>
+</html>

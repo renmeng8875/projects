@@ -1,0 +1,79 @@
+10
+
+dir
+4998
+http://192.168.19.163/svn/repo/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins
+http://192.168.19.163/svn/repo
+
+
+
+2014-09-02T03:13:09.057173Z
+4998
+renmeng
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fa041893-e7f8-4317-a3e5-084af4ef981c
+
+org.eclipse.mylyn.bugzilla.core
+dir
+
+org.eclipse.team.cvs.core
+dir
+
+org.eclipse.ui.intro
+dir
+
+org.eclipse.wst.jsdt.core
+dir
+
+org.eclipse.jdt.core
+dir
+
+org.eclipse.mylyn.tasks.ui
+dir
+
+org.eclipse.wst.server.core
+dir
+
+org.eclipse.core.runtime
+dir
+
+org.eclipse.ui.ide
+dir
+
+org.springframework.ide.eclipse.osgi.targetdefinition
+dir
+
+org.springframework.ide.eclipse.aop.core
+dir
+
+org.eclipse.epp.usagedata.recording
+dir
+
+org.eclipse.wst.jsdt.ui
+dir
+
+org.eclipse.jdt.ui
+dir
+
+org.eclipse.ui.workbench
+dir
+
+org.eclipse.core.resources
+dir
+
+org.eclipse.wst.xml.core
+dir
+

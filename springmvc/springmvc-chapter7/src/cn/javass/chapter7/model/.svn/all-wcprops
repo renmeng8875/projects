@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model
+END
+UserModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/UserModel.java
+END
+UserState.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/UserState.java
+END
+WorkInfoModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/WorkInfoModel.java
+END
+PhoneNumberModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/PhoneNumberModel.java
+END
+FormatterModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/FormatterModel.java
+END
+PhoneNumberModelErrorEditor.java
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/PhoneNumberModelErrorEditor.java
+END
+SchoolInfoModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/SchoolInfoModel.java
+END
+DataBinderTestModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/model/DataBinderTestModel.java
+END

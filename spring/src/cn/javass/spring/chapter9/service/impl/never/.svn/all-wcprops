@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never
+END
+SupportsAndNeverAddressServiceImplWithSuccess.java
+K 25
+svn:wc:ra_dav:version-url
+V 188
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never/SupportsAndNeverAddressServiceImplWithSuccess.java
+END
+SupportsAndNeverUserServiceImplWithRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 194
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never/SupportsAndNeverUserServiceImplWithRuntimeException.java
+END
+RequiredAndNeverUserServiceImplWithRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 194
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never/RequiredAndNeverUserServiceImplWithRuntimeException.java
+END
+SupportsAndNeverUserServiceImplWithSuccess.java
+K 25
+svn:wc:ra_dav:version-url
+V 185
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never/SupportsAndNeverUserServiceImplWithSuccess.java
+END
+SupportsAndNeverAddressServiceImplWithRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 197
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never/SupportsAndNeverAddressServiceImplWithRuntimeException.java
+END
+RequiredAndNeverAddressServiceImplWithRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 197
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/never/RequiredAndNeverAddressServiceImplWithRuntimeException.java
+END

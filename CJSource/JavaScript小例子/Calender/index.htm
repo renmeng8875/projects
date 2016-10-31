@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<title>Calender</title>
+<link href="css/global.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/JavaScript" src="js/jKit.js"></script>
+<script type="text/JavaScript" src="js/core.js"></script>
+<script type="text/JavaScript">
+</script>
+</head>
+<body>
+	<h1>Calender</h1>
+	<table class="jCalender" border="0" cellspacing="2">
+		<caption>
+			<input type="button" value="&lt;&lt;" class="jPrevYear" />
+			<input type="button" value="&lt;" class="jPrevMonth" />
+			<select class="jYearSelect">
+				<option value="2008">2008</option>
+			</select>年
+			<select class="jMonthSelect">
+				<option value="1">1</option>
+			</select>月
+			<input type="button"value="&gt;" class="jNextYear" />
+			<input type="button"  value="&gt;&gt;"  class="jNextMonth" />
+		</caption>
+		<thead>
+			<tr>
+				<th>日</th>
+				<th>一</th>
+				<th>二</th>
+				<th>三</th>
+				<th>四</th>
+				<th>五</th>
+				<th>六</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td colspan="7">
+					<span class="jPicking">2012年12月31日</span>
+					<input class="jToday" type="button" value="今天" />
+					<input class="jClose" type="button" value="关闭" />
+				</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<td><span>1</span></td>
+				<td><span>2</span></td>
+				<td><span>3</span></td>
+				<td><span>4</span></td>
+				<td><span>5</span></td>
+				<td><span>6</span></td>
+				<td><span>7</span></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

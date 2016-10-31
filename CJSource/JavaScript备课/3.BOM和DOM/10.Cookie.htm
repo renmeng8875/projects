@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>10.Cookie</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>Cookie</h1>
+	<h2>Cookie 基础知识</h2>
+	<p>我们已经知道，在 document 对象中有一个 cookie 属性。但是 Cookie 又是什么？“某些 Web 站点在您的硬盘上用很小的文本文件存储了一些信息，这些文件就称为 Cookie。”—— MSIE 帮助。一般来说，Cookies 是 CGI 或类似，比 HTML 高级的文件、程序等创建的，但是 JavaScript 也提供了对 Cookies 的很全面的访问权利。</p>
+	<p>在继续之前，我们先要学一学 Cookie 的基本知识。</p>
+	<p>每个 Cookie 都是这样的：cookie名=cookie值；cookie本身仅仅是一个字符串，是一组名值对；多组名值对用分号加空格分隔！</p>
+	<p>"cookie名"的限制与 JavaScript 的命名限制大同小异，少了“不能用 JavaScript 关键字”，多了“只能用可以用在 URL 编码中的字符”。后者比较难懂，但是只要你只用字母和数字命名，就完全没有问题了。“值”的要求也是“只能用可以用在 URL 编码中的字符”。</p>
+	<p>每个 Cookie 都有失效日期，一旦电脑的时钟过了失效日期，这个 Cookie 就会被删掉。我们不能直接删掉一个 Cookie，但是可以用设定失效日期早于现在时刻的方法来间接删掉它。</p>
+	<p>每个网页，或者说每个站点，都有它自己的 Cookies，这些 Cookies 只能由这个站点下的网页来访问，来自其他站点或同一站点下未经授权的区域的网页，是不能访问的。每一“组”Cookies 有规定的总大小（大约 2KB 每“组”），一超过最大总大小，则最早失效的 Cookie 先被删除，来让新的 Cookie“安家”。</p>
+	<h2>访问Cookie</h2>
+	<pre>
+	document.write(document.cookie);//输出类似"name1=value1; name2=value2; name3=value3"的字符串
+	document.write(typeof document.cookie);//cookie仅仅是个字符串</pre>
+	<p>但这样获取到的是一堆混乱的字符串，必须对其进行处理才能知道它的含义！在类似ASP或PHP这样的服务器端脚本中，往往设置cookie十分简单</p>
+	<pre>
+	//ASP
+	response.cookies("cookieName")="cookieValue"
+	//PHP
+	setcookie("cookieName","cookieValue");</pre>
+	<h3>解析Cookie名值对</h3>
+	<p>方案一：直接截取字符串</p>
+	<pre>
+	function getCookie(cookieName) {
+		var start = document.cookie.indexOf(cookieName+"=");
+		if (start ==-1) {return "";}
+		start = start+cookieName.length+1;
+		var end = document.cookie.indexOf(";",start);
+		if (end=-1) {end = document.cookie.length;}
+		return document.cookie.substring(start,end);
+	}</pre>
+	<p>方案二：将Cookie拆分为数组，通过遍历取得</p>
+	<pre>
+	function getCookie(cookieName) {
+		var cookies=document.cookie.split("; ");//一个分号加一个空格
+		if (!cookies.length) {return "";}
+		var pair=["",""];
+		for (var i=0;i< cookies.length;i++) {
+			pair = cookies[i].split("=");//以赋值号分隔,第一位是Cookie名,第二位是Cookie值
+			if (pair[0]==cookieName) {
+				break;
+			}
+		}
+		return pair[1];
+	}</pre>
+	<p>方案三：使用正则表达式解析</p>
+	<pre>
+	function getCookie(cookieName) {
+		var re = new RegExp("\\b"+cookieName+"=([^;]*)\\b");
+		var arr =  re.exec(document.cookie);
+		return arr?arr[1]:"";
+	}</pre>
+	<h3>设置Cookie</h3>
+	<p>一个Cookie包含以下信息：</p>
+	<ul>
+		<li>Cookie名称，Cookie名称必须使用只能用在URL中的字符，一般用字母及数字</li>
+		<li>Cookie值，Cookie值同样也只能使用可以用在URL中的字符，一般需要在设置Cookie值时对其使用encodeURI方法进行转义</li>
+		<li>Expires，过期日期，一个GMT格式的时间，当过了这个日期之后，浏览器就会将这个Cookie删除掉，当不设置这个的时候，Cookie在浏览器关闭后消失</li>
+		<li>Path，一个路径，在这个路径下面的页面才可以访问该Cookie，一般设为“/”，以表示同一个站点的所有页面都可以访问这个Cookie</li>
+		<li>Domain，子域，指定在该子域下才可以访问Cookie，例如要让Cookie在bbs.x-life.com下可以访问，但在news.x-life.com下不能访问，则可将domain设置成bbs.x-life.com</li>
+		<li>Secure，安全性，指定Cookie是否只能通过https协议访问，一般的Cookie使用HTTP协议既可访问，如果设置了Secure（没有值），则只有当使用https协议连接时cookie才可以被页面访问</li>
+	</ul>
+	<strong>注意：Cookie安全机制要求站点页面只能访问本站点的Cookie，不能访问其它站点的Cookie。同时，最好在设置Cookie时使用encodeURI对象进行URI编码，在取出Cookie时再使用decodeURI对其进行解码！</strong>
+	<p>设置一个完整Cookie示例</p>
+	<pre>
+	var expires = new Date();
+	expires.setMonth(expires.getMonth()+1);//一个月后Cookie失效
+	document.cookie = "userName="+encodeURI("用户名")+"; expires="+
+	expires.toGMTString()+"; path=/; domain=x-life.com; secure";</pre>
+	<p>每次设置document.cookie值时如果该Cookie名称并不存在，则新增一个Cookie，如果已经存在，则修改以前的值！</p>
+	<pre>
+	document.cookie ="a=1";//新增一个名称为a的Cookie
+	document.cookie = "b=2";//新增一个名称为b的Cookie，原来的Cookie安然无恙
+	document.cookie = "a=3";//将原来的名称为a的Cookie值修改为3</pre>
+	<p>setCookie函数</p>
+	<pre>
+	function setCookie(name,value,expires,domain,secure) {
+		var str = name+"="+encodeURI(value);//不要忘了在对应getCookie函数里面加上decodeURI方法
+		if (expires) {
+			str += "; expires="+expires.toGMTString();
+		}
+		if (path) {
+			str += "; path="+path;
+		}
+		if (domain) {
+			str += "; domain="+domain;
+		}
+		if (secure) {
+			str += "; secure";
+		}
+		document.cookie = str;
+	}</pre>
+	<h2>删除Cookie</h2>
+	<p>没有删除Cookie的直接的方法，但可以变通一下来删除Cookie！</p>
+	<pre>
+	function delCookie(cookieName) {
+		var expires = new Date();
+		expires.setTime(expires.getTime()-1);//将expires设为一个过去的日期，浏览器会自动删除它
+		document.cookie = cookieName+"=; expires="+expires.toGMTString();
+	}</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

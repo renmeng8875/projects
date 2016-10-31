@@ -1,0 +1,119 @@
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	font-size:12px;
+	color:#555;
+}
+h1 {
+	font-size:40px;
+	padding:20px 0;
+	text-align:center;
+}
+div#container {
+	border:1px solid #E1ECFF;
+	width:241px;
+	margin:10px auto;
+}
+div#container h2 {
+	height:30px;
+	line-height:30px;
+	color:#777;
+	font-size:14px;
+	text-indent:20px;
+	background:#E1ECFF;
+}
+div#calc {
+	width:221px;
+	height:236px;
+	margin:10px;
+	padding-top:14px;
+	background:url("../images/background.png") no-repeat center;
+}
+
+div#calc p#keyboard {
+	width:198px;
+	height:217px;
+	padding-top:4px;
+	margin:0 auto;
+	position:relative;
+	background:url("../images/buttons.gif") no-repeat center;
+}
+div#calc p#keyboard  span {
+	display:block;
+	position:absolute;
+	width:36px;
+	height:32px;
+	overflow:hidden;
+	border:none;
+	cursor:pointer;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-image:url("../images/buttons.gif");
+	background-color:transparent;
+}
+div#calc p#keyboard  span.num {
+	text-indent:-9999px;
+}
+div#calc p#keyboard input#output {
+	display:block;
+	width:168px;
+	height:35px;
+	line-height:35px;
+	font-size:28px;
+	text-align:right;
+	padding-right:2px;
+	border:none;
+	background:none;
+	margin:0 auto;
+	cursor:text;
+}
+div#calc p#keyboard span.row1 {
+	top:50px;
+}
+div#calc p#keyboard span.row2 {
+	top:84px;
+}
+div#calc p#keyboard span.row3 {
+	top:119px;
+}
+div#calc p#keyboard span.row4 {
+	top:154px;
+}
+div#calc p#keyboard span.row5 {
+	top:189px;
+}
+
+div#calc p#keyboard span.col1 {
+	left:4px;
+	width:37px;
+}
+div#calc p#keyboard span.col2 {
+	left:43px;
+}
+div#calc p#keyboard span.col3 {
+	left:81px;
+}
+div#calc p#keyboard span.col4 {
+	left:119px;
+	width:37px;
+}
+div#calc p#keyboard span.col5 {
+	left:158px;
+}
+div#calc p#keyboard span.minus {
+	top:85px;
+}
+div#calc p#keyboard span.zero {
+	width:73px;
+}
+div#calc p#keyboard span.eval {
+	height:67px;
+}
+div#calc p#keyboard span.hover {
+	background-image:url("../images/buttons_hover.gif");
+}
+div#calc p#keyboard span.down {
+	background-image:url("../images/buttons_down.gif");
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.Script标签与访问HTML页面</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>Script标签与访问HTML页面</h1>
+	<h2>Script标签</h2>
+	<p>script标签用于在HTML页面中嵌入一些可执的脚本</p>
+	<pre>
+	&lt;script&gt;
+		//some script goes here
+	&lt;/script&gt;</pre>
+	<p>script标签有三个特殊的属性(当然,像id,class这样的属性它也是有的,HTML页面中几乎每个元素都可以有class,id属性)</p>
+	<pre>
+	&lt;script language="JavaScript"&gt;//language属性指明标签里包含的脚本所使用的语言
+		//它有三个常见的取值JavaScript,JScript,VBScript
+		//some script goes here
+	&lt;/script&gt;
+	//对于JScript只有IE能够识别,其它浏览器会忽略这个标签其里面的内容
+	//而对于VBScript,只有Windows上的IE能够识别,运行
+	//然而language属性后来在XHTML中被type属性替代了
+	&lt;script type="text/javascript"&gt;//取值也变了,text/javascript,text/jscript,text/vbscript
+		//some script goes here
+	&lt;/script&gt;</pre>
+	<p>在Web浏览器中,我们只会使用JavaScript,type属性设置为text/javascript.事实上,由于JavaScript十分流行,它几乎成了脚本的代名词,而在Web浏览器中,即使script标签不加任何属性,浏览器也会把它当成JavaScript</p>
+	<pre>
+	&lt;script&gt;
+		alert("Hello!");
+	&lt;/script&gt;
+	//上面的那段代码将会按JavaScript的方式运行
+	//即使有IE中,不加声明的script块也会当成JavaScript执行,而不是VBScript
+	&lt;script&gt;
+		msgbox "Hello!"
+	&lt;/script&gt;
+	//上面的代码在IE中也会报错,IE也会将其当成JavaScript执行</pre>
+	<p>以前在HTML页面中,一些标签常会加一些诸如onclick,onmouseover这样的属性,这是一种事件绑定(关于事件,我们之后会详细讲解的,不要急).用于指定当HTML页面某个元素上发生了什么事的时候去执行的JavaScript代码(当然也可以是其它客户端脚本)</p>
+	<pre>
+	&lt;img src="../images/stack_heap.jpg" alt="内存堆栈" onclick="alert('你把我点疼了!')"  /&gt;</pre>
+	<p>上面的代码将在HTML页面上显示一个图像,当你用鼠标点击一下时,会出现一个弹窗,显示'你把我点疼了!',onclick属性的值其实是一段JavaScript代码;这就是事件,下面是其它一些简单的事件</p>
+	<ul>
+		<li>onclick ,当鼠标点击一下时执行一次</li>
+		<li>onmouseover ,当鼠标放上去时执行一次</li>
+		<li>onmouseout ,当鼠标移出去时执行一次</li>
+		<li>onmousedown ,当鼠标按下时执行一次</li>
+		<li>onmouseup ,当鼠标在上面松开(弹起)时执行一次</li>
+		<li>onmousedblclick ,当鼠标双击时执行一次</li>
+		<li>onload ,当对象加载完成时执行一次</li>
+	</ul>
+	<p>以前网上十分流行的称之为RollverImages(翻转图像)的效果其实就是组合onmouseover,onmouseout这样的事件和简单的JavaScript代码实现的</p>
+	<pre>
+	&lt;img src="../images/stack_heap.jpg" alt="内存堆栈"
+	 onmouseover="this.src='../images/over.jpg'" 
+	 onmouseout="this.src='../images/out.jpg'"  /&gt;</pre>
+	 <p>你可能知道,onmouseover这类的属性中的字符串将会在事件发生时当成脚本来执行,但上面的那些代码看上去十分模糊</p>
+	<pre>
+	 //为了便于查看,我们将它们提取出来放在下面
+	 this.src='../images/over.jpg'
+	 this.src='../images/out.jpg'</pre>
+	<p>分析上面的代码,我们发现,这其实是在给一个对象this的属性src赋值,但问题是我们并没有声明过一个叫this的对象!其实this对象是一个一直存在的一个对象,它不能被声明(this是关键字).这里,this就是指"这个",指这个标签!对于HTML中的元素,JavaScript会自动将其解析成一个对象.对于下面的img标签,会解析成下面一个对象:</p>
+	<pre>
+	 &lt;img src="../images/stack_heap.jpg" alt="内存堆栈" onclick="alert('Hello!')"  /&gt;
+	 //注意,实际上this是不能手动赋值,也不能手动声明的,这里仅仅是演示
+	 this = {
+	 	src:"../images/stack_heap.jpg",
+	 	alt:"内存堆栈",
+	 	onclick:"alert('Hello!')",
+	 	tagName:"IMG"
+	 };
+	 //其实不止这些属性</pre>
+	<p>上面,img标签会被解析成一个对象,具有src,alt等属性,src,alt属性是我们写在HTML里面的,而tagName则是系统自动生成的,它表示标签的标签名!我们可以用下面的代码进行测试:</p>
+	<pre>
+	 &lt;img src="../images/stack_heap.jpg" alt="内存堆栈" onclick="alert(this.src);alert(this.tagName);"  /&gt;</pre>
+	<p>自然,我们也可以修改它的值,于是翻转图象的效果就这样成功了</p>
+	<p>对于这样的行内事件绑定,有一些注意点.</p>
+	<pre>
+	&lt;head&gt;
+		 &lt;script&gt;
+			function myFn() {
+				alert("图象加载完成了!");
+			}
+		&lt;/script&gt;
+	&lt;/head&gt;
+	//.............若干若干代码之后
+	 &lt;img src="../images/stack_heap.jpg" alt="内存堆栈" onload="myFn()"  /&gt;//当图象加载成功时执行一个函数
+	</pre>
+	<p>上面的代码执行是没问题的,然而将顺序翻转一下(script可以放在任何合法的地方)</p>
+	<pre>
+	&lt;img src="../images/stack_heap.jpg" alt="内存堆栈" onload="myFn()"  /&gt;//当图象加载成功时执行一个函数
+	//.............若干若干代码之后
+	&lt;script&gt;
+		function myFn() {
+			alert("图象加载完成了!");
+		}
+	&lt;/script&gt;</pre>
+	<p>HTML页面按照从上往下的顺序加载执行,当图象加载成功后,就去执行onload里的内容(一个自定义函数),但由于script标签在下面若干代码之后,所以还没被加载,因此会出错"myFn is undefined";这就是为什么要将script标签放在head部分的原因,因为head在body前面,当body里的元素加载完成时,head中的script肯定加载完成了</p>
+	<p>但后来有了XHTML,有了"三层分离",W3C推出了DOM2,我们需要使用另一种方式绑定事件,获取HTML页面元素.再以上面的图像为例:</p>
+	<pre>
+	&lt;head&gt;
+		 &lt;script&gt;
+		 	var img = document.getElementById("myImg");//我们通过ID来获取它
+		 	//document.getElementById方法有个参数,一个字符串ID
+		 	//然后,img就表示了那个图像标签对象
+		 	img.onclick = myFn;
+		 	/*我们不是把JavaScript代码以字符串符值给它的onclick属性
+		 	而是直接赋值给它一个函数名
+		 	你也会说,为什么不是img.onclick=myFn();
+		 	因为现在是在JavaScript代码区域中
+		 	加"()"表示执行这个函数,然后将这个函数的返回值赋给了img.onclick*/
+			function myFn() {
+				alert("图象加载完成了!");
+			}
+		&lt;/script&gt;
+	&lt;/head&gt;
+	//.......
+	&lt;img src="../images/stack_heap.jpg" id="myImg" alt="内存堆栈" /&gt;
+	//我们不再加onclick属性了,而是给它起了个ID
+	</pre>
+	<p>但上面的代码执行了仍会出错,因为HTML从上往下加载,当加载到script时,body部分在下面,还没有被加载,而JavaScript在浏览加载到时就会自动执行.这时,页面上的ID为myImg的img还没被加载到,所以会出错;document.getElementById方法需要一个字符串形式的ID,而如果页面上没有ID为这个的元素,它则会返回null(空对象);而在下面一行,img.onclick这一句使用了一个空对象,所以会在这里出错!至于解决方法,其实只是将传统的行内事件绑定的script位置反过来放.将script放在所以HTML元素后面!</p>
+	<pre>
+	&lt;img src="../images/stack_heap.jpg" id="myImg" alt="内存堆栈" /&gt;
+	//..................若干代码之后
+	&lt;script&gt;
+	 	var img = document.getElementById("myImg");
+	 	//这个时候,由于script标签放置的位置处在img标签之后,加载到script时img标签肯定加载完成了
+	 	img.onclick = myFn;
+		function myFn() {
+			alert("图象加载完成了!");
+		}
+	&lt;/script&gt;</pre>
+	<p>但标准仍然推荐将script放在head部分!那么,这就要用到另一个事件onload</p>
+	<pre>
+	window.onload = initAll;//将所有代码写在一个函数之中,然后注册到window对象的onload事件属性上
+	//window表示窗口对象,只要窗口打开,它就始终存在,当页面加载完成后,会触发window对象上的onload事件
+	function initAll() {
+		var img = document.getElementById("myImg");
+	 	img.onclick = myFn;
+		function myFn() {
+			alert("图象加载完成了!");
+		}
+	}</pre>
+	<p>这样,代码就不出错了,不管将脚本放在什么位置,initAll只有当页面加载完成后才会被执行</p>
+	<h2>访问HTML页面:<abbr title="HTML 文档对象模型">HTML DOM</abbr></h2>
+	<p>HTML DOM将整个页面当成一个document对象,HTML里的标签都要通过document对象来访问.而文档中的每个标签,又会转换成一个对象</p>
+	<pre>
+	&lt;p class="demo" title="第一个段落:DOM树" id="p1"&gt;我们用一个p标签来演示&lt;/p&gt;</pre>
+	<p>它又会被转换成下面这个对象</p>
+	<pre>
+	//总该记得对象字面量语法吧
+	{
+		tagName:"p",
+		className:"demo",
+		title:"第一个段落:DOM树",
+		id:"p1",
+		innerHTML:"我们用一个p标签来演示"
+	}
+	//你也许会奇怪,为什么标签的class属性会变成对象的className属性而不是class.
+	//class是JavaScript保留字!!!
+	//tagName表示它的标签名,而innerHTML表示它里面的HTML代码</pre>
+	<p>浏览将HTML标签转换成这样的对象后,在JavaScript中访问该标签的属性或里面的内容就简单多了,但问题是如何访问到这个对象!!</p>
+	<pre>
+	//首先要给该标签加个ID,然后使用document.getElementById方法就能够访问到它了
+	window.onload = initAll;//注意,要将所要访问HTML页面的代码都放在window的onload事件处理上!
+	function initAll() {
+		var p = document.getElementById("p1");
+		alert(p.className);
+		alert(p.tagName);
+		alert(p.title);
+		alert(p.id);
+		alert(p.innerHTML);
+	}</pre>
+	<p>访问HTML页面就这么简单!获取一个元素之后,不但可以读取它的属性值,还可以设置它的属性值!</p>
+	<pre>
+	window.onload = initAll;
+	function initAll() {
+		var p = document.getElementById("p1");
+		p.title="JavaScript";
+		p.className="load";//我们可以更改它的样式
+	}</pre>
+	<p>利用这些,我们已经能做出一些激动人心的事了!</p>
+	<pre>
+	//一些CSS
+	.over {
+		color:red;
+		background:blue;
+		font-size:larger;
+	}
+	.out {
+		color:black;
+		background:white;
+		font-size:smaller;
+	}
+	.click {
+		color:yellow;
+		background:yellow;
+		font-size:12px;
+	}
+	//HTML代码
+	&lt;p id="p1" class="out"&gt;一大行文字,它们都是普通的文字!&lt;/p&gt;
+	//JavaScript代码
+	window.onload = initAll;
+	function initAll() {
+		var p = document.getElementById("p1");
+		p.onclick=clickFn;//这里的事件注册方式除了比行内注册方式少了括号,其它的是一样的
+		p.onmouseover = overFn;
+		p.onmouseout = outFn;
+	}
+	function clickFn() {
+		this.className="click";//这里,this也是可用的
+		//注意是className,而不是class
+	}
+	function overFn() {
+		this.className="over";
+	}
+	function outFn() {
+		this.className="out";
+	}</pre>
+	<p>当然,获取页面元素不止这一种方法.document.getElementsByTagName方法也能获取页面元素,顾名思意,它是通过HTML的标签来获取元素的,而不是ID.
+		因为一张HTML页面,一个ID名称是唯一的,而标签名则大多数是相同的,所以,getElementsByTagName方法只有一个参数,即一个字符串形式的标签名(tagName),而返回值则是一个类似数组的HTML元素列表</p>
+	<pre>
+	window.onload = initAll;//仍然要写在window.onload事件处理函数中
+	function initAll() {
+		var pList = document.getElementsByTagName("P");
+		//为什么要用大写的P?其实用小写p也可以,不区分大小写,但由于对象的tagName总报告的是大写的,就....
+		alert(pList.length);//与数组相似,length报告有多少个元素,页面上有多少个p标签,就报告多少
+		alert(pList[0].innerHTML);//这样来访问第一个p元素
+	}</pre>
+	<p>另外,对于document.getElementsByTagName方法,还可以传一个"*"号作为参数,以获取页面的所有元素,类似于CSS里面的通配符<p>
+	<pre>
+	window.onload = initAll;
+	function initAll() {
+	var allThings = document.body.getElementsByTagName("*");
+	//可在任何DOM元素上调用getElementsByTagName方法,在body上调用此方法时,body外的标签不会获取到
+	alert(allThings.length);//页面上有多少个标签,就报告多少(包含DOCTYPE)
+	alert(allThings[3].innerHTML);//这样来访问第四个元素
+	}</pre>
+	<h2>其它-javascript:伪协议</h2>
+	<p>伪协议不同于因特网上所真实存在的如http://,https://,ftp://,而是为关联应用程序而使用的.如:tencent://(关联QQ),data:(用base64编码来在浏览器端输出二进制文件),还有就是javascript:</p>
+	<p>我们可以在浏览地址栏里输入"javascript:alert('JS!');",点转到后会发现,实际上是把javascript:后面的代码当JavaScript来执行,并将结果值返回给当前页面</p>
+	<p>类似,我们可以在a标签的href属性中使用javascript伪协议</p>
+	<pre>
+	&lt;a href="javascript:alert('JS!');"&gt;&lt;/a&gt;
+	//点击这面的链接,浏览器并不会跳转到任何页面,而是显示一个弹窗</pre>
+	<p>但javascript:伪协议有个问题,它会将执行结果返回给当然的页面</p>
+	<pre>
+	&lt;a href="javascript:window.prompt('输入内容将替换当前页面!','');"&gt;A&lt;/a&gt;</pre>
+	<p>解决方法很简单</p>
+	<pre>
+	&lt;a href="javascript:window.prompt('输入内容将替换当前页面!','');undefined;"&gt;A&lt;/a&gt;
+	//将undefined加到最后</pre>
+	<p>尽管javascript伪协议提供了一定的灵活性,但在页面中尽量不要使用!而对于调试JavaScript,javascript伪协议则显得十分有用!</p>
+</body>
+</html>

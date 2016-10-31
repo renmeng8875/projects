@@ -1,0 +1,18 @@
+<script type="text/javascript">
+	//载入XML数据
+	var xml = document.implementation.createDocument("","",null);
+	xml.async =false;
+	xml.load("Bank.xml");
+	//载入XSLT
+	var xsl = document.implementation.createDocument("","",null);
+	xsl.async =false;
+	xsl.load("Bank.xsl");
+	var xslPro = new XSLTProcessor();
+	xslPro.importStylesheet(xsl);//导入XSLT
+	//使用transformToDocument将XML按XSLT进行转换,返回新文档的DOM
+	var result = xslPro.transformToDocument(xml);
+	//要将返回的DOM转换成字符串,还要使用XMLSerializer对象
+	var serializer =new XMLSerializer();
+	var html = serializer.serializeToString(result);
+	document.write(html);
+</script>

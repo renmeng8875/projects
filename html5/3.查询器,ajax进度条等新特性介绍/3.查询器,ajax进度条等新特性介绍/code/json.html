@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	输入字符串:<textarea rows="5" cols="60" id="txt"></textarea>
+	<br />
+	<button onclick="parse()">转为对象</button>
+	<button onclick="stringify()">对象转字符串</button>
+	<script type="text/javascript">
+		var obj;
+		function parse(){
+			var jsonStr = document.querySelector("#txt").value;
+			obj = JSON.parse(jsonStr);
+			
+			alert(obj);
+		}
+		function stringify(){
+			var txt = document.querySelector("#txt");
+			var jsonStr = JSON.stringify(obj);
+			txt.value = jsonStr;
+		}
+	</script>
+</body>
+</html>

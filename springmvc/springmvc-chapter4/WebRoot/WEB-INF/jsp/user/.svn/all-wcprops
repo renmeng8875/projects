@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/repo/!svn/ver/5072/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter4/WebRoot/WEB-INF/jsp/user
+END
+list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/repo/!svn/ver/5072/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter4/WebRoot/WEB-INF/jsp/user/list.jsp
+END
+createAndValidator.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/repo/!svn/ver/5072/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter4/WebRoot/WEB-INF/jsp/user/createAndValidator.jsp
+END
+delete.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/repo/!svn/ver/5072/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter4/WebRoot/WEB-INF/jsp/user/delete.jsp
+END
+update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/repo/!svn/ver/5072/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter4/WebRoot/WEB-INF/jsp/user/update.jsp
+END
+create.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/repo/!svn/ver/5072/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter4/WebRoot/WEB-INF/jsp/user/create.jsp
+END

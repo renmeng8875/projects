@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>滚动广告</title>
+<script type="text/javascript">
+	setInterval(function () {
+		var ul = document.getElementById("rollerAd");
+		ul.appendChild(ul.firstChild);
+	},1000);
+</script>
+<style type="text/css">
+	body {
+		background:white;
+	}
+	ul {
+		list-style-type:none;
+		width:740px;
+		height:20px;
+		overflow:hidden;
+		padding:10px;
+		margin:10px auto;
+		border:3px ridge aqua;
+	}
+	a {
+		display:block;
+		width:700px;
+		height:24px;
+		line-height:24px;
+		font-size:16px;
+		color:white;
+		margin:4px auto;
+		text-decoration:none;
+		text-indent:20px;
+		background:#06f;
+	}
+	a:hover {
+		background:#f60;
+		text-decoration:underline;
+	}
+</style>
+</head>
+<body>
+	<ul id="rollerAd">
+		<li><a href="http://www.ubuntu.com" target="AjaxLife">Ubuntu 9.04发布了。。。</a></li>
+		<li><a href="http://www.g.cn" target="AjaxLife">他们如此认为，他们如此结局。。。</a></li>
+		<li><a href="http://www.yc60.com" target="AjaxLife">QQ滔滔面板，把嘈杂声化妆成。。。</a></li>
+		<li><a href="http://www.javaeye.com" target="AjaxLife">每个出生的小孩都是不一样的，你会奇怪那么多庸俗的大人是从哪里来的</a></li>
+		<li><a href="http://www.kylin.org.cn" target="AjaxLife">麒麟OS再度粉墨登场，敬请期待。。。</a></li>
+		<li><a href="http://www.whatwg.org" target="AjaxLife">破解“驴爸”少年终于某年某月某日被捕入狱。。。</a></li>
+	</ul>
+</body>
+</html>

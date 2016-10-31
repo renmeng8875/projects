@@ -1,0 +1,26 @@
+<!ELEMENT root ANY>
+<!ELEMENT node ANY>
+<!ELEMENT input ANY>
+
+
+<!ENTITY % param "CDATA">
+
+
+<!ENTITY copyright "Paradise Lost For CJ All Rights Reserved">
+
+<!ENTITY pl4cj SYSTEM "pl4cj.ent">
+<!ATTLIST root 
+xmlns CDATA #IMPLIED
+>
+
+<!ATTLIST node 
+id ID #REQUIRED
+for IDREFS "b"
+age %param; #FIXED "18"
+>
+
+<!ENTITY % InputType "(text|radio|checkbox|submit|button)">
+
+<!ATTLIST input
+type %InputType; #IMPLIED
+>

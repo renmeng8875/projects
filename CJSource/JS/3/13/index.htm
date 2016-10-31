@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>动画</title>
+<script type="text/javascript">
+function $(id) {
+	return document.getElementById(id);
+}
+window.onload=function () {
+	var oDiv=$("oDiv");
+	//setOpacity(oDiv,50);
+	//alert(oDiv.filters.alpha.opacity);
+	//alert(document.documentElement.filters);
+	opacityAnimate(oDiv,0,100,1000,Quad);
+	setTimeout(function () {
+		opacityAnimate(oDiv,100,-100,1000,Quad);
+	},1000);
+	
+	//alert(typeof oDiv.style.opacity);
+	//oDiv.style.opacity=0.4;
+	//oDiv.style.filter="alpha(opacity=40)";
+	//setInterval(fn,50);
+	//setTimeout(fn,50);
+	
+	function fn() {
+		oDiv.style.fontSize=oDiv.clientLeft+1+"px";
+	}
+	//animate(oDiv,'width',100,300,900,Quad);
+	//animate(oDiv,'left',100,400,900,Quad);
+	//animate(oDiv,'top',50,300,900,Quad);
+	/*
+	animate(oDiv,{
+		'width':100,
+		'left':100,
+		'top':50
+	},{
+		'width':300,
+		'left':400,
+		'top':300
+	},900,Quad);
+	*/
+	
+};
+
+/*
+参数说明
+curTime:当前时间,即动画已经进行了多长时间,开始时间为0
+start:开始值
+dur:动画持续多长时间
+alter:总的变化量
+*/
+//left 从100 增加到150，增加了50
+function animate(o,start,alter,dur,fx) {
+	var curTime=0;
+	var t=setInterval(function () {
+		if (curTime>=dur) clearTimeout(t);
+		for (var i in start) {
+			o.style[i]=fx(start[i],alter[i],curTime,dur)+"px";
+		}
+		curTime+=50;
+		
+	},50);
+}
+function Linear(start,alter,curTime,dur) {
+	return start+curTime/dur*alter;
+}//最简单的线性变化,即匀速运动
+
+function Quad(start,alter,curTime,dur) {
+	return start+Math.pow(curTime/dur,2)*alter;
+}
+
+function opacityAnimate(o,start,alter,dur,fx) {
+	var curTime=0;
+	
+	var t=setInterval(function () {
+		if (curTime>=dur) clearTimeout(t);
+		//o.style.opacity=fx(start,alter,curTime,dur)+"px";
+		setOpacity(o,fx(start,alter,curTime,dur));
+		curTime+=50;
+		
+	},50);
+}
+/*
+function setOpacity(o,opacity) {
+	if (typeof o.style.opacity=="string") {
+		o.style.opacity=opacity/100;
+	} else {
+		o.style.filter="alpha(opacity="+opacity+")";
+	}
+}*/
+
+var setOpacity = (document.documentElement.filters)?function (obj,val) {
+	obj.style.filter = "alpha(opacity="+val+")";
+}:function (obj,val) {
+	obj.style.opacity = val/100+"";
+};
+
+/*
+function animate(o,attr,add,start,end,t) {
+	//o 要进行动画的对象
+	//attr style属性
+	//add		增量
+	//t		时间间隔
+	//start 起始值
+	//end 结束值
+	var max=Math.max(start,end),
+			min=Math.min(start,end);
+	var interval=setInterval(function () {
+		if (add>0) {
+			if (min>=max) {clearInterval(interval);}
+			min+=add;
+			o.style[attr]=min+"px";
+		} else {
+			if (max<=min) {clearInterval(interval);}
+			max+=add;
+			o.style[attr]=max+"px";
+		}
+	},t);
+}
+*/
+//开始值，结束值，当前运动了多长时间,这个运动总共进行多长时间
+//当前所运动了多长的路程
+
+</script>
+<style type="text/css">
+#oDiv {
+width:200px;
+height:200px;
+border:3px ridge aqua;
+background:blue;
+position:absolute;
+font-size:10px;
+left:150px;
+top:150px;
+filter:alpha(opacity=40);
+}
+</style>
+</head>
+<body class="redStyle">
+	<h1>动画</h1>
+
+	<div id="oDiv">
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标题滚动文字</title>
+<script type="text/javascript">
+	//虽然滚动文字没什么多大意义，但还是那句话，做了锻炼
+	scrollText("滚动的标题文字！！！",function (txt) {
+		document.title=txt;
+	},500);
+	window.onload = function () {
+		scrollText("滚动的文字,但文字在HTML页面上！！！",function (txt) {
+			document.getElementById("p1").innerHTML=txt;
+		},500);
+	}
+	/*scrollText("滚动的文字,但文字在状态栏上！！！",function (txt) {
+		window.status = txt;
+	},300,"right");*/
+	
+	
+	
+	function scrollText(chars,preFn,delay,dir) {
+		if (!delay) {
+			delay = 1000;
+		}
+		var charsList = chars.split("");
+		clearInterval(preFn.__InterVal);
+		var doScroll;
+		if (dir) { doScroll = scrollToRight; }
+		else { doScroll = scrollToLeft; }
+		preFn.__InterVal = setInterval(doScroll,delay);
+		function scrollToLeft() {
+			charsList.push(charsList.shift());
+			preFn(charsList.join(""));
+		}
+		function scrollToRight() {
+			charsList.unshift(charsList.pop());
+			preFn(charsList.join(""));
+		}
+	}
+</script>
+</head>
+<body>
+	<p id="p1">Some Text Here!!!</p>
+</body>
+</html>

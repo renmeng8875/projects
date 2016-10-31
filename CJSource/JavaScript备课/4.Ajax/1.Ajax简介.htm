@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>1.Ajax简介</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>Ajax简介</h1>
+	<h2>Ajax是什么?</h2>
+	<p>
+		首先,Ajax是什么?一个很酷的新兴词汇!仅仅是某种早就有了的技术的一种新说法而已!
+		Ajax是指一种创建交互式网页应用的网页开发技术。要谈到网页应用程序,则必须从WEB的历史来讲:
+	</p>
+	<p>1.开始的Internet,仅仅是科学家们用来交换研究论文,及一些大学在上面发布一些课程信息的工具,那个时候网页与一幅户外广告没多大区别(相反户外广告才能起来广告的作用).那个时候,只有少部分的公司具有公司网站,而它们的公司网站仅仅是在首页上放置一些联系信息或一些静态的文档!</p>
+	<p>2.当Windows出现后(尽管Windows仅仅是给早就有了的操作系统加个外套而已,但这确实上一大进步),及个人电脑的流行,WEB也开始从学院走向群众,人们无法再忍受静态网页的一成不变,于是CGI(Common Gateway Interface)诞生了!
+		CGI其实是用C或Perl编写的程序,当用户请求某个页面时,CGI程序会自动执行,CGI程序可以访问数据库,返回HTML页面.那个时候就可以通过CGI来创建一个在线商城了.然而CGI有很多缺点:首先是其编写很复杂,往往编写CGI的是一些专业的程序员,他们只会关心一些算法问题,而不会理HTML页面是否漂亮!
+		另一点,由于CGI是经过编译后的程序,虽然作为独立程序运行时效率会很高,但也很危险,因为CGI程序可以访问服务器的系统里的其它与WEB无关的程序及创建文件,虽然一般情况下CGI程序不会这样做,但如果恶意用户将CGI程序放到服务器,那么它就可以为所欲为了!尽管存在这些缺陷，到如今CGI仍在使用。
+	</p>
+	<p>3.很多人都知道Sun,知道因特网流行的编程语言JAVA.如上所说CGI具有许多缺点,JAVA便是来弥补这些缺点的.由于Netscape的Navigator支持Java，动态Web页面掀开了新的一页：applet时代到来了。Applet与CGI不同,它是运行在客户端的,Applet就是嵌入在Web页面上的小应用程序.
+		只要用户使用支持Java的浏览器，就可以在浏览器的Java虚拟机（Java Virtual Machine，JVM）中运行applet。尽管applet可以做很多事情，但它也存在一些限制：通常不允许它读写文件系统，它也不能加载本地库，而且可能无法启动客户端上的程序。除了这些限制外，applet是在一个沙箱安全模型中运行的，这是为了有助于防止用户运行恶意代码。
+		JAVA最先就是因为Applet出名的,而很多人学JAVA也是从Applet开始的.然而,Applet好景不长,一是由于一个Applet本身加载要很长时间,另一方面,由于更流行的MS的IE开始不支持Applet,它就只好没落了.
+	</p>
+	<p>
+		4.与此同时，Netscape创建了一种脚本语言，并最终命名为JavaScript（建立原型时叫做Mocha，正式发布之前曾经改名为LiveWire和LiveScript，不过最后终于确定为JavaScript）。设计JavaScript是为了让不太熟悉Java的Web设计人员和程序员能够更轻松地开发applet（当然，Microsoft也推出了与JavaScript相对应的脚本语言，称为VBScript）。
+		当然,最初JavaScript是很失败的,由于各个浏览器相互不兼容(然而它们都提供了弹窗,那些烦人的alert),又因为缺乏开发工具,JavaScript很受非议.但尽管如此，JavaScript仍然是一种创建动态Web应用的强大方法。
+	</p>
+	<p>
+		5.在Java问世一年左右，Sun引入了servlet。现在Java代码不用再像applet那样在客户端浏览器中运行了，它可以在你控制的一个应用服务器上运行。这样，开发人员就能充分利用现有的业务应用，而且，如果需要升级为最新的Java版本，只需要考虑服务器就行了。Java推崇“一次编写，到处运行”，这一点使得开发人员可以选择最先进的应用服务器和服务器环境，这也是这种新技术的另一个优点。servlet还可以取代CGI脚本。
+		当然,这个时候的servlet仍然比CGI简单不了多少.MS吸取了Sun的教训,推出了ASP,Sun也很快作出了回应,推出了JSP.JSP和ASP的设计目的都是为了将业务处理与页面外观相分离，从这个意义上讲，二者是相似的。虽然存在一些技术上的差别（Sun也从Microsoft那里学到了教训），但它们有一个最大的共同点，即Web设计人员能够专心设计页面外观，而软件开发人员可以专心开发业务逻辑。
+		ASP与JSP都没有垄断服务器脚本市场,因为还有其它优秀的服务器脚本,如PHP,ColdFusion及Ruby!
+	</p>
+	<p>6.当WEB进化到这里的时候,动态的网站已经很多了.但人们对动态的定义一直很模糊,比如说很多人以为动态是指动画!其实这也没什么可笑的,正是这一理念,将动态WEB从服务器端动态生成HTML进化为富客户端应用程序(当然不是动画).
+		富客户端应用程序(Rich Internet Applications,富因特网应用程序,RIA)的提出解决了长久以来的"客户体验"问题,用户在使用Windows时已经习惯于那些各色各样的桌面应用程序,而死板的HTML页面往往只能提供一些文档.
+		RIA的出现,目标就是能使WEB页面能像桌面应用程序一样具有很高的交互性及响应率.其实Sun推出的Applet就是一个RIA,当然MS也有其产品,最近推出的SilverLight.并不只有这两家,还有Adobe Flash(它不是做动画的吗?对的,但其不但可以用来做动画,还可以创建一些其它的RIA),利用Flash，设计人员可以创建令人惊叹的动态应用。公司可以在Web上发布高度交互性的应用，几乎与胖客户应用相差无几。不同于applet、servlet和CGI脚本，Flash不需要编程技巧，很容易上手。
+		像许多解决方案一样，Flash需要客户端软件,由于此限制,很多网站上就多出了"跳过此页"的链接.
+	</p>
+	<p>
+		7.主角出场了(其实已经低调出场过一次了),曾经的JavaScript,以及其带来的DHTML,开始了新的历程.
+		当Microsoft和Netscape发布其各自浏览器的第4版时，Web开发人员有了一个新的选择：动态HTML（Dynamic HTML，DHTML）。与有些人想像的不同DHTML不是一个W3C标准，它更像是一种营销手段。实际上，DHTML结合了HTML、层叠样式表（Cascading Style Sheets，CSS）、JavaScript和DOM。这些技术的结合使得开发人员可以动态地修改Web页面的内容和结构。
+		最初DHTML的反响很好。不过，它需要的浏览器版本还没有得到广泛采用。尽管IE和Netscape都支持DHTML，但是它们的实现大相径庭，这要求开发人员必须知道他们的客户使用什么浏览器。而这通常意味着需要大量代码来检查浏览器的类型和版本，这就进一步增加了开发的开销。有些人对于尝试这种方法很是迟疑，因为DHTML还没有一个官方的标准。
+		当DHTML渐渐退出视野之后,我们的JavaScript并没有没落,由于W3C标准的不断推进,给JS带来了福音,现在编写跨浏览器的代码并不像当初那样困难了(尽管也存在一些问题).另外,XML与异步通信(XMLHttpRequest)在WEB上的的流行,浏览器对支持也越来越好,也使得JS可以大展其身手.当你使用JS操纵DOM的时候,就发现实现动态WEB应用程序已经不再有多遥远.
+		现在又有了XML(数据库)与异步通信的支持,可以使得应用程序在加载完成后,无需跳转,就可以返回给用户所有的内容了!
+	</p>
+	<h3>Ajax是多种技术的并称</h3>
+	<p>Ajax是Asynchronous JavaScript and XML（异步JavaScript和XML），它其实包含了很多技术,主要是下面所列的:</p>
+	<ul>
+		<li>ECMAScript,为什么不是JavaScript?因为JavaScript本身与Ajax一样,包含的也太多了!</li>
+		<li>DOM及相关内容:CSS,XHTML....</li>
+		<li>XML,及XML的一些扩展语言:XSL,SVG,XUL,XAML.....XML的扩展太多了</li>
+		<li>XMLHttpRequest对象,浏览器提供的一个可以用于异步通信的JavaScrip对象</li>
+		<li>服务器脚本的支持,没有服务器脚本在后台工作,也是没有办法实现"动态"的,之后就知道了...</li>
+	</ul>
+	<h2>关于XMLHttpRequest对象</h2>
+	<p>XMLHttpRequest对象其实最早是由MS提出来的,并在IE5中就提供了支持,当时,在IE5里它是一个ActiveXObject.
+		原先，XHR对象只在IE中得到支持（因此限制了它的使用），但是从Mozilla 1.0和Safari 1.2开始，对XHR对象的支持开始普及。这个很少使用的对象和相关的基本概念甚至已经出现在W3C标准中：DOM Level 3 加载和保存规约（DOM Level 3 Load and Save Specification）。现在，特别是随着Google Maps、Google Suggest、Gmail、Flickr、Netflix和A9等应用变得越来越炙手可热，XHR也已经成为事实上的标准。
+		与前面提到的方法不同，Ajax在大多数现代浏览器中都能使用，而且不需要任何专门的软件或硬件。实际上，这种方法的一大优势就是开发人员不需要学习一种新的语言，也不必完全丢掉他们原先掌握的服务器端技术。Ajax是一种客户端方法，可以与J2EE、.NET、PHP、Ruby和CGI脚本交互，它并不关心服务器是什么。尽管存在一些很小的安全限制，你还是可以现在就开始使用Ajax，而且能充分利用你原有的知识。
+	</p>
+	<h3>早期的异步通信实现</h3>
+	<p>虽然可以使用XHR对象来实现异步通信,但其实早期的开发人员曾经也尝试过使用隐藏帧等方法来实现异步通信!</p>
+	<pre>
+	//主页面中的JS代码
+	function getPages(url) {
+		var iframe =document.getElementById("hideIframe");//一个隐藏了的iframe标签
+		iframe.src = url;//将帧的src设置为传入的url,就可以将那个页面在后台载入
+	}
+	window.container = document.getElementById("oDiv");//加载内容的窗口
+	getPages("test.php?param=value");//可以通过QS传递参数
+	//在隐藏帧中加载的页面中JS代码
+	window.onload = function () {//当帧加载完毕后修改父窗口中的内容
+		parent.container.innerHTML = document.body.innerHTML;
+	}</pre>
+	<p>另外还有一种就是使用script标签</p>
+	<pre>
+	//HTML
+	&lt;script type="text/javascript" id="voidScript" src="void(0)"&gt; &lt;/script&gt;
+	//JS
+	function getScript(url) {
+		var script = document.getElementById("voidScript");
+		script.src =url;//这种方法必须加载JS脚本,并且脚本加载后就会执行
+	}
+	getScript("test.php?userName=abc");
+	</pre>
+	<h3>Ajax的问题</h3>
+	<p>Ajax并不是每个网站都需要的,尽管它有诸多优点:如可与XHTML无缝集成,轻量,无需插件..但其缺点也有不少:依赖JavaScript,影响浏览器默认行为如后退按钮及收藏夹等.另外,它最大的优点也是它最大的缺点:
+		我们以前总是告诉用户，Web应用是以一种请求/响应模式完成操作的，用户也已经接受了这种思想。但是用了Ajax，就不再有这个限制。我们可以只修改页面的一部分，如果用户没想到这一点，他们会尝试狂点某按钮,或刷新页面,所以要通过一些方法来让用户知道页面正在"异步"与服务器交互!
+	</p>
+<!--
+
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

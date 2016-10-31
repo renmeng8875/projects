@@ -1,0 +1,62 @@
+body {
+
+padding:100px;
+}
+* {
+padding:0;
+margin:0;
+}
+
+#oDiv {
+background:blue;
+width:200px;
+height:200px;
+border:0px ridge aqua;
+position:absolute;
+right:0px;
+bottom:0px;
+cursor:move;
+padding:10px;
+}
+#oDiv img {
+border:3px solid red;
+
+}
+#range {
+width:800px;
+height:400px;
+margin:10px auto;
+background:green;
+position:relative;
+}
+.moving {
+opacity:0.6;
+filter:alpha(opacity=60);
+}
+
+#oWindow {
+width:400px;
+border:1px solid teal;
+position:absolute;
+left:200px;
+top:200px;
+display:none;
+}
+#oWindow h3 {
+height:20px;
+line-height:24px;
+overflow:hidden;
+text-indent:10px;
+background:teal;
+color:white;
+font-size:13px;
+font-weight:normal;
+cursor:move;
+}
+#oWindowFrame {
+background:#DDD;
+height:200px;
+}
+
+
+

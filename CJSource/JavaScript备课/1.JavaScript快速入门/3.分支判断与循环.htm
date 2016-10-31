@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>4.分支判断与循环</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>分支判断与循环</h1>
+	<h2>分支结构</h2>
+	<ul>
+		<li>单一选择结构（if）</li>
+		<li>二路选择结构（if/else）</li>
+		<li>内联三元运算符 ?:</li>
+		<li>多路选择结构（switch）</li>
+	</ul>
+	<pre>
+	var condition = true;
+	if (condition) {
+		alert("我将出现！");
+	}
+	condition = false;
+	if (condition) {
+		alert("我不会出现！");
+	} else {
+		alert("我会出现！");
+	}
+	condition ="some string";
+	if (condition) {
+		alert("可以直接对任何数据类型进行if判断,在判断时计算会自动将其转换成布尔值!");
+	}
+	var val = condition?"当为true时我将被返回":"当为false时我将被返回";
+	alert(val);//将输出"当为true时我将被返回"
+	</pre>
+	<p>对于if..else语句，如果要执行的语句只有一条，可以不使用“｛｝”，但这种写法并不推荐.但确实这样可以简化代码:</p>
+	<pre>
+	var str ="one";
+	if (str=="one") alert("str的值为字符串'one' !");
+	else alert("not one");</pre>
+	<p>虽然JavaScript中没有if .... elseif 结构,但可以使用if...else的简写方式得到</p>
+	<pre>
+	//为了判断用户输入的成绩的范围,我们使用了多重嵌套的if .. else语句
+	var num = window.prompt("请输入XXX的成绩!","");
+	num *=1;//window.prompt方法始终只返回字符串,用这样的方法将其转换成数字
+	if (isNaN(num) && num) {//不能将其它值转换成数字时将返回NaN,可以用内置的isNaN判断值是否是NaN
+		alert("您输入的不是一个数字!");
+	} else {
+		if (num<=100 && num>=90) {
+			alert("Excellent!");
+		} else {
+			if (num <90 && num>=80) {
+				alert("Good!");
+			} else {
+				if (num < 80 && num >= 70) {
+					alert("So so!");
+				} else {
+					if (num < 70 && num >=60) {
+						alert("Be careful !!!");
+					} else {
+						if (num < 60 && num >= 0) {
+							alert("Oh, NO!");
+						} else {
+							alert("USB!");
+						}
+					}
+				}
+			}
+		}	
+	}
+	//上面的代码由于用了多重的if..else嵌套,显得非常的混乱,简化只须将else后的花括号去掉就行了
+	// if (...) {...}这算是一句
+	if (isNaN(num)) {
+		alert("您输入的不是一个数字!");
+	} else if (num<=100 && num>=90) {
+		alert("Excellent!");
+	} else if (num <90 && num>=80) {
+		alert("Good!");
+	} else if (num < 80 && num >= 70) {
+		alert("So so!");
+	} else if (num < 70 && num >=60) {
+		alert("Be careful !!!");
+	} else if (num < 60 && num >= 0) {
+		alert("Oh, NO!");
+	} else {
+		alert("USB!");
+	}
+	//看上去清晰多了,但要注意的是,JavaScript中没有elseif 这样的语法,所以上的else if之间是有空格的</pre>
+	<p>用于进行多次判断的switch语句</p>
+	<pre>
+	switch(condition) { //switch本来就是跳转的意思（又称为“开关”），所以switch语句就是判断情况，跳到符合的情况开始执行
+		case 4:
+			alert("c的值是4");
+		case 3:
+			alert("c的值肯定大于等于3");
+		case 2:
+			alert("c的值肯定大于等于2");
+		case 1:
+			alert("c的值肯定大于等于1");
+	}
+	//可以使用 break来只执行符合一个条件的语句
+	switch(condition) {
+		case 4:
+			alert("c的值是4");
+			break;
+		case 3:
+			alert("c的值是3");
+			break;
+		case 2:
+			alert("c的值是2");
+			break;
+		case 1:
+			alert("c的值是1");
+			break;
+	}
+	var condition="one";
+	switch(condition) {//switch不但可以用来判断数字,还可以判断字符串，甚至是不定的变量
+		case "one":
+			alert("condition的值是字符串'one' !");
+			break;
+		case "three":
+			alert("condition的值是字符串'three' !");
+			break;
+		case "four":
+			alert("condition的值是字符串'four' !");
+			break;
+		case "five":
+			alert("condition的值是字符串'five' !");
+			break;
+		default://当所有情况都不匹配时，将执行default语句后的
+			alert("我们要万无一失!condition什么都不是!");
+	}</pre>
+	<h2>循环</h2>
+	<p>循环用来指明当某些条件保持为真时要重复的动作。当条件得到满足时，就跳出循环语句。在 JavScript 中有四种循环结构可用。 </p>
+	<ul>
+		<li>由计数器控制的循环（for）</li>
+		<li>在循环的开头测试表达式（while）</li>
+		<li>在循环的末尾测试表达式（do/while）</li>
+		<li>对对象的每个属性都进行操作（for/in）</li>
+	</ul>
+	<p>for 语句指定了一个计数器变量，一个测试条件，以及更新该计数器的操作。在每次循环的重复之前，都将测试该条件。如果测试成功，将运行循环中的代码。如果测试不成功，不运行循环中的代码，程序继续运行紧跟在循环后的第一行代码。在执行该循环后，计算机变量将在下一次循环之前被更新。</p>
+	<pre>
+	for (var i=0;i<10;i++) {//for循环的圆括号里面须放三个句子,分别是1.初使化计数器 2.判断条件 3.更新计数器
+		alert("i当前的值为"+i);
+	}</pre>
+	<p>其实for循环语句完全可以这样写,下面的代码和上面的效果是一样的（虽然没有必要，但从这样的代码可清楚看出for循环如何工作的）</p>
+	<pre>
+	var i=0;//循环进行之前初始化i
+	for(;;) {//for语句括号中必须有三个语句，但可以为空语句
+		if (i<10) {//当条件为true时才执行代码
+			alert("i当前的值为"+i);
+		} else {//当条件为false时就退出循环
+			break;//使用break退出循环
+		}
+	}</pre>
+	<p>一个死循环最能说明while的工作方式了（但这样的错误我们绝不能在实际编程中出现）</p>
+	<pre>
+	while (true) {
+		alert("你关不掉我的！");//这就是网上那些所谓的高手写的“关不上的窗(周传雄新歌,力荐)”代码
+	}</pre>
+	<p>do..while循环与while循环不同之处在于它至少将代码块中的代码执行一次</p>
+	<pre>
+	do {
+		alert("我肯定会出现一次的");
+	} while (false);</pre>
+	<p>而对于for ... in循环，我们将在讲解数组和对象时使用</p>
+</body>
+</html>

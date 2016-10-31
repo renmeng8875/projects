@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>3.节点</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>节点</h1>
+	<h2>节点类型</h2>
+	<p>DOM定义了Node的接口以及许多种节点类型来表示节点的多个方面!</p>
+	<ul>
+		<li>Document——最顶层的节点，所有的其他节点都是附属于它的。</li>
+		<li>DocumentType——DTD引用（使用&lt;!DOCTYPE &gt;语法）的对象表现形式，例如&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" &gt;。它不能包含子节点。</li>
+		<li>DocumentFragment——可以像Document一样来保存其他节点。</li>
+		<li>Element——表示起始标签和结束标签之间的内容，例如&lt;tag &gt;&lt;/tag &gt;或者&lt;tag / &gt;。这是唯一可以同时包含特性和子节点的节点类型。</li>
+		<li>Attr——代表一对特性名和特性值。这个节点类型不能包含子节点。</li>
+		<li>Text——代表XML文档中的在起始标签和结束标签之间，或者CData Section内包含的普通文本。这个节点类型不能包含子节点。</li>
+		<li>CDataSection——&lt;![CDATA[ ]]&gt;的对象表现形式。这个节点类型仅能包含文本节点Text作为子节点。</li>
+		<li>Entity——表示在DTD中的一个实体定义，例如&lt;!ENTITY foo "foo"&gt;。这个节点类型不能包含子节点。</li>
+		<li>EntityReference——代表一个实体引用，例如&amp;quot;。这个节点类型不能包含子节点。</li>
+		<li>ProcessingInstruction——代表一个PI(处理指令)。这个节点类型不能包含子节点。</li>
+		<li>Comment——代表注释。这个节点类型不能包含子节点。</li>
+		<li>Notation——代表在DTD中定义的记号。这个很少用到，所以我们不会讨论。</li>
+	</ul>
+	<p>还定义了对应不同节点类型的12个常量.</p>
+	<ul>
+		<li>Node.ELEMENT_NODE (1)</li>
+		<li>Node.ATTRIBUTE_NODE (2)</li>
+		<li>Node.TEXT_NODE (3)</li>
+		<li>Node.CDATA_SECTION_NODE (4)</li>
+		<li>Node.ENTITY_REFERENCE_NODE (5)</li>
+		<li>Node.ENTITY_NODE (6)</li>
+		<li>Node.PROCESSING_INSTRUCTION_NODE (7)</li>
+		<li>Node.COMMENT_NODE (8)</li>
+		<li>Node.DOCUMENT_NODE (9)</li>
+		<li>Node.DOCUMENT_TYPE_NODE (10)</li>
+		<li>Node.DOCUMENT_FRAGMENT_NODE (11)</li>
+		<li>Node.NOTATION_NODE (12)</li>
+	</ul>
+	<strong>节点类型常量都是Node对象的属性，但是IE不支持Node对象,但是仍可以使用数值</strong>
+	<p>Node接口也定义了一些所有节点类型都包含的特性和方法。我们在下面的表格中列出了这些特性和方法：</p>
+	<table>
+	  <tbody>
+	    <tr>
+	      <td>特性/方法</td>
+	      <td>类型/返回类型</td>
+	      <td>说 明</td>
+	    </tr>
+	    <tr>
+	      <td>nodeName</td>
+	      <td>String</td>
+	      <td>节点的名字；根据节点的类型而定义,元素节点返回tagName，文本节点返回#text,属性节点返回属性名</td>
+	    </tr>
+	    <tr>
+	      <td>nodeValue</td>
+	      <td>String</td>
+	      <td>节点的值；根据节点的类型而定义.元素节点此属性为空，文本节点些属性即为节点中的字符串，属性节点返回属性值</td>
+	    </tr>
+	    <tr>
+	      <td>nodeType</td>
+	      <td>Number</td>
+	      <td>节点的类型常量值之一</td>
+	    </tr>
+	    <tr>
+	      <td>ownerDocument</td>
+	      <td>Document</td>
+	      <td>指向这个节点所属的文档</td>
+	    </tr>
+	    <tr>
+	      <td>firstChild</td>
+	      <td>Node</td>
+	      <td>指向在childNodes列表中的第一个节点</td>
+	    </tr>
+	    <tr>
+	      <td>lastChild</td>
+	      <td>Node</td>
+	      <td>指向在childNodes列表中的最后一个节点</td>
+	    </tr>
+	    <tr>
+	      <td>childNodes</td>
+	      <td>NodeList</td>
+	      <td>所有子节点的列表</td>
+	    </tr>
+	    <tr>
+	      <td>previousSibling</td>
+	      <td>Node</td>
+	      <td>指向前一个兄弟节点；如果这个节点就是第一个兄弟节点，那么该值为null</td>
+	    </tr>
+	    <tr>
+	      <td>nextSibling</td>
+	      <td>Node</td>
+	      <td>指向后一个兄弟节点；如果这个节点就是最后一个兄弟节点，那么该值为null</td>
+	    </tr>
+	    <tr>
+	      <td>hasChildNodes()</td>
+	      <td>Boolean</td>
+	      <td>当childNodes包含一个或多个节点时，返回真</td>
+	    </tr>
+	    <tr>
+	      <td>attributes</td>
+	      <td>NamedNodeMap</td>
+	      <td>包含了代表一个元素的特性的Attr对象；仅用于Element节点</td>
+	    </tr>
+	    <tr>
+	      <td>appendChild(<em>node</em>)</td>
+	      <td>Node</td>
+	      <td>将<em>node</em>添加到childNodes的末尾</td>
+	    </tr>
+	    <tr>
+	      <td>removeChild(<em>node</em>)</td>
+	      <td>Node</td>
+	      <td>从childNodes中删除<em>node</em></td>
+	    </tr>
+	    <tr>
+	      <td>replaceChild
+	        (<em>newnode</em>,<em>oldnode</em>)</td>
+	      <td>Node</td>
+	      <td>将childNodes中的<em>oldnode</em>替换成<em>newnode</em></td>
+	    </tr>
+	    <tr>
+	      <td>insertBefore
+	        (<em>newnode</em>,<em>refnode</em>)</td>
+	      <td>Node</td>
+	      <td>在childNodes中的<em>refnode</em>之前插入<em>newnode</em></td>
+	    </tr>
+	  </tbody>
+	</table>
+	<p>除节点外，DOM还定义了一些助手对象，它们可以和节点一起使用，但不是DOM文档必有的部分。</p>
+	<ul>
+		<li>NodeList——节点数组，按照数值进行索引；用来表示一个元素的子节点。比如childNodes。NodeList有个length属性表示节点数量</li>
+		<li>NamedNodeMap——同时用数值和名字进行索引的节点表；用于表示元素特性。比如元素的attributes。NamedNodeMap对象也有一个length属性来指示它所包含的节点的数量。</li>
+	</ul>
+	<p>这些助手对象为处理DOM文档提供附加的访问和遍历方法。</p>
+	<h2>属性节点</h2>
+	<p>正如前面提到的，即便Node接口已具有attributes方法，且已被所有类型的节点继承，然而，只有Element节点才能有特性。Element节点的attributes属性其实是NamedNodeMap，它提供一些用于访问和处理其内容的方法：</p>
+	<ul>
+		<li>getNamedItem(name)——返回nodeName属性值等于name的节点；</li>
+		<li>removeNamedItem(name)——删除nodeName属性值等于name的节点；</li>
+		<li>setNamedItem(node)——将node添加到列表中，按其nodeName属性进行索引；</li>
+		<li>item(pos)——像NodeList一样，返回在位置pos的节点；</li>
+	</ul>
+	<strong>请记住这些方法都是返回一个Attr节点，而非特性值。</strong>
+	<p>当NamedNodeMap用于表示特性时，其中每个节点都是Attr节点，它的nodeName属性被设置为特性名称，而nodeValue属性被设置为特性的值。示例：</p>
+	<pre>
+	&lt;p id="p1" style="background-color:red;" title="P!!!"&gt;Some Text!&lt;/p&gt;
+	var p1 = document.getElementById("p1");
+	//访问ID属性
+	alert(p1.attributes.getNamedItem("id")).nodeValue;
+	//也可以用数值来访问ID属性
+	alert(p1.attributes.item(0)).nodeValue;
+	//也可以改变它的值
+	p1.attributes.getNamedItem("id").nodeValue = "newP1";</pre>
+	<p>Attr节点也有一个完全等同于（同时也完全同步于）nodeValue属性的value属性，并且有name属性和nodeName属性保持同步。我们可以随意使用这些属性来修改或变更特性。但这些方法都比较复杂，所以DOM又定义了三个元素方法来帮助访问特性：</p>
+	<ul>
+		<li>getAttribute(name)——等于attributes.getNamedItem(name).value</li>
+		<li>setAttribute(name, newValue)——等于attribute.getNamedItem(name).value = newValue</li>
+		<li>removeAttribute(name)——等于attributes.removeNamedItem(name)</li>
+	</ul>
+	<h3>NodeList</h3>
+	<p>事实上我们早接触过NodeList了</p>
+	<pre>
+	var allTags = document.getElementsByTagName("*");
+	alert(allTags.item(1).tagName);//访问了第二个元素
+	alert(allTags[0]);//在JavaScript可以这样访问第一个元素，但这只能是JavaScript里正常运行</pre>
+	<p>getElementsByTagName与getElementsByName都返回NodeList，可以使用item(index)方法访问其中的内容，在JavaScript中还可使用数组形式的下标访问！</p>
+	<h2>创建和操纵节点</h2>
+	<p>迄今为止，已经学过了如何访问文档中的不同节点，不过这仅仅是使用DOM所能实现的功能中的很小一部分。还能添加、删除、替换（或者其他操作）DOM文档中的节点。正是这些功能使得DOM具有真正意义上的动态性。</p>
+	<h3>创建新节点</h3>
+	<p>DOM Document（文档）中有一些方法用于创建不同类型的节点，即便在所有的浏览器中的浏览器document对象并不需要全部支持所有的方法。下面的表格列出了包含在DOM Level 1中的方法，并列出不同的浏览器是否支持项。</p>
+	<table>
+	  <tbody>
+	    <tr>
+	      <td>方  法</td>
+	      <td>描  述</td>
+	      <td>IE</td>
+	      <td>MOZ</td>
+	      <td>OP</td>
+	      <td>SAF</td>
+	    </tr>
+	    <tr>
+	      <td>createAttribute
+	        (<em>name</em>)</td>
+	      <td>用给定名称<em>name</em>创建特性节点</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>－</td>
+	    </tr>
+	    <tr>
+	      <td>createCDATASection
+	        (<em>text</em>)</td>
+	      <td>用包含文本<em>text</em>的文本子节点创建一个CDATA Section</td>
+	      <td>－</td>
+	      <td>×</td>
+	      <td>－</td>
+	      <td>－</td>
+	    </tr>
+	    <tr>
+	      <td>createComment(<em>text</em>)</td>
+	      <td>创建包含文本<em>text</em>的注释节点</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	    </tr>
+	    <tr>
+	      <td>createDocumentFragment()</td>
+	      <td>创建文档碎片节点</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	    </tr>
+	    <tr>
+	      <td>createElement
+	        (<em>tagname</em>)</td>
+	      <td>创建标签名为<em>tagname</em>的元素</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	    </tr>
+	    <tr>
+	      <td>createEntity
+	        Reference(<em>name</em>)</td>
+	      <td>创建给定名称的实体引用节点</td>
+	      <td>－</td>
+	      <td>×</td>
+	      <td>－</td>
+	      <td>－</td>
+	    </tr>
+	    <tr>
+	      <td>createProcessing
+	        Instruction(<em>target</em>,
+	        <em>data</em>)</td>
+	      <td>创建包含给定<em>target</em>和<em>data</em>的PI节点</td>
+	      <td>－</td>
+	      <td>×</td>
+	      <td>－</td>
+	      <td>－</td>
+	    </tr>
+	    <tr>
+	      <td>createTextNode(<em>text</em>)</td>
+	      <td>创建包含文本<em>text</em>的文本节点</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	      <td>×</td>
+	    </tr>
+	  </tbody>
+	</table>
+	<p>注：IE = Windows的IE 6；MOZ = 任意平台的Mozilla 1.5；OP=任意平台的Opera 7.5；SAF=MacOS的Safari 1.2</p>
+	<p>最常用到的几个方法是：createDocumentFragment()、createElement()和createText- Node()；其他的一些方法要么就是没什么用（createComment()），要么就是浏览器的支持不够，目前还不太能用。</p>
+	<p>动态创建一个段落示例</p>
+	<pre>
+	var p = document.createElement("p");//创建一个元素节点，传入标签名
+	var txt = document.createTextNode("创建文本节点,传参数即是文本内容");
+	p.appendChild(txt);//将txt所引用的文本节点插入p到p的最后面(在这里p是空的)
+	//直到现在，页面不会出现任何内容，必须将创建的节点插入到文档中
+	document.body.appendChild(p);//p将出现在最后
+	</pre>
+	<p>移动，删除节点方法及注意事项——appendChild,removeChild,replaceChild,insertBefore</p>
+	<pre>
+	var p1 = document.getElementById("p1");
+	document.body.appendChild(p1);//p1将会被作为body的最后一个子节点，然而页面上仍只有一个p
+	p1.parentNode.removeChild(p1);//removeChild必须是要删除的节点的父节点调用
+	//p1将会从页面上消失，然而它并没有完全消失，我们还可以再将其插入文档
+	document.body.appendChild(p1);//因为变量p1包含了节点的引用
+	var p2 = document.getElementById("p2");
+	p2.parentNode.replaceChild(p1,p2);//p2将会被替换成p1，p2将消失
+	//而p1将从原来的位置移到p2的位置</pre>
+	<h3>克隆节点——cloneNode</h3>
+	<p>基于上面的原因，DOM为我们提供了一个克隆节点的方法用于生成一个节点的副本</p>
+	<pre>
+	var p1 = document.getElementById("p1");
+	var p2 = p1.cloneNode();
+	document.body.appendChild(p2);//页面上将会多出一个段落,不过段落中什么都没有
+	p2 = p1.cloneNode(true);//使用参数true表示克隆节点时包含子节点
+	document.body.appendChild(p2);</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

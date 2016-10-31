@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3
+END
+CircleTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/CircleTest.java
+END
+ThreadScope.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/ThreadScope.java
+END
+ThreadScopeTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/repo/!svn/ver/5003/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/ThreadScopeTest.java
+END
+DefaultBeanFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/DefaultBeanFactory.java
+END
+SingletonTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/SingletonTest.java
+END
+DependencyInjectByStaticFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/DependencyInjectByStaticFactory.java
+END
+HelloImpl3.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/repo/!svn/ver/5002/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/HelloImpl3.java
+END
+HelloImpl4.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/HelloImpl4.java
+END
+HelloImpl5.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/HelloImpl5.java
+END
+DependencyInjectTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/DependencyInjectTest.java
+END
+DependencyCheckTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/DependencyCheckTest.java
+END
+MethodInjectTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/MethodInjectTest.java
+END
+BeanDefinition.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/BeanDefinition.java
+END
+SingletonClassLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/SingletonClassLoader.java
+END
+DependencyInjectByInstanceFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/DependencyInjectByInstanceFactory.java
+END
+AutowireBeanTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/AutowireBeanTest.java
+END
+BeanDifinitionRegister.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/BeanDifinitionRegister.java
+END
+BeanFatoryTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/BeanFatoryTest.java
+END
+SingletonBeanRegister.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/SingletonBeanRegister.java
+END
+MoreDependencyInjectTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter3/MoreDependencyInjectTest.java
+END

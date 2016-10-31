@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/required
+END
+RequiredUserServiceImplWithRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 189
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/required/RequiredUserServiceImplWithRuntimeException.java
+END
+RequiredUserServiceImplWithSuccess.java
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/required/RequiredUserServiceImplWithSuccess.java
+END
+RequiredAddressServiceImplWithRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 192
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/required/RequiredAddressServiceImplWithRuntimeException.java
+END
+RequiredAddressServiceImplWithSuccess.java
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/src/cn/javass/spring/chapter9/service/impl/required/RequiredAddressServiceImplWithSuccess.java
+END

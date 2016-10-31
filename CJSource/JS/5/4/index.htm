@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery事件</title>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+	var nodes=$("li:contains(4)");
+	/*nodes.click(function (evt) {
+		fn.call(this,evt,nodes);
+	});*/
+	//nodes.flag="Nodes!!!";
+	/*nodes.bind("click",nodes,fn);*/
+	
+	//nodes.click();
+	//nodes.trigger("click");
+	
+	//nodes.unbind();
+	//nodes.click();
+	
+	/*nodes.bind("click",function () {
+		alert("Click!!!");
+	});
+	nodes.bind("mouseout",function () {
+		alert("Out!!!");
+	});*/
+	/*nodes.bind({
+		click:function () {
+			console.log("Click");
+		},
+		dblclick:function () {
+			console.log("Double Click");
+		}
+	});*/
+	
+	/*$("a").bind("click",function (evt) {
+		//alert(this.innerHTML);
+		evt.preventDefault();
+		evt.stopPropagation();
+	});*/
+	/*document.onclick=function (evt) {
+		alert(evt);
+	};*/
+	
+	/*var flag=true;
+	$("#googleLink").click(function (evt) {
+		evt.preventDefault();
+		if (!flag) return;
+		$("#googleFrame").attr("src",this.href);
+		flag=false;
+	});*/
+	/*$("#googleLink").one("click",function (evt) {
+		evt.preventDefault();
+		$("#googleFrame").attr("src",this.href);
+	});*/
+	
+	/*$("li:contains('News')").mouseover(function() {
+		$(this).addClass("highlight");
+	});*/
+	/*$("li:contains('News')").live("mouseover",function() {
+		$(this).addClass("highlight");
+		
+	});
+	
+	var o=$(document.body);
+	alert(o.selector);
+	//live方法仅对有selector的jQuery对象有效
+	$(document.body).live("click",function () {
+		alert(this.tagName);
+	});
+	
+	
+	$("#newsList").append("<li>List 5 News</li>");*/
+	
+	$("#stopSpan").mouseover(function (evt) {
+		evt.stopPropagation();
+		return false;
+	});
+	
+	/*$("#hoverList").mouseover(function () {
+		$("#oDiv").show();
+	}).mouseout(function () {
+		$("#oDiv").hide();
+	});*/
+	
+	$("#hoverList").hover(function () {
+		$("#oDiv").show();
+	},function () {
+		$("#oDiv").hide();
+	});
+	/*$("#header").toggle(function () {
+		alert("1轮到我了！");
+	},function () {
+		alert("2轮到我了！");
+	},function () {
+		alert("3轮到我了！");
+	});*/
+	
+	/*$("#header").toggle(function () {
+		$("ul").show();
+	},function () {
+		$("ul").hide();
+	});*/
+	var flag=true;
+	$("#header").click(function () {
+		flag=!flag;
+		$("ul").toggle(flag);
+	});
+	
+});
+
+function fn(evt) {
+	alert(evt.data.flag);
+}
+</script>
+<style type="text/css">
+.highlight {
+background:#EEE;
+}
+</style>
+</head>
+<body>
+<h1 id="header">jQuery事件</h1>
+
+<ul id="newsList">
+	<li>List 1 News</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li id="hoverList">List 4
+		<div id="oDiv" style="display:none;left:50px;width:100px;height:100px;position:absolute;top:150px;background:yellow">
+		DIV!!!!<span id="stopSpan">Content</span>
+		</div>
+	</li>
+</ul>
+
+<ul>
+	<li>List 1</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li>List 4 News</li>
+</ul>
+
+</iframe>
+</body>
+</html>

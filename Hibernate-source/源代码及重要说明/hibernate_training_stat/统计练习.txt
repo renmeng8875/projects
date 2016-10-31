@@ -1,0 +1,56 @@
+有如下实体模型：
+
+学生 *-----1 班级，多对一双向关联
+学生 1<-----* 成绩 *----->1 课程，成绩与学生之间是单向多对一关联；成绩与课程之间是单向多对一关联
+
+实体模型，可以参见代码，其数据库表如下：
+
+mysql> desc t_classes;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
+| classesNo | varchar(255) | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+
+mysql> desc t_student;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(255) | YES  |     | NULL    |                |
+| studentNo | varchar(255) | YES  |     | NULL    |                |
+| classesid | int(11)      | YES  | MUL | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+
+mysql> desc t_course;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(255) | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+
+mysql> desc t_grade;
++---------+---------+------+-----+---------+----------------+
+| Field   | Type    | Null | Key | Default | Extra          |
++---------+---------+------+-----+---------+----------------+
+| id      | int(11) | NO   | PRI | NULL    | auto_increment |
+| grade   | int(11) | YES  |     | NULL    |                |
+| course  | int(11) | YES  | MUL | NULL    |                |
+| student | int(11) | YES  | MUL | NULL    |                |
++---------+---------+------+-----+---------+----------------+
+
+运行：JoinTest.testInitData()之后，产生如下数据：
+在文件t_classes.txt/t_course.txt/t_grade.txt/t_student.txt中
+
+请在此基础上，统计出每门课程成绩最高的学生。
+练习执行步骤：
+1、创建数据库hibernate_training_stat
+2、执行ExportToDB程序
+3、执行JoinTest.testInitData()
+4、练习：填充JoinTest.testQuery()方法中的HQL语句,并能正确执行！
+
+要求列出：课程名称、学生名称、分数、所属班级名称
+
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>9.定位</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>定位</h1>
+	<h2>元素尺寸</h2>
+	<p>获取元素尺寸可以使用下面几种方式</p>
+	<ul>
+		<li>元素的style属性width，height，但这些属性往往返回空值，因为它们只能返回使用行内style属性定义在元素上的样式</li>
+		<li>元素的currentStyle属性width，height（IE），getComputedStyle(obj,null)返回对象的width，height，这样可以获取元素的实际CSS定义的宽度和高度，但当元素没有使用CSS定义外观时，虽然元素仍然有大小（只要其中有字符或其它元素），这些属性的返回值是不确定的，如IE返回auto,而火狐则返回一个看似理想的值。</li>
+		<li>对象的clientWidth和clientHeight属性给出元素的可视部分的宽度和高度,当有滚动条时，只返回可见区域大小,对于块级元素,将返回元素的所设置的宽度和高度加上填充(padding)，这一点几乎所有浏览器都达成一致.但当块级元素并没有设置宽和高以及填充时,就出现不同了,谷歌浏览器和火狐浏览器的报告一致,IE报告都为0,而Opera则有所偏差.再将这两个属性应用到行内元素上,IE和火狐都报告为0,谷歌报告了一个看似理想的数字,而Opera竟会一个为正另一个负!</li>
+		<li>对象的offsetWidth和offsetHeight属性用来取得对象在页面中的实际所占区域大小(所设置的宽高加边框加填充，当有滚动条时还会算上滚动条),似乎这个属性对于设置了宽和高的块级元素几乎没有什么浏览器兼容问题,但不得不说的是火狐的一个BUG.火狐浏览器有个可将页面放大缩小的功能,当将页面缩小后,对象的offsetWidth和offsetHeight属性会发生细微的变化-变小几像素!尽管这对JS编程来讲几乎没影响,但似乎这个BUG也太明显了.这两个属性变非总是那么让人信任,当对象并没设置宽高或它是一个行内元素时,它的报告就显得相当复杂,不同浏览器都有自己一套标准(但是仍然可以肯定的是这两个属性报告的仍然是该元素占据的的空间大小,只不过会因字体和空格的默认大小不同而不同),最让人摸不着头脑的是Opera,对于一个body的子块级元素,当body和它自身没设置宽高时,Opera报告的它的宽度相当大,6千多像素!</li>
+		<li>还有就是scrollWidth和scrollWidth了,就目前来讲,对于一个没有滚动条和溢出的元素,其它浏览器对这个属性的报告还算有规律:对象的clientWidth+border=scrollWidth.对象的clientHeight+border=scrollHeight;只有IE报告有问题!它以元素中的内容为准,如果元素内没有其它内容,虽然IE并不会报0,但会报告一个非常小的值!再看看当元素有滚动条时怎么样吧!唯一值得高兴的是,它们对有滚动条的元素的clientWidth和clientHeight都报告一致(但仍有一点要注意,那就是火狐的一BUG,页面缩放功能带来的郁闷,而且这次变化非常大).而对于scrollWidth和scrollHeight真是五花八门:先说好的,尽管各不一样,但它们对scrollWidth不知为什么,相差不大,那么坏的就是,scrollHeight属性就相差太大了,没规律可循!(scrollWidth和scrollHeight属性返加对象内容的实际所需空间,当元素设置了overflow值为scroll或hidden之类时,scrollWidth和scrollHeight属性就派上用场了,可惜的是它问题太多了)</li>
+	</ul>
+	<p>综上所述，对于一个在CSS中定义了大小的块级元素，获取它的实际大小是很简单的，但对于没有定义宽度和高度，或是一行内元素时，则没有跨浏览器的解决方案可以获取它的实际大小！</p>
+	<h3>窗口视口宽度和高度</h3>
+	<p>对于窗口视口（视口指显示页面的那部分）的大小，Mozilla提供了window.innerWidth与window.innerHeight两个属性，而IE则没有相对应的属性，但可以使用document.documentElement.clientWidth与document.documentElement.clientHeight 两个属性来获取！另外，对于IE6之前的版本，则需要使用document.body的clientWidth与clientHeight属性！</p>
+	<pre>
+	//获取视口大小，依次为火狐，IE6及IE6以上的版本，IE6以下的版本
+	var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	//事实上，IE版本低于6的浏览器几乎不存在了
+	//而同时其实火狐也支持通过document.documentElement的clientWidth,clientHeight属性获取视口大小
+	//完全可以不做任何浏览器检测
+	w = document.documentElement.clientWidth;
+	h = document.documentElement.clientHeight;</pre>
+	<h2>元素边框宽度</h2>
+	<p>获取元素边框宽度可以使用下面几种方式</p>
+	<ul>
+		<li>元素style属性的borderWidth，但同样它只能返回使用HTML行内style属性定义的边框样式</li>
+		<li>使用currentStyle属性或getComputedStyle方法，可以获取元素CSS定义的实际边框样式，如果CSS没有定义元素的边框，一般的元素是没有边框的，但部分元素，如表单控件，仍然具有默认的边框宽度！对于此类情况，也是不能依靠这种方法来获取元素的边框大小的！</li>
+		<li>对象的clientLeft和clientTop属性。不能不说clientLeft和clientTop的名字起的太奇怪了,事实上它们的名字更应该这样:clientBorderLeftWidth和clientBorderTopWidth(难道是太长了的原因?);更奇怪的是,它们只能取得设置在元素上的左边框和上边框的粗细,而没有返回右边和下边的边框宽度的属性!另外,对于文档根元素(documentElement),在IE中它有默认的两像素边框宽度,而其它浏览器中报告为0.</li>
+	</ul>
+	<h2>元素坐标</h2>
+	<p>获取元素坐标方法：</p>
+	<ul>
+		<li>元素style属性的left,top属性，不但这种方法仅适用于使用HTML style属性声明样式的元素，并且只有当元素使用定位（position设置为relative,absolute,fixed,但不包含static）时，才会存在这些值</li>
+		<li>元素currentStyle属性或getComputedStyle方法返回的Style对象的left,top属性，但这种方法仅对采用定位的元素有作用</li>
+		<li>元素的offsetLeft与offsetTop属性返回元素在页面中相对于父元素的坐标。一般对于进行了定位的元素（即position为不是static的值或没有设置），这两个属性的返回值为CSS中定义的元素的left,top值，当其自身有边距时（margin），还会加上边距。而对于没有采用定位的元素则显得比较复杂，我们只能考虑下设置了宽度和高度的块级元素，因为没有设置宽高，及行内元素，没有办法获取它的宽高，即使能获取它的left，top值也显得无意义了。对于没有采用定位的块级元素，offsetLeft与offsetTop属性将返回其自身的margin+父元素的padding。元素还有个offsetParent属性返回元素的相对定位的父元素，当使用定位时，各个浏览器一致，并且和CSS里设置的吻合，当不使用定位时，父元素是WHO成了问题，各个浏览器认识不一样，IE报告为其父节点，而其它浏览器则报告为body，当然，这次IE正确了。另外，对于表格中的一些元素，不应对其进行定位！</li>
+	</ul>
+	<h3>具有滚动条时的定位</h3>
+	<p>scrollLeft和scrollTop,它们用来获得那些具有滚动条的元素滚动条滚动的距离,而没有滚动条的元素,它总返回0.可以这样认为,这两个属性报告了有滚动条元素中未显示的左一部分的宽(scrollLeft)和上一部分的高(scrollTop).而对于页面的滚动条，则取documentElement的scrollLeft与scrollTop属性，但是对于谷歌浏览器，它会将页面的滚动条视为document.body的！</p>
+	<h2>Event对象与定位相关的属性</h2>
+	<p>clientX与clientY返回事件发生时鼠标在视口中的坐标；offsetX与offsetY返回事件发生时鼠标相对于目标对象的坐标，以目标对象右上角为坐标原点，而这两个属性的W3C DOM版本则为layerX与layerY；pageX与pageY返回事件发生时鼠标相对于页面的坐标，虽然这个属性IE不支持，但仍然有补救的余地！</p>
+	<pre>
+	//不要在每个事件处理函数中进行判断，而要善于利用之前的fixEvent函数！
+	function fixEvent(evt) {
+		if (!evt.target) {
+			//函数中已有的部分
+			evt.pageX = evt.clientX+document.documentElement.scrollLeft;
+			evt.pageY = evt.clientY+document.documentElement.scrollTop;
+			//可以将事件发生时鼠标在视口中的坐标加上页面滚动的偏移量得出pageX与pageY
+			evt.layerX = evt.offsetX;
+			evt.layerY = evt.offsetY;
+		}
+		return evt;
+	}</pre>
+	<h2>拖动</h2>
+	<p>最简单的拖动脚本——拖动的基本原理</p>
+	<pre>
+	window.onload = function () {
+		var oDiv = document.getElementById("oDiv");//oDiv必须使用CSS定位
+		oDiv.onmousedown = drag;
+		function drag(evt) {
+			evt = evt || window.event;
+			this.onmouseup = drop;
+			this.onmousemove = moveDiv;
+			this.offset = {
+				x:evt.offsetX || evt.layerX,
+				y:evt.offsetY || evt.layerY
+			};
+		}
+		function moveDiv(evt) {
+			evt = evt || window.event;
+			this.style.left = evt.clientX-this.offset.x+"px";
+			this.style.top = evt.clientY-this.offset.y+"px";
+		}
+		function drop(evt) {
+			this.onmouseup = null;
+			this.onmousemove = null;
+		}
+	};</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

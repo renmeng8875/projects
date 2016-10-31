@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript">
+	window.onload = function () {
+		var fm1 = document.fm1;
+		fm1.fb.onfocus =function () {
+			window.status += "Focus";
+			
+			this.focus();
+		};
+		fm1.fb.onblur = function () {
+			window.status += "Blur";
+			this.blur();
+		};
+	};
+	document.ondblclick = function () {
+		var fm1 = document.fm1;
+		
+		var sel = fm1.sel;
+		//var options =sel.getElementsByTagName("options");
+		var opt = new Option("text","val");
+		sel.options[3]=null;
+		/*
+		try {
+			sel.add(opt,sel.options[2]);//FF
+		} catch(e) {
+			sel.add(opt,2);
+		}
+		
+		try {
+			sel.add(opt);//IE
+		} catch(e) {
+			sel.add(opt,null);//FF
+		}*/
+	};
+</script>
+<style type="text/css">
+	body {
+		background:white;
+	}
+
+</style>
+</head>
+<body>
+<form name="fm1">
+	<input type="text" name="fb" />
+	Select:
+	<select name="sel">
+		<option value="1" selected="selected">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+</form>
+</body>
+</html>

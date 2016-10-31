@@ -1,0 +1,48 @@
+/*******************************************************************************
+* Copyright 2008 Rafael Marques Martins
+*
+* This file is part of HermesJS.
+* 
+* HermesJS is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+* 
+* HermesJS is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with HermesJS; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+* 
+*******************************************************************************/
+({
+	//put you classes here
+    modules : {
+		//format:
+		// 'className' : 'dependencyFile1,dependencyFile2,dependencyFile3'
+        'FormValidator'	  : 'package.FormValidator',
+        'Cookie' 		  : 'modules.Cookie',
+        'QueryString'  	  : 'modules.QueryString',
+        'ScriptExtractor' : 'modules.ScriptExtractor'
+    },
+	
+	//your functions here
+    functions : {
+		//format:
+		// 'functionName' : 'dependencyFile1,dependencyFile2,dependencyFile3'
+        '$' 	 : 'lib.jquery.jquery',
+		'$.ajax' : 'lib.jquery.jquery',
+		'$.get'  : 'lib.jquery.jquery'
+    },
+	
+	//and use this packages to configure sets of files
+	//any module/class or package can use another package as a dependency file
+	packages : {
+		'example1' : 'modules.Cookie,modules.QueryString',
+		'example2' : 'package.example1,modules.prototypeUtils',
+		'FormValidator' : 'lib.jquery.jquery,modules.FormValidator'
+	}
+})

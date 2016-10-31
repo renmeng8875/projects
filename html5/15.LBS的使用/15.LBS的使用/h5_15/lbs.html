@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="lbs">
+	</div>
+	<button onclick="getLBS()">获取我的位置</button>
+	<script type="text/javascript">
+		function getLBS(){
+			if(navigator.geolocation)	
+				navigator.geolocation.getCurrentPosition(showPosition);
+			else
+				alert("不支持LBS");
+		}
+		
+		function showPosition(p){
+			var str ="你的坐标：维度" + p.coords.latitude + ";经度" +p.coords.longitude;
+			
+			document.getElementById("lbs").innerHTML = str;
+		}
+	</script>
+</body>
+</html>

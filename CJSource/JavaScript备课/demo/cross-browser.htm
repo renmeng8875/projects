@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Cross-Browser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript" src="../js/mytools.js"></script>
+<script type="text/javascript">
+	var Browser = {
+		isIE:navigator.userAgent.indexOf("MSIE")>-1 && !window.opera,
+		isGecko:navigator.userAgent.indexOf("Gecko")>-1 && !window.opera,
+		isKHTML:navigator.userAgent.indexOf("KHTML")>-1,
+		isOpera:navigator.userAgent.indexOf("Opera")>-1
+	};
+	window.onload = function () {
+	};
+	function print_r(obj) {
+		var str = "";
+		for (var i in obj) {
+			str += i+" : "+obj[i];
+		}
+		document.write(str);
+	}
+</script>
+<style type="text/css">
+* {
+	font-size:12px;
+	margin:0;
+	padding:0;
+}
+html {
+}
+body {
+	background:white;
+}
+div {
+	width:100px;
+	height:100px;
+	background:blue;
+	color:red;
+	position:absolute;
+	left:100px;
+	top:100px;
+}
+#div2 {
+background:yellow;
+}
+a {
+display:block;
+width:200px;
+height:20px;
+background:pink;
+}
+a:hover {
+background:red;
+}
+</style>
+</head>
+<body>
+	<div id="oDiv">A</div>
+	<div id="div2">B</div>
+	<a href="###">AAA</a>
+	
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="#link1">link1</a><br />
+	<a href="#link2">link2</a><br />
+	<a href="#link3">link3</a><br />
+	
+	<script type="text/javascript">
+		window.onhashchange = function(e){
+			console.log(e.newURL);
+			console.log(e.oldURL);
+		};
+	</script>
+</body>
+</html>

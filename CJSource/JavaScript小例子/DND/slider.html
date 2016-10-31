@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Slider</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" src="../base.js"></script>
+  <script type="text/javascript" src="js/dnd.js"></script>
+  <script type="text/javascript" src="js/slider.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/slider.css">
+</head>
+<body>
+<h1>Slider</h1>
+<div id="scale">
+	<img src="images/slider_knob.gif" id="slider_knob" alt="Slider" />
+</div>
+
+<div id="volume">
+	<h6 id="vol_show">音量</h6>
+	<div id="vol_slider">
+		<a href="javascript:void(0);" id="vol_knob"></a>
+	</div>
+</div>
+<script type="text/javascript">
+
+var scale=$("scale"),
+	slider_knob=$("slider_knob");
+
+var s=new Slider({
+	knob:slider_knob,
+	range:scale,
+	mode:DND.MODE_H,
+	values:[0,100],
+	onChange:function (v) {
+		window.status=v;
+	}
+});
+s.setValue(50);
+
+var vol=new Slider({
+	knob:$("vol_knob"),
+	range:$("vol_slider"),
+	mode:DND.MODE_V,
+	values:[0,100],
+	onChange:function (v) {
+		$("vol_show").innerHTML="音量："+(100-v);
+	}
+});
+
+
+</script>
+</body>
+</html>

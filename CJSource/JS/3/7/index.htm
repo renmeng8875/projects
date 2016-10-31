@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>事件(下)</title>
+<!--script type="text/javascript">
+window.onload=function () {
+	var oDiv=document.getElementById("oDiv"),
+			para=document.getElementById("para");
+	/*oDiv.onclick=function (evt) {
+		evt=evt || window.event;
+		//alert("X:"+evt.offsetX+"\nY:"+evt.offsetY);
+		//alert("X:"+evt.layerX+"\nY:"+evt.layerY);
+		//alert(evt.target);
+		var target=evt.target || evt.srcElement;
+		alert(this.tagName);//oDiv.tagName
+		alert(target.tagName);//要看运行时事件由哪个触发的
+		//alert(evt.srcElement.tagName);
+
+	};*/
+	//Netscape 捕获(从大范围向小范围内缩)
+	//IE	冒泡(从小范围向大范围扩展)
+	//document.onclick=
+	document.addEventListener('click',function (evt) {
+		evt=fixEvt(evt);
+		alert("Document:"+evt.target.tagName);
+	},true);
+	//oDiv.onclick=
+	oDiv.addEventListener('click',function (evt)  {
+		evt=fixEvt(evt);
+		alert("DIV:"+evt.target.tagName);
+		//evt.stopPropagation();
+		//evt.cancelBubble=true;
+	},true);
+	//para.onclick=
+	para.addEventListener('click',function (evt) {
+		evt=fixEvt(evt);
+		alert("P:"+evt.target.tagName);
+		//停止事件流,事件不再扩散(W3C)
+		//evt.cancelBubble=true;
+		//evt.stopPropagation();
+	},true);
+};
+
+function fixEvt(evt) {
+	//修正事件对象在各个浏览器中的不同
+	evt=evt || window.event;
+	if (!evt.target) {//IE
+		evt.target=evt.srcElement;
+		evt.layerX=evt.offsetX;
+		evt.layerY=evt.offsetY;
+		evt.stopPropagation=function () {
+			this.cancelBubble=true;
+		};
+	}
+	return evt;
+}
+document.onmousedown=function (evt) {
+			//alert("pageY:"+evt.pageY+"\nclientY"+evt.clientY);
+	//alert(arguments.length);
+	//alert(this);//document
+	//alert("Click!!");
+	//alert(evt);//W3C
+	//alert(event);//IE
+	//if (!evt) evt=event;//在IE下面evt为undefined
+	evt = evt || event;
+	/*if ((window.event && evt.button==4)  || evt.button==1) { //检测是不是按下了中键
+		alert("按下了中键");
+	}*/
+	//alert("X:"+evt.clientX+"\nY:"+evt.clientY);
+	//alert("X:"+evt.screenX+"\nY:"+evt.screenY);
+};
+//document.onclick();
+document.onkeypress=function (evt) {
+	evt=evt || event;
+	//alert(String.fromCharCode(evt.keyCode));
+	//alert(String.fromCharCode(evt.charCode));
+};
+</script-->
+<script type="text/javascript" defer="defer">
+	/*
+window.addEventListener('load',,false);
+
+window.addEventListener('load',,false);
+*/
+
+//window.attachEvent('onload',init1);
+//window.attachEvent('onload',init2);
+
+/*
+function addEvent(obj,evtype,fn) {
+	if (obj.addEventListener) {//对象检测、能力检测
+		obj.addEventListener(evtype,fn);
+	} else {
+		obj.attachEvent("on"+evtype,function () {
+			fn.call(obj);
+		});//IE不支持事件捕获
+	}
+	return obj;
+}
+*/
+
+function addEvent(obj,evt,fn) {
+	if (obj.addEventListener) {
+		obj.addEventListener(evt,fn,false);
+		return obj;
+	}
+		
+		
+	if (!obj.functions) obj.functions={};
+	if (!obj.functions[evt])
+		obj.functions[evt]=[];
+		
+		//obj.functions["mousedown"]=[]
+	var functions=obj.functions[evt];
+	for (var i=0;i<functions.length;i++) {
+		if (functions[i]===fn) return obj;
+	}
+	functions.push(fn);
+	//fn.index=functions.length-1;
+	
+	
+	if (typeof obj["on"+evt]=="function") {
+		//alert(obj["on"+evt]);//当这一行执行到时，obj["on"+evt] 就是handler
+		//alert(obj["on"+evt]==handler);
+		if (obj["on"+evt]!=handler)
+			functions.push(obj["on"+evt]);
+	}
+	obj["on"+evt]=handler;
+	return obj;
+	
+	
+}
+
+function handler() {//哪个事件发生了?
+	//对event对象标准化
+	var evt=fixEvt(window.event);
+	var evtype=evt.type;
+	var functions=this.functions[evtype];
+	for (var i=0;i<functions.length;i++) {
+		if (functions[i]) functions[i].call(this,evt);
+	}
+}
+
+function fixEvt(evt) {
+	evt.target=evt.srcElement;
+	if (evt.type=="mouseover")
+		evt.relatedTarget=evt.fromElement;
+	else if ("mouseout"==evt.type)
+		evt.relatedTarget=evt.toElement;
+	
+	evt.stopPropagation=function () {
+		evt.cancelBubble=true;
+	};
+	evt.preventDefault=function () {
+		evt.returnValue=false;
+	};
+	return evt;
+}
+
+
+
+
+var a=function () {
+	var oDiv=document.getElementById("oDiv");
+	//oDiv.attachEvent("onclick",fn);
+	//addEvent(oDiv,'click',fn);
+	//oDiv.addEventListener('click',fn,false);
+	/*oDiv.onmouseout=function () {
+		alert(event.toElement.tagName);
+	};*/
+	var lnk=document.getElementById("lnk");
+	addEvent(lnk,'click',function (evt) {
+		alert(this.tagName);
+		evt.preventDefault();
+		
+	});
+
+	
+	function fn(evt) {
+		alert(evt.type);
+	}
+
+};
+//window.onload=init1;
+//window.addEventListener('load',init1,false);
+//window.addEventListener('DOMContentLoaded',init1,false);
+init1();
+function init1() {
+	var oDiv=document.getElementById("oDiv");
+	oDiv.parentNode.removeChild(oDiv);
+	var img=document.getElementById("img");
+	/*img.onload=function () {
+		alert("Img!");
+	};*/
+	alert("Loaded!!!");
+}
+function init2() {
+	alert(2);
+}
+
+</script>
+<style type="text/css">
+#oDiv {
+width:200px;
+height:200px;
+background:blue;
+border:2px ridge aqua;
+}
+#para {
+width:100px;
+height:20px;
+background:yellow;
+display:block;
+}
+</style>
+</head>
+<body>
+	<h1>事件(下)</h1>
+
+	<div id="oDiv">oDiv
+		<p id="para">P</p>
+	</div>
+	<a href="http://www.g.cn" id="lnk">Google</a>
+	<img src="http://localhost:8080/test.php" />
+	<img id="img" src="http://www.dfdaily.com/node2/node31/node217/images/00108446.jpg" />
+
+</body>
+</html>

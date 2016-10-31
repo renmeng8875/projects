@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Event</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript" src="../js/tools.js"></script>
+<script type="text/javascript">
+	/*window.addEventListener("load",initAll,false);//冒泡
+	function initAll() {
+		var oDiv = document.getElementById("oDiv");
+		oDiv.addEventListener("click",fn1,false);//冒泡
+		document.body.addEventListener("click",fn1,false);//冒泡
+		document.addEventListener("click",fn1,false);//捕获
+	}
+	function fn1(evt) {
+		alert(evt.currentTarget);
+		if (evt.currentTarget.tagName == "BODY") {
+			evt.stopPropagation();
+		}
+	}*/
+	/*window.attachEvent("onload",initAll);
+	function initAll() {
+		var oDiv = document.getElementById("oDiv");
+		oDiv.attachEvent("onclick",fn1);
+		document.body.attachEvent("onclick",fn1);
+		document.attachEvent("onclick",fn1);
+	}
+	function fn1(evt) {
+		evt = window.event;
+		alert(this==window);
+	}*/
+	function addEvent(obj,evtype,fn) {
+		if (obj.addEventListener) {
+			obj.addEventListener(evtype,fn,false);
+		} else {
+		}
+	}
+	function delEvent(obj,evtype,fn) {
+		if (obj.removeEventListener) {
+			obj.removeEventListener(evtype,fn,false);
+		} else if (obj.detachEvent) {
+			obj.detachEvent("on"+evtype,fn.__CallFn);
+		} else {
+			obj["on"+evtype] = null;
+		}
+	}
+</script>
+<style type="text/css">
+	#oDiv {
+	width:300px;
+	height:300px;
+	background:blue;
+	}
+	#div2 {
+	background:blue;
+	}
+</style>
+</head>
+<body>
+<div id="oDiv">abc
+</div><a href="###">asdlfjasdfl;asdkfjsklda</a>
+asdfdsafsadkl;fjsadlkfjsadl;fj
+	<script type="text/javascript">
+		//for (var i in Node) {
+		//	document.write(i+" | "+Node[i]+"<br />");
+		//}
+	</script>
+	
+</body>
+</html>

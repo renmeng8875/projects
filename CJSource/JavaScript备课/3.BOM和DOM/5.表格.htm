@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.表格</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>表格</h1>
+	<p>表格的层次结构</p>
+	<pre>
+&lt;table border=&quot;1&quot;&gt;
+	&lt;caption&gt;表格标题&lt;/caption&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;表头1&lt;/th&gt;
+			&lt;th&gt;表头2&lt;/th&gt;
+			&lt;th&gt;表头3&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tfoot&gt;
+		&lt;tr&gt;
+			&lt;td colspan=&quot;3&quot;&gt;脚注&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tfoot&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;数据&lt;/td&gt;
+			&lt;td&gt;数据&lt;/td&gt;
+			&lt;td&gt;数据&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;数据&lt;/td&gt;
+			&lt;td&gt;数据&lt;/td&gt;
+			&lt;td&gt;数据&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+	</pre>
+	<p>上面是一个创建表格所用到的所有标签，但一些标签是可写可不写的，事实上一般的表格只需写上tr与td标签就行了，而标题caption,表头thead表尾tbody等则是一些语义性元素</p>
+	<h3>表格对象的一些属性</h3>
+	<pre>
+	var table= document.getElementById("myTable");
+	//获取表格标题caption标签
+	var caption = table.getElementsByTagName("caption")[0];
+	//HTML DOM提供的更简单的方法
+	caption= table.caption;//返回表格标题caption标签，如果没有则返回null
+	if (caption) {
+		alert(caption.firstChild.nodeValue);//输出标题文本
+	}
+	var thead =table.tHead;//获取表头
+	var tfoot = table.tFoot;//获取表尾
+	</pre>
+	<p>由于caption,thead,tfoot这些标签一个表格中只能出现一次，所以HTML DOM提供了直接的属性来访问，而对于tr,td,th,tbody这些重复的标签，HTML DOM则给Table对象增加了一些集合来访问</p>
+	<pre>
+	//获取所有tr
+	var rows = table.getElementsByTagName("tr");//但会获取嵌套表格中的tr
+	//rows集合只会包含表格的行，而不包含表格下面嵌套表格的行
+	rows = table.rows;//返回包含表格中所有行的一个数组
+	alert(rows[0].innerHTML);
+	var tBodies = table.tBodies;//返回包含表格中所有tbody的一个数组
+	var cells =table.cells;//返回包含表格中所有单元格的一个数组</pre>
+	<strong>注意，对于Table对象的cells属性，它将返回所有td,th标签，而对于tBodies属性，即使HTML 源代码中没有tbody标签，也会默认有一个tbody</strong>
+	<h3>表格对象的一些方法</h3>
+	<p>创建标题:createCaption() 方法用于在表格中获取或创建 <caption> 元素。返回一个 HTMLElement 对象，表示该表的 <caption> 元素。如果该表格已经有了标题，则返回它。如果该表没有 <caption> 元素，则创建一个新的空 <caption> 元素，把它插入表格，并返回它。</p>
+	<pre>
+	var caption = document.createElement("caption");
+	caption.appendChild(document.createTextNode("新标题"));
+	table.insertBefore(caption,table.firstChild);
+	/*
+	上面方法有两大缺点：
+	1.方法复杂
+	2.如果已经存在caption标签，则会造成caption标签重复，导致后插入的无效
+	*/
+	caption = table.createCaption();//注意，并不需要指定要将其插入到哪个表格中
+	//因为该方法必须在对应的表格对象上调用
+	caption.innerHTML = "新标题";</pre>
+	<p>与createCaption相似的还有：</p>
+	<ul>
+		<li>createTFoot() 在表格中创建一个空的 tFoot 元素;返回一个 TableSection，表示该表的〈tfoot〉 元素。如果该表格已经有了脚注，则返回它。如果该表没有脚注，则创建一个新的空 〈tfoot〉 元素，把它插入表格，并返回它。</li>
+		<li>createTHead() 在表格中创建一个空的 tHead 元素;返回一个 TableSection，表示该表的〈thead〉元素。如果该表格已经有了表头，则返回它。如果该表没有表头，则创建一个新的空〈thead〉元素，把它插入表格，并返回它。</li>
+	</ul>
+	<p>既然有增加的方法，就有对应的删除的方法</p>
+	<ul>
+		<li>deleteCaption() 从表格删除 caption 元素以及其内容。 如果该表有 〈caption〉 元素，则从文档树种删除它。否则，什么也不做。</li>
+		<li>deleteTFoot() 从表格删除 tFoot 元素及其内容。 如果该表有 〈tfoot〉 元素，则将它从文档树种删除，否则什么也不做。</li>
+		<li>deleteTHead() 方法用于从表格删除thead 元素。如果该表有 〈thead〉元素，则将它从文档树种删除，否则什么也不做。</li>
+	</ul>
+	<p>添加与删除行</p>
+	<ul>
+		<li>insertRow() 在表格中插入一个新行。 返回一个 TableRow，表示新插入的行。该方法创建一个新的 TableRow 对象，表示一个新的〈tr〉标记，并把它插入表中的指定位置。新行将被插入 index 所在行之前。若 index 等于表中的行数，则新行将被附加到表的末尾。如果表是空的，则新行将被插入到一个新的〈tbody〉 段，该段自身会被插入表中。</li>
+		<li>deleteRow() 从表格删除一行。参数 index 指定了要删除的行在表中的位置。行的编码顺序就是他们在文档源代码中出现的顺序。〈thead〉和〈tfoot〉 中的行与表中其它行一起编码。 </li>
+	</ul>
+	<h2>行 (TableRow) 对象</h2>
+	<p>行对象的一些属性：cells属性返回行中所有单元格的一个数组。rowIndex属性返回该行在表中的位置。sectionRowIndex属性返回在 tBody 、tHead 或 tFoot 中，行的位置。 </p>
+	<pre>
+	var row = table.rows[0];
+	alert(row.cells.length);//第一行中单元格的数目
+	alert(row.rowIndex);//0</pre>
+	<p>TableRow 对象的方法</p>
+	<ul>
+		<li>deleteCell() 删除行中的指定的单元格。参数 index 是要删除的表元在行中的位置。该方法将删除表行中指定位置的表元。 </li>
+		<li>insertCell() 在一行中的指定位置插入一个空的td元素。 返回一个 TableCell 对象，表示新创建并被插入的 td 元素。 该方法将创建一个新的 td 元素，把它插入行中指定的位置。新单元格将被插入当前位于 index 指定位置的表元之前。如果 index 等于行中的单元格数，则新单元格被附加在行的末尾。请注意，该方法只能插入 td 数据表元。若需要给行添加头表元，必须用 Document.createElement() 方法和 Node.insertBefore() 方法（或相关的方法）创建并插入一个 th 元素。</li>
+	</ul>
+	<pre>
+	var row =table.rows[2];
+	var cell = row.insertCell(2);
+	cell.innerHTML = "新插入的单元格";
+	//上面的代码与下面的等效(但不考虑空白文本节点)
+	var cell = document.createElement("td");
+	cell.innerHTML = "新插入的单元格";
+	row.insertBefore(cell,row.childNodes[2]);
+	//删除单元格
+	row.deleteCell(2);
+	//等效代码(同样不考虑空白文本节点)
+	row.removeChild(row.childNodes[2]);</pre>
+	<h2>TableCell 单元格对象</h2>
+	<p>与TableCell对象相关的有用的属性只有一个：cellIndex属性返回单元在格行中的下标</p>
+	<pre>
+	alert(table.rows[2].cells[3].cellIndex);//3</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

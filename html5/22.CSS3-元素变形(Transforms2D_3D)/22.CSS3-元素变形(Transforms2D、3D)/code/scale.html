@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div style="border:1px solid #ccc;width:600px;height:160px;padding:60px;">
+		<div id="divTran" class="tran" style="height:60px;width:60px;background:yellow;">
+			this is block
+		</div>
+	</div>
+	
+	比例：<input type="text" id="scale" /><button onclick="scaleGo()">缩放</button>
+	<script type="text/javascript">
+		function scaleGo(){
+			var div = document.getElementById("divTran");
+			var scale = document.getElementById("scale");
+			
+			var css = "scale(" + scale.value + "," + scale.value +")";
+			div.style["webkitTransform"] = css;
+		}
+	</script>
+</body>
+</html>

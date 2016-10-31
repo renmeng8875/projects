@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="css/zc-style.css" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/zc-21-4.js"></script>
+</head>
+<body>
+	<div id="container">
+		<p class="headline"><span>欢迎您：贸易有限公司　　　　　企业编号：888888　　　　　<a href="###">安全退出</a></span>您当前的位置：会员企业管理中心</p>
+		<!-- left start -->
+		<div class="left">
+			<dl class="hotKey">
+				<dt>企业发布中心</dt>
+				<dd class="menu_click"><a href="###">新闻发布</a></dd>
+				<dt>企业管理中心</dt>
+				<dd><a href="###">新闻管理</a></dd>
+				<dd><a href="###">产品管理</a></dd>
+				<dd><a href="###">求职着列表</a></dd>
+				<dd><a href="###">基本资料管理</a></dd>
+				<dd><a href="###">联系方式修改</a></dd>
+				<dd><a href="###">在线发布托运</a></dd>
+				<dd><a href="###">客户管理</a></dd>
+			</dl>
+			<h3 class="important">温馨提示：</h3>
+			<p class="matter">您使用本系统前请务必完善公司信息，以便日后的招聘工作的顺利进行，当公司信息有所改变时，请及时调整和补充。信息越详细，求职者将更加青睐您，您的招聘将更加顺利！</p>
+		</div>
+		<!-- left end -->
+		
+		
+		<div class="right">
+			<p class="look_box">
+				<strong>温馨提示：</strong>
+				<span>请务必填写清楚，这样对您的企业推广和产品促销更加有效。谢谢合作</span>
+			</p>
+			<h3>基本资料</h3>
+			<p class="see_box"><span>*</span>为必填项</p>
+			<fieldset>
+				<form method="post" action="" id="form-zc-21-4">
+					<dl>
+						<dt><span>*</span>公司名称：</dt>
+						<dd>
+							<input type="text" class="required" name="comName" />
+						</dd>
+						<dt><span>*</span>上传公司图片：</dt>
+						<dd>
+							<input type="file" name="comFile" class="length210px required" />
+						</dd>
+						<dt><span>*</span>营业执照：</dt>
+						<dd>
+							<input type="text" class="required" name="comPermit" />
+						</dd>
+						<dt><span>*</span>上传各类证书：</dt>
+						<dd>
+							<input type="file" name="comCert" class="length210px required" /><em><a href="###">添加更多证书</a></em>
+						</dd>
+						<dt><span>*</span>所属行业：</dt>
+						<dd>
+							<select name="comTrade">
+								<option value="请选择">请选择</option>
+								<option value="金融业">金融业</option>
+							</select>
+						</dd>
+						<dt><span>*</span>公司性质：</dt>
+						<dd>
+							<select name="comProperty">
+								<option value="请选择">请选择</option>
+							</select>
+						</dd>
+						<dt><span>*</span>成立时间：</dt>
+						<dd>
+							<input type="text" class="length40px required" name="comYear" /><em>年</em>
+							<select name="comMonth">
+								<option value="1">1</option>
+							</select>
+						</dd>
+						<dt><span>*</span>营业时间：</dt>
+						<dd>
+							<input type="text" class="length40px required" name="startTime" /><em>至</em>
+							<input type="text" class="length40px required" name="endTime" />
+						</dd>
+						<dt><span>*</span>可否送货：</dt>
+						<dd>
+							<label><input type="radio" class="radio_css" name="give" checked="checked" value="yes" /><span>可以送</span></label>
+							<label><input type="radio" class="radio_css" name="give" value="no" /><span>不送</span></label>
+							<label><input type="radio" class="radio_css" name="give" value="other" /></label><input type="text" class="length85px" name="endTime" />
+						</dd>
+						<dt><span>*</span>注册资金：</dt>
+						<dd>
+							<input type="text" class="length40px required" name="comMoney" /><em>万元</em>
+							<label><input type="radio" class="radio_css" name="moneyType" checked="checked" value="人民币" /><span>人民币</span></label>
+							<label><input type="radio" class="radio_css" name="moneyType" value="港币" /><span>港币</span></label>
+							<label><input type="radio" class="radio_css" name="moneyType" value="美元" /><span>美元</span></label>
+						</dd>
+						<dt><span>*</span>员工人数：</dt>
+						<dd>
+							<select name="comCount">
+								<option value="1-50人">1-50人</option>
+							</select>
+						</dd>
+						<dt><span>*</span>有 效 期：</dt>
+						<dd>
+							<select name="proValid" class="length140px">
+								<option value="请选择">请选择</option>
+								<option value="10天">10天</option>
+								<option value="20天">20天</option>
+								<option value="1个月">1个月</option>
+								<option value="3个月">3个月</option>
+								<option value="6个月">6个月</option>
+							</select>
+						</dd>
+						<dt><span>*</span>公司简介：</dt>
+						<dd class="height190px">
+							<textarea name="proContent" class="required"></textarea>
+							<p>
+								请用中文详细说明贵司的成立历史、主营产品、品牌、服务等优势；如果内容过于简单或仅填写单纯的产品介绍，将有可能无法通过审核。<br />
+								公司简介中请不要出现联系方式，否则我们的工作人员将予以删除，谢谢合作!
+							</p>
+						</dd>
+					</dl>
+					<div class="right_bg"> </div>
+					<div class="all_button"><input type="submit" class="save_submit" value="确认提交" /> </div>
+				</form>
+			</fieldset>
+		</div>
+		<!-- right end -->
+	</div>
+</body>
+</html>

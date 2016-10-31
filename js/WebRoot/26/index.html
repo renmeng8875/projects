@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE>Class02</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+  <script type="text/javascript" src="lib/keymaster.min.js"></script>
+  <script type="text/javascript" src="uuid.js"></script>
+  <script type="text/javascript" src="command.js"></script>    
+ </HEAD>
+ <BODY>
+ <input type="text" id="flow">
+ <input type="button" value="添加新流程" onclick="API.addFlow()">
+ <br>
+ <input type="button" value="ctrl+z回退" onclick="API.re()">
+ <input type="button" value="ctrl+shift重做" onclick="API.again()">
+ <div id= "div01"></div>
+ </BODY>
+</HTML>

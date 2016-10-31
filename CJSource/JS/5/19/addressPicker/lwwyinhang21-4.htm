@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/MultiSelector.css" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/MultiSelector.js"></script>
+	<script type="text/javascript" src="js/jquery.addressPicker.js"></script>
+	<script type="text/javascript" src="js/21-4.js"></script>
+	
+</head>
+<body>
+	<div id="container">
+		<p class="headline">您当前的位置：求职管理中心 &#62; 基本个人资料</p>
+		<!-- left start -->
+		<div class="left">
+			<span class="blank"> </span>
+			<dl class="menu">
+				<dt><span>│</span>我的简历</dt>
+				<dd><a href="###">基本资料</a></dd>
+				<dd><a href="###">工作经验</a></dd>
+				<dd><a href="###">教育经历</a></dd>
+				<dd class="menu_click"><a href="###">求职意向</a></dd>
+				<dd><a href="###">专业技能</a></dd>
+			</dl>
+			<h3 class="important">温馨提示：</h3>
+			<p class="matter">为了更好的让招聘单位了解您，请您务必详细填写你的各个选项，每个选项都是让使用单位更加清晰的了解您的综合能力，谢谢合作！</p>
+		</div>
+		<!-- left end -->
+		
+		
+		<div class="right">
+			<p class="look_box">
+				<strong>温馨提示：</strong>
+				<span>请详细说明您期望的求职条件，让招聘公司更容易找到您并更加了解您。</span>
+			</p>
+			<h3>求职意向</h3>
+			<p class="see_box"><span>*</span>为必填项</p>
+			<fieldset>
+				<form method="post" action="" id="form21-4">
+					<dl>
+						<dt><span>*</span>工作类型：</dt>
+						<dd>
+							<label><input type="radio" class="radio_css" name="wType" checked="checked" value="全职/兼职" /> <span>全职/兼职</span></label>
+							<label><input type="radio" class="radio_css" name="wtype" value="全职" /> <span>全职</span></label>
+							<label><input type="radio" class="radio_css" name="wType" value="兼职" /> <span>兼职</span></label>
+							<label><input type="radio" class="radio_css" name="wtype" value="实习" /> <span>实习</span></label>
+						</dd>
+						<dt><span>*</span>希望工作岗位：</dt>
+						<dd>
+							<input type="text" name="work" class="required" />
+						</dd>
+						<dt><span>*</span>寻求职位：</dt>
+						<dd>
+							<input type="text" class="length85px required" name="findWork[]" /><em>　</em>
+							<input type="text" class="length85px required" name="findWork[]" /><em>　</em>
+							<input type="text" class="length85px required" name="findWork[]" /><em>如：人力资源总监</em>
+						</dd>
+						<dt><span>*</span>希望工作地点：</dt>
+						<dd>
+							<input type="text" name="workPlaceHope" id="workPlaceHope" class="required" />
+						</dd>
+						<dt><span>*</span>薪酬待遇：</dt>
+						<dd>
+							<select name="edu">
+								<option value="1000元以下">1000元以下</option>
+								<option value="1000-1800元">1000-1800元</option>
+								<option value="1800-2500元">1800-2500元</option>
+								<option value="2500-3500元">2500-3500元</option>
+								<option value="3500-5000元">3500-5000元</option>
+								<option value="5000-8000元">5000-8000元</option>
+								<option value="8000-12000元">8000-12000元</option>
+								<option value="12000元以上">12000元以上</option>
+							</select><em>元/月 </em>
+							<input type="checkbox" class="check_css" name="veil" /><em>面议</em>
+							<input type="checkbox" class="check_css" name="fouse" /><em>要求提供住房</em>
+						</dd>
+						<dt><span>*</span>到岗时间：</dt>
+						<dd class="height80px">
+							<label><input type="radio" class="radio_css" name="uTime" checked="checked" value="随时到岗" /> <span>随时到岗</span></label><br class="br_bug" />
+							<label><input type="radio" class="radio_css" name="uTime" value="全职" /> <span>全职</span></label>
+							<input type="text" class="length40px" name="uYear" /><em>　</em>
+							<select name="uMonth">
+								<option value="1">1</option>
+							</select><em>月</em>
+							<select name="uDay">
+								<option value="1">1</option>
+							</select><em>日以后</em><br  class="br_bug" />
+							<label><input type="radio" class="radio_css" name="uTime" value="兼职" /> <span>兼职</span></label>
+							<select name="uMonth">
+								<option value="1">1</option>
+							</select><em>个月以后</em>
+						</dd>
+					</dl>
+					<div class="ff_bug"> </div>
+					<div class="all_button"><input type="submit" class="save" value="保存" name="send" /> <input type="submit" class="save_next" value="保存并下一步" name="sendNext" /> <input type="reset" class="save_show" value="重填" name="sendShow" /> </div>
+				</form>
+			</fieldset>
+		</div>
+		<!-- right end -->
+	</div>
+</body>
+</html>

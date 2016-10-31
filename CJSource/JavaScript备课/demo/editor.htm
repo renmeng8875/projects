@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+
+</head>
+<body>
+asdfsa<img style="width:100px;height:100px;" src="p.jpg" />
+<div contentEditable="true" id="oDiv" style="overflow:auto;width:100%;height:300px;background:pink;">
+	请在这里输入内容...
+</div>
+<textarea id="content" name="content" style="width:100%;height:300px;"></textarea>
+<input type="button" id="b" value="添加样式" />
+<input type="button" id="so" value="查看源代码" />
+<script type="text/javascript">
+	//document.body.contentEditable = true;
+	//document.designMode = "on";
+	var b = document.getElementById("b");
+	var oDiv = document.getElementById("oDiv");
+	var so = document.getElementById("so");
+	var content = document.getElementById("content");
+	so.onclick = function () {
+		content.value = oDiv.innerHTML;
+	};
+	b.onclick = function () {
+		oDiv.focus();
+		document.execCommand("CreateLink",false,"http://www.g.cn");
+	};
+</script>
+</body>
+</html>

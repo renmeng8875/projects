@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" /> 
+<title>XPlayer</title>
+<script type="text/javascript" src="../XTools.js"></script>
+<script type="text/javascript">
+	/*XT.addLoadEvent(function () {
+		var buttons = XT("picNav").getChildren();
+		var layers = XT("picBox").$A("alt","XImage");
+		for (var i=0,len=buttons.length;i<len;i++) {
+			buttons[i].relatedObj = layers[i];
+		}
+		XT("picNav").addEvent("mouseover",rollLayer);
+		XT("picNav").addEvent("mouseout",rollLayer);
+		function rollLayer(evt) {
+			if (evt.target.relatedObj) {
+				for (var i=0,len=layers.length;i<len;i++) {
+					layers[i].setStyle({display:"none"});
+					buttons[i].delClass("activeClass");
+				}
+				evt.target.relatedObj.setStyle({display:"block"});
+				evt.target.addClass("activeClass");
+				if (evt.type=="mouseout") {
+				}
+			}
+		}
+	});*/
+	XT.addLoadEvent(function () {
+		var picNav = XT("picNav");
+		var buttons = picNav.getChildren();
+		var layers = XT("picBox").$T("img");
+		var player =XPlayer(buttons,layers,"activeClass");
+		player.startPlay(3000);
+	});
+	function XPlayer(buttons,layers,activeClass) {
+		return new arguments.callee.init(buttons,layers,activeClass);
+	}
+	XPlayer.init = function (buttons,layers,activeClass) {
+		this.buttons = buttons;
+		this.layers = layers;
+		this.activeClass = activeClass;
+		var __self=this;
+		for (var i=0,len=buttons.length;i<len;i++) {
+			buttons[i].relatedObj = layers[i];
+			buttons[i].addEvent("mouseover",function () {
+				__self.stopPlay();
+				XPlayer.preEvents.apply(__self,arguments);
+			});
+			buttons[i].addEvent("mouseout",function () {
+				__self.startPlay(__self.timeout);
+			});
+		}
+	};
+	XPlayer.init.prototype.show = function (obj) {
+		if (obj == this.currentObj) {
+			return;
+		}
+		for (var i=0,len=this.buttons.length;i<len;i++) {
+			this.layers[i].hide();
+			this.buttons[i].delClass(this.activeClass);
+		}
+		obj.relatedObj.show();
+		obj.relatedObj.opacityTrans(60,100,4);
+		obj.addClass(this.activeClass);
+		this.currentObj = obj;
+	};
+	XPlayer.preEvents = function (evt) {
+		this.show(evt.target);
+	};
+	XPlayer.init.prototype.startPlay = function (timeout) {
+		var __self = this;
+		this.timeout = timeout;
+		if (!this.currentObj) {
+			this.show(this.buttons[0]);
+		} else {
+			this.show(this.currentObj);
+		}
+		this.playInterval=setInterval(function () {
+			var one;
+			for (var i=0,len=__self.buttons.length;i<len;i++) {
+				one = __self.buttons[i];
+				if (one==__self.currentObj) {
+					one = __self.buttons[i+1];
+					if (!one) {
+						one=__self.buttons[0];
+					}
+					break;
+				}
+			}
+			__self.show(one);
+		},timeout);
+	};
+	XPlayer.init.prototype.stopPlay = function () {
+		clearInterval(this.playInterval);
+	};
+</script>
+<style type="text/css">
+* {
+	padding:0;
+	margin:0;
+}
+html {
+	background:navy;
+	height:100%;
+}
+body {
+	width:800px;
+	height:100%;
+	background:white;
+	margin:0 auto;
+	padding:10px;
+}
+ol,ul {
+	list-style-type:none;
+}
+h1 {
+	background:#06f;
+	color:white;
+	line-height:200%;
+	text-align:center;
+}
+div#picBox {
+	width:512px;
+	height:384px;
+	margin:20px auto;
+	border:2px solid silver;
+	position:relative;
+	background:#333;
+}
+div#picBox img {
+	width:512px;
+	height:384px;
+	display:none;
+}
+ul#picNav {
+	position:absolute;
+	right:0;
+	bottom:0;
+	height:14px;
+	filter:alpha(opacity=80);
+	opacity:0.8;
+}
+ul#picNav li {
+	width:24px;
+	height:15px;
+	text-align:center;
+	line-height:15px;
+	float:left;
+	font-size:12px;
+	color:white;
+	background:purple;
+	cursor:pointer;
+	border-right:1px solid white;
+}
+ul#picNav li.last {
+	border:none;
+}
+ul#picNav li.activeClass {
+	background:#f30;
+}
+</style>
+</head>
+<body>
+<h1>Pictures Player</h1>
+<div id="picBox">
+	<img src="images/1.jpg" style="display:block;" alt="XImage" />
+	<img src="images/2.jpg" alt="XImage" />
+	<img src="images/6.jpg" alt="XImage" />
+	<img src="images/4.jpg" alt="XImage" />
+	<img src="images/5.jpg" alt="XImage" />
+	<ul id="picNav">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li class="last">5</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	//alert(XT("abc").before(document.createTextNode("#sdafasf##")));
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery选择器</title>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+jQuery(function ($) {
+	/*var firstUl=$("li:not(.highlight)");
+	alert(firstUl.length);*/
+	/*var list=$("li:gt(4)");
+	list.addClass("highlight");//隐式循环*/
+	/*var headers=$(":header");
+	headers.addClass("highlight");*/
+	/*var nodes=$("li:contains(4);");
+	nodes.addClass("highlight")*/
+	/*var nodes=$("body :hidden");
+	alert(nodes.length);*/
+	/*var texts=$(":text");
+	alert(texts.length);*/
+	//var fm=$("form").get(0);
+	//alert($("form :checked").length);
+	document.onclick=function () {
+		alert($("select").val());
+	};
+	
+});
+
+</script>
+<style type="text/css">
+.highlight {
+background:#EEE;
+}
+</style>
+</head>
+<body>
+<h1 id="header">jQuery选择器</h1>
+<h2>Selector</h1>
+<ul id="newsList">
+	<li>List 1 News</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li>List 4</li>
+</ul>
+<ul>
+	<li>List 1</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li>List 4</li>
+</ul>
+<div style="visibility:hidden;">oDiv</div>
+<form>
+  <select>
+  	<option>A</option>
+  	<option>B</option>
+  	<option>C</option>
+  	<option>D</option>
+  </select>
+
+</form>
+</body>
+</html>

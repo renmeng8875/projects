@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>数组，对象</title>
+	<script type="text/javascript">
+		//var num =12;
+		//var arr = new Array(12,24,36,23,34,34,45);
+		/*var arr2 =arr;//引用
+		arr[0]=3;
+		alert(arr);
+		alert(arr2);
+		alert(arr2===arr);
+		var a = arr;
+		arr = 3;
+		alert(a);*/
+		/*for (var i=0;i< arr.length;i++) {
+			document.write(arr[i]+"<br />");
+		}*/
+		//alert(arr.length);
+		/*arr[7]=23;
+		arr[7]=undefined;
+		delete arr[7];
+		alert(arr[7]);*/
+		
+	//	arr.shift();//将数组第一个元素删掉
+		//alert(arr);
+		//arr.unshift(123);//在数组的顶端添加一个元素
+	//	alert(arr);
+	//	alert(arr[0]);
+	
+		//arr.pop();////将数组最后一个元素删掉
+		
+		//arr.push(124);//将一个元素添加到数组的末尾
+		//alert(arr.length);
+		//arr.pop();
+		//alert(arr.length);
+		//var b= new Array(34,34,34,354,34);
+		//var a=[34,34,34,354,34];//数组字面量
+		//alert(a[0]);
+		//var obj = new Object();
+		//obj.property = 123;
+		//var person = new Object();
+		//person.age =18;
+		//person.arm =false;
+		//alert(person["age"]);
+		//alert(person["arm"]);
+		var arr= new Array();
+		for (var i=1;i<= 9;i++) {
+			for (var j=1;j<=i;j++) {
+				arr.push(j+"X"+i+"="+i*j);
+			}
+			arr.push("<br />");
+		}
+		document.write(arr.join(""));
+	</script>
+</head>
+<body>
+	<h1>数组，对象</h1>
+</body>
+</html>

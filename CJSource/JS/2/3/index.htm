@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>运算符,语句</title>
+<script type="text/javascript">
+/*var a=new Object();
+a.age=12;
+alert(a.age);
+delete a.age;
+
+delete a["age"];
+alert(a.age);*/
+var a=[12,322];
+/*delete a[0];
+a[0]=undefined;
+
+
+alert(window.a);//全局变量都是window对象的属性
+delete window.a;
+alert(window.a);
+alert(123);*/
+/*
+alert(voidReturn(231432));
+
+function voidReturn(expr) {
+	return undefined;
+}*/
+var iNum = 10;
+++iNum;
+
+//实际上等价于
+/*var iNum = 10;
+iNum = iNum + 1;
+
+
+var iNum = 10;
+--iNum;
+iNum=iNum-1;
+
+iNum++;
+iNum--;
+iNum=12;
+
+var i=-10;
+
+
+var a=iNum + (i--);
+alert(a);*/
+var i=+"123";
+//alert(typeof i);
+
+var d=new Date();
+//alert(Number(d));//等效alert(d.getTime())
+
+//var date=+new Date();
+//alert(date);
+
+
+//下面皆返回true
+	/*alert(!null);
+	alert(!0);
+	alert(!undefined);
+	alert(!false);
+	alert(!"");
+	alert(!NaN);
+	//下面皆返回false
+	alert(!" ");
+	alert(!true);
+	alert(!(new Object()));
+	alert(!-1);*/
+	
+	
+function fnTrue() {
+	alert(true);//在&& 中不会出现
+	return true;
+}
+function fnFalse() {
+	alert(false);
+	return false;
+}
+//注意是执行两个函数,将返回值进行比较
+//var a = fnFalse() && fnTrue();//只会出现一个弹窗,显示false
+//a = fnTrue() || fnFalse();//这一步只会出现一个弹窗,显示true
+	
+	//alert(10 % 3);
+	
+/*	
+var iNum = 0;
+outermost: //label
+for (var i=0; i<4; i++) {
+  for (var j=0; j<4; j++) {
+	    if (i == 2 && j == 2) {
+	   	 break outermost;
+	 	 	}
+  	iNum++;
+  }
+}
+alert(iNum);	//输出 "55"*/
+
+var person={
+	name:'CJ',
+	age:18,
+	weight:120
+};
+var name=123;
+/*with (person) {
+	alert(name);
+	alert(age);
+	alert(weight);
+}*/
+
+
+</script>
+
+</head>
+<body>
+<h1>运算符,语句 </h1>
+</body>
+</html>

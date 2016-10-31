@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>访问HTML页面</title>
+	<script type="text/javascript">
+		//window.document.body
+		//null 空对象
+		window.onload = function () {
+			var t = document.getElementById("t");//document.getElementById方法返回一个HTML中的元素
+			//alert(oDiv.tagName);//标签名
+			//alert(oDiv.id);
+			//oDiv.style.backgroundColor = "blue";
+			//setTimeout();//两个参数,1，函数名，2，时间间隔(以毫秒为单位)
+			setTimeout(date,1000);
+		};
+		
+		
+		function date() {
+			var t = document.getElementById("t");
+			var d = new Date();
+			t.innerHTML ="现在时间:"+d.getHours()+"时"+d.getMinutes()+"分"+d.getSeconds()+"秒";
+			setTimeout(date,1000);
+		}
+	</script>
+</head>
+<body>
+<span id="t">现在时间:N时N分N秒</span>
+		
+</body>
+
+</html>

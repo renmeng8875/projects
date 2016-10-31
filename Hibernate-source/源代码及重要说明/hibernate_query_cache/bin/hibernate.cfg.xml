@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate_cache</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">bjsxt</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		
+		<!-- 开启二级缓存 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		
+		<!-- 指定缓存产品提供商 -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+		
+		<!-- 启用查询缓存 -->
+		<property name="hibernate.cache.use_query_cache">true</property>
+		
+		<mapping resource="com/bjsxt/hibernate/Classes.hbm.xml"/>
+		<mapping resource="com/bjsxt/hibernate/Student.hbm.xml"/>
+		
+		<class-cache class="com.bjsxt.hibernate.Student" usage="read-only"/>
+	</session-factory>
+</hibernate-configuration>

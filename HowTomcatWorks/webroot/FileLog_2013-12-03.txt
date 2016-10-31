@@ -1,0 +1,39 @@
+2013-12-03 19:27:02 HttpConnector Opening server socket on all host IP addresses
+2013-12-03 19:27:02 HttpConnector[8080] Starting background thread
+2013-12-03 19:27:02 HttpProcessor[8080][0] Starting background thread
+2013-12-03 19:27:02 HttpProcessor[8080][1] Starting background thread
+2013-12-03 19:27:02 HttpProcessor[8080][2] Starting background thread
+2013-12-03 19:27:02 HttpProcessor[8080][3] Starting background thread
+2013-12-03 19:27:02 HttpProcessor[8080][4] Starting background thread
+2013-12-03 19:27:02 starting Context
+2013-12-03 19:27:02 Context started
+2013-12-03 19:29:58 start....
+2013-12-03 19:29:58 HttpConnector Opening server socket on all host IP addresses
+2013-12-03 19:29:58 HttpConnector[8080] Starting background thread
+2013-12-03 19:29:58 HttpProcessor[8080][0] Starting background thread
+2013-12-03 19:29:58 HttpProcessor[8080][1] Starting background thread
+2013-12-03 19:29:58 HttpProcessor[8080][2] Starting background thread
+2013-12-03 19:29:58 HttpProcessor[8080][3] Starting background thread
+2013-12-03 19:29:58 HttpProcessor[8080][4] Starting background thread
+2013-12-03 19:29:58 starting Context
+2013-12-03 19:29:58 Context started
+2013-12-03 19:30:07 start....
+2013-12-03 19:30:08 HttpConnector Opening server socket on all host IP addresses
+2013-12-03 19:30:08 HttpConnector[8080] Starting background thread
+2013-12-03 19:30:08 HttpProcessor[8080][0] Starting background thread
+2013-12-03 19:30:08 HttpProcessor[8080][1] Starting background thread
+2013-12-03 19:30:08 HttpProcessor[8080][2] Starting background thread
+2013-12-03 19:30:08 HttpProcessor[8080][3] Starting background thread
+2013-12-03 19:30:08 HttpProcessor[8080][4] Starting background thread
+2013-12-03 19:30:08 starting Context
+2013-12-03 19:30:08 Context started
+2013-12-03 19:30:24 start....
+2013-12-03 19:31:24 HttpConnector Opening server socket on all host IP addresses
+2013-12-03 19:31:24 HttpConnector[8080] Starting background thread
+2013-12-03 19:31:24 HttpProcessor[8080][0] Starting background thread
+2013-12-03 19:31:24 HttpProcessor[8080][1] Starting background thread
+2013-12-03 19:31:24 HttpProcessor[8080][2] Starting background thread
+2013-12-03 19:31:24 HttpProcessor[8080][3] Starting background thread
+2013-12-03 19:31:24 HttpProcessor[8080][4] Starting background thread
+2013-12-03 19:31:24 starting Context
+2013-12-03 19:31:24 Context started

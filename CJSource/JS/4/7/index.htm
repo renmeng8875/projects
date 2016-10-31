@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>浏览器中的XSLT</title>
+<script type="text/javascript" src="../../lib/base.js"></script>
+</head>
+<body>
+	<h1>浏览器中的XSLT</h1>
+
+
+
+<script type="text/javascript">
+transform("test.xml","test.xslt",function (s) {
+	alert(s);
+});
+	
+
+function transform(xml,xslt,callback) {
+	var xmlDom,xsltDom;
+	if (typeof xml=="string") {
+		xmlDom=Base.getXMLDOM();
+		Base.loadXMLFile(xmlDom,xml,function () {
+			xsltDom=Base.getXMLDOM();
+			Base.loadXMLFile(xsltDom,xslt,function () {
+				callback(trans());
+			});
+		});
+	} else {
+		xmlDom=xml;
+		xsltDom=xslt;
+	}
+	
+	
+	
+	
+	function trans() {
+		if ("transformNode" in xmlDom) {
+			return xmlDom.transformNode(xsltDom);
+		} else {
+			var xsltpro=new XSLTProcessor();
+			xsltpro.importStylesheet(xsltDom);
+			var result=xsltpro.transformToDocument(xmlDom);
+			return Base.getXML(result);
+		}
+	}
+	
+}
+</script>
+
+</body>
+</html>

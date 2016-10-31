@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html manifest="game_manifest.jsp">
+<head>
+<meta charset="UTF-8">
+<title>D3游戏</title>
+</head>
+<body>
+	<div id="divP" style="text-align:center;line-height:40px;">
+		<progress id="progress" max="100" value="0"></progress>
+	</div>
+	<div id="div" style="display:none;">
+		<img src="http://us.blizzard.com/_images/games/d3/bg-top.jpg" />
+		<img src="http://us.blizzard.com/_images/games/d3/bg-mid01.jpg" />
+	</div>
+	
+	
+	<script>
+		var hasDown=0,count=154;
+		var ac = window.applicationCache;
+		var progress = document.getElementById("progress");
+		ac.onprogress = function(){
+			hasDown++;
+			progress.value = parseInt((hasDown/count)*100);
+			
+			if(hasDown>=count){
+				progress.value = 100;
+				
+				window.setTimeout(function(){
+					document.getElementById("divP").style.display="none";
+					document.getElementById("div").style.display="block";
+				}, 500);
+			}
+		}
+		ac.onnoupdate = function(){
+			window.setTimeout(function(){
+				document.getElementById("divP").style.display="none";
+				document.getElementById("div").style.display="block";
+			}, 1000);
+		}
+	</script>
+</body>
+</html>

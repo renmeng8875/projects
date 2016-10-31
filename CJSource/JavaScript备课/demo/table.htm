@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>DOM</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript" src="../js/tools.js"></script>
+<script type="text/javascript">
+	window.onload = function () {
+		var table = document.getElementById("myTable");
+		alert(table.cells.length);
+
+	};
+</script>
+<style type="text/css">
+	#oDiv {
+	background:red;
+	}
+	#div2 {
+	background:blue;
+	}
+</style>
+</head>
+<body>
+<table border="1" id="myTable">
+	<caption>Caption</caption>
+	<thead>
+		<tr>
+			<th>表头1</th>
+			<th>表头2</th>
+			<th>表头3</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td colspan="3">脚注</td>
+		</tr>
+	</tfoot>
+	
+		<tr>
+			<td>数据</td>
+			<td>数据</td>
+			<td>数据</td>
+		</tr>
+
+		<tr>
+			<td>数据</td>
+			<td>数据</td>
+			<td>数据</td>
+		</tr>
+
+	
+</table>
+
+	<script type="text/javascript">
+		//for (var i in Node) {
+		//	document.write(i+" | "+Node[i]+"<br />");
+		//}
+	</script>
+	
+</body>
+</html>

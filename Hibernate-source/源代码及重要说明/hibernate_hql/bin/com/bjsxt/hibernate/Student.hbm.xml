@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bjsxt.hibernate.Student" table="t_student">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<property name="createTime"/>
+		<many-to-one name="classes" column="classesid"/>
+		<filter name="filtertest" condition="id &lt; :myid"/>
+	</class>
+	
+	<query name="searchStudents">
+		<![CDATA[
+			SELECT s FROM Student s where s.id<?
+		]]>
+	</query>
+	
+	<filter-def name="filtertest">
+		<filter-param name="myid" type="integer"/>
+	</filter-def>	
+</hibernate-mapping>

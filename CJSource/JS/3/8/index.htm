@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>样式</title>
+<script type="text/javascript">
+window.onload=function () {
+	var oDiv=document.getElementById("oDiv");
+	//alert(oDiv.className);
+	//oDiv.className="red";
+	//alert(oDiv.className);
+	//oDiv.id="para";
+	//document.body.className="blueStyle";
+	//alert(oDiv.getAttribute('style'));
+	//alert(oDiv.style.width="1000px");
+	var toggleRed=document.getElementById("toggleRed");
+	var toggleBlue=document.getElementById("toggleBlue");
+	//alert(oDiv.style.borderColor);
+	//oDiv.style.borderColor="#DEF";
+	//alert(oDiv.style.height);
+	//alert(oDiv.currentStyle.width);
+	//var s=getComputedStyle(oDiv,null);
+	//alert(getRealStyle(oDiv,'width'));
+	//alert(s.backgroundColor);
+	toggleRed.onclick=function () {
+		//oDiv.className=oDiv.className.replace("blue","");
+		//oDiv.className+=" red";
+		//delClass(oDiv,'blue');
+		//addClass(oDiv,'red');
+		oDiv.style.backgroundColor="red";
+	};
+	toggleBlue.onclick=function () {
+		//oDiv.className=oDiv.className.replace("red","");
+		//oDiv.className+=" blue";
+		//delClass(oDiv,'red');
+		//addClass(oDiv,'blue');
+		oDiv.style.backgroundColor="blue";
+	};
+	var lnk = document.createElement("link");
+	lnk.type="text/css";
+	lnk.rel="styleSheet";
+	lnk.href="test.css";
+	var head = document.getElementsByTagName("head")[0];
+	head.appendChild(lnk);
+
+	//var sheets=document.styleSheets;
+	var rules=getRules(0);
+	//alert(rules[0].style.border);
+	//rules[0].style.background="red";
+	var sheet = document.styleSheets[0];
+	//sheet.insertRule("body {color:yellow;}",1);//W3C方法,第一个参数为CSS文本,第二个参数为位置,从0开始计数
+	//sheet.addRule("body","color:yellow;",1);//IE方法,第一个参数为CSS选择符,第二个为CSS内容,第三个为位置
+	//而要删除某条规则，则只能通过下标
+	//sheet.removeRule(1);//IE
+	//sheet.deleteRule(1);//W3C
+
+};
+window.onload = function () {
+	var oDiv = document.getElementById("oDiv");//oDiv必须使用CSS定位
+	oDiv.onmousedown = drag;
+	function drag(evt) {
+		evt = evt || window.event;
+		this.onmouseup = drop;
+		this.onmousemove = moveDiv;
+		this.offset = {
+			x:evt.offsetX || evt.layerX,
+			y:evt.offsetY || evt.layerY
+		};
+	}
+	function moveDiv(evt) {
+		evt = evt || window.event;
+		this.style.left = evt.clientX-this.offset.x+"px";
+		this.style.top = evt.clientY-this.offset.y+"px";
+	}
+	function drop(evt) {
+		this.onmouseup = null;
+		this.onmousemove = null;
+	}
+};
+function addRule(sheet,selector,cssText,i) {
+	//向指定样式表中添加一个CSS规则
+	if (sheet.insertRule) {//W3C
+		sheet.insertRule(selector+"{"+cssText+"}",i);
+	} else if (sheet.addRule) {//IE
+		sheet.addRule(selector,cssText,i);
+	}
+}
+
+function delRule(sheet,index) {//删除样式规则
+		if (sheet.deleteRule) {
+			sheet.deleteRule(index);
+		} else {
+			sheet.removeRule(index);
+		}
+	}
+
+
+function getRules(i) {
+	var s=document.styleSheets[i];
+	return s.cssRules || s.rules;
+}
+
+function addClass(obj,className) {
+	//给指定的元素添加一个类名
+	obj.className+=" "+className;
+	return obj;
+}
+function delClass(obj,className) {
+	//删除指定元素的某个类名
+	var s=obj.className.split(/\s+/);
+	for (var i=0;i<s.length;i++) {
+		if (s[i]==className) delete s[i];
+	}
+	obj.className=s.join(" ");
+	return obj;
+}
+
+function getRealStyle(obj,s) {
+	var style;
+	if (window.getComputedStyle) {//W3C DOM
+		style=window.getComputedStyle(obj,null);
+	} else if (obj.currentStyle) {
+		style=obj.currentStyle;
+	}
+	return style[s];
+}
+
+//皮肤
+
+</script>
+<style type="text/css">
+#oDiv.base {
+width:200px;
+height:200px;
+border:2px ridge aqua;
+position:absolute;
+left:100px;
+top:100px;
+}
+#oDiv.red {
+background:red;
+}
+#oDiv.blue {
+background:blue;
+}
+#para {
+width:100px;
+height:100px;
+background:yellow;
+display:block;
+}
+body {
+width:600px;
+}
+body.redStyle {
+	border:2px solid red;
+}
+body.redStyle * {
+	color:red;
+}
+body.blueStyle {
+	border:2px solid blue;
+}
+body.blueStyle * {
+	color:blue;
+}
+
+</style>
+</head>
+<body class="redStyle">
+	<h1>样式</h1>
+	样式
+	<a href="###" id="toggleRed">切换到红色主题</a>
+	<a href="###" id="toggleBlue">切换到蓝色主题</a>
+	<div id="oDiv" class="base blue" style="background:white">
+		oDiv
+
+	</div>
+
+</body>
+</html>

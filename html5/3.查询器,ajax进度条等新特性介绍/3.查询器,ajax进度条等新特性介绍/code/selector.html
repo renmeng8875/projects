@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>h5 selector</title>
+</head>
+<body>
+	输入要selectors:<textarea rows="3" cols="60" id="selector"></textarea><br />
+	要修改的颜色:<input type="color" id="color">
+	<br />
+	<button onclick="exec()">执行</button>
+	
+	<hr color="#ccc" />
+	id,class:
+	<div id="div1" class="div">id=div1,class=div</div>
+	<div id="div2" class="div">id=div2,class=div</div>
+	<hr color="#ccc" />
+	子元素1:
+	<div>
+		<p>
+			只有1个子元素p
+		</p>
+	</div>
+	
+	<hr color="#ccc" />
+	子元素2:
+	<div>
+		<p>
+			子元素p1
+		</p>
+		<p>
+			子元素p2	
+		</p>
+		<section>
+			<p>p2中的子元素</p>
+		</section>
+	</div>
+	<hr color="#ccc" />
+	属性:<br />
+	<a href="http://www.baidu.com">http://www.baidu.com</a><br />
+	<a href="www.baidu.com/index.htm">www.baidu.com/index.htm</a><br />
+	
+	<script type="text/javascript">
+		function exec(){
+			var txt = document.getElementById("selector");
+			var color = document.getElementById("color");
+			
+			var objs = document.querySelectorAll(txt.value);
+			for(var i=0;i<objs.length;i++){
+				objs[i].style.color = color.value;
+			}
+		}
+	</script>
+</body>
+</html>

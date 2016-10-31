@@ -1,0 +1,12 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE>Class02</TITLE>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+  <script type="text/javascript" src="extend.js"></script>
+  <script type="text/javascript" src="interface.js"></script>
+  <script type="text/javascript" src="factory03.js"></script>
+ </HEAD>
+ <BODY>
+ </BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<html> 
+<head> 
+<script type="text/javascript" src="burst.js"></script> 
+
+</head> 
+<body> 
+ 
+<canvas id="myCanvas" width="640px" height="480px" style="border:5px solid black;">No Canvas in IE :(</canvas> 
+ <script> 
+var myBurstScript=function(Burst){
+    
+    Burst.defaults.debug=false;
+    
+    Burst.defaults.ease="easeOutQuad";
+    Burst.timeline("chassis", 0, 100, 1, true)
+      .shape("car", "car.svg", "svg", 0, 0, 1, 0)
+        .cut("wheel1;wheel2")        
+        .group("chassis")
+          .track("top").key(0,0).key(50,-20).key(70,0)        
+    ;
+    
+    Burst.defaults.ease="linear";
+    Burst.timeline("wheels", 0, 100, 1, true)
+      .shape("car", "car.svg", "svg", 0, 0, 1, 0)
+        .cut("chassis")         
+        .group("wheel1").track("centerX").key(0,230).track("centerY").key(0,350)
+          .track("rot").key(0,0).key(100,-360)
+        .group("wheel2").track("centerX").key(0,430).track("centerY").key(0,350)
+          .track("rot").key(0,0).key(100,-360)
+    ;
+    
+    Burst.timeline("carObject", 0, 300, 3, false)      
+      .track("scl").key(0,.5)
+      .track("left").key(0,400).key(300,-195)
+      .inherit("wheels")
+      .inherit("chassis")
+    ;
+    
+  
+    Burst.timeline("boom", 0, 10, 1, true)
+      .shape("boom", "boom.svg", "svg", 0, 0, 1, 0)
+    ;
+    
+    Burst.start("carObject", function(){
+        Burst.timeline("chassis").paused=true;
+        Burst.timeline("wheels").paused=true;
+        Burst.start("boom");
+    });
+    
+    
+}
+newBurst("myCanvas", myBurstScript);
+</script> 
+</body> 
+</html>

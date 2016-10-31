@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>拖放</title>
+</head>
+<body>
+	<p>请选择你喜欢的城市：</p>
+	<ol style="height:120px;width:90px;border:1px solid #ccc;" ondragend="dragEnd(event)" ondragstart="dragStart(event)">
+		<li draggable="true" value="1">上海</li>
+		<li draggable="true" value="2">北京</li>
+		<li draggable="true" value="3">深圳</li>
+		<li draggable="true" value="4">广州</li>
+		<li draggable="true" value="5">香港</li>
+	</ol>
+	<br />
+	<p>下面是你选的城市</p>
+	<select multiple="multiple" ondrop="drop(event)" ondragover="allowDrop(event)" style="height:120px;width:90px;border:1px solid #ccc;">
+	</select>
+	
+	<script type="text/javascript">
+		function dragStart(ev){
+			if(ev.target instanceof HTMLLIElement){
+				ev.dataTransfer.setData("value",ev.target.getAttribute("value"));
+				ev.dataTransfer.setData("text",ev.target.innerHTML);
+			}else{
+				ev.preventDefault();
+			}
+		}
+		function dragEnd(ev){
+			if(ev.dataTransfer.dropEffect !="none")
+				ev.target.parentNode.removeChild(ev.target);
+		}
+		function allowDrop(ev){
+			ev.preventDefault();
+		}
+		function drop(ev){
+			var value = ev.dataTransfer.getData("value");
+			var text = ev.dataTransfer.getData("text");
+			
+			var op = document.createElement("option");
+			op.value = value;
+			op.text = text;
+			
+			ev.target.appendChild(op);
+			// 这里写删除
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/MTOUCH.js"></script>
+</head>
+<body>
+	<div id="div1" style="width:10px;height:60px;background-color:#ccc;">
+	</div>
+	<button id="btn1">展开</button>
+	<script type="text/javascript">
+		$("#btn1").bind("click",function(){
+			var css = {"width":"400px","background-color":"red"};
+			
+			$("#div1").animate(css,1000);
+		});
+	</script>
+	
+	<br />
+	列表放大旋转(鼠标移动):
+	<div id="div2" style="width:200px;margin-left:100px;background-color:#ccc;-webkit-radius:6px;">
+		<ul>
+			<li><a href="www.qq.com">www.qq.com</a></li>
+			<li><a href="www.baidu.com">www.baidu.com</a></li>
+			<li><a href="www.g.com">www.g.com</a></li>
+			<li><a href="www.sina.com">www.sina.com</a></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		$("#div2").bind("mouseover",function(){
+			var css = {"-webkit-transform":"rotate(360deg) scale(1.5)","background-color":"#FE5011"};
+			$("#div2").animate(css,1000);
+		});
+		
+		$("#div2").bind("mouseout",function(){
+			var css = {"-webkit-transform":"rotate(0deg) scale(1)","background-color":"#ccc"};
+			$("#div2").animate(css,1000);
+		});
+	</script>
+</body>
+</html>

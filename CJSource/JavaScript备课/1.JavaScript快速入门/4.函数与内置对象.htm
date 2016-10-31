@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.函数与内置对象</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>函数与内置对象</h1>
+	<h2>函数</h2>
+	<p>函数(又称为方法)用于对一大段为了达到某种目的的代码进行归类，以使代码更具有条理：</p>
+	<pre>
+	//一段计算三角形面积的代码
+	var wide=window.prompt("请输入三角形的底边长度！","");
+	var high=window.prompt("请输入三角形的高！","");
+	var area=wide*high/2;
+	if (isNaN(area)) {//判断用户是否输入的是数字
+		alert("三角形的面积为"+area);
+	} else {
+		alert("您的输入有误!");
+	}</pre>
+	<p>如果我们需要在其它地方使用此功能，那么最简单的方法就是Ctrl＋C然后Ctrl＋V，使用函数可以节约一些代码</p>
+	<pre>
+	function calcAngleArea() {
+	//使用function关键字声明一个函数，接着是函数的名称，函数名称必须符合变量的命名规范
+		//花括号用来表示一段代码块
+		var wide=window.prompt("请输入三角形的底边长度！","");
+		var high=window.prompt("请输入三角形的高！","");
+		var area=wide*high/2;
+		if (isNaN(area)) {
+			alert("您的输入有误!");
+		} else {
+			alert("三角形的面积为"+area);
+		}
+	}</pre>
+	<p>但是写了这样了个计算三角形面积的函数之后，页面打开时并没有任何东西会出现，那是因为函数必须使用 “函数名（）”这样的语句来调用执行，所以我们还需要再添加一句calcAngleArea();如果要多次进行这样的计算，只需多次调用些函数即可!(事实上，看到这样的格式，我们发现，像alert(),prompt(),isNaN()这些也是函数，它们是系统内置的函数!)</p>
+	<pre>
+	//在之前我们已经声明了计算三角形面积的函数calcAngleArea
+	calcAngleArea();
+	calcAngleArea();
+	calcAngleArea();
+	//将会进行三次这样的计算</pre>
+	<p>当然，我们可以对其进行一些改进，以使这个函数更好用</p>
+	<pre>
+	function calcAngleArea(wide,high) {//具有参数的函数，参数其实是一些变量，多个参数用“，”分隔
+		var area=wide*high/2;
+		if (isNaN(area)) {
+			alert("您的输入有误!");
+		} else {
+			alert("三角形的面积为"+area);
+		}
+	}</pre>
+	<p>这样，函数就具有伸缩性了，我们不必强制用户在prompt弹窗中输入内容。我们先测试一下函数如何执行</p>
+	<pre>
+	calcAngleArea(12,8);//传入参数12和8，在函数内部执行。接着我们就看到了输出</pre>
+	<p>同样，有时候我们并不是相让用户输入某些值，也并不想将某些值输给用户。但现在这个计算三角形面积的函数不管我们想如何处理结果，它都只是在弹窗中将结果显示给用户。这个时候就用到了函数返回值的功能：</p>
+	<pre>
+	//在函数内部可以使用return语句将值返回给调用函数的上下文
+	function calcAngleArea(wide,high) {
+		var area=wide*high/2;
+		if (isNaN(area) || !area) {
+			return false;
+			alert("注意,一个函数中的return执行之后，函数就停止运行了，所以你不会看到我!");
+		} else {
+			return area;
+		}
+	}
+	var a=calcAngleArea(23,8);//执行函数，函数的返回值将会赋给变量a
+	if (a) {
+		document.write(a);//当函数有返回值时，我们可以以想要的任何方式来输出a,而不是预先定义好的alert
+	}</pre>
+	<p>这样，这个函数的功能就是真正的无瑕眦的计算三角形面积的函数了（尽管看上去有些简单），我们输入宽和高，然后函数将其计算后将结果返回，如果只是像"calcAngleArea(23,8)"这样调用函数的话,返回的结果将会丢失，所以我们用一个变量将结果保存了下来。</p>
+	<h2>函数所带来的作用域问题</h2>
+	<p>在函数内部声明的变量（局部变量），在函数外部并不能访问</p>
+	<pre>
+	function demo() {
+		var a="外面不能访问我！";
+	}
+	//alert(a);//出错，没有声明变量a
+	demo();//执行函数
+	alert(a);//仍然出错</pre>
+	<p>但在函数外部声明的变量（全局变量），在函数内部是可以访问的</p>
+	<pre>
+	function demo() {
+	//在一个脚本中，使用function关键字声明的具有名称的函数在脚本中出现的次序是任意的，并不存在先后之分
+		alert(globalVar);
+	}
+	//demo();//出错，执行时变量globalVar还没有声明
+	var globalVar="Hello!";
+	demo();//输出Hello!
+	</pre>
+	<h2>内置对象Math与Date</h2>
+	<p>Math对象为我们提供了很多用于数学计算的方法和一些常量</p>
+	<pre>
+	alert(Math.PI);//输出π
+	alert(Math.pow(10,3));//输出10的3次方
+	alert(Math.abs(-12));//输出-12的绝对值
+	var num=23.34;
+	alert(Math.ceil(num));//返回大于等于num的最小整数
+	alert(Math.floor(num));//返回小于等于num的最大整数。
+	alert(Math.round(num));//返回与num最接近的整数(四舍五入)。
+	alert(Math.random());//返回介于 0 和 1 之间的伪随机数。产生的伪随机数介于 0 和 1 之间（含 0，不含 1）
+	alert(Math.max(2,3,4));//返回多个数值参数中较大的那个
+	alert(Math.min(2,3,1));//返回多个数值参数中较小的那个
+	alert(Math.sqrt(2));//返回一个数的平方根
+	alert(Math.SQRT2);//返回2的平方根
+	alert(Math.SQRT1_2);//返回二分之一的平方根</pre>
+	<p>Date对象像一个时光机</p>
+	<pre>
+	var d = new Date();//Date对象需要创建
+	//Date 对象能够表示的日期范围约等于 1970 年 1 月 1 日前后各 285,616 年。 
+	alert(d);//直接输出这个对象,将会得到一个表示时间的字符串
+	//这个对象有一些方法,可以用来获取时间的各个部分
+	alert(d.getYear());//获取年,2000年以前返回年份后两位,2000年之后的返回年份的完整表达方式
+	alert(d.getFullYear());//始终返回年份的4位数表达方式
+	alert(d.getMonth());//返回月份,注意,月份是从0开始计数的,所以1月时将返回0
+	alert(d.getDate());//返回今天几号
+	alert(d.getDay());//返回今天星期几,星期天是0,星期1是1....
+	alert(d.getHours());//返回小时
+	alert(d.getMinutes());//返回分钟
+	alert(d.getSeconds());//返回秒
+	alert(d.getMilliSeconds());//返回毫秒
+	alert(d.getTime());
+	//返回一个整数值,这个整数代表了从1970年1月1日开始计算到Date对象中的时间之间的毫秒数
+	//日期的范围大约是1970年1月1日午夜的前后各285616年,负数代表1970年之前的日期</pre>
+	<p>我们不但能从中获取时间值,还可以设置时间值</p>
+	<pre>
+	var d = new Date();
+	d.setFullYear(1990);//设置年份为1900
+	alert(d.getFullYear());//返回1900
+	alert(d.getTime());//输出的值是负的,这验证了上面所说的getTime()返回值</pre>
+	<p>与那些getXXX方法对应的设置时间的函数仅仅是将get改成set</p>
+	<pre>
+	var d=new Date();
+	d.setFullYear(2004);
+	d.setMonth(11);//设置月份为12月,注意月份是从0开始计数的
+	d.setDate(2);
+	d.setHours(6);
+	d.setMinutes(12);
+	d.setSeconds(12);
+	alert(d.getDay());//输出2004年12月2日星期几
+	//setXXX这样的方法有个最大的好处就是如果我们设置了错误的值,脚本并不会出错,但日期会自动更正
+	d= new Date();
+	d.setYear(2003);
+	d.setMonth(1);//月份从0开始计数
+	d.setDate(31);//2月从来不会有31号
+	alert(d);//输出日期,发现会是3月3号</pre>
+	<p>运用Date对象这个自动更正的好处,我们可以用它来判断用户输入的日期是否是有效的</p>
+	<pre>
+	//让用户输入生日
+	var year=window.prompt("请输入出生年份!","")*1;
+	var month=window.prompt("请输入出生月份!","")*1;
+	var date = window.prompt("请输入出生日!","")*1;
+	if (!year || !month || !date) {//NaN转换成布尔值将会是false
+		alert("您的输入有误!");
+	} else {
+		var timeMachine=new Date();
+		timeMachine.setFullYear(year);
+		timeMachine.setMonth(month-1);//记住,月份是从0开始计数的
+		timeMachine.setDate(date);
+		var trueYear = timeMachine.getFullYear();
+		var trueMonth = timeMachine.getMonth()+1;//记住,月份是从0开始计数的
+		var trueDate = timeMachine.getDate();
+		if (trueYear != year || trueMonth != month || trueDate != date) {
+			alert("您撒谎!");
+		} else {
+		alert("虽然这个时光机能知道输入的日期是否有效,至于人是不是在那天生的,它是不能去看一看的!");
+		}
+	}</pre>
+</body>
+</html>

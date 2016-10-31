@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.XSLT基础</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>XSLT基础</h1>
+	<h2>XSL 与 XSLT</h2>
+	<p>XSL 指扩展样式表语言（EXtensible Stylesheet Language）。它主要被用来对XML文档进行格式化,与CSS不同,XSL不仅仅是样式表语言XSL主要包括三个部分:</p>
+	<ul>
+		<li>XSLT 一种用于转换 XML 文档的语言。 它可以将一个XML文件转换成另一种格式的XML文件或XHTML文件.</li>
+		<li>XPath 一种用于在 XML 文档中导航,定位元素的语言。 </li>
+		<li>XSL-FO , 可扩展样式表语言格式化对象（Extensible Stylesheet Language Formatting Objects） ,用于格式化供输出的 XML 数据。XSL-FO 目前通常被称为 XSL (尽管这算是一种误解,但这样说是可以的,因为在格式化XML方面,XSL-FO起着和CSS一样的作用!)</li>
+	</ul>
+	<p>XSLT 指 XSL 转换（XSL Transformations）。 它是 XSL 中最重要的部分。通过 XSLT，您可以向或者从输出文件添加或移除元素和属性。您也可重新排列元素，执行测试并决定隐藏或显示哪个元素，等等。描述转化过程的一种通常的说法是，XSLT 把 XML 源树转换为 XML 结果树。</p>
+	<h2>书写 XSLT</h2>
+	<p>XSLT 文件本身也是XML 文件,一般 以.xml .xsl .xslt几种文件后缀名保存.XSLT遵循XML的语法,文件开头一般都加有XML声明,XML声明之后是文档根元素stylesheet或transform(两者之一),并且使用version属性声明XSLT版本,目前版本是1.0,2.0还在草案中,XSLT的所有内置元素都从属于"http://www.w3.org/1999/XSL/Transform"命名空间,所以应该在文档根元素上声明一个xsl或xs的命名空间! </p>
+	<pre>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+	&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; /&gt;	</pre>
+	<p>上面创建了一个最基本的XSLT文件,将其应用于任何XML文档,在支持XSLT的浏览器打开该XML文档,会看到所有的文档显示了出来,而标签没有了!事实上,在浏览器中真正显示的是HTML,XSLT将XML转换成了HTML.我们可以更进一步指定转换成HTML的版本,比如转换成XHTML!</p>
+	<pre>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+	&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&gt;
+	&lt;xsl:output method=&quot;html&quot; encoding=&quot;utf-8&quot;
+	doctype-public=&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+	doctype-system=&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot; /&gt;
+	&lt;/xsl:stylesheet&gt;</pre>
+	<p>output元素定义输出文档的格式。method属性可接受xml,html,text,name四种格式;version设置输出格式的 W3C 版本号（仅在 method="html" 或 method="xml" 时使用）;
+	encoding设置输出中编码属性的值(对于HTML将会输出成charset的值);
+	doctype-public规定 DTD 中要使用的公共标识符;
+	doctype-system规定 DTD 中要使用的系统标识符;
+	indent 规定在输出结果树时是否要增加空白,该值必须为 yes 或 no。</p>
+	<h3>template 模版</h3>
+	<p>可以用template来定义模版.template元素必须有match或name两个属性之一或两者都有,match属性用以并联XML中的元素,其值为一个XPath表达式,XPath表达式所选取的元素会被应用模版而进行转换.
+	name属性为模版定义名称,用以在其它地方引用.一个template元素里面包含的是一些将被输出的HTML或XML标签.
+	</p>
+	<pre>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+	&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&gt;
+	&lt;xsl:output method=&quot;html&quot; version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; indent=&quot;yes&quot;/&gt;
+		&lt;xsl:template match=&quot;/bank/p/name&quot;&gt;
+			&lt;strong&gt;Name&lt;/strong&gt;
+		&lt;/xsl:template&gt;
+	&lt;/xsl:stylesheet&gt;</pre>
+	<p>对于使用一个没有任何模版的XSLT的XML文件,在浏览器中显示时只是简单的将其中的文本显示出来,应用了上面的XSLT之后,根元素bank下面子元素p的子元素name的值都将会显示成一个加粗的Name!而其它的则只是普通的文本.但这样并没有什么意义,我们还可以更进一步,将被XPath表达式"/bank/p/name"选取的元素的值显示出来-------value-of元素!value-of元素的select属性是必须的,属性值是一个XPath表达式,指定一个节点(如果是多节点,value-of中会获取第一个节点的值),然后将其里面的文本输出!将上面的模版替换成下面的,输出后就会将所有的name加粗!</p>
+	<strong>注意,任何正文内容的输出都应该放在template元素里面!</strong>
+	<pre>
+	&lt;xsl:template match=&quot;/bank/p/name&quot;&gt;
+		&lt;strong&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;&lt;/strong&gt;
+	&lt;/xsl:template&gt;</pre>
+	<p>注意上面的value-of的select是使用的 "." ,而没有使用"/bank/p/name",因为"/bank/p/name"返回的是所有的name元素," . "表示模版当前应用的那个元素!</p>
+	<p>可以定义多个模版,如下:</p>
+	<pre>
+	&lt;xsl:template match=&quot;/bank/p/name&quot;&gt;
+		&lt;strong&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;---&lt;/strong&gt;
+	&lt;/xsl:template&gt;
+	&lt;xsl:template match=&quot;/bank/p/age&quot;&gt;
+		&lt;em&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;---&lt;/em&gt;
+	&lt;/xsl:template&gt;
+	&lt;xsl:template match=&quot;/bank/p/money&quot;&gt;
+		&lt;u&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;&lt;/u&gt;&lt;hr /&gt;
+	&lt;/xsl:template&gt;</pre>
+	<strong>当多个模版的match表达选取节点重叠时,后出现的模版的格式会覆盖先出现的,可以使用template元素的priority属性对模版的优先组进行编号,其值是一个数字,越大优先级越高!</strong>
+	<p>这样,便给name,age,money这些元素都进行了格式化输出,但现在输出的HTML代码顺序仍然是按照在XML源文件中出现的顺序出现的.当需要对整个XML文档进行格式化输出的时候,可以将match属性设为"/"</p>
+	<pre>
+	&lt;xsl:template match=&quot;/&quot; /&gt;</pre>
+	<p>使用上面的模版,将会使XML文档在浏览器中没有任何输出.可以在应用于根节点的模版中加上HTML标签,以输出完整的HTML文档!</p>
+	<pre>
+	&lt;xsl:template match=&quot;/&quot;&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+			&lt;title&gt;XSLT&lt;/title&gt;
+		&lt;/head&gt;
+		&lt;body&gt;
+			一个HTML页面
+		&lt;/body&gt;
+		&lt;/html&gt;
+	&lt;/xsl:template&gt;</pre>
+	<p>这样,即使定义了其它模版,它们的输出也不会出现在浏览器中,因为上面的模版覆盖了其它应用于子节点的模版的输出,要在其中包含其它模版的内容,可以使用XSLT的apply-templates元素来应用模版,该元素有两个属性,select属性值是一个XPath表达式,XPath表达式选取的节点及其子节点将被应用模版.
+		如果没有为这些节点定义模版,则直接输出节点的值.如果apply-templates元素不指定select属性,则将给当前节点(template元素的match属性所匹配的节点)的所有后代节点应用模版,如果没有定义模版,则直接输出所有节点的值.
+	</p>
+	<p>下面的代码将直接输出所有节点的值</p>
+	<strong>
+	XSLT中有一个规定:如果一个节点没有任何可用的template,则将这个节点中所有文本节点的值返回!
+	</strong>
+	<pre>
+	&lt;xsl:template match=&quot;/&quot;&gt;
+			&lt;xsl:apply-templates /&gt;
+	&lt;/xsl:template&gt;</pre>
+	<p>可以指定select属性,指明哪些节点将应用模版并输出在这个地方,这样就可以不以XML源文件中的顺序输出数据了!</p>
+	<pre>
+	&lt;xsl:template match=&quot;/&quot;&gt;
+		&lt;xsl:apply-templates select=&quot;/bank/p/money&quot; /&gt;
+			&lt;hr /&gt;
+		&lt;xsl:apply-templates select=&quot;/bank/p/name&quot; /&gt;
+	&lt;/xsl:template&gt;</pre>
+	<p>还可以使用call-template调用指定的模版,call-template元素的name属性指定要调用模版的name</p>
+	<h3>attribute 给元素添加属性</h3>
+	<p>使用attribute元素,可以在转换时给元素动态添加属性!其语法很简单,下面是一个给img元素添加值为&quot;test.jpg&quot;的src属性的代码:</p>
+	<pre>
+	&lt;img&gt;
+		&lt;xsl:attribute name=&quot;source&quot;&gt;test.jpg&lt;/xsl:attribute&gt;
+	&lt;/img&gt;</pre>
+	<h3>for-each 节点遍历</h3>
+	<p>XSLT中的for-each 元素允许您在 XSLT 中进行循环。该元素的select属性与其它元素的select属性一样,其值是一个XPath表达式,被XPath表达式选取的元素将被遍历!</p>
+	<pre>
+	&lt;xsl:template match=&quot;/&quot;&gt;
+		&lt;xsl:for-each select=&quot;/bank/p/name&quot;&gt;
+			&lt;em&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;&lt;/em&gt;&lt;br /&gt;
+		&lt;/xsl:for-each&gt;
+	&lt;/xsl:template&gt;</pre>
+	<p>上面的代码将遍历所有根元素bank的子元素p的name子元素并加以格式化后输出它的值. 
+		注意,value-of元素的select的值"."表示选取当前节点,在for-each的内部,当前节点为for-each当前遍历到的节点!
+	</p>
+	<h3>sort 排序</h3>
+	<p>sort 元素用于对结果进行排序。sort元素需要放在for-each元素内部.sort元素的select属性值为选取排序依据节点的XPath表达式,data-type属性有两个取值(text|number),指明是按字母顺序排序还是按数字大小排序!
+	另外,它还有个order属性,可以指定是按正顺还是倒序排序,取值为(ascending|descending),默认是ascending(正序)!</p>
+	<pre>
+	&lt;xsl:for-each select=&quot;/bank/p&quot;&gt;
+		&lt;xsl:sort select=&quot;./money&quot; data-type=&quot;number&quot; /&gt;
+		&lt;xsl:value-of select=&quot;./money&quot; /&gt;&lt;br /&gt;
+	&lt;/xsl:for-each&gt;</pre>
+	<h3>if 条件测试</h3>
+	<p>在XSLT中还可以使用if元素进行条件判断,该元素的test属性值为一个条件测试XPath表达式,当值计算结果是真的时候才处理if元素中的内容!</p>
+	<pre>
+	&lt;xsl:for-each select=&quot;/bank/p&quot;&gt;
+		&lt;xsl:sort select=&quot;./money&quot; data-type=&quot;number&quot;  order=&quot;descending&quot; /&gt;
+		&lt;xsl:if test=&quot;position() &amp;lt; 4 and age &amp;gt;=18&quot;&gt;
+			&lt;xsl:value-of select=&quot;./money&quot; /&gt;&lt;br /&gt;
+		&lt;/xsl:if&gt;
+	&lt;/xsl:for-each&gt;</pre>
+	<p>上面的代码用以输出money排前三名的成年人. 注意,在if元素的test属性中,XPath表达中的一些特殊字符(如大于和小于)必须写成实体引用!</p>
+	<h3>choose  when...otherwise...... 多重条件测试</h3>
+	<p>出于习惯,见到if语句可能会想到if...else语句,但XSLT中并没有if..else语句,取而代之的是即有if...else功能,又有switch..case功能的choose元素,choose元素有两个子元素when与otherwise,相当于
+	else if 与else ,或者,when相当于case语句,otherwise相当于default.when元素的test属性值同样是一个XPath表达式,当这个表达式返回真的时候,when的子元素才会显示!otherwise没有test属性,当所有的when元素的test都失败后,处理otherwise子元素!</p>
+	<pre>
+	&lt;xsl:choose&gt;
+		&lt;xsl:when test=&quot;name='PHPer'&quot;&gt;PHPer就是PHP程序员的意思!&lt;/xsl:when&gt;
+		&lt;xsl:when test=&quot;name='CJ'&quot;&gt;好好Coding,天天向上!&lt;/xsl:when&gt;
+		&lt;xsl:when test=&quot;name='DBD'&quot;&gt;不懂!&lt;/xsl:when&gt;
+		&lt;xsl:otherwise&gt;其它人&lt;/xsl:otherwise&gt;
+	&lt;/xsl:choose&gt;</pre>
+	<h2>浏览器中的 XSLT</h2>
+	<p>只要有XML与XSLT解释引擎,就可以在任何地方使用任何语言利用XSLT将XML转换成HTML或其它文档,并且使用不同的语言并不会影响转换结果.也就是说,这种转换是与语言无关的,既可以在服务器端进行转换后,返回HTML页面,也可以客户端进行转换,它们的效果都是一样的.而且在客户端对XML文件进行转换,可以减轻服务器的负担.</p>
+	<p>在一个引入了XSLT文件的XML文件,浏览器会自动对其进行转换.但是,XML一般并不是在浏览器中显示,而是用来读取数据.当使用其它语言来手动转换时,需要将xml-stylesheet这样的PI去掉,这样,XML 文件可使用多个不同的 XSL 样式表来进行转换,增加了灵活性。</p>
+	<h3>IE 中的XSLT</h3>
+	<p>与IE支持XML DOM 一样,IE中XSLT相关API显得十分简单,同时IE对XSLT的支持也很有限!下面是在IE 中将一个XMLDOM使用XSLT转换成HTML的示例:</p>
+	<pre>
+	//载入XML数据文件
+	var xml = new ActiveXObject("Microsoft.XMLDOM");
+	xml.async = false;
+	xml.load("test.xml");
+	//载入XSLT文件,XSLT也是作为XML文件载入的
+	var xsl = new ActiveXObject("Microsoft.XMLDOM");
+	xsl.async = false;
+	xsl.load("test.xsl");
+	//直接在要转换的DOM上调用transformNode方法,传入XSLT DOM,返回字符串
+	document.write(xml.transformNode(xsl));</pre>
+	<h3>Mozilla 中的XSLT</h3>
+	<p>与Mozilla对XML DOM的支持一样,它对XSLT的支持更标准但更复杂!Mozilla使用一个XSLTProcessor对象来处理与XSLT有关的转换.</p>
+	<pre>
+	//载入XML数据
+	var xml = document.implementation.createDocument("","",null);
+	xml.async =false;
+	xml.load("test.xml");
+	//载入XSLT
+	var xsl = document.implementation.createDocument("","",null);
+	xsl.async =false;
+	xsl.load("test.xsl");
+	//创建XSLTProcessor
+	var xslPro = new XSLTProcessor();
+	xslPro.importStylesheet(xsl);//导入XSLT
+	//使用transformToDocument将XML按XSLT进行转换,返回新文档的DOM
+	var result = xslPro.transformToDocument(xml);
+	//要将返回的DOM转换成字符串,还要使用XMLSerializer对象
+	var serializer =new XMLSerializer();
+	var html = serializer.serializeToString(result);
+	document.write(html);</pre>
+	
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

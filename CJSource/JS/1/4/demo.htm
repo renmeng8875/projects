@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>数组与对象</title>
+<script type="text/javascript">
+	var a =new Array();//创建数组 new Date()
+	//数组下标从0开始,第一个元素下标为0
+	a[0]=1;
+	a[1]="adfsdf";
+	a[2]=true;//动态类型
+	//var b;
+	//alert(b);//undefined
+	Math.PI;//Math对象的属性PI
+	//alert(a.length);//数组对象a的属性length,数组元素的个数
+	//alert(a[9999]);
+
+	//alert(a.length);//1000
+	//数组最大下标为数组长度减一
+	
+	//alert(a[a.length-1]);//输出a的最后一个元素
+	
+	a[10]=123232;
+	
+	/*for (var i=0;i < a.length ;i++) {
+		if (a[i] != undefined) alert(a[i]);
+	}*/
+	
+	/*for (var i=0;i < a.length && a[i]!=undefined ;i++) {
+		alert(a[i]);
+	}*/
+	
+	//var b=new Array(0,1,2,3);
+	//alert(b[0]);
+	
+	//var c=new Array(2);//只有一个参数的时候，这个参数应该是数组的长度
+	//alert(c.length);
+	
+	var d=[];//创建一个长度为0的数组
+	//var d =new Array();
+	//d=[0,"adfsad",2,3];
+	//d =[2];
+	//alert(d[0]);
+	d[0]=12;
+	d[1]=123;
+	d.push("Hello","World");
+	
+	//alert(d.length);//2
+	
+	//d[d.length]=123456;//向数组末尾添加了一个元素
+	
+	//alert(d.length);
+	//alert(d[d.length-1]);
+	
+	//d.push(456);//push方法专门用来向数组末尾添加元素
+	//alert(d[d.length-1]);
+//	alert(d.length);
+	//var l=d.push(456);//push方法的返回值为数组新的长度
+//	alert(l);
+//d.push(123,123,13,546);
+//alert(d[d.length-1]);
+//alert(d[1]);
+//delete d[1];//不会改变数组的长度
+//d[1]=undefined;
+//alert(d[1]);
+//alert(d.length);
+
+//alert(d);
+//alert(d.join("#"));
+//UTC 1970 1 1 0 0 0 0
+
+/*
+var s="Start";
+var a=["Start"];
+
+
+var date=new Date();
+var start =date.getTime();
+for (var i=0;i<9999999;i++) {
+	s+="ABC";
+}
+alert("字符串相连:"+((new Date()).getTime()-start));
+
+start =(new Date()).getTime();
+
+for (var i=0;i<9999999;i++) {
+	a.push("ABC");
+}
+s=a.join("");
+alert("使用数组:"+((new Date()).getTime()-start));
+*/
+
+/*var obj=new Object();
+obj.name="CJ";
+obj.age=18;
+alert(obj.name);
+alert(obj.age);*/
+/*
+var obj=new Object();
+obj.name="CJ";
+obj.age=18;
+var arr=new Array();
+arr[0]="CJ";
+arr[1]=18;
+
+alert(Math.PI);*/
+
+var a=[];//数组字面量
+/*
+var obj={};//var obj=new Object();
+obj.name="CJ";
+obj.age="CJ";
+obj.weight="CJ";
+*/
+	//名称:值,
+/*
+var obj={//对象字面量
+	"":"CJ",
+	"age":18,
+	12:123
+};
+obj.abc=456;
+alert(obj[12]);
+obj[0]=12345;
+alert(obj[0]);
+alert(obj.length);//Object比Array少一些功能
+//少:length属性,push,join..
+*/
+/*
+var a=[1];//Array是Object一个扩展
+//var arr=new Array(123);//创建一个有123个空位的数组
+alert(a);
+a.length=123;
+alert(a.length);
+alert(a);
+*/
+/*
+var obj={
+	name:"CJ",
+	age:18,
+	weight:128
+};
+for (var i in obj) {//for in 循环 :foreach
+	alert(i+":"+obj[i]);
+}*/
+
+//该是对象就是对象,该是数组就是数组
+var myClass=[];//创建一个数组,放置每个学生的信息,以学生的学号作为数组下标
+myClass[1]={
+	"name":"HUXP",
+	"Chinese":60,
+	"English":70,
+	"Math":80,
+	"Grade":"C"
+};
+myClass[2]={
+	"name":"发哥",
+	"Chinese":80,
+	"English":80,
+	"Math":80,
+	"Grade":"B"
+};
+myClass[3]={
+	"name":"Per",
+	"Chinese":66,
+	"English":77,
+	"Math":88,
+	"Grade":"B"
+};
+myClass[4]={
+	"name":"小虎子",
+	"Chinese":60,
+	"English":60,
+	"Math":770,
+	"Grade":"C"
+};
+myClass[5]={
+	"name":"DBD",
+	"Chinese":70,
+	"English":70,
+	"Math":70,
+	"Grade":"B"
+};
+myClass[6]={
+	"name":"○",
+	"Chinese":77,
+	"English":77,
+	"Math":80,
+	"Grade":"B"
+};
+myClass[7]={
+	"name":"Me",
+	"Chinese":100,
+	"English":100,
+	"Math":100,
+	"Grade":"A",
+	"Saying":"哇哈哈!"
+};
+/*
+var name=prompt("请输入名称","");
+for (var i=1;i<myClass.length;i++) {
+	if (myClass[i].name==name) {
+		alert("Math:"+myClass[i].Math);
+		break;
+	}
+}*/
+/*
+
+function searchByName(name) {
+	for (var i=1;i<myClass.length;i++) {
+		if (myClass[i].name==name) {
+			return myClass[i].Math;
+		}
+	}
+}
+
+var mark=searchByName(prompt("请输入名称",""));
+alert(mark);*/
+
+//JavaScript 一切皆对象
+/*
+var s="String";
+alert(s.charAt(s.length-1));*/
+//var s="姓名";//Unicode
+//alert(s.charCodeAt(0));
+//var s1=new String("S");//创建一个字符
+
+//alert(String.fromCharCode(65,66,67));
+var s="Hello,World!!!";
+//var s2=s.replace(",W","#w");
+//alert(s2);
+//s.substr(开始下标,截取个数)
+//alert(s.substr(1,1));//uc,从下标1开始向后截取2个字符
+//s.substring(开始下标,结束下标);//不包含结束下标的字符
+//alert(s.substring(1,2));
+//alert(s.toLowerCase());
+//alert(s.toUpperCase());
+//alert(s.split(""));
+//var a=["A","C","C"];
+//var a1=a.join(",").split(",");
+//alert(a1[0]);
+//alert(a1);
+//"ABC".split("");//返回一个数组 ["A","C"]
+
+//document.title="ABC";
+//setInterval("alert('ABC')",1000);
+var s="滚动的字符串……".split("");
+
+function func() {
+	
+	s.push(s[0]);
+	s.shift();//shift方法，把数组第一个元素去掉
+	document.title=s.join("");
+}
+setInterval(func,1000);
+</script>
+</head>
+<body>
+	<h1>数组与对象</h1>
+</body>
+</html>

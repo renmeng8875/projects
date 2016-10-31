@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>4.运算符,语句</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>运算符,语句</h1>
+	<h2>一元运算符</h2>
+	<p>一元运算符只有一个参数，即要操作的对象或值。它们是 ECMAScript 中最简单的运算符。</p>
+	<p>delete 运算符删除对以前定义的对象属性或方法的引用。例如：</p>
+	<pre>
+	var obj = new Object();
+	obj.name = "David";
+	alert(obj.name);	//输出 "David"
+	delete obj.name;
+	alert(obj.name);	//输出 "undefined"</pre>
+	<p>delete 运算符不能删除开发者未定义的属性和方法。例如，下面的代码是没什么效果的：</p>
+	<pre>
+	delete obj.toString;</pre>
+	<p>即使 toString 是有效的方法名，这行代码也会引发错误，因为 toString() 方法是原始的 ECMAScript 方法，不是开发者定义的。</p>
+	<p>delete 还可以用来删除数组中的元素(这没什么奇怪的,数组和对象是相通的)</p>
+	<pre>
+	var arr = [2,4,6,8,10];
+	delete arr[2];
+	alert(arr[2]);//undefined</pre>
+	<p>void 运算符对任何值返回 undefined。该运算符通常用于避免输出不应该输出的值，例如，从 HTML 的 &lt;a&gt; 元素调用 JavaScript 函数时。要正确做到这一点，函数不能返回有效值，否则浏览器将清空页面，只显示函数的结果。例如：</p>
+	<pre>
+	&lt;a href="javascript:window.open('about:blank')"&gt;Click me&lt;/a&gt;</pre>
+	<p>如果把这行代码放入 HTML 页面，点击其中的链接，即可看到屏幕上显示 "[object]"。TIY这是因为 window.open() 方法返回了新打开的窗口的引用。然后该对象将被转换成要显示的字符串。要避免这种效果，可以用 void 运算符调用 window.open() 函数：</p>
+	
+	<pre>
+	&lt;a href="javascript:void(window.open('about:blank'))"&gt;A&lt;/a&gt;
+	//这使 window.open() 调用返回 undefined，它不是有效值，不会显示在浏览器窗口中。</pre>
+	<strong>没有返回值的函数真正返回的都是 undefined。</strong>
+	<p>直接从 C（和 Java）借用的两个运算符是前增量运算符和前减量运算符。所谓前增量运算符，就是数值上加 1，形式是在变量前放两个加号（++）：</p>
+	<pre>
+	var iNum = 10;
+	++iNum;
+	//实际上等价于
+	var iNum = 10;
+	iNum = iNum + 1;</pre>
+	<p>同样，前减量运算符是从数值上减 1，形式是在变量前放两个减号（--）：</p>
+	<pre>
+	var iNum = 10;
+	--iNum;</pre>
+	<p>在使用前缀式运算符时，注意增量和减量运算符都发生在计算表达式之前。考虑下面的例子：</p>
+	<pre>
+	var iNum = 10;
+	--iNum;
+	alert(iNum);	//输出 "9"
+	alert(--iNum);	//输出 "8"
+	alert(iNum);	//输出 "8"</pre>
+	<p>第二行代码对 iNum 进行减量运算，第三行代码显示的结果是（"9"）。第四行代码又对 iNum 进行减量运算，不过这次前减量运算和输出操作出现在同一个语句中，显示的结果是 "8"。为了证明已实现了所有的减量操作，第五行代码又输出一次"8"。在算术表达式中，前增量和前减量运算符的优先级是相同的，因此要按照从左到右的顺序计算之。例如：</p>
+	<pre>
+	var iNum1 = 2;
+	var iNum2 = 20;
+	var iNum3 = --iNum1 + ++iNum2;	//等于 "22"
+	var iNum4 = iNum1 + iNum2;//等于 "22"</pre>
+	<p>还有两个直接从 C（和 Java）借用的运算符，即后增量运算符和后减量运算符。后增量运算符也是给数值上加 1，形式是在变量后放两个加号（++）：</p>
+	<pre>
+	var iNum = 10;
+	iNum++;</pre>
+	<p>后减量运算符是从数值上减 1，形式为在变量后加两个减号（--）：</p>
+	<pre>
+	var iNum = 10;
+	iNum--;</pre>
+	<p>与前缀式运算符不同的是，后缀式运算符是在计算过包含它们的表达式后才进行增量或减量运算的。考虑以下的例子：</p>
+	<pre>
+	var iNum = 10;
+	iNum--;
+	alert(iNum);	//输出 "9"
+	alert(iNum--);	//输出 "9"
+	alert(iNum);	//输出 "8"</pre>
+	<p>在算术表达式中，后增量和后减量运算符的优先级是相同的，因此要按照从左到右的顺序计算之。例如：</p>
+	<pre>
+	var iNum1 = 2;
+	var iNum2 = 20;
+	var iNum3 = iNum1-- + iNum2++;	//等于 "22"
+	var iNum4 = iNum1 + iNum2;		//等于 "22"</pre>
+	<p>	在前面的代码中，iNum3 等于 22，因为表达式要计算的是 2 + 20。变量 iNum4 也等于 22，不过它计算的是 1 + 21，因为增量和减量运算都在给 iNum3 赋值后才发生。</p>
+	<p>大多数人都熟悉一元加法和一元减法，它们在 ECMAScript 中的用法与您高中数学中学到的用法相同。一元加法本质上对数字无任何影响,只用来表示正数,但不能将负数转换成正数</p>
+	<pre>
+	var num=-10;
+	alert(+num);//-10</pre>
+	<p>但并不是一元加法就一无用处.由于这类的运算符只能作用于数字,因些,当将这些运算符运用于字符串时,可以起到将字符串转换成数字的妙效!</p>
+	<pre>
+	var str ="123";
+	str = +str;
+	alert(typeof str);//number</pre>
+	<p>一元减法也有这样的效用,但同时,它还会对数字求负!</p>
+	<h2>位运算符</h2>
+	<p>位运算符是在数字底层（即表示数字的 32 个数位）进行操作的。</p>
+	<p>ECMAScript 整数有两种类型，即有符号整数（允许用正数和负数）和无符号整数（只允许用正数）。在 ECMAScript 中，所有整数字面量默认都是有符号整数!</p>
+	<p>有符号整数使用 31 位表示整数的数值，用第 32 位表示整数的符号，0 表示正数，1 表示负数。数值范围从 -2147483648 到 2147483647。</p>
+	<p>可以以两种不同的方式存储二进制形式的有符号整数，一种用于存储正数，一种用于存储负数。正数是以真二进制形式存储的，前 31 位中的每一位都表示 2 的幂，从第 1 位（位 0）开始，表示 20，第 2 位（位 1）表示 21。没用到的位用 0 填充，即忽略不计。例如，下面展示的是数 18 的表示法。</p>
+	<img src="../images/32bit18.gif" alt="数 18 的二进制表现形式" />
+	<p>18 的二进制版本只用了前 5 位，它们是这个数字的有效位。把数字转换成二进制字符串，就能看到有效位：</p>
+	<pre>
+	var iNum = 18;
+	alert(iNum.toString(2));	//输出 "10010"</pre>
+	<p>这段代码只输出 "10010"，而不是 18 的 32 位表示。其他的数位并不重要，因为仅使用前 5 位即可确定这个十进制数值。如下图所示：</p>
+	<img src="../images/32bit18_5.gif" alt="前 5 位即可确定这个十进制数值" />
+	<p>负数也存储为二进制代码，不过采用的形式是二进制补码。计算数字二进制补码的步骤有三步：</p>
+	<ol>
+		<li>确定该数字的非负版本的二进制表示（例如，要计算 -18的二进制补码，首先要确定 18 的二进制表示）</li>
+		<li>求得二进制反码，即要把 0 替换为 1，把 1 替换为 0</li>
+		<li>在二进制反码上加 1</li>
+	</ol>
+	<p>要确定 -18 的二进制表示，首先必须得到 18 的二进制表示，如下所示：</p>
+	<pre>
+	0000 0000 0000 0000 0000 0000 0001 0010</pre>
+	<p>接下来，计算二进制反码，如下所示：</p>
+	<pre>
+	1111 1111 1111 1111 1111 1111 1110 1101</pre>
+	<p>最后，在二进制反码上加 1，如下所示：</p>
+	<pre>
+	1111 1111 1111 1111 1111 1111 1110 1101
+	                                                                 1
+	-----------------------------------------------------------
+	1111 1111 1111 1111 1111 1111 1110 1110</pre>
+	<p>因此，-18 的二进制表示即 1111 1111 1111 1111 1111 1111 1110 1110。记住，在处理有符号整数时，开发者不能访问 31 位。</p>
+	<p>然而，把负整数转换成二进制字符串后，ECMAScript 并不以二进制补码的形式显示，而是用数字绝对值的标准二进制代码前面加负号的形式输出。例如：</p>
+	<pre>
+	var iNum = -18;
+	alert(iNum.toString(2));	//输出 "-10010"</pre>
+	<p>这段代码输出的是 "-10010"，而非二进制补码，这是为避免访问位 31。为了简便，ECMAScript 用一种简单的方式处理整数，使得开发者不必关心它们的用法。另一方面，无符号整数把最后一位作为另一个数位处理。在这种模式中，第 32 位不表示数字的符号，而是值 231。由于这个额外的位，无符号整数的数值范围为 0 到 4294967295。对于小于 2147483647 的整数来说，无符号整数看来与有符号整数一样，而大于 2147483647 的整数则要使用位 31（在有符号整数中，这一位总是 0）。把无符号整数转换成字符串后，只返回它们的有效位。</p>
+	<strong>注意：所有整数字面量都默认存储为有符号整数。只有 ECMAScript 的位运算符才能创建无符号整数。</strong>
+	<dl>
+		<dt>位运算符</dt>
+		<dd>按位非 NOT</dd>
+		<dd>按位与 AND</dd>
+		<dd>按位或 OR</dd>
+		<dd>按位异或 XOR</dd>
+		<dd>左移运算 &lt;&lt;</dd>
+		<dd>有符号右移运算 &gt;&gt;</dd>
+		<dd>无符号右移运算 &gt;&gt;&gt;</dd>
+	</dl>
+	<p>按位非运算符首先将数字转换成二进制(32位),然后再对各个数位上的1替换成0,而0则替换成1</p>
+	<pre>
+	var num = 12;
+	/*12转换成二进制数为1100,32位形式为
+	00000000000000000000000000001100 	//取该二进制数的补码
+	11111111111111111111111111110011	//-13
+	*/
+	alert(~num);//-13,输出仍然以十进制格式
+	//按位非实际上是对数字取负,然后再减一</pre>
+	<p>按位与,按位或,按位异或运算符都是先将数字转换成32位二进制数,然后对各位进行操作</p>
+	<pre>
+	/*
+	0 &amp; 0 == 0					1 |  0 == 1	
+	0 &amp; 1 == 0					1 |  1 == 1
+	1 &amp; 1 == 1					0 |  0 == 0	
+	异或比较特殊,当两加只有一个是1时返回1,其它返回0
+	1 ^ 1 == 0					1 ^ 0 == 1			0 ^ 0 == 0
+	*/
+	var num1 = 12;
+	var num2 = 24;
+	/*
+	00000000000000000000000000001100	// 12
+	00000000000000000000000000011000	// 24
+	-----------------------------------------------------	// &amp;
+	00000000000000000000000000001000	// 8
+	*/
+	alert(num1 &amp; num2);// 8
+	/*
+	00000000000000000000000000001100	// 12
+	00000000000000000000000000011000	// 24
+	-----------------------------------------------------	// |
+	00000000000000000000000000011100	// 28
+	*/
+	alert(num1 |  num2);// 28
+	/*
+	00000000000000000000000000001100	// 12
+	00000000000000000000000000011000	// 24
+	-----------------------------------------------------	// ^
+	00000000000000000000000000010100	// 20
+	*/
+	alert(num1 ^ num2);//20
+	alert(num1 &lt;&lt; 4);//将12左移4位,192
+	/*左移运算符将二进制数字向左移动N位,空出的位置用0填充,超出32位的截去(不改变第32位)
+	00000000000000000000000000001100
+	00000000000000000000000011000000 //192
+	*/
+	alert(num1 &gt;&gt; 4);//将12有符号右移4位,0
+	/*有符号右移运算符将二进制数字向右移动N位,前面空出的位置用0填充(不改变第32位),后面截去N位
+	00000000000000000000000000001100 //12
+	00000000000000000000000000000000 //0
+	*/
+	alert(num1 &gt;&gt;&gt; 4);//将12无符号右移4位,0
+	/*无符号右移运算符将二进制数字向右移动N位,前面空出的位置用0填充,后面截去N位
+	//如果N大于0,第32位总会用0填充,使用无符号右移运算符得到的总是正数
+	00000000000000000000000000001100 //12
+	00000000000000000000000000000000 //0,对于正数,有符号右移和无符号右移一样
+	*/
+	alert(-num1 &gt;&gt;&gt; 4);//将-12无符号右移4位,268435455
+	/*
+	11111111111111111111111111110100 //-12
+	00001111111111111111111111111111 //268435455
+	*/</pre>
+	<h2>Boolean 运算符</h2>
+	<p>Boolean 运算符有三种：NOT(!)、AND(&amp;&amp;) 和 OR(||)。</p>
+	<dl>
+		<dt>逻辑 NOT 运算符的行为如下：</dt>
+		<dd>对于0,true,null,NaN,undefined,空字符串,返回true</dd>
+		<dd>对于非0数字,非空字符串,非空对象,true,返回false</dd>
+	</dl>
+	<pre>
+	//下面皆返回true
+	alert(!null);
+	alert(!0);
+	alert(!undefined);
+	alert(!false);
+	alert(!"");
+	alert(!NaN);
+	//下面皆返回false
+	alert(!" ");
+	alert(!true);
+	alert(!(new Object()));
+	alert(!-1);</pre>
+	<strong>逻辑非运算符(!)始终返回布尔值!</strong>
+	<p>当然,逻辑非运算符还有另外一个用途---〉将其它类型转换成布尔值，例如：</p>
+	<pre>
+	alert(!!NaN);//NaN的逻辑值为false</pre>
+	<p>在 ECMAScript 中，逻辑 AND 运算符用双和号(&amp;&amp;)表示,逻辑OR运算符有双竖线表示(||),它们的效用你可能已经很清楚</p>
+	<pre>
+	alert(true &amp;&amp; true);//true
+	alert(false &amp;&amp; true);//false
+	alert(false &amp;&amp; false);//false
+	alert(true || true);//true
+	alert(true || false);//true
+	alert(false || false);//false</pre>
+	<p>然而在ECMAScript中，AND与OR运算符不但可以作用于逻辑值！</p>
+	<pre>
+	alert(34 &amp;&amp; String);//将返回34
+	//但新手对这样的比较可能很迷惑</pre>
+	<p>ECMAScript中的逻辑与逻辑或运算符又被称之为"快速与","快速或",或称之为"短路与","短路或".称之为短路或快速,是因为它们在测试两边条件时(将其转换成布尔值),如果第一个表达式的值已经能够确定整个表达式值的时候,就不会继续求下一个表达式的值,直接将这个值返回.比如与操作,如果第一个值转换为布尔是false,那么不管下个是true还是false,整个表达式的值都会是false,而对于OR运算符,则是如果第一个逻辑值为true,那么整个表达式的值就定了,就不用判断第二个条件了,所以,我们应该在AND运算中将最可能是false的条件放在前面,而在OR运算中,则将最有可能是true的条件放在前面,这样可以提高效率!我们可以用下面的例子来证明这一点:</p>
+	<pre>
+	function fnTrue() {
+		alert(true);
+		return true;
+	}
+	function fnFalse() {
+		alert(false);
+		return false;
+	}
+	//注意是执行两个函数,将返回值进行比较
+	var a = fnFalse() &amp;&amp; fnTrue();//只会出现一个弹窗,显示false
+	//a = fnTrue() || fnFalse();//这一步只会出现一个弹窗,显示true</pre>
+	<p>而对于这两个操作符的返回值,则只要记住一点:将最后判断的那个条件的值返回</p>
+	<pre>
+	//AND中第一个为true时,还要继续判断,第二个为false,整个表达式的值为false,同时将第二个条件返回
+	alert(true &amp;&amp; false);
+	//当对其它类型使用AND时也是这样的
+	alert(null &amp;&amp; Object);//将返回null,因为在AND运算中第一条件为false,就无须继续了
+	//同理,OR运算也是如此
+	alert(Object || String);//返回Object,因为它的逻辑值是true
+	alert(false || NaN);//返回NaN</pre>
+	<h2>数学运算符</h2>
+	<p>加法(+),减法(-),乘法(*),除法(/)以及取模(%)都是小学数学的内容了,这里我们主要讨论在ECMAScript中,当这些运算符与一些特殊值相遇时会是什么情况</p>
+	<dl>
+		<dt>加法(+)</dt>
+		<dd>-Infinity 加 -Infinity，结果为 -Infinity。Infinity 加 Infinity，结果为 Infinity。</dd>
+		<dd>Infinity 加 -Infinity，结果为 NaN。</dd>
+		<dd>当只要有一边是字符串时,两边都被转换成字符串进行相连</dd>
+	</dl>
+	<dl>
+		<dt>减法(-)</dt>
+		<dd>-Infinity 减 Infinity，结果为 NaN。</dd>
+		<dd>-Infinity 减 -Infinity，结果为 NaN。</dd>
+		<dd>Infinity 减 -Infinity，结果为 Infinity。</dd>
+		<dd>-Infinity 减 Infinity，结果为 -Infinity。</dd>
+	</dl>
+	<dl>
+		<dt>乘法(*)</dt>
+		<dd>如果结果太大或太小，那么生成的结果是 Infinity 或 -Infinity。</dd>
+		<dd>Infinity 乘以 0 以外的任何数字，结果为 Infinity 或 -Infinity。</dd>
+		<dd>Infinity 乘以 Infinity，结果为 Infinity。</dd>
+	</dl>
+	<dl>
+		<dt>除法(/)</dt>
+		<dd>如果结果太大或太小，那么生成的结果是 Infinity 或 -Infinity。</dd>
+		<dd>Infinity 被 Infinity 除，结果为 NaN。</dd>
+		<dd>Infinity 被任何数字除，结果为 Infinity。</dd>
+		<dd>0 除一个任何非无穷大的数字，结果为 NaN。</dd>
+		<dd>Infinity 被 0 以外的任何数字除，结果为 Infinity 或 -Infinity。</dd>
+	</dl>
+	<dl>
+		<dt>取模(%)</dt>
+		<dd>如果被除数是 Infinity，或除数是 0，结果为 NaN。</dd>
+		<dd>Infinity 被 Infinity 除，结果为 NaN。</dd>
+		<dd>如果除数是无穷大的数，结果为被除数。</dd>
+		<dd>如果被除数为 0，结果为 0。</dd>
+	</dl>
+	<strong>如果对其它类型的值进行数学运算,那么其它类型的值会自动转换成数字,如果转换失败,则返回NaN(只有加法运算可以和普通字符串相连)</strong>
+	<h2>语句</h2>
+	<p>判断语句:if (condition) {...} , if (condition) {....}else {....} , if (condition) {....} else if  (condition) {......} else {.....}</p>
+	<p>循环语句:while (condition) {...} , do {...} while (condition) ,for (initialization; expression; post-loop-expression) statement; for (var key in obj) {......}</p>
+	<p>有标签的语句与break,continue语句</p>
+	<p>break 和 continue 语句的不同之处:break 语句可以立即退出循环，阻止再次反复执行任何代码。而 continue 语句只是退出当前循环，根据控制表达式还允许继续进行下一次循环。</p>
+	<pre>
+	var iNum = 0;
+	outermost:
+	for (var i=0; i<10; i++) {
+	  for (var j=0; j<10; j++) {
+	    if (i == 5 && j == 5) {
+	    break outermost;
+	  }
+	  iNum++;
+	  }
+	}
+	alert(iNum);	//输出 "55"</pre>
+	<p>with 语句用于设置代码在特定对象中的作用域。</p>
+	<pre>
+	var sMessage = "hello";
+	with(sMessage) {
+	  alert(toUpperCase());	//输出 "HELLO"
+	}
+	var person = new Object();
+	person.age = 18;
+	person.name = "XXX";
+	person.parent = "ZZZ";
+	with (person) {
+		alert(age+"\n"+name+"\n"+parent);
+	}</pre>
+	<strong>with 语句是运行缓慢的代码块，尤其是在已设置了属性值时。大多数情况下，如果可能，最好避免使用它。</strong>
+</body>
+</html>

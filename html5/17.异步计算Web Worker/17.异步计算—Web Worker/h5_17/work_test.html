@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>异步线程测试</title>
+</head>
+<body>
+<div>
+	<button onclick="start()">启动计数</button>&nbsp;&nbsp;<button onclick="stop()">停止计数</button>
+</div>
+ <p>
+ 	当前总数: <output id="result"></output>
+ </p>
+  <script>
+   var worker;
+   
+   function start(){
+	   worker = new Worker('worker.js');
+	   worker.onmessage = function (event) {
+	     document.getElementById('result').innerHTML = event.data + "<br /> ";
+	   };
+   }
+   
+   function stop(){
+	   worker.terminate();
+   }
+  </script>
+</body>
+</html>

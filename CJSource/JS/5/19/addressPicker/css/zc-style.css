@@ -1,0 +1,536 @@
+* {
+	margin:0;
+	padding:0;
+}
+ul,ol {
+	list-style:normal;
+}
+body {
+	font-size:12px;
+	background:#ffffff;
+}
+a {
+	text-decoration:none;
+	color:#444444;
+}
+a:hover {
+	text-decoration:underline;
+}
+em {
+	font-style:normal;
+}
+strong {
+	font-weight:bold;
+}
+.br_bug {
+	clear:both;
+	margin-top:10px;
+}
+.ff_bug {
+	height:0;
+	overflow:hidden;
+	clear:both;
+}
+#container {
+	width:950px;
+	margin:20px auto 0 auto;
+}
+
+/* left css start */
+#container .left {
+	width:180px;
+	float:left;
+	background:url('../images/bg.png') no-repeat left 317px;
+	padding-bottom:4px;
+}
+#container p.headline {
+	height:24px;
+	line-height:24px;
+}
+#container p.headline span {
+	float:right;
+}
+#container p.headline span a {
+	color:#06f;
+}
+#container .left dl.hotKey {
+	height:390px;
+	font-weight:bold;
+	font-size:14px;
+	letter-spacing:2px;
+	background:#fff;
+}
+#container .left dl dt {
+	width:180px;
+	height:31px;
+	line-height:31px;
+	color:#ee7302;
+	text-align:center;
+	background:url('../images/left-title.jpg') no-repeat;
+	margin-bottom:8px;
+	border:0;
+	float:left;
+}
+#container .left dl dd {
+	height:31px;
+	margin-bottom:8px;
+	float:left;
+	background:url('../images/menu-bg.jpg') no-repeat;
+}
+
+/* menu select start */
+#container .left dl dd.menu_click {
+	height:31px;
+	background:url('../images/select.jpg') no-repeat;
+}
+#container .left dl dd.menu_click a {
+	width:180px;
+	height:31px;
+}
+#container .left dl dd.menu_click a:hover {
+	background:url('../images/select.jpg') no-repeat;
+}
+/* menu select end */
+
+#container .left dl dd a {
+	width:180px;
+	height:31px;
+	line-height:31px;
+	text-align:center;
+	display:block;
+}
+#container .left dl dd a:hover {
+	background:url('../images/menu-hover.jpg') no-repeat;
+}
+#container .left h3.important {
+	width:180px;
+	height:36px;
+	line-height:44px;
+	text-indent:24px;
+	font-size:12px;
+	color:#666;
+	overflow:hidden;
+	background:url('../images/message-bg.jpg') no-repeat;
+	clear:both;
+}
+#container .left p.matter {
+	width:158px;
+	line-height:20px;
+	border-left:1px solid #C4C4C4;
+	border-right:1px solid #C4C4C4;
+	background:#fff url('../images/bg.png') no-repeat 6px -275px;
+	padding:4px 2px 10px 18px;
+	letter-spacing:1.1px;
+}
+/* left css end*/
+/* right css start*/
+#container .right {
+	width:760px;
+	float:left;
+	margin-left:10px;
+	padding-bottom:50px;
+}
+#container .right .look_box {
+	padding:10px;
+	border:1px solid #A5CCED;
+	background:#F5F8FD;
+	margin-bottom:8px;
+}
+#container .right .look_box strong {
+	display:block;
+	padding-bottom:10px;
+}
+#container .right .look_box span {
+	display:block;
+	line-height:18px;
+	text-indent:12px;
+	color:#F30B0B;
+}
+#container .right h3 {
+	font-size:14px;
+	height:30px;
+	line-height:32px;
+	overflow:hidden;
+	background:url('../images/right-bg.jpg') no-repeat;
+	text-indent:18px;
+}
+#container .right p.see_box {
+	border-left:1px solid #C4C4C4;
+	border-right:1px solid #C4C4C4;
+	text-align:right;
+	padding:5px 10px 0 0;
+}
+#container .right p.see_box span {
+	color:red;
+}
+#container .right fieldset {
+	border:0;
+	color:#686868;
+}
+#container .right fieldset .right_bg {
+	width:760px;
+	height:4px;
+	overflow:hidden;
+	background:url('../images/right-bg.jpg') no-repeat left -30px;
+	float:left;
+}
+#container .right fieldset .right_bg_job {
+	width:760px;
+	height:4px;
+	overflow:hidden;
+	background:url('../images/right-bg.jpg') no-repeat left -30px;
+	float:left;
+	margin-left:-1px;
+}
+#container .right fieldset dl {
+	width:758px;
+	border-left:1px solid #C4C4C4;
+	border-right:1px solid #C4C4C4;
+	padding-bottom:4px;
+	float:left;
+}
+#container .right fieldset dl dt {
+	width:130px;
+	height:30px;
+	line-height:30px;
+	text-align:right;
+	float:left;
+}
+#container .right fieldset dl dt span {
+	float:right;
+	color:red;
+}
+#container .right fieldset dl dd {
+	width:613px;
+	height:30px;
+	padding-left:15px;
+	float:left;
+}
+#container .right fieldset dl dd img {
+	float:left;
+	cursor:pointer;
+	margin:5px 0 0 5px;
+}
+#container .right fieldset dl dd.length145px {
+	width:145px;
+}
+#container .right fieldset dl dd.email_box {
+	height:140px;
+}
+#container .right fieldset dl dd.email_box  label {
+	margin:0;
+	padding:0;
+}
+#container .right fieldset dl dd.email_box  label input {
+	margin-left:0;
+}
+#container .right fieldset dl dd.email_box  label.fuck {
+	clear:both;
+	margin:0;
+	display:block;
+	width:600px;
+}
+#container .right fieldset dl dd.email_box strong {
+	display:block;
+	width:613px;
+	float:left;
+	color:#C25F02;
+	height:20px;
+	line-height:20px;
+	font-weight:bold;
+	margin-top:10px;
+}
+#container .right fieldset dl dd.email_box ins {
+	display:block;
+	width:613px;
+	float:left;
+	margin-right:-3px;
+	text-decoration:none;
+	line-height:20px;
+}
+#container .right fieldset dl input {
+	border:1px solid #C3C3C3;
+	height:18px;
+	margin:3px 0 0 0;
+	width:140px;
+	float:left;
+}
+#container .right fieldset h4 {
+	width:760px;
+	font-size:14px;
+	height:30px;
+	line-height:32px;
+	overflow:hidden;
+	background:url('../images/right-bg.jpg') no-repeat;
+	text-indent:18px;
+	margin-top:8px;
+	float:left;
+}
+#container .right fieldset dl dd  input.radio_css {
+	border:0;
+	float:left;
+	width:12px;
+	height:12px;
+	margin:1px 0 0 1px;
+}
+#container .right fieldset dl dd  input.check_css {
+	border:0;
+	float:left;
+	width:14px;
+	margin:4px 0 0 20px;
+}
+#container .right fieldset dl dd  .length85px {
+	width:85px;
+}
+#container .right fieldset dl dt .length70px {
+	width:70px;
+	float:right;
+}
+#container .right fieldset dl dd .length40px{
+	width:40px;
+}
+#container .right fieldset dl dd .length140px{
+	width:140px;
+}
+#container .right fieldset dl dd .length210px {
+	width:210px;
+	height:22px;
+}
+#container .right fieldset dl dd .length200px {
+	width:200px;
+}
+/*
+#container .right fieldset dl dd input.orange_button {
+	width:34px;
+	height:22px;
+	border:1px;
+	border-left-color:#FFB866;
+	border-top-color:#FFB866;
+	border-right-color:#A95C02;
+	border-bottom-color:#A95C02;
+	cursor:pointer;
+	color:#fff;
+	background:#FD9212;
+	clear:both;
+	float:left;
+}
+#container .right fieldset dl dd input.blue_button {
+	width:34px;
+	border:1px;
+	height:22px;
+	color:#fff;
+	background:#277DEA;
+	border-left-color:#65ADFF;
+	border-top-color:#65ADFF;
+	border-right-color:#0A4CA2;
+	border-bottom-color:#0A4CA2;
+	cursor:pointer;
+	clear:left;
+	margin:-22px 0 0 40px;
+}
+*/
+#container .right fieldset dl dd.height150px {
+	height:150px;
+}
+#container .right fieldset dl dd.height190px {
+	height:190px;
+}
+#container .right fieldset dl dd.height165px {
+	height:165px;
+}
+#container .right fieldset dl dd p {
+	width:595px;
+	font-size:12px;
+	border:1px solid #FFCF88;
+	background:#FFFFEC;
+	float:left;
+	padding:4px;
+	margin:3px 0 0 0;
+}
+#container .right fieldset dl dd.height80px {
+	height:80px;
+}
+#container .right fieldset dl dd.height52px {
+	height:52px;
+}
+#container .right fieldset dl dd span {
+	float:left;
+}
+#container .right fieldset dl dd em {
+	float:left;
+	margin:7px 4px 0 4px;
+}
+#container .right fieldset dl dd select {
+	float:left;
+	height:20px;
+	margin-top:3px;
+}
+#container .right fieldset dl dd label {
+	float:left;
+	cursor:default;
+	margin:7px 15px 0 0;
+}
+#container .right fieldset dl dd textarea {
+	width:600px;
+	height:130px;
+	float:left;
+	border:1px solid #C3C3C3;
+}
+
+#container .right fieldset .border1px {
+	width:758px;
+	border-left:1px solid #C4C4C4;
+	border-right:1px solid #C4C4C4;
+	padding-top:8px;
+}
+#container .right fieldset .job_type {
+	height:30px;
+	background:#F5F5F5;
+	margin:0 10px;
+	padding:6px 15px 0 15px;
+}
+#container .right fieldset .button_green {
+	width:66px;
+	height:21px;
+	background:url('../images/tr-button-bg.jpg') no-repeat;
+	border:0;
+	cursor:pointer;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+#container .right fieldset .button_long {
+	width:77px;
+	height:21px;
+	background:url('../images/tr-button-blue.jpg') no-repeat;
+	border:0;
+	cursor:pointer;
+	margin-bottom:20px;
+}
+#container .right fieldset .button_small {
+	width:62px;
+	height:21px;
+	background:url('../images/tr-button-small.jpg') no-repeat;
+	border:0;
+	cursor:pointer;
+	margin-bottom:20px;
+}
+#container .right fieldset  table {
+	width:738px;
+	margin:8px 10px;
+	border:0;
+}
+#container .right fieldset  table tr.tr_top {
+	height:26px;
+	background:url('../images/th-bg.jpg') repeat-x;
+}
+#container .right fieldset  table tr {
+	height:30px;
+	background:url('../images/td-bg.jpg') no-repeat left bottom;
+}
+#container .right fieldset  table tr td {
+	text-align:center;
+}
+#container .right fieldset  table tr td span {
+	color:red;
+}
+/*
+#container .right fieldset p {
+	height:30px;
+}
+#container .right fieldset p.email_box {
+	height:100px;
+}
+#container .right fieldset p em {
+	display:block;
+	width:130px;
+	line-height:30px;
+	text-align:right;
+	float:left;
+}
+#container .right fieldset p span {
+	color:red;
+	float:left;
+	margin-top:7px;
+	margin-right:5px;
+}
+#container .right fieldset p strong {
+	display:block;
+	color:#C25F02;
+	height:20px;
+	line-height:20px;
+	font-weight:bold;
+	margin-top:10px;
+	margin-left:130px;
+}
+#container .right fieldset p ins {
+	text-decoration:none;
+	display:block;
+	margin-left:130px;
+	line-height:20px;
+	color:#666;
+}
+#container .right fieldset p input {
+	border:1px solid #C3C3C3;
+	height:18px;
+	margin-top:3px;
+	width:140px;
+}
+#container .right fieldset p input.cYear,#container .right fieldset p input.high,#container .right fieldset p input.hYear,#container .right fieldset p input.hMonth {
+	width:40px;
+}
+#container .right fieldset p input.radio_css {
+	border:0;
+	width:auto;
+}
+#container .right fieldset p select {
+	margin-top:3px;
+}
+*/
+
+#container .right fieldset .all_button {
+	float:left;
+	text-align:center;
+	padding-left:300px;
+	margin-top:20px;
+}
+#container .right fieldset .all_button input {
+	border:0;
+	cursor:pointer;
+}
+#container .right fieldset .all_button input.save {
+	width:60px;
+	height:35px;
+	background:url('../images/button-bg.jpg') no-repeat;
+}
+#container .right fieldset .all_button input.reset {
+	width:60px;
+	height:35px;
+	background:url('../images/button-bg.jpg') no-repeat;
+}
+#container .right fieldset .all_button input.save_submit {
+	width:80px;
+	height:35px;
+	background:url('../images/submit.jpg') no-repeat;
+}
+
+#container .right fieldset .all_button input.save_next {
+	width:115px;
+	height:35px;
+	background:url('../images/bg.png') no-repeat -55px -150px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

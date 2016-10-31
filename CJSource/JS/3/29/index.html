@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>PopWindow</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" src="../../lib/base.js"></script>
+  <script type="text/javascript" src="../../lib/dnd.js"></script>
+  <script type="text/javascript" src="pop_window.js"></script>
+  <link rel="stylesheet" type="text/css" href="base.css">
+</head>
+<body>
+<h1>PopWindow</h1>
+
+<button id="btn1">窗口A</button>
+<button id="btn2">窗口B</button>
+<button id="btn3">窗口C</button>
+
+<script type="text/javascript">
+	
+var 
+	btn1=$("btn1"),
+	btn2=$("btn2"),
+	btn3=$("btn3"),
+	w1=new PopWindow({
+		title:"弹出窗口A",
+		content:"窗口内容A",
+		width:400,
+		height:300,
+		mask:false
+	}),
+	w2=new PopWindow({
+		title:"弹出窗口B",
+		content:"窗口内容B",
+		width:400,
+		height:300,
+		mask:false
+	})
+	w3=new PopWindow({
+		title:"弹出窗口C",
+		content:"窗口内容C",
+		width:400,
+		height:300,
+		mask:true
+	});
+	
+btn1.onclick=function () {
+	w1.toggleVisible();
+};
+btn2.onclick=function () {
+	w2.toggleVisible();
+};
+btn3.onclick=function () {
+	w3.toggleVisible();
+};
+
+
+
+
+</script>
+</body>
+</html>

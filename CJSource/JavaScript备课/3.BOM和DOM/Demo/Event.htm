@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Event</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript">
+	function addEvent(obj,evtype,fn,useCapture) {
+		if (obj.addEventListener) {//优先考虑W3C事件注册方案
+			obj.addEventListener(evtype,fn,!!useCapture);
+		} else {//当不支持addEventListener时(IE),由于IE同时也不支持捕获,所以不如使用传统事件绑定
+			if (!fn.__EventID) {fn.__EventID = addEvent.__EventHandlesCounter++;}
+			//为每个事件处理函数分配一个唯一的ID
+			if (!obj.__EventHandles) {obj.__EventHandles={};}
+			//__EventHandles属性用来保存所有事件处理函数的引用
+			//按事件类型分类
+			if (!obj.__EventHandles[evtype]) {//第一次注册某事件时
+				obj.__EventHandles[evtype]=[];
+				if (obj["on"+evtype]) {//以前曾用传统方式注册过事件处理函数
+					(obj.__EventHandles[evtype][0]=obj["on"+evtype]).__EventID=0;//添加到预留的0位
+				}
+				//并且给原来的事件处理函数增加一个ID
+				obj["on"+evtype]=addEvent.execEventHandles;
+				//当事件发生时，execEventHandles遍历数组obj.__EventHandles[evtype]并执行其中的函数
+			}
+			obj.__EventHandles[evtype][fn.__EventID]=fn;
+		}
+	}
+	addEvent.__EventHandlesCounter=1;//计数器,0位预留它用
+	addEvent.execEventHandles = function (evt) {//遍历所有的事件处理函数并执行
+		if (!this.__EventHandles) {return true;}
+		evt = addEvent.fixEvent(evt || window.event);
+
+		var fns = this.__EventHandles[evt.type];
+		for (var i=0;i< fns.length;i++) {
+			if (fns[i] instanceof Function) {fns[i].call(this,evt);}
+		}
+	};
+	addEvent.fixEvent = function (evt) {
+		if (!evt.target) {//IE
+			evt.target = evt.srcElement;
+			evt.preventDefault = addEvent.preventDefault;
+			evt.layerX = evt.offsetX;
+			evt.offsetY = evt.offsetY;
+			if (evt.type == "mouseover") {
+				evt.relatedTarget = evt.fromElement;
+			} else if (evt.type=="mouseout") {
+				evt.relatedTarget = evt.toElement;
+			}
+			evt.stopPropagation =addEvent.stopPropagation;
+		}
+		
+		return evt;
+	}
+	addEvent.preventDefault = function () {
+		this.returnValue = false;
+	};
+	addEvent.stopPropagation  = function () {
+		this.cancelBubble = true;
+	};
+	addEvent(window,"load",function () {
+		addEvent(document.getElementsByTagName("img")[0],"mouseover",function (evt) {
+			alert(evt.relatedTarget.tagName);
+		});
+	});
+	
+	
+	
+	
+	function delEvent(obj,evtype,fn,useCapture) {
+		if (obj.removeEventListener) {//先使用W3C的方法移除事件处理函数
+			obj.removeEventListener(evtype,fn,!!useCapture);
+		} else {
+			
+			if (obj.__EventHandles) {
+				
+				var fns = obj.__EventHandles[evtype];
+				if (fns) {
+					delete fns[fn.__EventID];
+				}
+			}
+		}
+	}
+	function fn1() {
+		alert(document.body.onload);
+	}
+</script>
+</head>
+<body>
+	<img src="../../images/dom.jpg" />
+</body>
+</html>

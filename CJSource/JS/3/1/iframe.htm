@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>IFrame</title>
+</head>
+<body>
+	<h1>IFrame</h1>
+	<iframe src="nav.htm" id="testFrame"></iframe>
+	
+<script type="text/javascript">
+	var iframe=document.getElementById("testFrame");
+	/*
+	var w=iframe.contentWindow;
+	w.onload=function() {
+		alert(w.document.body.innerHTML+="ABC");
+	};*/
+//	alert(w.document.body);
+//	w.document.body.innerHTML="ABC";
+
+
+var Browser = {
+	isIE:navigator.userAgent.indexOf("MSIE")!=-1,
+	isFF:navigator.userAgent.indexOf("Firefox")!=-1,
+	isOpera:navigator.userAgent.indexOf("Opera")!=-1,
+	isSafari:navigator.userAgent.indexOf("Safari")!=-1
+};
+</script>
+</body>
+</html>

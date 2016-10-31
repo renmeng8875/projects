@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>函数与内置对象</title>
+	<script type="text/javascript">
+		
+		
+		/*var wide=window.prompt("请输入三角形的底边长度！","");
+		var high=window.prompt("请输入三角形的高！","");
+		var area=wide*high/2;
+		if (isNaN(area)) {
+			alert("您的输入有误!");
+		} else {
+			alert("三角形的面积为"+area);
+		}*/
+	/*	function calcAngleArea() { //使用function关键字声明一个函数，接着是函数的名称，函数名称必须符合变量的命名规范
+			//花括号用来表示一段代码块
+			var wide=window.prompt("请输入三角形的底边长度！","");
+			var high=window.prompt("请输入三角形的高！","");
+			var area=wide*high/2;
+			if (isNaN(area)) {
+				alert("您的输入有误!");
+			} else {
+				alert("三角形的面积为"+area);
+			}
+		}
+		calcAngleArea();
+		//执行若干代码之后
+		calcAngleArea();*/
+		/*function calcAngleArea(wide,high) {//具有参数的函数，参数其实是一些变量，多个参数用“，”分隔
+			var area=wide*high/2;
+			if (isNaN(area)) {
+				alert("您的输入有误!");
+			} else {
+				alert("三角形的面积为"+area);
+			}
+		}
+		calcAngleArea(12,8);
+		calcAngleArea(45,8);*/
+		/*function calcAngleArea(wide,high) {
+			var area=wide*high/2;
+			if (isNaN(area)) {
+				return false;
+				alert("注意,一个函数中的return执行之后，函数就停止运行了，所以你不会看到我!");
+			} else {
+				return area;
+			}
+		}
+		var a=calcAngleArea(23,8);//执行函数，函数的返回值将会赋给变量a
+		if (a) {
+			document.write(a);//当函数有返回值时，我们可以以想要的任何方式来输出a,而不是预先定义好的alert
+		}*/
+		/*function a(msg) {
+			alert(msg);
+		}*/
+		//alert(typeof a);
+		//函数是一种变量类型
+		//var b = a;
+		//var c =b;
+		//alert(b===a && a===c && b===c);
+		//fn();
+		//var fn = function () {alert("aaa");};
+		
+		
+	//	function fn() {
+		//	alert("执行");
+		//}
+		/*function fn(msg,msg2) {
+			alert(msg);
+			alert(msg2);
+		}
+		fn();*/
+		//var Var="var";//全局变量
+		//alert(Var);
+	//	function fn() {
+		//	var a=23;//局部变量
+	//		alert(a);
+	//	}
+		//function fn() {
+		//}
+		//fn(12,23,23,4);
+		//alert(a);
+		/*var person= new Object();
+		person.age =18;
+		alert(person.age);
+		person.show = function () {//方法
+			alert("秀");
+		};
+		person.show();*/
+
+		//alert(Math.PI);//输出π
+		//alert(Math.pow(10,3));//输出10的3次方
+		//alert(Math.abs(-12));//输出-12的绝对值
+		//var num=23.34;
+		//alert(Math.ceil(num));//返回大于等于num的最小整数
+		//alert(Math.floor(num));//返回小于等于num的最大整数。
+		//alert(Math.round(num));//返回与num最接近的整数(四舍五入)。
+		//alert(Math.random());*///返回介于 0 和 1 之间的伪随机数。产生的伪随机数介于 0 和 1 之间（含 0，不含 1）
+	//	alert(Math.max(2,3));//返回两个数值参数中较大的那个
+	//	alert(Math.min(2,3));//返回两个数值参数中较小的那个
+	
+		/*var MyMath = new Object();
+		MyMath.PI =3.1415926;
+		MyMath.pow = function (num,gree) {
+			var reVal=1;
+			for (var i=0;i<gree;i++) {
+				reVal = reVal*num;
+			}
+			return reVal;
+		};
+		MyMath.abs = function (num) {
+			// "(condition)?(trueValue):(falseValue)" 三目运算符
+			return num>0?num:num*-1;
+		};*/
+		
+		//var a = new Date();
+		//alert(a.getDate());//获取几号
+		//alert(a.getYear());//获取年
+		//alert(a.getMonth());//获取月(月份从0开始计数)
+		//alert(a.getHours());//获取时
+		//alert(a.getMinutes());//获取分
+		//alert(a.getSeconds());//获取秒
+		//alert(a.getMilliseconds());//获取毫秒
+		//alert(a.getDay());//获取星期几
+		//a.setYear(1990);
+		//a.setMonth(0);//月份是从0开始的
+		//a.setDate(1);
+		//alert(a.getDay());
+		var year = window.prompt("请输入出生年份!","");
+		var month = window.prompt("请输入出生月份!","");
+		var date = window.prompt("请输入出生日!","");
+		if (!year || !month || !date) {
+			alert("你放弃了!");
+		}
+		year = Number(year);
+		month = Number(month);
+		date = Number(date);
+		var d = new Date();
+		d.setFullYear(year);
+		d.setMonth(month-1);
+		d.setDate(date);
+		var validYear = d.getFullYear();
+		var validMonth = d.getMonth()+1;
+		var validDate = d.getDate();
+		if (validYear != year || validMonth!=month || validDate != date) {
+			alert("输入的日期不正确!");
+		}
+	</script>
+</head>
+<body>
+	<h1>函数与内置对象</h1>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery中的Ajax</title>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="../../lib/jquery.json.js"></script>
+
+<script type="text/javascript">
+jQuery(function () {
+	/*jQuery.ajax({
+		url:"http://www.pl4cj.com:8888/5/6/action.php",
+		cache:false,
+		dataType:"jsonp",
+		data:{param1:"value1",param2:"value2"},
+		complete:function (xhr,ts) {
+			//alert(xhr.responseText+"\n"+ts);
+		},
+		success:function (data) {
+			alert("JSONP"+$.JSON.encode(data));
+			//alert(data);
+		}
+	});
+	*/
+	$("#oDiv").animate({height:300},1000,function () {
+		$(this).load("content.htm");
+	});
+});
+
+
+/*
+var fnName="callback"+(+new Date);
+window[fnName]=function (data) {
+	alert(jQuery.JSON.encode(data));
+};
+//JSONP
+var script=document.createElement("script");
+script.src="http://www.pl4cj.com:8888/5/6/action.php?param=123&callback="+fnName;
+document.getElementsByTagName("head")[0].appendChild(script);
+*/
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<h1 id="header">jQuery中的Ajax</h1>
+
+<div id="oDiv" style="background:blue;color:white;">
+	jQuery中的Ajax
+</div>
+
+</body>
+</html>

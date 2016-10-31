@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>浏览器中的XML</title>
+<script type="text/javascript" src="../../lib/base.js"></script>
+</head>
+<body>
+	<h1>浏览器中的XML</h1>
+
+<script type="text/javascript">
+/*
+Base.ajax({
+	url:"test.xml",
+	success:function (text,xml) {
+		alert(xml.getElementsByTagName("book")[0].firstChild.nodeValue);
+	}
+});*/
+
+
+if (false) {
+	function XMLDOM() {
+		var xmlDomVers = [
+		"Microsoft.XmlDom",
+		"MSXML2.DOMDocument",
+		"MSXML2.DOMDocument.3.0",
+		"MSXML2.DOMDocument.4.0",
+		"MSXML2.DOMDocument.5.0"
+		];
+		for (var i=xmlDomVers.length-1;i>=0;i--) {
+			try {
+				var xmlDom = new ActiveXObject(xmlDomVers[i]);
+				return xmlDom;
+			} catch(e) {continue;}
+			
+		}
+	}
+	
+	var xmlDom=XMLDOM();
+	
+	/*xmlDom.loadXML("<?xml version='1.0'?><root>XMLDOM内容</root>");
+	alert(xmlDom.documentElement.firstChild.nodeValue);*/
+	//xmlDom.load("http://www.pl4cj.org/demo/test.xml");
+	xmlDom.async=true;//设成false表示同步加载
+	xmlDom.load("test.xml");//默认是异步加载
+	xmlDom.onreadystatechange=function () {
+		if (xmlDom.readyState===4) {
+			if (xmlDom.parseError.errorCode===0) {
+				alert(xmlDom.documentElement.tagName);
+			} else {
+				var er=xmlDom.parseError
+				throw new Error("XML解析出错!错误信息如下:\n"+
+								"错误代号:"+er.errorCode+
+								"\n文件:"+er.filepos+
+								"\n行:"+er.line+
+								"\n字符:"+er.linepos+
+								"\n相关信息:"+er.reason+"\n");
+			}
+		}
+	};
+
+}
+/*var nsURL="http://www.pl4cj.org/";
+var xmlDom = document.implementation.createDocument(nsURL,"root",null);
+xmlDom.async=true;//false同步载入
+xmlDom.onload=function () {
+	alert(this.documentElement.firstChild.nodeName);
+};
+
+xmlDom.load("test.xml");*/
+
+/*
+var xmlParser = new DOMParser();
+
+var xmlStr="<root><book>知识分子的背叛</book><book>小逻辑</book><book>不确定的科学和不确定的世界</book></root>";
+var xmlDom = xmlParser.parseFromString(xmlStr,"text/xml");//该方法返回一个XML DOM对象
+//alert(xmlDom.getElementsByTagName("book")[0].firstChild.nodeValue);
+//第二个参数text/xml也可以是application/xml,两者都用来解析XML
+//还可以是application/xhtml+xml,用来解析XHTML,只能用这三种MIME
+//alert(xmlDom.documentElement.firstChild.xml);
+
+
+
+var serializer= new XMLSerializer();
+var s = serializer.serializeToString(xmlDom,"text/xml");
+alert(s);
+//xmlDom为一个XML DOM节点对象
+//而text/xml也可为application/xml
+
+*/
+
+
+
+if (document.implementation && document.implementation.createDocument) {
+	//W3C
+	var getXMLDOM=function () {//获取一个XMLDOM对象
+		return document.implementation.createDocument("","",null);
+	},
+	loadXMLFile=function (xmlDom,url,callback) {
+		if (xmlDom.async===true) {
+			xmlDom.onload=function () {
+				if (xmlDom.documentElement.nodeName=="parsererror") {
+					throw new Error("XML Parse Error:"+xmlDom.documentElement.firstChild.nodeValue);
+				} else {
+					callback.call(xmlDom);
+				}
+			};
+		}
+		xmlDom.load(url);
+		return xmlDom;
+	},
+	loadXMLString=function (xmlDom,s) {
+		var p = new DOMParser();
+		var newDom=p.parseFromString(s,"text/xml");
+		if (newDom.documentElement.nodeName=="parsererror") {
+			throw new Error("XML Parse Error:"+newDom.documentElement.firstChild.nodeValue);
+		}
+		while (xmlDom.firstChild) {
+			xmlDom.removeChild(xmlDom.firstChild);
+		}
+		for (var i=0,n;i<newDom.childNodes.length;i++) {
+			n=xmlDom.importNode(newDom.childNodes[i],true);
+			//importNode用于把其它文档中的节点导入到当前文档中
+			//true参数同时导入子节点
+			xmlDom.appendChild(n);
+		}
+		return xmlDom;
+	},
+	getXML=function (xmlNode) {
+		var s= new XMLSerializer();
+		return s.serializeToString(xmlNode,"text/xml");
+	};
+} else if (window.ActiveXObject) {
+	//IE
+	var getXMLDOM=function () {
+		return new ActiveXObject("Microsoft.XmlDom");
+	},loadXMLFile=function (xmlDom,url,callback) {
+		xmlDom.onreadystatechange=function () {
+			if (xmlDom.readyState===4) {
+				if (xmlDom.parseError.errorCode===0) {
+					callback.call(xmlDom);
+				} else {
+					throw new Error("XML Parse Error:"+xmlDom.parseError.reason);
+				}
+			}
+		};
+		xmlDom.load(url);
+		return xmlDom;
+	},loadXMLString=function (xmlDom,s) {
+		xmlDom.loadXML(s);
+		if (xmlDom.parseError.errorCode!==0) {
+			throw new Error("XML Parse Error:"+xmlDom.parseError.reason);
+		}
+		return xmlDom;
+	},
+	getXML=function (xmlNode) {
+		return xmlNode.xml;
+	};
+}
+
+
+var xml=getXMLDOM();
+loadXMLFile(xml,"test.xml",function () {
+	alert(getXML(xml));
+});
+
+
+
+
+
+</script>
+</body>
+</html>

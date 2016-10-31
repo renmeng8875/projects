@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>7.事件(下)</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>事件(下)</h1>
+	<h2>事件对象——Event</h2>
+	<p>事件对象是用来记录一些事件发生时的相关信息的对象。事件对象只有事件发生时才会产生，并且只能是事件处理函数内部访问，在所有事件处理函数运行结束后，事件对象就被销毁！</p>
+	<h3>访问事件对象：W3C DOM方法与IE专用方法</h3>
+	<pre>
+	//W3C DOM把事件对象作为事件处理函数的第一个参数传入进去
+	document.onclick = function (evt) {//这样，事件对象只能在对应的事件处理函数内部可以访问到
+		alert(evt);
+	};
+	//IE将事件对象作为window对象的一个属性（相当于全局变量）
+	//貌似全局对象，但是只有是事件发生时才能够访问
+	alert(window.event);//null
+	window.onload = function () {
+		alert(window.event);
+	};</pre>
+	<p>事件对象的属性及方法</p>
+	<table>
+		<caption>鼠标相关</caption>
+		<tr>
+			<th>属性名</th>
+			<th>值类型</th>
+			<th>读/写</th>
+			<th>描述</th>
+		</tr>
+		<tr>
+			<td>button</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>
+				<p>对于特定的鼠标事件，表示按下的鼠标按钮，该属性仅可以在mouseup与mousedown事件中访问。W3C 规定：0表示按下了左键，1表示按下了中键，2表示按下了右键，相当于对于鼠标键从左到右进行的编号，而编号从0开始；
+					而IE有另外一套规定：0表示没有任何键按下，1表示左键，2表示右键，4表示中键，而其它按键的组合则只要将键码相加即可，如：同时按下左右键时button值为3
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>clientX</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>事件发生时，鼠标在客户端区域的X坐标，客户端区域是指页面可视区域</td>
+		</tr>
+		<tr>
+			<td>clientY</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>事件发生时，鼠标在客户端区域的Y坐标</td>
+		</tr>
+		<tr>
+			<td>screenX</td>
+			<td>Integer</td>
+			<td>R(IE) R/W(W3C)</td>
+			<td>相对于屏幕的鼠标X坐标</td>
+		</tr>
+		<tr>
+			<td>screenY</td>
+			<td>Integer</td>
+			<td>R(IE) R/W(W3C)</td>
+			<td>相对于屏幕的鼠标Y坐标</td>
+		</tr>
+		<tr>
+			<td>x(仅IE)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>鼠标相对于引起事件的元素的父元素的X坐标</td>
+		</tr>
+		<tr>
+			<td>y(仅IE)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>鼠标相对于引起事件的元素的父元素的Y坐标</td>
+		</tr>
+		<tr>
+			<td>offsetX(仅IE) layerX(仅W3C)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>鼠标相对于引起事件的对象的X坐标</td>
+		</tr>
+		<tr>
+			<td>offsetY(仅IE)  layerY(仅W3C)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>鼠标相对于引起事件的对象的Y坐标</td>
+		</tr>
+		<tr>
+			<td>pageX(仅W3C)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>鼠标相对于页面的X坐标</td>
+		</tr>
+		<tr>
+			<td>pageY(仅W3C)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>鼠标相对于页面的Y坐标</td>
+		</tr>
+	</table>
+	<table>
+		<caption>键盘相关</caption>
+		<tr>
+			<th>属性名</th>
+			<th>值类型</th>
+			<th>读/写</th>
+			<th>描述</th>
+		</tr>
+		<tr>
+			<td>altKey</td>
+			<td>Boolean</td>
+			<td>R</td>
+			<td>true表示按下了ALT键；false表示没有按下</td>
+		</tr>
+		<tr>
+			<td>ctrlKey</td>
+			<td>Boolean</td>
+			<td>R</td>
+			<td>true表示按下了CTROL，false表示没有</td>
+		</tr>
+		<tr>
+			<td>shiftKey</td>
+			<td>Boolean</td>
+			<td>R</td>
+			<td>true表示按下了shift，false表示没有</td>
+		</tr>
+		<tr>
+			<td>keyCode</td>
+			<td>Integer</td>
+			<td>R/W(IE) R(W3C)</td>
+			<td>对于keypress事件，表示按下按钮的Unicode字符；对于keydown/keyup事件 ，表示按下按钮的数字代号</td>
+		</tr>
+		<tr>
+			<td>charCode(仅W3C)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>在keypress事件中所按键的字符Unicode编码，如果不是字符键，则该属性为0，并且，当CapsLock打开与关闭时charCode的值也对应着大小写字母</td>
+		</tr>
+	</table>
+	<table>
+		<caption>其它</caption>
+		<tr>
+			<th>属性名</th>
+			<th>值类型</th>
+			<th>读/写</th>
+			<th>描述</th>
+		</tr>
+		<tr>
+			<td>srcElement(IE) target(W3C)</td>
+			<td>Element</td>
+			<td>R</td>
+			<td>引起事件的元素</td>
+		</tr>
+		<tr>
+			<td>fromElement(仅IE)</td>
+			<td>Element</td>
+			<td>R</td>
+			<td>某些鼠标事件中(mouseover与mouseout)，鼠标所离开的元素</td>
+		</tr>
+		<tr>
+			<td>toElement(仅IE)</td>
+			<td>Element</td>
+			<td>R</td>
+			<td>某些鼠标事件中(mouseover与mouseout)，鼠标所进入的元素</td>
+		</tr>
+		<tr>
+			<td>relatedTarget(仅W3C)</td>
+			<td>Element</td>
+			<td>R</td>
+			<td>某些鼠标事件中(mouseover与mouseout)，返回与事件的目标节点相关的节点。</td>
+		</tr>
+		<tr>
+			<td>repeat(仅IE)</td>
+			<td>Boolean</td>
+			<td>R</td>
+			<td>如果不断触发keydown事件，则为true,否则为false</td>
+		</tr>
+		<tr>
+			<td>returnValue(仅IE)</td>
+			<td>Boolean</td>
+			<td>R/W</td>
+			<td>将其设为false表示以取消事件的默认动作</td>
+		</tr>
+		<tr>
+			<td>preventDefault(仅W3C)</td>
+			<td>Function</td>
+			<td>R</td>
+			<td>执行方法以取消事件的默认动作</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>String</td>
+			<td>R</td>
+			<td>事件的名称，不带on前缀</td>
+		</tr>
+		<tr>
+			<td>cancelable(仅W3C	)</td>
+			<td>Boolean</td>
+			<td>R</td>
+			<td>当为true表示事件的默认动作可以被取消（用preventDefault方法取消）</td>
+		</tr>
+		<tr>
+			<td>cancelBubble(仅IE)</td>
+			<td>Boolean</td>
+			<td>R/W</td>
+			<td>将其设置为true将取消事件冒泡</td>
+		</tr>
+		<tr>
+			<td>stopPropagation(仅W3C)</td>
+			<td>Function</td>
+			<td>R</td>
+			<td>执行方法取消事件冒泡</td>
+		</tr>
+		<tr>
+			<td>bubbles(仅W3C)</td>
+			<td>Boolean</td>
+			<td>R</td>
+			<td>返回true表示事件是冒泡类型</td>
+		</tr>
+		<tr>
+			<td>eventPhase(仅W3C)</td>
+			<td>Integer</td>
+			<td>R</td>
+			<td>返回事件传播的当前阶段。它的值是下面的三个常量之一，它们分别表示捕获阶段、在目标对象上时和起泡阶段：
+				<table>
+					<tr><th>常量</th><th>值</th></tr>
+					<tr><td>Event.CAPTURING_PHASE(捕获阶段)</td><td>1</td></tr>
+					<tr><td>Event.AT_TARGET(在目标对象上)</td><td>2</td></tr>
+					<tr><td>Event.BUBBLING_PHASE(冒泡阶段)</td><td>3</td></tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>timeStamp (仅W3C)</td>
+			<td>Long</td>
+			<td>R</td>
+			<td>返回一个时间戳。指示发生事件的日期和时间（从 epoch 开始的毫秒数）。epoch 是一个事件参考点。在这里，它是客户机启动的时间。并非所有系统都提供该信息，因此，timeStamp 属性并非对所有系统/事件都是可用的。</td>
+		</tr>
+	</table>
+	<p>取得事件对象及取得事件目标对象</p>
+	<pre>
+	document.onclick =function (evt) {
+		evt = evt || window.event;//在IE中evt会是undefined
+		//而支持W3C DOM事件的浏览器中事件对象将会作为事件处理函数的第一个参数
+		var targetElement = evt.target || evt.srcElement;
+		//IE中事件对象没有target属性
+	};</pre>
+	<p>阻止事件发生时浏览器的默认行为</p>
+	<pre>
+	document.onclick = function (evt) {
+		evt = evt || window.event;
+		var target = evt.target || evt.srcElement;
+		if (!target) {
+			return;
+		}
+		if (target.tagName=="A" && target.href) {
+			//使用传统的方法取消事件默认行为必须使用return false
+			//但使用了return ,函数便终止了运行，可以使用事件对象来取消
+			if (window.event) {//IE
+				window.event.returnValue = false;
+			} else {
+				evt.preventDefault();
+			}
+			window.open(target.href,"newWindow");
+			//这样让所有的链接在新窗口打开
+		}
+	};
+	</pre>
+	<h2>事件传播——冒泡与捕获</h2>
+	<p>DOM事件标准定义了两种事件流，这两种事件流有着显著的不同并且可能对你的应用有着相当大的影响。这两种事件流分别是捕获和冒泡。和许多Web技术一样，在它们成为标准之前，Netscape和微软各自不同地实现了它们。Netscape选择实现了捕获事件流，微软则实现了冒泡事件流。幸运的是，W3C决定组合使用这两种方法,并且大多数新浏览器都遵循这两种事件流方式。</p>
+	<p>默认情况下，事件使用冒泡事件流，不使用捕获事件流。然而，在Firefox和Safari里，你可以显式的指定使用捕获事件流，方法是在注册事件时传入useCapture参数，将这个参数设为true。</p>
+	<h3>冒泡事件流</h3>
+	<p>当事件在某一DOM元素被触发时，例如用户在客户名字节点上点击鼠标，事件将跟随着该节点继承自的各个父节点冒泡穿过整个的DOM节点层次，直到它遇到依附有该事件类型处理器的节点，此时，该事件是onclick事件。在冒泡过程中的任何时候都可以终止事件的冒泡，在遵从W3C标准的浏览器里可以通过调用事件对象上的stopPropagation()方法，在Internet Explorer里可以通过设置事件对象的cancelBubble属性为true。如果不停止事件的传播，事件将一直通过DOM冒泡直至到达文档根。</p>
+	<h3>捕获事件流</h3>
+	<p>事件的处理将从DOM层次的根开始，而不是从触发事件的目标元素开始，事件被从目标元素的所有祖先元素依次往下传递。在这个过程中，事件会被从文档根到事件目标元素之间各个继承派生的元素所捕获，如果事件监听器在被注册时设置了useCapture属性为true,那么它们可以被分派给这期间的任何元素以对事件做出处理；否则，事件会被接着传递给派生元素路径上的下一元素，直至目标元素。事件到达目标元素后，它会接着通过DOM节点再进行冒泡。</p>
+	<h2>现代事件绑定方法</h2>
+	<p>针对如上节课所讨论的，使用传统事件绑定有许多缺陷，比如不能在一个对象的相同事件上注册多个事件处理函数。而浏览器和W3C也并非没有考虑到这一点，因此在现代浏览器中，它们有自己的方法绑定事件。</p>
+	<p>W3C DOM</p>
+	<ul>
+		<li>obj.addEventListener(evtype,fn,useCapture)——W3C提供的添加事件处理函数的方法。obj是要添加事件的对象，evtype是事件类型，不带on前缀，fn是事件处理函数，如果useCapture是true，则事件处理函数在捕获阶段被执行，否则在冒泡阶段执行</li>
+		<li>obj.removeEventListener(evtype,fn,useCapture)——W3C提供的删除事件处理函数的方法</li>
+	</ul>
+	<p>微软IE方法</p>
+	<ul>
+		<li>obj.attachEvent(evtype,fn)——IE提供的添加事件处理函数的方法。obj是要添加事件的对象，evtype是事件类型，带on前缀，fn是事件处理函数，IE不支持事件捕获</li>
+		<li>obj.detachEvent(evtype,fn,)——IE提供的删除事件处理函数的方法，evtype包含on前缀</li>
+	</ul>
+	<p>整合两者的方法</p>
+	<pre>
+	function addEvent(obj,evtype,fn,useCapture) {
+		if (obj.addEventListener) {
+			obj.addEventListener(evtype,fn,useCapture);
+		} else {
+			obj.attachEvent("on"+evtype,fn);//IE不支持事件捕获
+		} else {
+			obj["on"+evtype]=fn;//事实上这种情况不会存在
+		}
+	}
+	function delEvent(obj,evtype,fn,useCapture) {
+		if (obj.removeEventListener) {
+			obj.removeEventListener(evtype,fn,useCapture);
+		} else {
+			obj.detachEvent("on"+evtype,fn);
+		} else {
+			obj["on"+evtype]=null;
+		}
+	}</pre>
+	<p>其它兼容性问题：IE不支持事件捕获？很抱歉，这个没有办法解决！但IE的attach方法有个问题，就是使用attachEvent时在事件处理函数内部，this指向了window，而不是obj！当然，这个是有解决方案的！</p>
+	<pre>
+	function addEvent(obj,evtype,fn,useCapture) {
+		if (obj.addEventListener) {
+			obj.addEventListener(evtype,fn,useCapture);
+		} else {
+			obj.attachEvent("on"+evtype,function () {
+				fn.call(obj);
+			});
+		} else {
+			obj["on"+evtype]=fn;//事实上这种情况不会存在
+		}
+	}</pre>
+	<p>但IE的attachEvent方法有另外一个问题，同一个函数可以被注册到同一个对象同一个事件上多次，解决方法：抛弃IE的attachEvent方法吧！IE下的attachEvent方法不支持捕获，和传统事件注册没多大区别(除了能绑定多个事件处理函数)，并且IE的attachEvent方法存在内存泄漏问题！</p>
+	<p>addEvent,delEvent现代版</p>
+	<pre>
+	function addEvent(obj,evtype,fn,useCapture) {
+		if (obj.addEventListener) {//优先考虑W3C事件注册方案
+			obj.addEventListener(evtype,fn,!!useCapture);
+		} else {//当不支持addEventListener时(IE),由于IE同时也不支持捕获,所以不如使用传统事件绑定
+			if (!fn.__EventID) {fn.__EventID = addEvent.__EventHandlesCounter++;}
+			//为每个事件处理函数分配一个唯一的ID
+			
+			if (!obj.__EventHandles) {obj.__EventHandles={};}
+			//__EventHandles属性用来保存所有事件处理函数的引用
+			
+			//按事件类型分类
+			if (!obj.__EventHandles[evtype]) {//第一次注册某事件时
+				obj.__EventHandles[evtype]=[];
+				if (obj["on"+evtype]) {//以前曾用传统方式注册过事件处理函数
+					(obj.__EventHandles[evtype][0]=obj["on"+evtype]).__EventID=0;//添加到预留的0位
+					//并且给原来的事件处理函数增加一个ID
+				}
+				obj["on"+evtype]=addEvent.execEventHandles;
+				//当事件发生时，execEventHandles遍历数组obj.__EventHandles[evtype]并执行其中的函数
+			}
+		}
+	}
+	addEvent.__EventHandlesCounter=1;//计数器,0位预留它用
+	addEvent.execEventHandles = function (evt) {//遍历所有的事件处理函数并执行
+		if (!this.__EventHandles) {return true;}
+		evt = evt || window.event;
+		var fns = this.__EventHandles[evt.type];
+		for (var i=0;i< fns.length;i++) {
+			if (fns[i] instanceof Function) {
+				fns[i].call(this);
+			}
+		}
+	};
+	function delEvent(obj,evtype,fn,useCapture) {
+		if (obj.removeEventListener) {//先使用W3C的方法移除事件处理函数
+			obj.removeEventListener(evtype,fn,!!useCapture);
+		} else {
+			if (obj.__EventHandles) {
+				var fns = obj.__EventHandles[evtype];
+				if (fns) {delete fns[fn.__EventID];}
+			}
+		}
+	}
+	</pre>
+	<h2>标准化事件对象</h2>
+	<p>IE的事件对象与W3C DOM的事件对象有许多不一样的地方，解决的最好的方法就是调整IE的事件对象，以使它尽可能的与标准相似！下表列出了IE事件对象中一些和W3C DOM名称或值不一样但含义相同的属性 </p>
+	<table>
+		<caption>IE与W3C DOM事件对象的不同</caption>
+		<tr><th>W3C DOM</th><th>IE</th></tr>
+		<tr>
+			<td>button——按键编码为：0-左键，1-中键，2-右键</td>
+			<td>button——按键编码为：1-左键，2-右键，4-中键</td>
+		</tr>
+		<tr>
+			<td>charCode</td>
+			<td>没有对应属性，但可以用keyCode来代替</td>
+		</tr>
+		<tr>
+			<td>preventDefault</td>
+			<td>没有对应方法，但可以将event对象的returnValue设为false来模拟</td>
+		</tr>
+		<tr>
+			<td>target</td>
+			<td>srcElement</td>
+		</tr>
+		<tr>
+			<td>relatedTarget</td>
+			<td>fromElement与toElement</td>
+		</tr>
+		<tr>
+			<td>stopPropagation</td>
+			<td>没有对应方法，但可以通过将event对象的cancelBubble属性设为true来模拟</td>
+		</tr>
+	</table>
+	<p>总结出fixEvent函数</p>
+	<pre>
+	function fixEvent(evt) {
+		if (!evt.target) {
+			evt.target = evt.srcElement;
+			evt.preventDefault = fixEvent.preventDefault;
+			evt.stopPropagation = fixEvent.stopPropagation;
+			if (evt.type == "mouseover") {
+				evt.relatedTarget = evt.fromElement;
+			} else if (evt.type =="mouseout") {
+				evt.relatedTarget = evt.toElement;
+			}
+			evt.charCode =  (evt.type=="keypress")?evt.keyCode:0;
+			evt.eventPhase = 2;//IE仅工作在冒泡阶段
+			evt.timeStamp = (new Date()).getTime();//仅将其设为当前时间
+		}
+		return evt;
+	}
+	fixEvent.preventDefault =function () {
+		this.returnValue = false;//这里的this指向了某个事件对象，而不是fixEvent
+	};
+	fixEvent.stopPropagation =function () {
+		this.cancelBubble = true;
+	};</pre>
+	<p>fixEvent函数不是单独执行的，它必须有一个事件对象参数，而且只有事件发生时它才被执行！最好的方法是把它整合到addEvent函数的execEventHandles里面</p>
+	<pre>
+	addEvent.execEventHandles = function (evt) {//遍历所有的事件处理函数并执行
+		if (!this.__EventHandles) {return true;}
+		evt = fixEvent(evt || window.event);//在这里对其进行标准化操作
+		var fns = this.__EventHandles[evt.type];
+		for (var i=0;i< fns.length;i++) {
+			if (fns[i] instanceof Function) {
+				fns[i].call(this,evt);//并且将其作为事件处理函数的第一个参数
+				//这样在事件处理函数内部就可以使用统一的方法访问事件对象了
+			}
+		}
+	};
+	</pre>
+	<h2>Load事件</h2>
+	<p>使用JavaScript操纵DOM，必须等待DOM加载完毕才可以执行代码，但window.onload有个坏处，它非要等到页面中的所有图片及视频加载完毕才会触发load事件。结果就是一些本来应该在打开时隐藏起来的元素，由于网络延迟，在页面打开时仍然会出现，然后又会突然消失，让用户觉得莫名其妙。必须与这种丑陋的闪烁告别！</p>
+	<pre>
+	function addLoadEvent(fn) {
+	    var init = function() {
+	        if (arguments.callee.done) return;
+	        arguments.callee.done = true;
+	        fn.apply(document,arguments);
+	    };
+	    //注册DOMContentLoaded事件，如果支持的话
+	    if (document.addEventListener) {
+	        document.addEventListener("DOMContentLoaded", init, false);
+	    }
+	    //但对于Safari，我们需要使用setInterval方法不断检测document.readyState
+	    //当为loaded或complete的时候表明DOM已经加载完毕
+	    if (/WebKit/i.test(navigator.userAgent)) {
+	        var _timer = setInterval(function() {
+	            if (/loaded|complete/.test(document.readyState)) {
+	                clearInterval(_timer);
+	                init();
+	            }
+	        },10);
+	    }
+	    //对于IE则使用条件注释，并使用script标签的defer属性
+	 	//IE中可以给script标签添加一个defer(延迟)属性，这样，标签中的脚本只有当DOM加载完毕后才执行
+	 	/*@cc_on @*/
+	 	/*@if (@_win32)
+	 	document.write("&lt;script id=\"__ie_onload\" defer=\"defer\" src=\"javascript:void(0)\"&gt;&lt;\/script&gt;");
+	 	var script = document.getElementById("__ie_onload");
+	 	script.onreadystatechange = function() {
+		 	if (this.readyState == "complete") {
+		 		init();
+		 	}
+	 	};
+	 	/*@end @*/
+	 	return true;
+	 }
+	</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

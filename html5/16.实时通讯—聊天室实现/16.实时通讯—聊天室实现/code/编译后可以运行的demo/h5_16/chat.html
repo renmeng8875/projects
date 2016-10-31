@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="chat" style="border:1p solid #ccc;width:600px;height:300px;overflow:scroll;">
+	</div>
+	<div>
+		昵称：<input type="text" id="nick" /><br />
+		内容：<input type="text" id="msg" style="width:240px;" /><button onclick="send()">发送消息</button>
+	</div>
+	
+	<script>
+		var chat = document.getElementById("chat");
+		var nick = document.getElementById("nick");
+		var msg = document.getElementById("msg");
+		
+		// MozWebSocket
+		var ws = new WebSocket("ws://localhost:8080/h5_16/ws_socket/chat");
+		ws.onmessage = function(evt){
+			var data = evt.data;
+			
+			var d = document.createElement("div");
+			d.innerHTML = data;
+			chat.appendChild(d);
+		}
+		
+		function send(){
+			var m = nick.value + ":" + msg.value;
+			ws.send(m);
+			
+			msg.value = "";
+			
+			var d = document.createElement("div");
+			d.innerHTML = m;
+			chat.appendChild(d);
+		}
+		
+		window.setInterval(function(){
+			if(ws.bufferedAmount == 0){
+				ws.send("");
+			}
+		}, 2000);
+	</script>
+</body>
+</html>

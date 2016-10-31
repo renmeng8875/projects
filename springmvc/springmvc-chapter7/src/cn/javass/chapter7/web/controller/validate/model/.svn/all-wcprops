@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model
+END
+HardCodeMessageModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/HardCodeMessageModel.java
+END
+NotEmptyModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/NotEmptyModel.java
+END
+LengthModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/LengthModel.java
+END
+MinModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/MinModel.java
+END
+DigitsModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/DigitsModel.java
+END
+MaxModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/MaxModel.java
+END
+EmailModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/EmailModel.java
+END
+RecursionModel1.java
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/RecursionModel1.java
+END
+NotNullModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 171
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/NotNullModel.java
+END
+RecursionModel2.java
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/RecursionModel2.java
+END
+RangeModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/RangeModel.java
+END
+A.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/A.java
+END
+ValidModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/ValidModel.java
+END
+B.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/B.java
+END
+AssertTrueModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/AssertTrueModel.java
+END
+DecimalMinModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/DecimalMinModel.java
+END
+DecimalMaxModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/DecimalMaxModel.java
+END
+PastDateModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/PastDateModel.java
+END
+NotBlankModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/NotBlankModel.java
+END
+FutureDateModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/FutureDateModel.java
+END
+NullModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/NullModel.java
+END
+SizeModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/SizeModel.java
+END
+AssertFalseModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 175
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/AssertFalseModel.java
+END
+PatternModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 171
+/svn/repo/!svn/ver/5076/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/springmvc-chapter7/src/cn/javass/chapter7/web/controller/validate/model/PatternModel.java
+END

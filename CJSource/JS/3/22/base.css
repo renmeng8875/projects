@@ -1,0 +1,23 @@
+td,th,h1 {
+text-align:center;
+padding:2px;
+}
+table {
+margin:20px auto;
+}
+th {
+padding:4px 14px;
+color:aqua;
+background:#3399FF;
+cursor:pointer;
+height:30px;
+line-height:30px;
+}
+th.sorting {
+background:#33AAFF;
+color:white;
+}
+th img.sortDirImage {
+margin-left:6px;
+margin-bottom:3px;
+}

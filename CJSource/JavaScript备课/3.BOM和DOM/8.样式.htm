@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>8.样式</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>样式</h1>
+	<h2>修改元素外观方式</h2>
+	<p>修改元素外观主要有下面3种方法：修改ID，修改className,修改元素的style属性</p>
+	<p>修改ID？会造成多么混乱的结果可想而知！</p>
+	<p>修改className确实是非常好的方法，我们甚至可以利用CSS层叠，通过修改body的className来修改整个页面的风格！前提是我们必须写特定的CSS！</p>
+	<pre>
+	//CSS代码
+	body.redStyle {
+		border:2px solid red;
+	}
+	body.redStyle * {
+		color:red;
+	}
+	body.blueStyle {
+		border:2px solid blue;
+	}
+	body.blueStyle * {
+		color:blue;
+	}
+	//JS代码
+	document.body.className="redStyle";//切换为“红粉佳人”风格
+	document.body.className="blueStyle";//切换为“蓝调情怀”风格
+	</pre>
+	<p>但修改className也并非那么容易，不要忘了className可以有多个的！所以不管添加，测试还是移除元素的className，都要小心，下面的函数可以造福人类！</p>
+	<pre>
+	function hasClassName(obj,cn) {
+		return (new RegExp("\\b"+cn+"\\b")).test(obj.className);
+	}
+	function addClassName(obj,cn) {
+		return obj.className += " " + cn;//第一次添加时，会多出一个前置空格
+		//但不用担心，浏览会自动将其清除掉
+	}
+	function delClassName(obj,cn) {
+		return obj.className = obj.className.replace(new RegExp("\\b"+cn+"\\b"),"");
+		//同样，多个className之间的多个空格也会被视为一个
+	}</pre>
+	<p>元素的style属性?见下面</p>
+	<h2>Style属性</h2>
+	<p>可以在元素的style属性上应用CSS规则，并且style属性上的规则优先级要高于样式表中的规则，因此，通过修改元素的style属性来修改元素的外观可能是最方便并且是最有效的方法了。</p>
+	<p>同其它HTML属性不同的是，元素的style属性是一个对象，CSS的属性名和属性值分别映射到了style对象的属性名和属性值，如定义对象的style="color:red;"，在JavaScript中访问时就可以这样访问：obj.style.color。但style属性也有一些需要注意的地方，比如CSS属性名中包含一些不能用作变量名的非法字符时，在JavaScript中访问时，会自动转换成驼峰命名式。</p>
+	<pre>
+	var oDiv=document.getElementById("oDiv");
+	alert(oDiv.style.fontSize);//自动驼峰命名
+	//如果要直接获取style属性中的所有CSS文本，则可以使用style对象的cssText属性
+	alert(oDiv.style.cssText);
+	//对于CSS简写方式，各个浏览器返回结果出现分歧
+	alert(oDiv.style.border);
+	//需要分别获取值
+	alert(oDiv.style.borderLeftColor);//但会很麻烦
+	//对于颜色，火狐总返回RGB表现形式,但设置时可以使用十六进制形式
+	alert(oDiv.style.backgroundColor);//火狐会返回rgb(x,y,z)
+	</pre>
+	<p>但是元素的style属性仅仅提供了内联样式所定义的CSS规则，而不能反映CSS样式表中的规则</p>
+	<pre>
+	//CSS
+	#oDiv {
+		color:blue;
+	}
+	//HTML
+	&lt;div id="oDiv"&gt;Div&lt;/div&gt;
+	//JS
+	alert(document.getElementById("oDiv").style.color);//空的</pre>
+	<p>另外，要注意的是，修改元素的style属性时，必须将一个字符串赋给style对象的属性！</p>
+	<pre>
+	oDiv.style.width = 120;//错误的，虽然在IE下有效果
+	oDiv.style.fontSize="120%";//正确</pre>
+	<h2>获取实际应用在元素上的样式</h2>
+	<p>对于获取元素的实际的CSS层叠最后的样式，IE与W3C DOM存在分歧：IE给对象提供了一个currentStyle属性，它的使用方式很像元素的style属性，但它返回的值是元素的实际样式，而不管样式是内联的还是在外部样式表中定义的！
+		W3C DOM则使用一个全局方法getComputedStyle，它的第一个参数为要检测的对象，第二个参数为null（在未来实现），将返回一个与元素的style也很相似的对象，但一是返回的对象是元素实际样式规则，二是它对于数值型属性总是返回像素值</p>
+	<pre>
+	alert(oDiv.currentStyle.width);//IE，currentStyle保留原来定义在CSS中的单位
+	alert(window.getComputedStyle(oDiv,null).width);//W3C DOM,并且总是返回计算后的像素值
+	//另外，两种方式都不能获取那些CSS简写方式定义的，下面两个都会输出空
+	alert(oDiv.currentStyle.background);
+	alert(getComputedStyle(oDiv,null).border);</pre>
+	<p>Cross-Browser 获取元素实际样式的方式</p>
+	<pre>
+	function getStyle(obj,cn) {
+		if (window.getComputedStyle) {//W3C DOM
+			return window.getComputedStyle(obj,null)[cn];
+		} else if (obj.currentStyle) {//IE
+			return obj.currentStyle[cn];
+		}
+		return "";
+	}</pre>
+	<h2>样式表</h2>
+	<p>DOM也提供了访问外部样式表的方法，当然，也有无奈的兼容性问题！</p>
+	<h3>向页面添加样式表</h3>
+	<pre>
+	//使用添加节点的方法
+	var lnk = document.createElement("link");
+	lnk.type="text/css";
+	lnk.rel="styleSheet";
+	lnk.href="test.css";
+	var head = document.getElementsByTagName("head")[0];
+	head.appendChild(lnk);
+	//在IE下不能使用innerHTML向head中添加HTML代码的方式
+	//另一种方法就是使用document.write
+	document.write("<link href='test.css' type='text/css' rel='stylesheet' />");
+	</pre>
+	<h3>访问样式表</h3>
+	<p>也许修改个别元素的样式是十分简单的，但更改某条样式表规则（可以使所有相关元素都发生变化），则十分麻烦，并且这种技术只有Win平台上的IE与火狐才支持！但是访问样式表中的CSS规则仍然是有办法的！</p>
+	<pre>
+	alert(document.styleSheets);//document对象的styleSheets属性是一个包含了所有的样式表的伪数组
+	var sheets = docuemtn.styleSheets;
+	alert(sheets.length);//length报告了样式表的个数
+	//style标签出现一次或使用link标签链入CSS一次就算作一个样式表对象
+	var sheet1 = sheets[0];//可以使用下标来访问</pre>
+	<p>样式表对象的属性</p>
+	<ul>
+		<li>type，一般都为text/css</li>
+		<li>href，link标签为其href属性，而style标签则为空</li>
+		<li>id，所属标签的ID</li>
+		<li>disabled，样式表是否启用，启用时为false</li>
+		<li>cssText(仅IE)，样式表中规则的文本形式</li>
+		<li>owningElement(IE)，ownerNode(W3C DOM)，返回引入样式表的那个标签</li>
+		<li>rules(IE),cssRules(W3C)，对应样式表里所有规则的集合</li>
+	</ul>
+	<p>Rule对象属性</p>
+	<ul>
+		<li>selectorText ，选择符</li>
+		<li>style，与元素上的 style属性十分相似，可以读取和设置CSS规则 ，并且有cssText属性</li>
+	</ul>
+	<h3>修改样式表</h3>
+	<p>通过styleSheets访问到的样式表对象具有一些方法来修改其中的样式表规则，但这些方法在各个浏览器中不一样。火狐支持W3C的insertRule()和deleteRule()方法。IE使用专有的addRule()和removeRule()方法。而其它浏览器则不支持任何一个。</p>
+	<pre>
+	var sheet = document.styleSheets[0];
+	sheet.insertRule("body {color:blue;}",1);//W3C方法,第一个参数为CSS文本,第二个参数为位置,从0开始计数
+	sheet.addRule("body","color:blue;",1);//IE方法,第一个参数为CSS选择符,第二个为CSS内容,第三个为位置
+	//而要删除某条规则，则只能通过下标
+	sheet.removeRule(1);//IE
+	sheet.deleteRule(1);//W3C</pre>
+	<p>Cross-Browser 总结函数</p>
+	<pre>
+	function addCSS(sheet,selectorText,declarations,index) {
+		if (sheet.insertRule) {
+			sheet.insertRule(selectorText+" {"+declarations+"}",index);
+		} else if (sheet.addRule) {
+			sheet.addRule(selectorText,declarations,index);
+		}
+	}
+	function delCSS(sheet,index) {
+		if (sheet.deleteRule) {
+			sheet.deleteRule(index);
+		} else {
+			sheet.removeRule(index);
+		}
+	}</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

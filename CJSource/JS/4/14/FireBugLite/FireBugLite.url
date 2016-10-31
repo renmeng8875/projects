@@ -1,0 +1,11 @@
+[DEFAULT]
+BASEURL=http://localhost:8080/
+[InternetShortcut]
+URL=javascript:(function (){var fireBugPath='http://localhost:8080/FireBugLite/';var fireBugJSPath=fireBugPath+"firebug-lite-cn.js";var fireBugCSSPath =fireBugPath+"firebug-lite.css";var firebugLoader=document.createElement('script');firebugLoader.setAttribute('src',fireBugJSPath);firebugLoader.setAttribute('charset',"GBK");document.body.appendChild(firebugLoader);(function(){if(window.firebug && window.firebug.version){window.firebug.env.css=fireBugCSSPath;window.firebug.init();}else{setTimeout(arguments.callee);}})();firebugLoader=null;})();
+IDList=
+HotKey=0
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,15
+[InternetShortcut.A]
+[InternetShortcut.W]
+URL=javascript:var firebug+AD0-document.createElement('script')+ADs-firebug.setAttribute('src','file:///E:/+YhBUCQ-/+ZYdoYw-/Web/FirBugLite/firebug-lite.js')+ADs-document.body.appendChild(firebug)+ADs-(function()+AHs-if(window.firebug.version)+AHs-firebug.init()+ADsAfQ-else+AHs-setTimeout(arguments.callee)+ADsAfQB9-)()+ADs-void(firebug)+ADs-

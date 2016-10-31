@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>面向对象</title>
+	<script type="text/javascript">//原型链
+		//prototype 原型
+		//constructor 构造函数
+		function ClassA(name,age) {
+			this.name = name;
+			this.age =age;
+			this.method = function () {
+				if (arguments.length==1) {
+					fnTest1(arguments[0]);
+				} else if (arguments.length == 2) {
+					fnTest2(arguments[0],arguments[1]);
+				}
+				function fnTest1(one) {
+					alert("One\n"+one);
+				}
+				function fnTest2(one,two) {
+					alert("Two\n"+one+" | "+two);
+				}
+			};
+		}
+		function ClassB() {
+			this.inherit = "World!";
+		}
+		
+		var obj = new ClassA("B",100);
+		//obj.method(1,2);
+		/*ClassA.prototype = "Hello!";
+		for (var i in obj) {
+			//alert(i+" | "+obj[i]);
+		}
+		alert(ClassA.prototype.isPrototypeOf(obj));
+		function fnTest(arg1,arg2) {
+			alert(arg1+"\n"+arg2);
+			if (arguments.length==1) {
+				fnTest1(arguments[0]);
+			} else if (arguments.length == 2) {
+				fnTest2(arguments[0],arguments[1]);
+			}
+			function fnTest1(one) {
+				alert("One\n"+one);
+			}
+			function fnTest2(one,two) {
+				alert("Two\n"+one+" | "+two);
+			}
+		}
+		
+		function Person(name,age,slogan) {
+			this.name =name;
+			this.age =age;
+			this.slogan = slogan;
+		}
+		Person.prototype.say = function (words) {
+			alert(words);
+		};
+		function Teacher() {//对象冒充
+			Person.apply(this,arguments);
+		}
+		Teacher.prototype = new Person();
+		var t1 = new Teacher("CJ",18,"Hello");
+		alert_r(t1);
+		function alert_r(obj) {
+			for (var i in obj) {
+				alert(i + " | "+obj[i]);
+			}
+		}*/
+		
+		/*function fnTest(t) {
+			this.test = t;
+			alert(arguments[arguments.length-1]);
+		}
+		var obj = new Object();
+		obj.name = "XXX";
+		fnTest.call(obj,"TEST",123);
+		alert(obj.test);*/
+		
+		
+		
+		function fn1() {
+			//alert(1);
+			var abc = Math.random();
+			function fn2() {
+				alert(abc);
+			}
+			return fn2;
+		}
+		function ClassC() {
+			var a = 123;
+			this.getA = function () {
+				return a;
+			};
+			this.setA = function (val) {
+				a=val;
+			};
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<h1>面向对象</h1>
+	封装
+	继承
+	聚集
+	多态
+	<hr />
+</body>
+</html>

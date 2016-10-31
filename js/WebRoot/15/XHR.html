@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Ajax Connection Queue</title>
+    <script type="text/javascript" src="asyncRequest.js"></script>
+    <script type="text/javascript" src="DED.js"></script>
+    <script type="text/javascript" src="Library.js"></script>
+    <script type="text/javascript">
+      function init() {
+        //定义一个序列
+        var q = new DED.Queue;
+        //设置执行次数
+        q.setRetryCount(5);
+        //超时时间
+        q.setTimeout(3000);
+		//获得页面节点
+        var items = document.getElementById('items');
+        var results = document.getElementById('results');
+        var queue = document.getElementById('queue-items');
+
+        // 跟踪自己的请求客户端
+        var requests = [];
+
+        // 通知的每个请求被刷新
+        q.onFlush.subscribe(function(data) {
+          results.innerHTML = data;
+          requests.shift();
+          queue.innerHTML = requests.toString();
+        });
+        // 对于任何失败通知。
+        q.onFailure.subscribe(function() {
+          results.innerHTML += ' <span style="color:red;">Connection Error!</span>';
+        });
+        // 通知的完成状态
+        q.onComplete.subscribe(function() {
+          results.innerHTML += ' <span style="color:green;">Completed!</span>';
+        });
+        /**
+         * 每次直接操作序列而是通过桥梁来完成
+         * @param {} element
+         * @returns {} 
+         */
+        var actionDispatcher = function(element) {
+          switch (element) {
+            case 'flush':
+              q.flush();
+              break;
+            case 'dequeue':
+              q.dequeue();
+              requests.pop();
+              queue.innerHTML = requests.toString();
+              break;
+            case 'pause':
+              q.pause();
+              break;
+            case 'clear':
+              q.clear();
+              requests = [];
+              queue.innerHTML = '';
+              break;
+          }
+        };
+                
+        var addRequest = function(request) {
+          var data = request.split('-')[1];
+          q.add({
+            method: 'GET',
+            uri :"",
+            //uri: 'bridge-connection-queue.php?ajax=true&s='+data,
+            params: null
+          });
+          requests.push(data);
+          queue.innerHTML = requests.toString();
+        };
+        addEvent(items, 'click', function(e) {
+          var e = e || window.event;
+          var src = e.target || e.srcElement;
+          try {
+            e.preventDefault();
+          }
+          catch (ex) {
+            e.returnValue = false;
+          }
+          actionDispatcher(src.id);
+        });
+
+        var adders = document.getElementById('adders');
+        addEvent(adders, 'click', function(e) {
+          var e = e || window.event;
+          var src = e.target || e.srcElement;
+          try {
+            e.preventDefault();
+          }
+          catch (ex) {
+            e.returnValue = false;
+          }
+          addRequest(src.id);
+        });
+      };
+    </script>
+    <style type="text/css" media="screen">
+      body { font: 100% georgia,times,serif; }
+      h1, h2 { font-weight: normal; }
+      #queue-items { height: 1.5em; }
+      #add-stuff {
+        padding: .5em;
+        background: #ddd;
+        border: 1px solid #bbb;
+      }
+      #results-area { padding: .5em;border: 1px solid #bbb; }
+    </style>
+  </head>
+  <body id="example" onload="init()">
+    <div id="doc">
+      <h1>Ajax Connection Queue</h1>
+      <div id="queue-items"></div>
+      <div id="add-stuff">
+        <h2>Add Requests to Queue</h2>
+        <ul id="adders">
+          <li><a href="#" id="action-01">添加 o1 到序列</a></li>
+          <li><a href="#" id="action-02">添加 o2 到序列</a></li>
+          <li><a href="#" id="action-03">添加 o3 到序列</a></li>
+        </ul>
+      </div>
+      <h2>Other Queue Actions</h2>
+      <ul id='items'>
+        <li><a href="#" id="flush">刷新执行</a></li>
+        <li><a href="#" id="dequeue">移除</a></li>
+        <li><a href="#" id="pause">停顿</a></li>
+        <li><a href="#" id="clear">清空</a></li>
+      </ul>
+      <div id="results-area">
+        <h2>Results: </h2>
+        <div id="results"></div>
+      </div>
+    </div>
+  </body>
+</html>

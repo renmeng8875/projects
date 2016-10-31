@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>函数与内置对象</title>
+<script type="text/javascript">
+/*
+	
+	function funcName() {
+		var wide=window.prompt("请输入三角形的底边长度！","");
+		var high=window.prompt("请输入三角形的高！","");
+		var area=wide*high/2;
+		if (!isNaN(area)) {//判断用户是否输入的是数字
+			alert("三角形的面积为"+area);
+		} else {
+			alert("您的输入有误!");
+		}
+	}
+	
+	function calcArea(wide,high) {//计算三角形面积
+		return wide*high/2;
+	}
+	var w=window.prompt("请输入三角形的底边长度！","");
+	var h=window.prompt("请输入三角形的高！","");
+
+	document.write(calcArea(w,h));
+	
+	
+
+var b=456;//全局变量 ,在所有地方都可以访问
+demo();
+
+
+function demo() {
+	var a=123;//a只在demo函数中
+	var c;//函数局部变量 ,只能在函数访问
+	alert(b);
+}*/
+
+//alert(Math.PI);
+/*
+var d= new Date();//创建一个新的对象
+document.write(d.getFullYear()+"年"+
+	(d.getMonth()+1)+"月"
+	+d.getDate()+"日 "+d.getHours()+":"+
+	d.getMinutes()+":"+d.getSeconds()
+);*/
+
+//alert(d);//直接输出这个对象,将会得到一个表示时间的字符串
+//alert(d.getYear());//获取年,2000年以前返回年份后两位,2000年之后的返回年份的完整表达方式
+//alert(d.getFullYear());//始终返回年份的4位数表达方式
+//alert(d.getMonth());
+//alert(d.getDate());//返回今天几号
+//alert(d.getDay());//星期几
+
+/*alert(d.getMonth());//返回月份,注意,月份是从0开始计数的,所以1月时将返回0
+alert(d.getDate());//返回今天几号
+alert(d.getDay());//返回今天星期几,星期天是0,星期1是1....
+alert(d.getHours());//返回小时
+alert(d.getMinutes());//返回分钟
+alert(d.getSeconds());//返回秒
+alert(d.getMilliSeconds());//返回毫秒
+alert(d.getTime());*/
+/*
+var d =new Date();
+d.setFullYear(1990);
+d.setMonth(8);//9月
+d.setDate(32);
+
+alert(d.getMonth()+1+"  "+d.getDate());
+*/
+
+var year=prompt("请输入年份:","")*1,
+		month=prompt("请输入月份:","")*1,
+		date=prompt("请输入几号:","")*1;
+		
+var d=new Date();
+d.setFullYear(year);
+d.setMonth(month-1);
+d.setDate(date);
+
+if (d.getFullYear()==year 
+		&& d.getMonth()+1==month 
+		&& d.getDate()==date) {
+			alert("正确!");
+} else {
+	alert("您输入了错误的日期!");
+}
+</script>
+</head>
+<body>
+	<h1>函数与内置对象</h1>
+</body>
+</html>

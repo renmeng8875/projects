@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<canvas id="canvas" width="400" height="400" style="border:1px solid red;">
+	</canvas>
+	
+	<script>
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		
+		var img = new Image();
+		img.onload = function(){
+			// 循环播放动画
+			window.setInterval(redraw,100);
+		}
+		img.src = "images/sprite.gif";
+		
+		var index = 0,width=99;
+		function redraw(){
+			index++;
+			if(index>=6){
+				index = 0;
+			}
+			// 计算背景图positon,left
+			var left = index*width;
+			ctx.clearRect(100,100,99,122);
+			ctx.drawImage(img,left,0,99,122,100,100,99,122);
+		}
+	</script>
+</body>
+</html>

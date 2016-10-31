@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bjsxt.hibernate.CollectionMapping" table="t_CollectionMapping">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<set name="setValue" table="t_set_value">
+			<key column="set_id"/>
+			<element type="string" column="set_value"/>
+		</set>
+		<list name="listValue" table="t_list_value">
+			<key column="list_id"/>
+			<list-index column="list_index"/>
+			<element type="string" column="list_value"/>
+		</list>
+		<array name="arrayValue" table="t_array_value">
+			<key column="array_id"/>
+			<list-index column="array_index"/>
+			<element type="string" column="array_value"/>
+		</array>
+		<map name="mapValue" table="t_map_value">
+			<key column="map_id"/>
+			<map-key type="string" column="map_key"/>
+			<element type="string" column="map_value"/>
+		</map>
+	</class>
+</hibernate-mapping>

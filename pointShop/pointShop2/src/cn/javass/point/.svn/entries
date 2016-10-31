@@ -1,0 +1,80 @@
+10
+
+dir
+5047
+http://192.168.19.163/svn/repo/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/pointShop2/src/cn/javass/point
+http://192.168.19.163/svn/repo
+
+
+
+2014-09-04T09:05:42.421860Z
+5047
+renmeng
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fa041893-e7f8-4317-a3e5-084af4ef981c
+
+aop
+dir
+
+model
+dir
+
+service
+dir
+
+dao
+dir
+
+AppConfig.java
+file
+
+
+
+
+2011-02-18T03:19:05.000000Z
+7696dcafad2c634d13ee461fa30f89cc
+2014-09-04T09:05:42.421860Z
+5047
+renmeng
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+428
+
+web
+dir
+
+exception
+dir
+

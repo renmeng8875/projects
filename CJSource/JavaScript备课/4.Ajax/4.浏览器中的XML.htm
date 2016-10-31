@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>4.浏览器中的XML</title>
+<style type="text/css">
+	@import url("../style/global.css");
+</style>
+</head>
+<body>
+	<h1>浏览器中的XML</h1>
+	<h2>打开XML</h2>
+	<p>首先,直接从浏览器中打开XML文件,浏览器会对其进行格式良好性检查,如果不符合XML语法规范则显示出错,如果格式良好,再检查是否包含样式表(CSS或XSL),如果包含样式表,则用样式表格式化XML文档然后显示,如果没有,则显示经过格式化的XML源码(不同浏览器显示方式不一样).注意,浏览器只对XML进行格式良好性检查,而不对其进行有效性检查!如何在XML文档中引入样式表?示例:</p>
+	<pre>
+	&lt;?xml version="1.0" standalone="no"?&gt;
+	&lt;?xml-stylesheet type="text/css" href="test.css"?&gt;</pre>
+	<p>如果是使用XSL,只需将上面的type属性值改成text/xsl即可!</p>
+	<h2>XMLHttpRequest对象的responseXML属性</h2>
+	<p>XMLHttpRequest对象的responseXML属性用来获取从服务器端返回的XML文件,如果没有则为null.注意,只有在服务器环境下,请求一个以.xml为后缀的文件返回的才会是一个XML DOM,在本地请求一个XML文件,返回的仍是文本文件.如果要使用服务器脚本生成字符串,要返回XML,必须加上一些头信息</p>
+	<pre>
+	//JS Code
+	var xhr = XHR();//XHR为之前所写的可以跨浏览器创建XMLHttpRequest对象的函数
+	xhr.open("get","test.php",true);
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState==4 && xhr.status == 200) {
+			//输出root
+			alert(xhr.responseXML.documentElement.nodeName);//可以使用DOM 2 Core的一些属性和方法
+		}
+	};
+	xhr.send(null);
+	//PHP Code
+	header("Content-Type:text/xml");//发送MIME信息
+	echo  &lt;&lt;&lt;XML
+		&lt;?xml version="1.0" encoding="gbk"?&gt;
+		&lt;root /&gt;
+	XML;</pre>
+	<h3>更简单的方法:直接加载XML文件</h3>
+	<p>浏览器也提供了直接加载XML文件的方法,但也仅仅火狐与Windows平台上的IE支持而已.同样,两者之间的实现也有很大的差别的!</p>
+	<h4>IE中的XML DOM</h4>
+	<p>微软在JavaScript中引入了用于创建ActiveX对象的ActiveXObject类。ActiveXObject的构造函数只有一个参数——要进行实例化的ActiveX对象的字符串代号。例如，XML DOM对象的第一个版本称为Microsoft.XmlDom。所以，要创建这个对象的实例，使用以下代码：</p>
+	<pre>
+	var xmlDom = new ActiveXObject("Microsoft.XmlDom");</pre>
+	<p>IE中的XML DOM支持的最新版本是5.0,IE中存在以下版本的XML DOM实现:</p>
+	<ul>
+		<li>Microsoft.XmlDom（最原始的）</li>
+		<li>MSXML2.DOMDocument</li>
+		<li>MSXML2.DOMDocument.3.0</li>
+		<li>MSXML2.DOMDocument.4.0</li>
+		<li>MSXML2.DOMDocument.5.0</li>
+	</ul>
+	<p>自然地，只要可能，大家都会选择最新的XML DOM的版本，因为新版会提高速度，添加一些新的功能如验证等。但是，如果尝试创建不存在于客户端机器上的ActiveX对象，IE就会抛出错误并停止所有执行。所以，为确保使用了正确的XML DOM版本，也为避免任何其他错误，我们可以创建一个函数来测试每个XML DOM字符串，出现错误即捕获：</p>
+	<pre>
+	function XMLDOM() {
+		var xmlDomVers = [
+		"Microsoft.XmlDom",
+		"MSXML2.DOMDocument",
+		"MSXML2.DOMDocument.3.0",
+		"MSXML2.DOMDocument.4.0",
+		"MSXML2.DOMDocument.5.0"
+		];
+		for (var i=xmlDomVers.length-1;i>=0;i--) {
+			try {
+				var xmlDom = new ActiveXObject(xmlDomVers[i]);
+				return xmlDom;
+			} catch(e) {continue;}
+			
+		}
+	}</pre>
+	<p>接下来就是载入XML. 微软的XML DOM有两种载入XML的方法：loadXML()和load()。loadXML()方法可直接向XML DOM输入XML字符串.load()方法用于从服务器上载入XML文件。不过，load()方法只可以载入与包含JavaScript的页面存储于同一服务器上的文件，也就是说，不可以通过其他人的服务器载入XML文件。
+		load方法还有两种载入文件的模式：同步和异步。以同步模式载入文件时，JavaScript代码会等待文件完全载入后才继续执行代码；而以异步模式载入时，不会等待，可以使用事件处理函数来判断文件是否完全载入了。默认情况下，文件按照异步模式载入。要进行同步载入，只需设置async特性为false：
+	</p>
+	<pre>
+	//Only For IE
+	var xmlDom = XMLDOM();
+	xmlDom.loadXML("&lt;root /&gt;");
+	alert(xmlDom.documentElement.nodeName);
+	var xml = XMLDOM();
+	xml.async = false;//同步载入
+	xml.load("test.xml");
+	alert(xml.documentElement.firstChild.nodeValue);
+	//同步加载时需要使用readystatechange事件监听
+	var xml2 = XMLDOM();
+	xml2.async=true;//可以不指定,默认是异步载入的
+	xml2.onreadystatechange = function () {//必须在调用load方法前分配此事件处理函数
+		if (xml2.readyState==4) {//readyState的含义和XHR对象是一样的
+			//注意这里没有使用this,因为IE下的ActiveXObject很特殊,使用this会出错
+			alert(xml2.xml);//与innerHTML属性类似,IE中的xml属性返回XML字符串形式的源码
+			//但注意,IE中的XMLDOM对象的xml属性是只读的
+		}
+	};
+	xml2.load("test.xml");</pre>
+	<p>在尝试将XML载入到XML DOM对象中时，无论使用loadXML()方法还是load()方法，都有可能出现XML格式不正确的情况。为解决这个问题，微软的XML DOM的parseError的特性包含了关于解析XML代码时所遇到的问题的所有信息。</p>
+	<p>parseError特性实际上是包含以下特性的对象：</p>
+	<ul>
+		<li>errorCode——表示所发生的错误类型的数字代号（当没有错误时为0）</li>
+		<li>filePos——错误发生在文件中的位置</li>
+		<li>line——遇到错误的行号</li>
+		<li>linepos——在遇到错误的那一行上的字符的位置</li>
+		<li>reason——对错误的一个解释</li>
+		<li>srcText——造成错误的代码</li>
+		<li>url——造成错误的文件的URL（如果可用）</li>
+	</ul>
+	<p>当直接对parseError自身取值，它会返回errorCode的值，也就是说可以这样进行检查</p>
+	<pre>
+	if (xmlDom.parseError===0) {
+		alert("没有出错!");
+	} else {
+		var er = xmlDom.parseError;
+		alert("XML解析出错!错误信息如下:\n\
+		错误代号:"+er.errorCode+"\n\
+		文件:"+er.filePos+"\n\
+		行:"++er.line+"\n\
+		字符:"+er.linepos+"\n\
+		相关信息:"+er.reason+"\n\");
+	}</pre>
+	<h4>Mozilla中的XML DOM</h4>
+	<p>与Mozilla其他方面一样，它提供的XML DOM版本要比IE的更加标准。 Mozilla中的XML DOM实际上是它的JavaScript实现，也就是说它不仅与浏览器一起衍化，同时它能可靠地在Mozilla支持的所有平台上使用。因此与不能在Macintosh上使用XML DOM的IE不同，Mozilla的支持跨越了平台的界限。另外，Mozilla的XML DOM实现了支持DOM Level 2 的功能，而微软的，仅支持DOM Level 1。</p>
+	<p>DOM标准指出，document.implementation对象有个可用的createDocument()方法。Mozilla严格遵循了这个标准，可以这样创建XML DOM：</p>
+	<pre>
+	var xmlDom = document.implementation.createDocument("","",null);</pre>
+	<p>createDocument()的三个参数分别是文档的命名空间URL，文档元素的标签名以及一个文档类型对象（总是为null，因为在Mozilla中还没有对文档类型对象的支持）。前面这行代码创建一个空的XML DOM。要创建包含一个文档元素的XML DOM，只需将标签名作为第二个参数：</p>
+	<pre>
+	var xmlDom = document.implementation.createDocument("","root",null);</pre>
+	<p>这行代码创建了代表XML代码&lt;root/&gt;的XML DOM。如果在第一个参数中指定了命名空间URL，可进一步定义文档元素：</p>
+	<pre>
+	var xmlDom = document.implementation.createDocument("http://www.x-do.org","root",null);</pre>
+	<p>这行代码创建了表示&lt;root xmlns="http://www.x-do.org"/&gt;的XML DOM</p>
+	<p>与微软的XML DOM不同，Mozilla只支持一个载入数据的方法：load()。Mozilla中的load()方法和IE中的load()工作方式一样。只要指定要载入的XML文件，以及同步还是异步（默认）载入。如果同步载入XML文件，代码基本上IE差不多：</p>
+	<pre>
+	var xmlDom = document.implementation.createDocument("","root",null);
+	xmlDom.async = false;//同步载入
+	xmlDom.load("test.xml");</pre>
+	<p>与IE不同的是,同步载入时,并没有readychange事件,而只有load事件,并且只有加载完毕一种状态!</p>
+	<pre>
+	var xmlDom = document.implementation.createDocument("","root",null);
+	xmlDom.async = true;//异步载入
+	xmlDom.onload = function () {
+		alert(this.documentElement.childNodes.item(0).tagName);
+		//对于JS,访问节点列表既可以用item方法,又可用数字下标,而其它语言则不一定能使用下标
+	};
+	xmlDom.load("test.xml");</pre>
+	<p>另外,麻烦的是,Mozilla的XML DOM不支持loadXML()方法。要将XML字符串解析为DOM，必须使用DOMParser对象,使用其parseFromString方法传入XML字符串表现形式：</p>
+	<pre>
+	var xmlParser = new DOMParser();
+	var xmlDom = xmlParser.parseFromString("&lt;root /&gt;","text/xml");//该方法返回一个XML DOM对象
+	//第二个参数text/xml也可以是application/xml,两者都用来解析XML
+	//还可以是application/xhtml+xml,用来解析XHTML,只能用这三种MIME</pre>
+	<p>与直接解析XML字符串相对应的获取XML字符串的方法,IE中XML DOM对象具有只读的xml属性,而Mozilla
+	则没有相对应的属性,但是，Mozilla提供了可以用于同样的目的的XMLSerializer对象：</p>
+	<pre>
+	var serializer= new XMLSerializer();
+	var xmlStr = serializer.serializeToString(xmlDom,"text/xml");
+	//xmlDom为一个XML DOM节点对象
+	//而text/xml也可为application/xml</pre>
+	<p>对于XML 解析错误,Mozilla的实现方式非常麻烦,它不像IE那样提供一个对象来表示错误,而是将错误信息作为一个XML文档返回,要获取具体的错误信息,还必须用解析其中的字符串! </p>
+	<pre>
+	var xmlParser = new DOMParser();
+	var xmlDom = xmlParser.parseFromString("&lt;root&gt;&lt;child&gt;&lt;/root&gt;","text/xml");
+	alert(xmlDom.documentElement.nodeName);//将返回parsererror,因为文档解析出错时
+	var serializer = new XMLSerializer();
+	var str = serializer.serializeToString(xmlDom,"text/xml");
+	alert(str);//将输出类似下面内容
+	&lt;parsererror xmlns=&quot;http://www.mozilla.org/newlayout/xml/parsererror.xml&quot;&gt;
+	XML解析错误：不符合的记号.预期：&amp;lt;/child&amp;gt;。 
+	位置：file:///E:/XML/test.html 
+	行：1，列：16：&lt;sourcetext&gt;&amp;lt;root&amp;gt;&amp;lt;child&amp;gt;&amp;lt;/root&amp;gt;
+	---------------^&lt;/sourcetext&gt;&lt;/parsererror&gt;</pre>
+	<p>而从其中抽取出诸如行号这些错误信息,只好使用正则表达式了!但是由于浏览器的语言设置不同,使用正则表达式也是困难重重的!
+	可以看到,虽然Mozilla对XML DOM的实现更标准,但是使用起来是非常不方便的!
+	</p>
+	<h2>跨浏览器的XML DOM构造函数</h2>
+	<p>说它跨浏览器,其实也仅仅是兼容Mozilla与Windows上的IE而已,而对于其它浏览器,则可以降级,考虑使用XHR的responseXML,虽然XHR对象该属性没有提供什么高级的方便的方法,但用于读取XML已经足够了!</p>
+	<pre>
+if (document.implementation && document.implementation.createDocument) {
+	//W3C
+	var getXMLDOM=function () {//获取一个XMLDOM对象
+		return document.implementation.createDocument("","",null);
+	},
+	loadXMLFile=function (xmlDom,url,callback) {
+		if (xmlDom.async===true) {
+			xmlDom.onload=function () {
+				if (xmlDom.documentElement.nodeName=="parsererror") {
+					throw new Error("XML Parse Error:"+xmlDom.documentElement.firstChild.nodeValue);
+				} else {
+					callback.call(xmlDom);
+				}
+			};
+		}
+		xmlDom.load(url);
+		return xmlDom;
+	},
+	loadXMLString=function (xmlDom,s) {
+		var p = new DOMParser();
+		var newDom=p.parseFromString(s,"text/xml");
+		if (newDom.documentElement.nodeName=="parsererror") {
+			throw new Error("XML Parse Error:"+newDom.documentElement.firstChild.nodeValue);
+		}
+		while (xmlDom.firstChild) {
+			xmlDom.removeChild(xmlDom.firstChild);
+		}
+		for (var i=0,n;i&lt;newDom.childNodes.length;i++) {
+			n=xmlDom.importNode(newDom.childNodes[i],true);
+			//importNode用于把其它文档中的节点导入到当前文档中
+			//true参数同时导入子节点
+			xmlDom.appendChild(n);
+		}
+		return xmlDom;
+	},
+	getXML=function (xmlNode) {
+		var s= new XMLSerializer();
+		return s.serializeToString(xmlNode,"text/xml");
+	};
+} else if (window.ActiveXObject) {
+	//IE
+	var getXMLDOM=function () {
+		return new ActiveXObject("Microsoft.XmlDom");
+	},loadXMLFile=function (xmlDom,url,callback) {
+		xmlDom.onreadystatechange=function () {
+			if (xmlDom.readyState===4) {
+				if (xmlDom.parseError.errorCode===0) {
+					callback.call(xmlDom);
+				} else {
+					throw new Error("XML Parse Error:"+xmlDom.parseError.reason);
+				}
+			}
+		};
+		xmlDom.load(url);
+		return xmlDom;
+	},loadXMLString=function (xmlDom,s) {
+		xmlDom.loadXML(s);
+		if (xmlDom.parseError.errorCode!==0) {
+			throw new Error("XML Parse Error:"+xmlDom.parseError.reason);
+		}
+		return xmlDom;
+	},
+	getXML=function (xmlNode) {
+		return xmlNode.xml;
+	};
+}</pre>
+<!--
+&lt;  &gt;
+<p></p>
+	<h2></h2>
+<strong></strong>
+<pre></pre>
+<ul>
+	<li></li>
+</ul>-->
+	
+</body>
+</html>

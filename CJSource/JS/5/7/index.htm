@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery数据缓存及命名空间</title>
+<script type="text/javascript">
+	$=1342134;
+</script>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	//button layer
+	/*var lists=document.getElmentsByTagName("li");
+	var layers=document.getElmentsByTagName("div");
+	for (var i=0;i<lists.length;i++) {
+		lists[i].title=layers[i];
+		lists[i].onclick=toggle;
+	}
+	function toggle() {
+		this.layer
+	}*/
+	
+	//Tooltips
+	
+//$=null;
+jQuery.onConflict();
+
+
+var j=jQuery.noConflict(true);
+alert(j);
+j(function ($) {
+	/*var h=$("#header");
+	h.title="标题";
+	$(document.getElementById("header")).data("title","标题");
+	//$("#header").removeData("title");
+	alert($("#header").data("title"));*/
+	
+	/*var h=document.getElementById("header");
+	h.abc=123;
+	var abc=document.getElementById("header").abc;*/
+	$("#header").data("title",123);
+	$(document.body).data("attr",456);
+});
+
+
+	/*
+function jQueryElement(elements) {
+	
+}
+
+
+var randAttribute="jQuery"+(+new Date);
+var dataPool={},counter=1;
+jQuery.fn.init.prototype.data=function (name,value) {
+	for (var i=0;i<this.length;i++) {
+		if (randAttribute in this[i]) {
+			dataPool[this[i][randAttribute]][name]=value;
+		} else {
+			this[i][randAttribute]=counter++;
+			dataPool[this[i][randAttribute]]={};
+		}
+	}
+};
+h1.jQuery123254125412=1
+document.body.jQuery123254125412=2;
+*/
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<h1 id="header">jQuery数据缓存及命名空间</h1>
+
+
+
+</body>
+</html>

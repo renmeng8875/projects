@@ -1,0 +1,105 @@
+.MultiSelectorInput {
+width:151px !important;
+height:19px !important;
+border:none !important;
+line-height:17px !important;
+text-indent:2px !important;
+padding-right:20px!important;
+cursor:pointer !important;
+background:url("selector_input_bg.gif") no-repeat left center !important;
+}
+div.MultiSelector {
+position:absolute;
+width:400px;
+background:white;
+z-index:100;
+left:100px;
+top:100px;
+border:1px solid #CCC;
+padding:8px;
+margin:0;
+font-size:12px;
+color:#333;
+}
+div.MultiSelector h3 {
+height:26px;
+font-size:14px;
+line-height:26px;
+background:url("selector_title_bg.gif") repeat-x center;
+margin:0;
+padding:0 12px;
+border:1px solid #CCE;
+}
+div.MultiSelector em {
+font-style:normal;
+padding-left:16px;
+background:url("list_square.gif") no-repeat left center;
+}
+div.MultiSelector h3 a {
+float:right;
+font-size:12px;
+color:blue;
+cursor:pointer;
+font-weight:normal;
+}
+div.MultiSelector h4 {
+background:#EEE;
+padding:2px;
+color:#333;
+text-indent:4px;
+height:14px;
+line-height:14px;
+font-size:12px;
+margin:4px 0;
+float:none;
+clear:both;
+}
+
+div.MultiSelector h4 a {
+	cursor:pointer;
+}
+div.MultiSelector h4 a:hover {
+	
+}
+div.MultiSelector h4 em {
+color:#06F;
+background:none;
+}
+div.MultiSelector dl {
+margin:0;
+padding:4px 0;
+}
+div.MultiSelector dl dt {
+float:none;
+clear:both;
+display:block;
+}
+div.MultiSelector dl dt em {
+color:#06F;
+float:left;
+
+}
+div.MultiSelector dl dd {
+margin-left:6px;
+padding:4px;
+float:none;
+clear:both;
+display:block;
+}
+div.MultiSelector label {
+display:inline-block;
+height:20px;
+line-height:20px;
+width:88px;
+cursor:pointer;
+vertical-align:bottom;
+}
+div.MultiSelector label input {
+vertical-align:middle;
+margin-right:2px;
+}
+
+div.MultiSelector div.selectedItemsContainer {
+padding:4px 8px;
+}
+

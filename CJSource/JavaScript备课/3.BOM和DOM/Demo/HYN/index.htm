@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>忽悠你——留言板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript" src="js/bbs.js"></script>
+<style type="text/css">@import url("style/1.css");</style>
+</head>
+<body>
+	<h1 id="header"><a href="/">HYN—GuestBook <em>Alpha 1.0</em></a></h1>
+	<p id="sideBar">
+		<a href="reg.htm">注册</a>
+		<a href="login.htm">登录</a>
+		<a href="###" id="sortASC">按时间正序排列</a>
+		<a href="###" id="sortDESC">按时间倒序排列</a>
+	</p>
+	<ul id="contentList">
+		<li>
+			<h3> 标题：<span class="msgTitle">留言标题</span> 留言人姓名：<span class="userName">留言人姓名</span> 留言时间：<span class="msgDate">留言时间</span></h3>
+			<div class="msgContent">
+				留言内容
+			</div>
+		</li>
+	</ul>
+	<form id="fm1">
+		<h3><a href="#">Top</a>发表留言</h3>
+		<label>留言标题：<input type="text" id="msgTitle" /></label>
+		<label>您的姓名：<input type="text" id="userName" /></label>
+		<label>留言内容：<textarea id="msgContent">请在这里输入留言内容......</textarea></label>
+		<input type="button" value="" id="submitButton" />
+	</form>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery动画</title>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+
+jQuery(function () {
+	/*$(document).click(function () {
+		$("#oDiv").show(3000);
+		$("#oDiv").hide(3000);
+	});*/
+	//fx("slideDown","slideUp");
+	fx("fadeIn","fadeOut");
+	function fx(fn1,fn2) {
+		/*$("#oDiv")[fn1](1000,function() {
+			$("#oDiv")[fn2](1000,function () {
+				fx(fn1,fn2);
+			});
+		});*/
+		$("#oDiv")[fn1](1000)[fn2](1000,function () {fx(fn1,fn2)});
+		
+	}
+	
+	/*$("#oDiv").animate({
+		fontSize:60,
+		width:800,
+		opacity:0.1
+	},3000);
+	$("#oDiv2").animate({
+		width:10
+	},3000);
+	$(document).click(function () {
+		
+		$(":animated").stop();
+	});
+	*/
+	
+	/*$("#oDiv").animate({width:800},3000,function () {
+		$("#oDiv").animate({height:0},3000);
+	});*/
+	/*$("#oDiv").animate({height:0},3000)
+	.animate({width:800},3000);*/
+	//$("#oDiv").slideUp(3000).slideDown(3000).fadeOut(3000);
+	
+	
+	function toggle() {
+		$("#oDiv").slideToggle("slow");
+	}
+	
+	
+});
+</script>
+<style type="text/css">
+#oDiv,#oDiv2 {
+background:blue;
+width:300px;
+height:300px;
+border:2px solid lime;
+position:absolute;
+left:100px;
+top:100px;
+color:white;
+}
+</style>
+</head>
+<body>
+<h1 id="header">jQuery动画</h1>
+
+<div id="oDiv">
+	jQuery动画
+</div>
+
+<!--div id="oDiv2">
+	jQuery动画
+</div-->
+
+</iframe>
+</body>
+</html>

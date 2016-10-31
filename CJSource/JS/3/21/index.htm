@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>乘法表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script type="text/javascript">
+window.onload=function () {
+	document.nine.onsubmit=function (evt) {
+		if (evt) evt.preventDefault();
+		else window.event.returnValue=false;
+		
+		var startNum=this.startNum,
+				finishNum=this.finishNum,
+				start=parseInt(startNum.value),
+				finish=parseInt(finishNum.value);
+		
+		if (start && finish) {
+			drawTable(start,finish);
+		} else {
+			alert("请输入正确的数字！");
+		}
+			
+	};
+	/*var table=document.getElementById("table");
+	var row=table.insertRow(0);
+	var cell=row.insertCell(0);
+	cell.innerHTML="新的单元格";
+	alert(table.rows.length);*/
+	function drawTable(start,finish) {
+		var oldTable=document.getElementById("dynamicTable");
+		if (oldTable) {
+			document.body.removeChild(oldTable);
+		}
+		var table=document.createElement("table");
+		for (var i=start,row;i<=finish;i++) {
+			row=table.insertRow(table.rows.length);
+			for (var j=start,cell;j<=i;j++) {
+				cell=row.insertCell(row.cells.length);
+				cell.innerHTML=j+"×"+i+"＝"+(j*j);
+			}
+			for (var k=j;k<=finish;k++) {
+				cell=row.insertCell(row.cells.length);
+				cell.innerHTML="&nbsp;";
+			}
+		}
+		table.border="1";
+		table.id="dynamicTable";
+		document.body.appendChild(table);
+	}
+};
+</script>
+</head>
+<body>
+<h1>乘法表</h1>
+<script type="text/javascript">
+	//用document.write方法打印出来的9X9乘法表
+	document.write("<h4>9×9乘法表</h4><table border='1'>")
+	for (var i=1;i<=9;i++) {
+		document.write("<tr>")
+		for (var j=1;j<=i;j++) {
+			document.write("<td>"+j+"×"+i+"＝"+(j*j)+"</td>");
+		}
+		for (var k=j;k<=9;k++) {
+			document.write("<td>&nbsp;</td>");
+		}
+		document.write("</tr>");
+	}
+	document.write("</table><br />");
+
+</script>
+<form action="pre.php" name="nine">
+	从 <input type="text" name="startNum" size="2" maxlength="1"  />
+	到 <input type="text" name="finishNum" size="2" maxlength="1" />
+	<input type="submit" value="显示乘法表" />
+</form>
+<br />
+<table id="table">
+</table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>RegExp</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+	<script type="text/javascript" src="../js/tools.js"></script>
+	<script type="text/javascript">
+		window.onload = initAll;
+		function initAll() {
+			var checkButton = document.getElementById("check");
+			checkButton.onclick = checkEmail;
+		}
+		function checkEmail() {
+			var email = document.getElementById("email");
+			var val = email.value;
+			if (!val) {
+				alert("请填写完整!");
+			}
+			var re = /[a-z]\w*@([a-z0-9-]+\.)+[a-z]{2,6}/i;
+			if (re.test(val)) {
+				alert("正确!");
+			} else {
+				alert("错误!");
+			}
+		}
+	</script>
+</head>
+<body>
+	电子邮件：<input type="text" value="" id="email" name="email" /><input type="button" id="check" value="检查" />
+</body>
+</html>

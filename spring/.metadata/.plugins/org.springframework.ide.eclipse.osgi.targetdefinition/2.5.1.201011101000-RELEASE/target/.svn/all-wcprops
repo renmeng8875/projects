@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 195
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target
+END
+com.springsource.slf4j.log4j-1.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 234
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.slf4j.log4j-1.5.6.jar
+END
+com.springsource.org.apache.log4j-1.2.15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 240
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.org.apache.log4j-1.2.15.jar
+END
+com.springsource.org.objectweb.asm-2.2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 240
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.org.objectweb.asm-2.2.3.jar
+END
+org.springframework.osgi.io-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 233
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.osgi.io-1.2.1.jar
+END
+com.springsource.net.sf.cglib-2.1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 235
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.net.sf.cglib-2.1.3.jar
+END
+org.springframework.osgi.extensions.annotation-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 252
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.osgi.extensions.annotation-1.2.1.jar
+END
+org.springframework.aop-3.0.1.RELEASE-A.jar
+K 25
+svn:wc:ra_dav:version-url
+V 239
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.aop-3.0.1.RELEASE-A.jar
+END
+org.springframework.osgi.extender-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 239
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.osgi.extender-1.2.1.jar
+END
+org.eclipse.osgi-3.5.1.R35x_v20091005.jar
+K 25
+svn:wc:ra_dav:version-url
+V 237
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.eclipse.osgi-3.5.1.R35x_v20091005.jar
+END
+org.springframework.context-3.0.1.RELEASE-A.jar
+K 25
+svn:wc:ra_dav:version-url
+V 243
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.context-3.0.1.RELEASE-A.jar
+END
+com.springsource.edu.emory.mathcs.backport-3.1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 248
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.edu.emory.mathcs.backport-3.1.0.jar
+END
+org.springframework.core-3.0.1.RELEASE-A.jar
+K 25
+svn:wc:ra_dav:version-url
+V 240
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.core-3.0.1.RELEASE-A.jar
+END
+org.springframework.beans-3.0.1.RELEASE-A.jar
+K 25
+svn:wc:ra_dav:version-url
+V 241
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.beans-3.0.1.RELEASE-A.jar
+END
+com.springsource.org.aopalliance-1.0.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 238
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.org.aopalliance-1.0.0.jar
+END
+org.springframework.osgi.core-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 235
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.osgi.core-1.2.1.jar
+END
+com.springsource.slf4j.org.apache.commons.logging-1.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 255
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.slf4j.org.apache.commons.logging-1.5.6.jar
+END
+org.springframework.context.support-3.0.1.RELEASE-A.jar
+K 25
+svn:wc:ra_dav:version-url
+V 251
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/org.springframework.context.support-3.0.1.RELEASE-A.jar
+END
+com.springsource.slf4j.api-1.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 232
+/svn/repo/!svn/ver/4998/MobileMarket/04-%E5%BC%80%E5%8F%91/repository/spring3-all/spring/.metadata/.plugins/org.springframework.ide.eclipse.osgi.targetdefinition/2.5.1.201011101000-RELEASE/target/com.springsource.slf4j.api-1.5.6.jar
+END

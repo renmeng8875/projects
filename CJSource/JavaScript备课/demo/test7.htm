@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>其他</title>
+	<script type="text/javascript">
+		//String对象
+		var str ="abc";
+		var str1 = new String("string");
+		//alert(str.length);//length属性报告了字符串的长度
+		//alert(str1.length);
+		//str.indexOf();//indexOf第一个参数,要查找的字符串.返回要查找的字符串在被查找字符串中的索引
+		//字符串的索引是从0开始的
+		//alert(str.indexOf("bc"));
+		//str.substring();//用来截取字符串,两个参数，开始位置和结束位置
+		//alert(str1.substring(2,3));
+		window.onload = initAll;
+		var interval;
+		function initAll() {
+			setInterval(setClock,1000);
+			interval = setInterval(zoomInDiv,50);
+			//zoomInDiv();
+		};
+		
+		function zoomInDiv() {
+			var oDiv = document.getElementById("oDiv");
+			var w = oDiv.style.width;
+			var h = oDiv.style.height;
+			if (!w && !h) {
+				w=200;
+				h=200;
+			} else {
+				w = parseInt(w);
+				h = parseInt(h);
+				w=w+2;
+				h=h+2;
+			}
+			oDiv.style.width= w+"px";
+			oDiv.style.height = h+"px";
+			if (w>=1000 && h >=1000) {
+				clearInterval(interval);
+			}
+		}
+		function setClock() {
+			var h= document.getElementById("hspan");
+			var m= document.getElementById("mspan");
+			var s= document.getElementById("sspan");
+			var d = new Date();
+			h.innerHTML = d.getHours();
+			m.innerHTML = d.getMinutes();
+			s.innerHTML = d.getSeconds();
+		}
+		
+	</script>
+	<style type="text/css">
+		#oDiv {
+		width:200px;
+		height:200px;
+		background:blue;
+		}
+	</style>
+</head>
+<body>
+现在时间:<span id="hspan">1</span>时<span id="mspan">1</span>分<span id="sspan">1</span>秒 
+</body>
+</html>

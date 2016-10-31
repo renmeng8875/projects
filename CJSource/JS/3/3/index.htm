@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>节点</title>
+<script type="text/javascript">
+	
+if (typeof Node=="undefined") {
+	window.Node={};
+}
+window.onload=function () {
+	var op=document.getElementById("op");
+	var nop=op.cloneNode(true);
+	//node.cloneNode(bool) ;//true表示连同子节点一起克隆
+	//document.body.appendChild(nop);
+	//alert(op.getAttribute("class"));
+	//alert(getAttr(op,"class"));
+	
+	var div1=document.createElement("div");
+	div1.innerHTML="DIV ONE";
+	var div2=document.createElement("div");
+	var div3=document.createElement("div");
+	//append(document.body,div1,div2,div3);
+	//delNode(div1,div2,div3);
+	//replaceNode(op,div1);
+	// insertAfter 将一个节点插入到指定节点的后面
+	insertAfter(document.getElementsByTagName("h1")[0],div1);
+};
+
+/*
+IE
+class	className
+for		htmlFor
+*/
+var specialNames={
+	"class":"className",
+	"for":"htmlFor"
+};
+//测试对象是否具有某个属性 name in obj
+//alert("classssss" in specialNames);
+
+function insertAfter(node,newNode) {
+	//将newNode插入到node之后
+	//如果node有下一个节点的话,newNode 插入到node.nextSibling的前面
+	//如果node没有下一个节点,newNode插入为node.parentNode的最后一个子节点
+	var pn=node.parentNode;
+	if (node.nextSibling) {
+		pn.insertBefore(newNode,node.nextSibling);
+	} else {
+		pn.appendChild(newNode);
+	}
+	return newNode;
+}
+function getAttr(node,attrName) {
+	var attr=node.getAttribute(attrName) ;
+	if (attr==null) {
+		if (attrName in specialNames) {
+			attrName=specialNames[attrName];
+			attr=node.getAttribute(attrName);
+		}
+	}
+	return attr;
+}
+
+
+function append(node) {
+	for(var i=1;i<arguments.length;i++) {
+		node.appendChild(arguments[i]);
+	}
+	return node;
+}
+
+function delNode() {
+	/*for (var i=0;i<arguments.length;i++) {
+		arguments[i].parentNode.removeChild(arguments[i]);
+	}*/
+	
+	each(arguments,function (node) {
+		node.parentNode.removeChild(node);
+	});
+}
+
+function replaceNode(replaced,newNode) {
+	replaced.parentNode.replaceChild(newNode,replaced);
+}
+/*
+arr		要遍历的数组
+fn		要作用于每个元素的函数
+*/
+function each(arr,fn) {
+	for(var i=0;i<arr.length;i++) {
+		fn(arr[i],i);
+	}
+}
+</script>
+</head>
+<body>
+	<h1>节点</h1>
+	<p id="op" class="base">CloneNode</p>
+</body>
+</html>

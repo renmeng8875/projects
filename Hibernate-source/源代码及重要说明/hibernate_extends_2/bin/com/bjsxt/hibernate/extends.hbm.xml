@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bjsxt.hibernate">
+	<class name="Animal" table="t_animal">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<property name="sex"/>
+		<joined-subclass name="Pig" table="t_pig">
+			<key column="pid"/>
+			<property name="weight"/>
+		</joined-subclass>
+		<joined-subclass name="Bird" table="t_bird">
+			<key column="bid"/>
+			<property name="height"/>
+		</joined-subclass>
+	</class>
+</hibernate-mapping>

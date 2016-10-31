@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery链式调用与隐式递归</title>
+<script type="text/javascript" src="../../lib/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+	var nodes=$("li:contains('News')");
+	//alert($("#newsList").get() instanceof Array);
+	nodes.push(document.body);
+	//alert(nodes instanceof Array);
+	//alert(nodes.length);
+	/*nodes
+	.css("color","red")
+	.attr("title","Title!!!");*/
+	/*for (var i=0;i<nodes.length;i++) {
+		$(nodes[i]).css("color","red");
+	}*/
+	
+	//alert(nodes.html());
+	//nodes.html("innerHTML!!!");
+	nodes.each(function () {
+		//alert(this);
+	});
+	
+	
+	//alert(ret===nodes);
+});
+/*
+function Demo() {
+}
+Demo.prototype ={
+	setName:function (name) {
+		this.name=name;
+		return this;
+	},
+	getName:function () {
+		return this.name;
+	},
+	setAge:function (age) {
+		this.age=age;
+		return this;
+	}
+};
+function D() {//工厂函数
+	return new Demo();
+}*/
+//D().setName("CJ").setAge(18).setName();
+
+function List(ary) {//ary是一个数组
+	//this.ary=ary instanceof Array?ary:[ary];
+	/*for (var i=0;i<ary.length;i++) {
+		this[i]=ary[i];
+	}
+	this.length=ary.length;*/
+	[].push.apply(this,ary);
+}
+
+List.prototype={
+	attr:function(name,value) {
+		for (var i=0;i<this.ary.length;i++) {
+			this.ary[i][name]=value;
+		}
+	},
+	get:function (index) {
+		if (index===undefined) return this.ary;
+		else return this.ary[index];
+	},
+	push:[].push,
+	shift:[].shift
+};
+var l=new List([1,2,3]);
+alert(l.length);
+</script>
+<style type="text/css">
+.highlight {
+background:#EEE;
+}
+</style>
+</head>
+<body>
+<h1 id="header">jQuery链式调用与隐式递归</h1>
+<p>jQuery中规定，一个方法不需要返回值的时候，它就将这个对象自身返回</p>
+<ul id="newsList">
+	<li>List 1 News</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li>List 4</li>
+</ul>
+<ul>
+	<li>List 1</li>
+	<li>List 2</li>
+	<li>List 3</li>
+	<li>List 4 News</li>
+</ul>
+
+</body>
+</html>

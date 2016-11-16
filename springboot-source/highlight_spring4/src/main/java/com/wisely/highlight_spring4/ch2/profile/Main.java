@@ -8,7 +8,7 @@ public class Main {
 		  AnnotationConfigApplicationContext context =  
 				  new AnnotationConfigApplicationContext();
 		  
-		  context.getEnvironment().setActiveProfiles("dev"); //1
+		  context.getEnvironment().setActiveProfiles("prod"); //1
 		  context.register(ProfileConfig.class);//2
 		  context.refresh(); //3
 		  

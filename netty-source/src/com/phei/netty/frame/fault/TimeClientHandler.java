@@ -40,8 +40,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
      * Creates a client-side handler.
      */
     public TimeClientHandler() {
-	req = ("QUERY TIME ORDER" + System.getProperty("line.separator"))
-		.getBytes();
+    	req = ("QUERY TIME ORDER" + System.getProperty("line.separator")).getBytes();
     }
 
     @Override
@@ -55,21 +54,18 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-	    throws Exception {
-	ByteBuf buf = (ByteBuf) msg;
-	byte[] req = new byte[buf.readableBytes()];
-	buf.readBytes(req);
-	String body = new String(req, "UTF-8");
-	System.out.println("Now is : " + body + " ; the counter is : "
-		+ ++counter);
+    public void channelRead(ChannelHandlerContext ctx, Object msg)throws Exception {
+		ByteBuf buf = (ByteBuf) msg;
+		byte[] req = new byte[buf.readableBytes()];
+		buf.readBytes(req);
+		String body = new String(req, "UTF-8");
+		System.out.println("Now is : " + body + " ; the counter is : "+ ++counter);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-	// 释放资源
-	logger.warning("Unexpected exception from downstream : "
-		+ cause.getMessage());
-	ctx.close();
+		// 释放资源
+		logger.warning("Unexpected exception from downstream : "+ cause.getMessage());
+		ctx.close();
     }
 }

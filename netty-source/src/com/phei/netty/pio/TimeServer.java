@@ -48,8 +48,7 @@ public class TimeServer {
 	    server = new ServerSocket(port);
 	    System.out.println("The time server is start in port : " + port);
 	    Socket socket = null;
-	    TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(
-		    50, 10000);// 创建IO任务线程池
+	    TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(50, 10000);// 创建IO任务线程池
 	    while (true) {
 		socket = server.accept();
 		singleExecutor.execute(new TimeServerHandler(socket));

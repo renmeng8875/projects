@@ -143,13 +143,13 @@ public class TimeClientHandle implements Runnable {
     }
 
     private void doWrite(SocketChannel sc) throws IOException {
-	byte[] req = "QUERY TIME ORDER".getBytes();
-	ByteBuffer writeBuffer = ByteBuffer.allocate(req.length);
-	writeBuffer.put(req);
-	writeBuffer.flip();
-	sc.write(writeBuffer);
-	if (!writeBuffer.hasRemaining())
-	    System.out.println("Send order 2 server succeed.");
-    }
+		byte[] req = "QUERY TIME ORDER".getBytes();
+		ByteBuffer writeBuffer = ByteBuffer.allocate(req.length);
+		writeBuffer.put(req);
+		writeBuffer.flip();
+		sc.write(writeBuffer);
+		if (!writeBuffer.hasRemaining())
+		    System.out.println("Send order 2 server succeed.");
+	    }
 
 }

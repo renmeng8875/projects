@@ -26,8 +26,7 @@ import java.nio.channels.CompletionHandler;
  * @date 2014年2月16日
  * @version 1.0
  */
-public class ReadCompletionHandler implements
-	CompletionHandler<Integer, ByteBuffer> {
+public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     private AsynchronousSocketChannel channel;
 
@@ -44,8 +43,7 @@ public class ReadCompletionHandler implements
 	try {
 	    String req = new String(body, "UTF-8");
 	    System.out.println("The time server receive order : " + req);
-	    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(req) ? new java.util.Date(
-		    System.currentTimeMillis()).toString() : "BAD ORDER";
+	    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(req) ? new java.util.Date(System.currentTimeMillis()).toString() : "BAD ORDER";
 	    doWrite(currentTime);
 	} catch (UnsupportedEncodingException e) {
 	    e.printStackTrace();

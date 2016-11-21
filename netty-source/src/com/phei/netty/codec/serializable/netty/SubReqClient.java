@@ -45,10 +45,7 @@ public class SubReqClient {
 			@Override
 			public void initChannel(SocketChannel ch)
 				throws Exception {
-			    ch.pipeline().addLast(
-				    new ObjectDecoder(1024, ClassResolvers
-					    .cacheDisabled(this.getClass()
-						    .getClassLoader())));
+			    ch.pipeline().addLast(new ObjectDecoder(1024, ClassResolvers.cacheDisabled(this.getClass().getClassLoader())));
 			    ch.pipeline().addLast(new ObjectEncoder());
 			    ch.pipeline().addLast(new SubReqClientHandler());
 			}

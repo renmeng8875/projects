@@ -35,10 +35,9 @@ public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 
     MarshallingDecoder marshallingDecoder;
 
-    public NettyMessageDecoder(int maxFrameLength, int lengthFieldOffset,
-	    int lengthFieldLength) throws IOException {
-	super(maxFrameLength, lengthFieldOffset, lengthFieldLength);
-	marshallingDecoder = new MarshallingDecoder();
+    public NettyMessageDecoder(int maxFrameLength, int lengthFieldOffset,int lengthFieldLength) throws IOException {
+    	super(maxFrameLength, lengthFieldOffset, lengthFieldLength);
+    	marshallingDecoder = new MarshallingDecoder();
     }
 
     @Override

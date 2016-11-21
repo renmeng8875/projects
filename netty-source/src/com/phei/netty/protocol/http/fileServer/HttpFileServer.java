@@ -47,21 +47,15 @@ public class HttpFileServer {
 			@Override
 			protected void initChannel(SocketChannel ch)
 				throws Exception {
-			    ch.pipeline().addLast("http-decoder",
-				    new HttpRequestDecoder());
-			    ch.pipeline().addLast("http-aggregator",
-				    new HttpObjectAggregator(65536));
-			    ch.pipeline().addLast("http-encoder",
-				    new HttpResponseEncoder());
-			    ch.pipeline().addLast("http-chunked",
-				    new ChunkedWriteHandler());
-			    ch.pipeline().addLast("fileServerHandler",
-				    new HttpFileServerHandler(url));
+			    ch.pipeline().addLast("http-decoder",new HttpRequestDecoder());
+			    ch.pipeline().addLast("http-aggregator",new HttpObjectAggregator(65536));
+			    ch.pipeline().addLast("http-encoder",new HttpResponseEncoder());
+			    ch.pipeline().addLast("http-chunked",new ChunkedWriteHandler());
+			    ch.pipeline().addLast("fileServerHandler",new HttpFileServerHandler(url));
 			}
 		    });
-	    ChannelFuture future = b.bind("192.168.1.102", port).sync();
-	    System.out.println("HTTP文件目录服务器启动，网址是 : " + "http://192.168.1.102:"
-		    + port + url);
+	    ChannelFuture future = b.bind("127.0.0.1", port).sync();
+	    System.out.println("HTTP文件目录服务器启动，网址是 : " + "http://127.0.0.1:"+ port + url);
 	    future.channel().closeFuture().sync();
 	} finally {
 	    bossGroup.shutdownGracefully();
@@ -70,17 +64,8 @@ public class HttpFileServer {
     }
 
     public static void main(String[] args) throws Exception {
-	int port = 8080;
-	if (args.length > 0) {
-	    try {
-		port = Integer.parseInt(args[0]);
-	    } catch (NumberFormatException e) {
-		e.printStackTrace();
-	    }
+		int port = 8080;
+		String url = DEFAULT_URL;
+		new HttpFileServer().run(port, url);
 	}
-	String url = DEFAULT_URL;
-	if (args.length > 1)
-	    url = args[1];
-	new HttpFileServer().run(port, url);
-    }
 }

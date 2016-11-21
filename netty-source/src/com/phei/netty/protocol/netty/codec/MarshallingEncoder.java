@@ -34,7 +34,7 @@ public class MarshallingEncoder {
     Marshaller marshaller;
 
     public MarshallingEncoder() throws IOException {
-	marshaller = MarshallingCodecFactory.buildMarshalling();
+    	marshaller = MarshallingCodecFactory.buildMarshalling();
     }
 
     protected void encode(Object msg, ByteBuf out) throws Exception {

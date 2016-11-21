@@ -32,7 +32,12 @@ public class UserInfo implements Serializable {
 
     private String userName;
 
-    private int userID;
+    @Override
+	public String toString() {
+		return "UserInfo [userID=" + userID + ", userName=" + userName + "]";
+	}
+
+	private int userID;
 
     public UserInfo buildUserName(String userName) {
 	this.userName = userName;

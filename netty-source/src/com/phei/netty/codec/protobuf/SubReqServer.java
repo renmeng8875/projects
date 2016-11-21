@@ -50,12 +50,8 @@ public class SubReqServer {
 			public void initChannel(SocketChannel ch) {
 			    // ch.pipeline().addLast(
 			    // new ProtobufVarint32FrameDecoder());
-			    ch.pipeline().addLast(
-				    new ProtobufDecoder(
-					    SubscribeReqProto.SubscribeReq
-						    .getDefaultInstance()));
-			    ch.pipeline().addLast(
-				    new ProtobufVarint32LengthFieldPrepender());
+			    ch.pipeline().addLast(new ProtobufDecoder(SubscribeReqProto.SubscribeReq.getDefaultInstance()));
+			    ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
 			    ch.pipeline().addLast(new ProtobufEncoder());
 			    ch.pipeline().addLast(new SubReqServerHandler());
 			}

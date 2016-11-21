@@ -44,16 +44,10 @@ public class SubReqClient {
 		    .option(ChannelOption.TCP_NODELAY, true)
 		    .handler(new ChannelInitializer<SocketChannel>() {
 			@Override
-			public void initChannel(SocketChannel ch)
-				throws Exception {
-			    ch.pipeline().addLast(
-				    new ProtobufVarint32FrameDecoder());
-			    ch.pipeline().addLast(
-				    new ProtobufDecoder(
-					    SubscribeRespProto.SubscribeResp
-						    .getDefaultInstance()));
-			    ch.pipeline().addLast(
-				    new ProtobufVarint32LengthFieldPrepender());
+			public void initChannel(SocketChannel ch)throws Exception {
+			    ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
+			    ch.pipeline().addLast(new ProtobufDecoder(SubscribeRespProto.SubscribeResp.getDefaultInstance()));
+			    ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
 			    ch.pipeline().addLast(new ProtobufEncoder());
 			    ch.pipeline().addLast(new SubReqClientHandler());
 			}

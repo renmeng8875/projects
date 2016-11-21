@@ -18,6 +18,8 @@ package com.phei.netty.codec.serializable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.ByteBuffer;
 
 /**
  * @author Administrator
@@ -26,24 +28,41 @@ import java.io.ObjectOutputStream;
  */
 public class TestUserInfo {
 
+	//自测写的解包测试函数
+	public static void decodeObj(){
+		UserInfo info = new UserInfo();
+		info.buildUserID(100).buildUserName("Welcome to Netty");
+		byte[] serializaArray = info.codeC();
+		ByteBuffer buffer = ByteBuffer.allocate(serializaArray.length);
+		buffer.put(serializaArray);
+		buffer.flip();
+		UserInfo serialObj = new UserInfo();
+		int userNameLength = buffer.getInt();
+		byte[] userNameArray = new byte[userNameLength];
+		buffer.get(userNameArray);
+		serialObj.setUserName(new String(userNameArray));
+		serialObj.setUserID(buffer.getInt());
+		System.err.println(serialObj);
+		
+	}
     /**
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-	UserInfo info = new UserInfo();
-	info.buildUserID(100).buildUserName("Welcome to Netty");
-	ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	ObjectOutputStream os = new ObjectOutputStream(bos);
-	os.writeObject(info);
-	os.flush();
-	os.close();
-	byte[] b = bos.toByteArray();
-	System.out.println("The jdk serializable length is : " + b.length);
-	bos.close();
-	System.out.println("-------------------------------------");
-	System.out.println("The byte array serializable length is : "
-		+ info.codeC().length);
+		UserInfo info = new UserInfo();
+		info.buildUserID(100).buildUserName("Welcome to Netty");
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream os = new ObjectOutputStream(bos);
+		os.writeObject(info);
+		os.flush();
+		os.close();
+		byte[] b = bos.toByteArray();
+		System.out.println("The jdk serializable length is : " + b.length);
+		bos.close();
+		System.out.println("-------------------------------------");
+		System.out.println("The byte array serializable length is : "+ info.codeC().length);
+		decodeObj();
 
     }
 

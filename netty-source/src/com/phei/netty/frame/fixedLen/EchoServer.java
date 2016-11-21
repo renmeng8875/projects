@@ -48,8 +48,7 @@ public class EchoServer {
 			@Override
 			public void initChannel(SocketChannel ch)
 				throws Exception {
-			    ch.pipeline().addLast(
-				    new FixedLengthFrameDecoder(20));
+			    ch.pipeline().addLast(new FixedLengthFrameDecoder(20));
 			    ch.pipeline().addLast(new StringDecoder());
 			    ch.pipeline().addLast(new EchoServerHandler());
 			}

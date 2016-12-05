@@ -23,5 +23,6 @@
 1. springmvc			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学习springmvc框架的源代码
 1. threadPattern		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学习多线程设计模式的源代码
 1. zkClient           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;讲解zookeeper命名服务实现负载均衡的例子
-2. platform-archetype    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自动生成骨架代码
+1. platform-archetype    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自动生成骨架代码
+1. mybatis-sharding      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mybatis分库分表插件
 

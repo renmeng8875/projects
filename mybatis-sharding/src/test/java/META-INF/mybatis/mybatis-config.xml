@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Student" type="cannon.prod.dal.model.Student" />
+	</typeAliases>
+	<plugins>
+		<plugin interceptor="cannon.mybatis.sharding.plugin.ShardPlugin">
+			<property name="configsLocation" value="META-INF/mybatis/mybatis-sharding-config.xml" />
+		</plugin>
+	</plugins>
+	<mappers>
+		<mapper resource="META-INF/mybatis/mapper/mybatis-mapper-student.xml" />
+	</mappers>
+</configuration>

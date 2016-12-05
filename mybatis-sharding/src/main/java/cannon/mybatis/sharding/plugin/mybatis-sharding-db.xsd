@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://fangjialong.iteye.com/schema/mybatis-sharding"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fangjialong.iteye.com/schema/mybatis-sharding">
+	<xsd:annotation>
+		<xsd:documentation>
+			<![CDATA[
+				数据库集群配置
+			]]>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<!-- Top-level <databases> tag -->
+	<xsd:element name="databases">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="logicName" minOccurs="1" maxOccurs="1" />
+				<xsd:element ref="configs" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="database" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="logicName">
+		<xsd:annotation>
+			<xsd:documentation>
+				<![CDATA[
+					数据库集群逻辑名称
+				]]>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="value" use="required" type="xsd:string"></xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="configs">
+		<xsd:annotation>
+			<xsd:documentation>
+				<![CDATA[
+					数据库集群全局配置
+				]]>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="property">
+		<xsd:complexType>
+			<xsd:attribute name="name" use="required" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="value" use="required" type="xsd:string"></xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="database">
+		<xsd:annotation>
+			<xsd:documentation>
+				<![CDATA[
+					数据库配置
+				]]>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="suffix" use="required" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="username" use="required" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="password" use="required" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="jdbcUrl" use="required" type="xsd:string"></xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

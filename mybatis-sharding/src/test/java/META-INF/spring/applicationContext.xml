@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!-- 配置数据源 -->
+	<bean id="distributeDefaultDataSource" class="cannon.mybatis.sharding.plugin.ShardDataSource" init-method="init" destroy-method="destroy">
+		<property name="configsLocation" value="META-INF/database/distributed-default-db.xml"></property>
+	</bean>
+
+	<bean id="distributeDefaultTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="distributeDefaultDataSource" />
+	</bean>
+
+	<bean id="distributeDefaultTransactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="distributeDefaultTransactionManager" />
+	</bean>
+
+	<bean id="shardSequenceFactory" class="cannon.mybatis.sharding.plugin.ShardSequenceFactory">
+		<property name="sequenceLogicTable" value="test_sequence"></property>
+		<property name="step" value="100"></property>
+		<property name="database" ref="distributeDefaultDataSource"></property>
+	</bean>
+
+	<bean id="distributeDefaultSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation">
+			<bean class="org.springframework.core.io.ClassPathResource">
+				<constructor-arg index="0"
+					value="META-INF/mybatis/mybatis-config.xml" />
+			</bean>
+		</property>
+		<property name="dataSource" ref="distributeDefaultDataSource" />
+	</bean>
+
+
+	<bean id="defaultSqlSessionDaoSupport" abstract="true">
+		<property name="sqlSessionFactory" ref="distributeDefaultSqlSessionFactory"></property>
+	</bean>
+	<bean id="studentDAO" class="cannon.prod.dal.dao.StudentDAOImpl"
+		parent="defaultSqlSessionDaoSupport" />
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databases xmlns="http://fangjialong.iteye.com/schema/mybatis-sharding"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://fangjialong.iteye.com/schema/mybatis-sharding
+	http://fangjialong.iteye.com/schema/mybatis-sharding/mybatis-sharding-db.xsd">
+	<!-- 全局配置 -->
+	<logicName value="test" />
+	<configs>
+		<property name="minPoolSize" value="4" />
+		<property name="minPoolSize" value="8" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="maxIdleTime" value="900" />
+		<property name="idleConnectionTestPeriod" value="1800" />
+	</configs>
+	<database suffix="_00" username="root" password="123456"
+		jdbcUrl="jdbc:mysql://localhost:3306/test_00?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull">
+		<property name="minPoolSize" value="4" />
+		<property name="minPoolSize" value="8" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="maxIdleTime" value="900" />
+		<property name="idleConnectionTestPeriod" value="1800" />
+	</database>
+	<database suffix="_01" username="root" password="123456"
+		jdbcUrl="jdbc:mysql://localhost:3306/test_01?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
+</databases>

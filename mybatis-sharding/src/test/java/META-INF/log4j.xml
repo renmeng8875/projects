@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	
+	<!-- 输出日志到文件 每天一个文件 -->
+	<appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="immediateFlush" value="true"></param>
+		<param name="file" value="/home/logs/snsprod-default.log"></param>
+		<param name="datePattern" value="'.'yyyy-MM-dd'.log'"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p [%X{traceId}/%c{1}] - %m%n"></param>
+		</layout>
+	</appender>
+
+	<!-- 输出日志到控制台 ConsoleAppender -->
+	<appender name="CONSOLE-DEFAULT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p [%X{traceId}/%c{1}] - %m%n"></param>
+		</layout>
+	</appender>
+
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="threshold" value="ERROR"></param>
+		<param name="immediateFlush" value="true"></param>
+		<param name="file" value="/home/logs/snsprod-error.log"></param>
+		<param name="datePattern" value="'.'yyyy-MM-dd'.log'"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p [%X{traceId}/%c{1}] - %m%n"></param>
+		</layout>
+	</appender>
+	
+	<!-- loggers -->
+	<logger name="org.springframework" additivity="false">  
+        <level class="org.apache.log4j.Level" value="ERROR"/>  
+        <appender-ref ref="CONSOLE-DEFAULT" />
+		<appender-ref ref="DEFAULT-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+    </logger>  
+    
+	<root>
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE-DEFAULT" />
+		<appender-ref ref="DEFAULT-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</root>
+</log4j:configuration>

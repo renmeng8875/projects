@@ -59,5 +59,12 @@ public class SqlParserFactory {
 		}
 
 	}
+	
+	public static void main(String[] args) throws JSQLParserException, SQLException {
+		SqlParser sqlParser = SqlParserFactory.getInstance().createParser("select * from user_00 where t.no=?");
+		System.out.println(sqlParser.getTables().get(0));
+		System.out.println(sqlParser.toSQL());
+		
+	}
 
 }

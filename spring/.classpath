@@ -47,9 +47,9 @@
 	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.5.RELEASE.jar" sourcepath="C:/Users/renm/.sourceattacher/spring-context-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.core-3.0.5.RELEASE.jar" sourcepath="C:/Users/renm/.sourceattacher/spring-core-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.expression-3.0.5.RELEASE.jar" sourcepath="C:/Users/renm/.sourceattacher/spring-expression-3.0.5.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.jdbc-3.0.5.RELEASE.jar" sourcepath="C:/Users/renm/.sourceattacher/spring-jdbc-3.0.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.jdbc-3.0.5.RELEASE.jar" sourcepath="C:/Users/Administrator/.sourceattacher/spring-jdbc-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.orm-3.0.5.RELEASE.jar" sourcepath="C:/Users/renm/.sourceattacher/spring-orm-3.0.5.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.transaction-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.transaction-3.0.5.RELEASE.jar" sourcepath="C:/Users/Administrator/.sourceattacher/spring-tx-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.web-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.web.struts-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/proxool-0.9.1.jar"/>

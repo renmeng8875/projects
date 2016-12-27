@@ -58,6 +58,7 @@ public class TranditionalTransactionTest {
             ResultSet rs = pstmt.executeQuery();//3.执行SQL
             process(rs);//4.处理结果集
             closeResultSet(rs);//5.释放结果集
+            closeStatement(pstmt);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -70,7 +71,7 @@ public class TranditionalTransactionTest {
     private void process(ResultSet rs) throws SQLException {
         while(rs.next()) {
             String value = rs.getString("TABLE_NAME");
-            System.out.println("Column TABLENAME:" + value);
+            System.err.println("Column TABLENAME:" + value);
         }        
     }
 

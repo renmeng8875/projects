@@ -78,7 +78,7 @@ public class ShardSequenceTest {
 						try {
 							for (int q = 0; q < 100; q++) {
 								// 为目标物理库创建Sequence序列
-								ShardSequence ss = sequenceFactory.getSequence("test", "_01", "_01");
+								ShardSequence ss = sequenceFactory.getSequence("test", "_01", "");
 								long sequence = ss.next();
 								sequences.offer(sequence);
 								// LOGGER.info("Create Sequence:{}", sequence);

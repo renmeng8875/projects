@@ -1,0 +1,39 @@
+16-12-27 14:21:36,610 [main] jdbc/test1: refreshed XAResource
+16-12-27 14:21:36,612 [main] jdbc/test2: refreshed XAResource
+16-12-27 14:23:00,195 [main] Starting read of logfile E:\projects\spring\.\tmlog0.log
+16-12-27 14:23:00,213 [main] Done read of logfile
+16-12-27 14:23:00,294 [main] jdbc/test1: refreshed XAResource
+16-12-27 14:23:00,296 [main] jdbc/test2: refreshed XAResource
+16-12-27 14:25:36,361 [main] Starting read of logfile E:\projects\spring\.\tmlog1.log
+16-12-27 14:25:36,390 [main] Done read of logfile
+16-12-27 14:25:36,475 [main] jdbc/test1: refreshed XAResource
+16-12-27 14:25:36,477 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:17:38,559 [main] Starting read of logfile E:\projects\spring\.\tmlog2.log
+16-12-27 15:17:38,582 [main] Done read of logfile
+16-12-27 15:17:38,658 [main] jdbc/test1: refreshed XAResource
+16-12-27 15:17:38,660 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:22:51,640 [main] Starting read of logfile E:\projects\spring\.\tmlog3.log
+16-12-27 15:22:51,669 [main] Done read of logfile
+16-12-27 15:22:51,744 [main] jdbc/test1: refreshed XAResource
+16-12-27 15:22:51,746 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:22:52,160 [main] Forcing close of pending statement: org.apache.derby.iapi.jdbc.BrokeredPreparedStatement40@13954b1
+16-12-27 15:26:52,944 [main] Starting read of logfile E:\projects\spring\.\tmlog4.log
+16-12-27 15:26:52,944 [main] Done read of logfile
+16-12-27 15:26:53,017 [main] jdbc/test1: refreshed XAResource
+16-12-27 15:26:53,019 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:26:53,374 [main] Forcing close of pending statement: org.apache.derby.iapi.jdbc.BrokeredPreparedStatement40@4e21db
+16-12-27 15:28:53,309 [main] Starting read of logfile E:\projects\spring\.\tmlog5.log
+16-12-27 15:28:53,309 [main] Done read of logfile
+16-12-27 15:28:53,383 [main] jdbc/test1: refreshed XAResource
+16-12-27 15:28:53,385 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:28:53,735 [main] Forcing close of pending statement: org.apache.derby.iapi.jdbc.BrokeredPreparedStatement40@1e3a0ec
+16-12-27 15:29:05,403 [main] Starting read of logfile E:\projects\spring\.\tmlog6.log
+16-12-27 15:29:05,403 [main] Done read of logfile
+16-12-27 15:29:05,492 [main] jdbc/test1: refreshed XAResource
+16-12-27 15:29:05,494 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:29:05,861 [main] Forcing close of pending statement: org.apache.derby.iapi.jdbc.BrokeredPreparedStatement40@190b72c
+16-12-27 15:29:47,603 [main] Starting read of logfile E:\projects\spring\.\tmlog7.log
+16-12-27 15:29:47,604 [main] Done read of logfile
+16-12-27 15:29:47,685 [main] jdbc/test1: refreshed XAResource
+16-12-27 15:29:47,687 [main] jdbc/test2: refreshed XAResource
+16-12-27 15:29:48,054 [main] Forcing close of pending statement: org.apache.derby.iapi.jdbc.BrokeredPreparedStatement40@1e3a0ec

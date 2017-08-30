@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="richcms"
+  id="myeclipse.1392774366224"
+  context-root="/richcms"
+  j2ee-spec="5.0"
+  archive="richcms.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

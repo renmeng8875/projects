@@ -1,3 +1,0 @@
-php_value upload_max_filesize 10000000M
-php_value post_max_size 120000000M
-php_flag magic_quotes_gpc off

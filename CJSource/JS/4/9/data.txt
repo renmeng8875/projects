@@ -1,1 +1,0 @@
-[{name:"CJ",age:18},{name:"CJ",age:18},{name:"CJ",age:18}]

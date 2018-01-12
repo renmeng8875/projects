@@ -1,8 +1,0 @@
-[DEFAULT]
-BASEURL=http://www.saltstorm.net/
-[InternetShortcut]
-URL=http://www.saltstorm.net/
-IconIndex=106
-IconFile=SHELL32.DLL
-Hotkey=1624
-Modified=0

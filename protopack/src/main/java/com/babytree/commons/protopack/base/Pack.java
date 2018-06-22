@@ -25,7 +25,7 @@ public class Pack
 
 	public Pack()
 	{
-		buffer = ByteBuffer.allocate(512);
+		buffer = ByteBuffer.allocate(16);
 		buffer.order(ByteOrder.LITTLE_ENDIAN);
 	}
 

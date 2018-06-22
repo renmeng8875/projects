@@ -37,6 +37,7 @@ public class PackUnpackTest {
 
         //模拟远程传输逻辑。。。。。。
         //*************网络上传输**********************
+
         byte[] rpcBytes = pack.getBuffer().array();
         System.err.println(rpcBytes.length);
         System.err.println(JSONObject.toJSONString(inputBean).getBytes().length);
